@@ -1,143 +1,152 @@
 """
-Training pipeline - Main training loop and model training
+Training pipeline - Main training loop and model training for the two-stage process.
 """
-import numpy as np
-from typing import Tuple, Optional, Dict, Callable
+import torch
+import torch.optim as optim
+import logging
+from tqdm import tqdm
+from typing import Tuple, Dict
+
 from .config import TrainingConfig
+from .losses import InfoNCELoss, KLDivergenceLoss
+from src.models.recommender import DualEncoderModel
 
+logger = logging.getLogger(__name__)
 
-class ModelTrainer:
+class TwoStageTrainer:
     """
-    TODO: Implement main training loop.
-    
-    Should handle:
-    - Training loop with batches
-    - Validation during training
-    - Early stopping
-    - Checkpointing
-    - Logging metrics
+    A trainer for the two-stage training process:
+    1. Contrastive Learning for Text, Image, and Query encoders.
+    2. Knowledge Distillation for the Content encoder.
     """
-    
-    def __init__(self, model: object, config: TrainingConfig):
+    def __init__(self, model: DualEncoderModel, config: TrainingConfig, device: torch.device):
         """
-        Initialize trainer.
+        Initialize the trainer.
         
         Args:
-            model: Model to train
-            config: Training configuration
+            model: The DualEncoderModel to be trained.
+            config: The training configuration.
+            device: The device to train on (e.g., 'cuda' or 'cpu').
         """
-        self.model = model
+        self.model = model.to(device)
         self.config = config
-        self.training_history = {
-            "loss": [],
-            "val_loss": [],
-            "metrics": {}
-        }
-    
-    def train(self, X_train: np.ndarray, y_train: np.ndarray,
-              X_val: np.ndarray = None, y_val: np.ndarray = None) -> Dict:
+        self.device = device
+        self.contrastive_loss_fn = InfoNCELoss(temperature=self.config.temperature)
+        self.distillation_loss_fn = KLDivergenceLoss()
+
+    def train(self, train_loader, val_loader=None):
         """
-        TODO: Main training loop.
+        Orchestrates the two-stage training process.
+        """
+        logger.info("--- Starting Stage 1: Contrastive Learning ---")
+        self._train_stage_1(train_loader, val_loader)
         
-        Args:
-            X_train: Training features
-            y_train: Training labels
-            X_val: Validation features (optional)
-            y_val: Validation labels (optional)
+        logger.info("--- Starting Stage 2: Knowledge Distillation ---")
+        self._train_stage_2(train_loader, val_loader)
+        
+        logger.info("Training finished.")
+
+    def _train_stage_1(self, train_loader, val_loader):
+        """
+        Executes the contrastive learning stage.
+        Trains TextBlock, ImageBlock, and QueryBlock.
+        """
+        # Set requires_grad for stage 1: train MLPs and LoRA adapters
+        for name, param in self.model.named_parameters():
+            if 'lora' in name or 'mlp' in name:
+                param.requires_grad = True
+            else:
+                param.requires_grad = False
+        
+        optimizer = optim.AdamW(
+            filter(lambda p: p.requires_grad, self.model.parameters()),
+            lr=self.config.learning_rate,
+            weight_decay=self.config.weight_decay
+        )
+
+        for epoch in range(self.config.num_epochs_stage1):
+            self.model.train()
+            total_loss = 0
             
-        Returns:
-            Dictionary with training history and metrics
-        """
-        # TODO: Implement the training loop
-        # 1. Create data loaders (if using batching)
-        # 2. Initialize optimizer and loss function
-        # 3. Main training loop:
-        #    - Forward pass
-        #    - Calculate loss
-        #    - Backward pass
-        #    - Update weights
-        # 4. Validation loop
-        # 5. Early stopping check
-        # 6. Checkpoint saving
-        pass
-    
-    def validate(self, X_val: np.ndarray, y_val: np.ndarray) -> Dict:
-        """
-        TODO: Validation step.
-        
-        Args:
-            X_val: Validation features
-            y_val: Validation labels
+            progress_bar = tqdm(train_loader, desc=f"Stage 1 - Epoch {epoch+1}/{self.config.num_epochs_stage1}")
+            for batch in progress_bar:
+                # Move batch to device
+                batch = {k: v.to(self.device) if isinstance(v, torch.Tensor) else v for k, v in batch.items()}
+                
+                optimizer.zero_grad()
+                
+                # Forward pass to get all embeddings
+                outputs = self.model(batch)
+                z_text, z_image, z_query = outputs['z_text'], outputs['z_image'], outputs['z_query']
+                
+                # Calculate InfoNCE loss for all pairs
+                loss_tq = self.contrastive_loss_fn(z_text, z_query)
+                loss_ti = self.contrastive_loss_fn(z_text, z_image)
+                loss_iq = self.contrastive_loss_fn(z_image, z_query)
+                
+                # Total contrastive loss
+                loss = loss_tq + loss_ti + loss_iq
+                
+                loss.backward()
+                optimizer.step()
+                
+                total_loss += loss.item()
+                progress_bar.set_postfix({'loss': loss.item()})
             
-        Returns:
-            Dictionary with validation metrics
-        """
-        pass
-    
-    def _create_batches(self, X: np.ndarray, y: np.ndarray, 
-                       batch_size: int) -> list:
-        """
-        TODO: Create mini-batches from data.
-        
-        Args:
-            X: Features
-            y: Labels
-            batch_size: Size of each batch
+            avg_loss = total_loss / len(train_loader)
+            logger.info(f"Stage 1 - Epoch {epoch+1} Average Loss: {avg_loss:.4f}")
             
-        Returns:
-            List of (X_batch, y_batch) tuples
-        """
-        pass
-    
-    def save_checkpoint(self, filepath: str, epoch: int) -> None:
-        """
-        TODO: Save model checkpoint during training.
-        
-        Args:
-            filepath: Path to save checkpoint
-            epoch: Current training epoch
-        """
-        pass
-    
-    def load_checkpoint(self, filepath: str) -> None:
-        """
-        TODO: Load model checkpoint.
-        
-        Args:
-            filepath: Path to checkpoint file
-        """
-        pass
+            # TODO: Add validation loop if val_loader is provided
 
+    def _train_stage_2(self, train_loader, val_loader):
+        """
+        Executes the knowledge distillation stage.
+        Trains only the ContentBlock.
+        """
+        # Set requires_grad for stage 2: only train ContentBlock
+        for name, param in self.model.named_parameters():
+            if 'content_block' in name:
+                param.requires_grad = True
+            else:
+                param.requires_grad = False
 
-def train_model(model: object, train_data: Tuple, val_data: Tuple = None,
-                config: TrainingConfig = None) -> Dict:
-    """
-    TODO: Wrapper function for training a model.
-    
-    Args:
-        model: Model to train
-        train_data: Tuple of (X_train, y_train)
-        val_data: Tuple of (X_val, y_val) - optional
-        config: Training configuration
-        
-    Returns:
-        Training history and final metrics
-    """
-    pass
+        optimizer = optim.AdamW(
+            filter(lambda p: p.requires_grad, self.model.parameters()),
+            lr=self.config.learning_rate,
+            weight_decay=self.config.weight_decay
+        )
 
-
-def evaluate_model(model: object, X_test: np.ndarray, y_test: np.ndarray,
-                  metrics: list = None) -> Dict:
-    """
-    TODO: Evaluate model on test set.
-    
-    Args:
-        model: Trained model
-        X_test: Test features
-        y_test: Test labels
-        metrics: List of metrics to calculate
-        
-    Returns:
-        Dictionary with evaluation metrics
-    """
-    pass
+        for epoch in range(self.config.num_epochs_stage2):
+            self.model.train()
+            total_loss = 0
+            
+            progress_bar = tqdm(train_loader, desc=f"Stage 2 - Epoch {epoch+1}/{self.config.num_epochs_stage2}")
+            for batch in progress_bar:
+                batch = {k: v.to(self.device) if isinstance(v, torch.Tensor) else v for k, v in batch.items()}
+                
+                optimizer.zero_grad()
+                
+                # Forward pass to get content and query vectors
+                outputs = self.model(batch)
+                z_content, z_query = outputs['z_content'], outputs['z_query']
+                
+                # The "teacher" (z_query) should not have gradients flowing back to it
+                with torch.no_grad():
+                    teacher_dist = F.log_softmax(z_query, dim=-1)
+                
+                # The "student" (z_content)
+                student_dist = F.log_softmax(z_content, dim=-1)
+                
+                # Calculate KL-Divergence loss
+                loss = self.distillation_loss_fn(student_dist, teacher_dist)
+                
+                loss.backward()
+                optimizer.step()
+                
+                total_loss += loss.item()
+                progress_bar.set_postfix({'loss': loss.item()})
+                
+            avg_loss = total_loss / len(train_loader)
+            logger.info(f"Stage 2 - Epoch {epoch+1} Average Loss: {avg_loss:.4f}")
+            
+            # TODO: Add validation loop if val_loader is provided
