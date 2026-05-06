@@ -1,7 +1,7 @@
 # Data and models - should not be committed
-data/raw/
-data/processed/
-models/
+/data/raw/
+/data/processed/
+/models/
 *.pkl
 *.h5
 *.pt
