@@ -2,6 +2,8 @@
 Training pipeline - Main training loop and model training for the two-stage process.
 """
 import torch
+import torch.nn as nn
+import torch.nn.functional as F
 import torch.optim as optim
 import logging
 from tqdm import tqdm
@@ -9,6 +11,7 @@ from typing import Tuple, Dict
 
 from .config import TrainingConfig
 from .losses import InfoNCELoss, KLDivergenceLoss
+from .history import TrainingHistory
 from src.models.recommender import DualEncoderModel
 
 logger = logging.getLogger(__name__)
@@ -33,10 +36,14 @@ class TwoStageTrainer:
         self.device = device
         self.contrastive_loss_fn = InfoNCELoss(temperature=self.config.temperature)
         self.distillation_loss_fn = KLDivergenceLoss()
+        self.history = TrainingHistory()
 
     def train(self, train_loader, val_loader=None):
         """
         Orchestrates the two-stage training process.
+        
+        Returns:
+            TrainingHistory object containing all recorded metrics
         """
         logger.info("--- Starting Stage 1: Contrastive Learning ---")
         self._train_stage_1(train_loader, val_loader)
@@ -45,6 +52,7 @@ class TwoStageTrainer:
         self._train_stage_2(train_loader, val_loader)
         
         logger.info("Training finished.")
+        return self.history
 
     def _train_stage_1(self, train_loader, val_loader):
         """
@@ -69,7 +77,7 @@ class TwoStageTrainer:
             total_loss = 0
             
             progress_bar = tqdm(train_loader, desc=f"Stage 1 - Epoch {epoch+1}/{self.config.num_epochs_stage1}")
-            for batch in progress_bar:
+            for batch_idx, batch in enumerate(progress_bar):
                 # Move batch to device
                 batch = {k: v.to(self.device) if isinstance(v, torch.Tensor) else v for k, v in batch.items()}
                 
@@ -89,6 +97,9 @@ class TwoStageTrainer:
                 
                 loss.backward()
                 optimizer.step()
+                
+                # Record loss
+                self.history.add_stage1_batch(epoch, loss_tq.item(), loss_ti.item(), loss_iq.item(), loss.item())
                 
                 total_loss += loss.item()
                 progress_bar.set_postfix({'loss': loss.item()})
@@ -121,7 +132,7 @@ class TwoStageTrainer:
             total_loss = 0
             
             progress_bar = tqdm(train_loader, desc=f"Stage 2 - Epoch {epoch+1}/{self.config.num_epochs_stage2}")
-            for batch in progress_bar:
+            for batch_idx, batch in enumerate(progress_bar):
                 batch = {k: v.to(self.device) if isinstance(v, torch.Tensor) else v for k, v in batch.items()}
                 
                 optimizer.zero_grad()
@@ -142,6 +153,9 @@ class TwoStageTrainer:
                 
                 loss.backward()
                 optimizer.step()
+                
+                # Record loss
+                self.history.add_stage2_batch(epoch, loss.item())
                 
                 total_loss += loss.item()
                 progress_bar.set_postfix({'loss': loss.item()})
