@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: vibecrates-api
+    ports:
+      - "8000:8000"
+    environment:
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - MODEL_NAME=recommendation_model
+      - API_RELOAD=False
+    volumes:
+      - ../models:/app/models:ro
+      - ../data:/app/data:ro
+    networks:
+      - vibecrates-network
+    restart: unless-stopped
+
+  # TODO: Add other services (database, cache, message queue, etc.)
+  # Example:
+  # postgres:
+  #   image: postgres:14
+  #   container_name: vibecrates-db
+  #   environment:
+  #     POSTGRES_PASSWORD: password
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   networks:
+  #     - vibecrates-network
+
+networks:
+  vibecrates-network:
+    driver: bridge
+
+volumes:
+  # postgres_data:
+  #   driver: local
