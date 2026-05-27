@@ -211,4 +211,4 @@ MIT License
 
 ## 연락처
 
-TODO: 연락처 정보 추가
+email address: maxsky9018@gmail.com
