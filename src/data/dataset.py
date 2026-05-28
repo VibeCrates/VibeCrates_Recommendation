@@ -12,13 +12,13 @@ from typing import List, Tuple, Dict
 class MultiModalDataset(Dataset):
     """
     A PyTorch Dataset for multi-modal recommendation data.
-    
+
     Each sample contains:
     - content_text: Product/content description (string)
     - content_image: Path to image file or PIL Image
-    - query: Search query (string)
+    - query: List[str] parsed from DSV (e.g. "q1|q2|q3|q4" → ["q1","q2","q3","q4"])
     """
-    
+
     def __init__(
         self,
         content_texts: List[str],
@@ -26,79 +26,48 @@ class MultiModalDataset(Dataset):
         queries: List[str],
         image_size: Tuple[int, int] = (224, 224)
     ):
-        """
-        Initialize the dataset.
-        
-        Args:
-            content_texts: List of content text descriptions
-            image_paths: List of paths to images
-            queries: List of search queries
-            image_size: Target image size for resizing (height, width)
-        """
         assert len(content_texts) == len(image_paths) == len(queries), \
             "All input lists must have the same length"
-        
+
         self.content_texts = content_texts
         self.image_paths = image_paths
         self.queries = queries
         self.image_size = image_size
-    
+
     def __len__(self) -> int:
-        """Return the total number of samples."""
         return len(self.content_texts)
-    
+
     def __getitem__(self, idx: int) -> Dict[str, any]:
-        """
-        Get a single sample.
-        
-        Args:
-            idx: Sample index
-            
-        Returns:
-            Dictionary containing:
-            - content_text: Text description
-            - content_image: PIL Image (224x224)
-            - query: Search query text
-        """
-        # Load text (keep as string for TextBlock to process)
         content_text = self.content_texts[idx]
-        
-        # Load image
+
         image_path = self.image_paths[idx]
         image = Image.open(image_path).convert('RGB')
         image = image.resize(self.image_size, Image.Resampling.LANCZOS)
-        
-        # Load query (keep as string for QueryBlock to process)
-        query = self.queries[idx]
-        
+
+        # DSV → List[str]; NaN이나 빈 값이면 빈 리스트 대신 원본 문자열 유지
+        raw = self.queries[idx]
+        if isinstance(raw, str) and raw.strip():
+            query = [q.strip() for q in raw.split("|") if q.strip()]
+        else:
+            query = []
+
         return {
             "content_text": content_text,
             "content_image": image,
-            "query": query
+            "query": query,
         }
 
 
 def collate_fn(batch: List[Dict]) -> Dict:
     """
-    Custom collate function for batching.
-    
-    Converts a list of samples into a batch:
-    - content_text: List of strings (for SBERT)
-    - content_image: List of PIL Images (for CLIP)
-    - query: List of strings (for CLIP Text Encoder)
-    
-    Args:
-        batch: List of samples from the dataset
-        
-    Returns:
-        Dictionary with batched data
+    Converts a list of samples into a batch.
+
+    - content_text: List[str]
+    - content_image: List[PIL.Image]
+    - query: List[List[str]]  — N queries per item (from DSV)
     """
-    content_texts = [sample["content_text"] for sample in batch]
-    content_images = [sample["content_image"] for sample in batch]
-    queries = [sample["query"] for sample in batch]
-    
     return {
-        "content_text": content_texts,
-        "content_image": content_images,
-        "query": queries
+        "content_text": [s["content_text"] for s in batch],
+        "content_image": [s["content_image"] for s in batch],
+        "query": [s["query"] for s in batch],
     }

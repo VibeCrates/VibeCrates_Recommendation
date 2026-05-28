@@ -157,16 +157,31 @@ class DualEncoderModel(BaseRecommender):
         z_content = self.content_block(z_image, z_text)
         return z_content, z_text, z_image
 
-    def encode_query(self, queries: list[str]):
-        """Encodes a search query."""
-        z_query = self.query_block(queries)
-        return z_query
+    def encode_query(self, queries: list[list[str]] | list[str]) -> torch.Tensor:
+        """
+        N개 쿼리를 QueryBlock에 통과시킨 뒤 mean pooling → z_query (B, 768).
+        List[str] (단일 쿼리 inference) 과 List[List[str]] (학습, DSV) 모두 지원.
+        """
+        if queries and isinstance(queries[0], str):
+            queries = [[q] for q in queries]
+
+        flat = [q for qs in queries for q in qs]
+        counts = [len(qs) for qs in queries]
+
+        z_flat = self.query_block(flat)  # (sum(N), 768)
+
+        pooled = []
+        offset = 0
+        for n in counts:
+            pooled.append(z_flat[offset:offset + n].mean(dim=0))
+            offset += n
+
+        return torch.stack(pooled)  # (B, 768)
 
     def forward(self, batch):
         """
-        A versatile forward pass for training.
-        The batch should be a dictionary containing the necessary data.
-        e.g., {'content_text': [...], 'content_image': ..., 'query': [...]}
+        batch 형식: {'content_text': List[str], 'content_image': List[PIL],
+                     'query': List[List[str]]}
         """
         z_content, z_text, z_image = self.encode_content(batch['content_text'], batch['content_image'])
         z_query = self.encode_query(batch['query'])
