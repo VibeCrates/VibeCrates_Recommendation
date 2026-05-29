@@ -2,7 +2,7 @@
 Preprocessing - Data preprocessing and feature engineering
 
 주요 역할:
-  - 도메인별 CSV(MovieGenre / music_features / Books_final) →
+  - 도메인별 CSV(MovieGenre / music_features / Books_filtered) →
     loader.py가 기대하는 표준 컬럼(content_text, image_path, query)으로 변환
   - 결측치 처리, 범주형 인코딩, 수치 피처 정규화
   - 사용자 프로필 집계, 아이템 피처 행렬 생성
@@ -33,7 +33,7 @@ DOMAIN_CONFIG = {
         "image_col": "img",
     },
     "book": {
-        "csv": "data/Books_final.csv",
+        "csv": "data/Books_filtered.csv",
         "id_col": "ISBN",
         "image_col": "Image-URL-M",
     },

@@ -37,16 +37,19 @@ DOMAIN_CONFIGS = {
         "valid_url": lambda url: isinstance(url, str) and url.startswith("http") and url not in ("no", "nan"),
     },
     "book": {
-        "csv": "data/Books_final.csv",
+        "csv": "data/Books_filtered.csv",
         "id_col": "ISBN",
-        "url_col": "Image-URL-M",
+        "url_col": "Image-URL-L",
         "out_dir": "data/images/book",
         "valid_url": lambda url: isinstance(url, str) and url.startswith("http"),
     },
 }
 
 SESSION = requests.Session()
-SESSION.headers.update({"User-Agent": "VibeCrates/1.0"})
+SESSION.headers.update({
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+    "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
+})
 
 
 def download_one(item_id: str, url: str, out_path: Path) -> tuple[str, bool]:

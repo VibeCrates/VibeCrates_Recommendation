@@ -39,7 +39,7 @@ DOMAIN_CONFIGS = {
         "has_image": lambda row: pd.notna(row.get("img")) and str(row.get("img", "")) not in ("no", "nan", ""),
     },
     "book": {
-        "csv": "data/Books_final.csv",
+        "csv": "data/Books_filtered.csv",
         "id_col": "ISBN",
         "image_col": "Image-URL-M",
         "role": "도서 편집자",
@@ -102,7 +102,7 @@ def load_image(domain: str, item_id: str, url: str) -> Image.Image:
     local_path = os.path.join(LOCAL_IMAGE_DIRS[domain], f"{item_id}.jpg")
     if os.path.exists(local_path):
         return Image.open(local_path).convert("RGB")
-    r = requests.get(url, timeout=10, headers={"User-Agent": "VibeCrates/1.0"}, stream=True)
+    r = requests.get(url, timeout=10, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"}, stream=True)
     r.raise_for_status()
     return Image.open(BytesIO(r.content)).convert("RGB")
 

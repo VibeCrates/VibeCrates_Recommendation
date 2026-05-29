@@ -44,7 +44,7 @@ class MultiModalDataset(Dataset):
         if str(image_path).startswith("http"):
             import requests
             from io import BytesIO
-            r = requests.get(image_path, timeout=10, headers={"User-Agent": "VibeCrates/1.0"})
+            r = requests.get(image_path, timeout=10, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"})
             r.raise_for_status()
             image = Image.open(BytesIO(r.content)).convert('RGB')
         else:
