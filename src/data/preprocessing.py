@@ -2,7 +2,7 @@
 Preprocessing - Data preprocessing and feature engineering
 
 주요 역할:
-  - 도메인별 CSV(MovieGenre / music_features / Books_filtered) →
+  - 도메인별 CSV(MovieGenre / music_features / kindle_data-v2) →
     loader.py가 기대하는 표준 컬럼(content_text, image_path, query)으로 변환
   - 결측치 처리, 범주형 인코딩, 수치 피처 정규화
   - 사용자 프로필 집계, 아이템 피처 행렬 생성
@@ -33,9 +33,9 @@ DOMAIN_CONFIG = {
         "image_col": "img",
     },
     "book": {
-        "csv": "data/Books_filtered.csv",
-        "id_col": "ISBN",
-        "image_col": "Image-URL-M",
+        "csv": "data/kindle_data-v2.csv",
+        "id_col": "asin",
+        "image_col": "imgUrl",
     },
 }
 
@@ -139,7 +139,11 @@ class DataPreprocessor:
 def _build_content_text(domain: str, row: pd.Series) -> str:
     """도메인 CSV 행 → content_text 문자열 (generate_queries.py의 build_synopsis와 동일 로직)."""
     if domain == "movie":
-        return f"Title: {row.get('Title', '')}\nGenre: {row.get('Genre', '')}"
+        text = f"Title: {row.get('Title', '')}\nGenre: {row.get('Genre', '')}"
+        overview = str(row.get("text", "")).strip()
+        if overview and overview != "nan":
+            text += f"\nOverview: {overview}"
+        return text
 
     if domain == "music":
         try:
@@ -160,10 +164,14 @@ def _build_content_text(domain: str, row: pd.Series) -> str:
         return text
 
     # book
-    return (
-        f"Title: {row.get('Book-Title', '')}\nAuthor: {row.get('Book-Author', '')}\n"
-        f"Category: {row.get('main_category', '')}"
+    text = (
+        f"Title: {row.get('title', '')}\nAuthor: {row.get('author', '')}\n"
+        f"Category: {row.get('category_name', '')}"
     )
+    desc = str(row.get("description", "")).strip()
+    if desc and desc != "nan":
+        text += f"\nDescription: {desc}"
+    return text
 
 
 def _resolve_image_path(domain: str, item_id: str, url: str, image_base_dir: str) -> str:

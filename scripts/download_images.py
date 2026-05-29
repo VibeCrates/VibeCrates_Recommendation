@@ -37,9 +37,9 @@ DOMAIN_CONFIGS = {
         "valid_url": lambda url: isinstance(url, str) and url.startswith("http") and url not in ("no", "nan"),
     },
     "book": {
-        "csv": "data/Books_filtered.csv",
-        "id_col": "ISBN",
-        "url_col": "Image-URL-L",
+        "csv": "data/kindle_data-v2.csv",
+        "id_col": "asin",
+        "url_col": "imgUrl",
         "out_dir": "data/images/book",
         "valid_url": lambda url: isinstance(url, str) and url.startswith("http"),
     },

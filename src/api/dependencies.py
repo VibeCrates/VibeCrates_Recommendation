@@ -168,10 +168,10 @@ def _build_meta_df(domain: str, raw_df: pd.DataFrame, std_df: pd.DataFrame) -> p
             extra = {"artists": str(raw_row.get("artists", "")), "album": str(raw_row.get("album_name", "")),
                      "genre": str(raw_row.get("genre", "")), "img": str(raw_row.get("img", ""))}
         else:  # book
-            title = str(raw_row.get("Book-Title", ""))
-            extra = {"author": str(raw_row.get("Book-Author", "")),
-                     "category": str(raw_row.get("main_category", "")),
-                     "image": str(raw_row.get("Image-URL-M", ""))}
+            title = str(raw_row.get("title", ""))
+            extra = {"author": str(raw_row.get("author", "")),
+                     "category": str(raw_row.get("category_name", "")),
+                     "image": str(raw_row.get("imgUrl", ""))}
         records.append({"item_id": item_id, "title": title, "extra": extra})
     return pd.DataFrame(records)
 

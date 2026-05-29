@@ -39,11 +39,11 @@ DOMAIN_CONFIGS = {
         "has_image": lambda row: pd.notna(row.get("img")) and str(row.get("img", "")) not in ("no", "nan", ""),
     },
     "book": {
-        "csv": "data/Books_filtered.csv",
-        "id_col": "ISBN",
-        "image_col": "Image-URL-M",
+        "csv": "data/kindle_data-v2.csv",
+        "id_col": "asin",
+        "image_col": "imgUrl",
         "role": "도서 편집자",
-        "has_image": lambda row: pd.notna(row.get("Image-URL-M")) and str(row.get("Image-URL-M", "")).startswith("http"),
+        "has_image": lambda row: pd.notna(row.get("imgUrl")) and str(row.get("imgUrl", "")).startswith("http"),
     },
 }
 
@@ -64,7 +64,11 @@ PROMPT_TEMPLATE = (
 
 def build_synopsis(domain: str, row: pd.Series) -> str:
     if domain == "movie":
-        return f"Title: {row.get('Title', '')}\nGenre: {row.get('Genre', '')}"
+        text = f"Title: {row.get('Title', '')}\nGenre: {row.get('Genre', '')}"
+        overview = str(row.get("text", "")).strip()
+        if overview and overview != "nan":
+            text += f"\nOverview: {overview}"
+        return text
 
     elif domain == "music":
         try:
@@ -85,10 +89,14 @@ def build_synopsis(domain: str, row: pd.Series) -> str:
         return text
 
     else:  # book
-        return (
-            f"Title: {row.get('Book-Title', '')}\nAuthor: {row.get('Book-Author', '')}\n"
-            f"Category: {row.get('main_category', '')}"
+        text = (
+            f"Title: {row.get('title', '')}\nAuthor: {row.get('author', '')}\n"
+            f"Category: {row.get('category_name', '')}"
         )
+        desc = str(row.get("description", "")).strip()
+        if desc and desc != "nan":
+            text += f"\nDescription: {desc}"
+        return text
 
 
 LOCAL_IMAGE_DIRS = {
