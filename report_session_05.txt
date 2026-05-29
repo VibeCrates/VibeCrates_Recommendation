@@ -1,0 +1,211 @@
+================================================================================
+VibeCrates Recommendation System — 세션 보고서 (5)
+작성일: 2026-05-29
+================================================================================
+
+
+## 1. 세션 시작 시점 상태 (session_04 이후)
+
+session_04에서 이월된 작업:
+  [ → 진행중] fetch_music_images_musicbrainz.py 실행 (백그라운드, PID 466083)
+  [ → 미완] generate_queries.py 실행 — movie / music / book (A100 필요)
+  [ → 미완] download_images.py 실행
+  [ → 완료] src/data/preprocessing.py 구현
+  [ → 완료] models/utils.py 미완성 함수 구현
+  [ → 완료] src/api/ 구현
+  [ → 완료] scripts/evaluate.py 구현
+  [ → 완료] scripts/inference.py 구현
+
+
+================================================================================
+## 2. MusicBrainz 이미지 수집 (백그라운드 실행 중)
+================================================================================
+
+  실행 명령:
+    nohup /opt/conda/envs/ltv/bin/python3.10 -u scripts/fetch_music_images_musicbrainz.py \
+      > logs/musicbrainz.log 2>&1 &
+
+  PID: 466083
+  로그: logs/musicbrainz.log
+  체크포인트: data/musicbrainz_cache.json (500건마다)
+
+  [현황 — 세션 종료 시점 기준]
+    진행: 323 / 18,082개 (1.8%)
+    경과: 약 27분
+    실제 속도: 약 5초/건 (예상 1.1~2.2초보다 느림 → API 응답 지연)
+    예상 잔여 시간: 약 24~25시간
+
+  ※ 스크립트 내 예상 시간 표시(5.5시간)는 트랙당 요청 1회로 계산한 오류.
+     실제로는 MBID 발견 시 2회 요청(MusicBrainz + Cover Art Archive),
+     API 응답 지연까지 합산하면 25시간 수준.
+
+  세션 중 수행한 스크립트 수정사항:
+    - generate_queries.py: 이미지 로딩을 로컬 파일 우선으로 변경
+        data/images/{domain}/{id}.jpg 존재 시 로컬 로드,
+        없으면 HTTP URL fallback (네트워크 의존성/속도 개선)
+
+
+================================================================================
+## 3. 작업 순서 오류 수정 — generate_queries 순서
+================================================================================
+
+  [문제]
+    session_04 보고서의 작업 순서:
+      1. fetch_music_images_musicbrainz.py
+      2. generate_queries.py   ← 이미지 다운로드 전
+      3. download_images.py
+
+    generate_queries.py는 PaliGemma 2에 이미지를 입력으로 넣으므로
+    이미지가 먼저 로컬에 있어야 함.
+
+  [수정된 올바른 순서]
+    1. fetch_music_images_musicbrainz.py  (완료 시까지 대기)
+    2. download_images.py                 (전 도메인 이미지 로컬 저장)
+    3. generate_queries.py × 3 도메인    (A100에서 실행)
+
+
+================================================================================
+## 4. 구현 완료 — src/data/preprocessing.py
+================================================================================
+
+  DataPreprocessor 클래스:
+    - handle_missing_values(): mean / median / zero / drop / forward_fill
+    - encode_categorical_features(): LabelEncoder fit/transform 패턴
+    - normalize_numerical_features(): StandardScaler / MinMaxScaler, key로 재사용
+    - create_item_features(): 음악 Spotify 오디오 피처 9개 정규화
+      (movie/book은 해당 컬럼 없어 영벡터 반환)
+
+  create_user_profiles() 미구현 이유:
+    콘텐츠 기반 추천 시스템으로 user 정보를 사용하지 않음. 제거.
+
+  핵심 추가 함수 — prepare_domain_df():
+    도메인별 원본 CSV → loader.py가 기대하는 표준 컬럼으로 변환
+    (content_text, image_path, query)
+    로컬 이미지 파일 우선, 없으면 HTTP URL fallback.
+
+  모듈 유틸리티:
+    - remove_duplicates(): 이미 구현되어 있던 함수 유지
+    - remove_outliers(): IQR / z-score / Isolation Forest
+    - resample_data(): oversample / undersample / SMOTE
+
+
+================================================================================
+## 5. 구현 완료 — src/models/utils.py
+================================================================================
+
+  미완성 함수 3개 구현:
+    - split_train_test(): sklearn train_test_split 래퍼, y=None 지원
+    - normalize_features(): StandardScaler fit_transform, scaler 반환
+    - calculate_similarity(): cosine [-1,1] / euclidean [0,1] / pearson [0,1]
+      pearson: 행 단위 z-score 후 내적, (sim+1)/2 정규화
+
+
+================================================================================
+## 6. 구현 완료 — scripts/evaluate.py
+================================================================================
+
+  평가 방식:
+    Dual Encoder retrieval 평가.
+    각 아이템의 query로 전체 아이템 인덱스를 검색했을 때
+    정답 아이템의 순위를 측정.
+
+  메트릭: MRR / Recall@K / NDCG@K / Median rank / Mean rank
+
+  OOM 방지:
+    (N, N) 행렬을 한 번에 생성하지 않고 --chunk-size(기본 512) 단위 청크 처리.
+
+  핵심 버그 수정 — compute_ranks():
+    self_sim을 element-wise 곱으로 따로 계산하면 float32 matmul 오차로
+    자기 자신의 순위가 0이 아닌 경우 발생.
+    → self_sim을 chunk_sim 대각선에서 직접 추출해 동일 연산 경로 보장.
+
+  실행 예:
+    python3 scripts/evaluate.py --domain movie --model-path models/trained_model.pt
+    python3 scripts/evaluate.py --domain music --top-k 1 5 10 20
+
+
+================================================================================
+## 7. 구현 완료 — scripts/inference.py
+================================================================================
+
+  설계 원칙:
+    도메인을 명시적으로 지정하지 않으면 movie + music + book 전체에서
+    통합 검색하여 유사도 기준으로 정렬된 결과를 반환.
+    --domain 옵션 지정 시에만 해당 도메인만 검색.
+
+  인덱스 캐시:
+    최초 실행 시 전체 아이템 인코딩 후 data/index_cache/{domain}.pt 저장.
+    이후 실행 시 캐시 로드로 즉시 검색 가능.
+    --rebuild-index 플래그로 강제 재생성 (모델 재학습 후 사용).
+
+  실행 예:
+    python3 scripts/inference.py --query "비 오는 날 혼자 보기 좋은"
+    python3 scripts/inference.py --query "새벽 드라이브 감성" --top-k 5
+    python3 scripts/inference.py --query "고독과 철학" --domain book
+    python3 scripts/inference.py --query "재즈바 분위기" --rebuild-index
+
+
+================================================================================
+## 8. 수정 완료 — src/api/ (user_id 기반 → query 기반)
+================================================================================
+
+  [문제]
+    기존 API가 user_id 기반으로 설계되어 있었으나
+    이 시스템은 user 정보를 전혀 사용하지 않는 콘텐츠 기반 모델.
+
+  [수정 내용]
+
+  schemas.py:
+    RecommendationRequest: user_id → query(str) + domain(Optional) + top_k
+    RecommendationItem: item_id / domain / score / title / extra
+    UserProfileRequest, UserProfileResponse, ItemInfoRequest 제거
+    HealthCheckResponse에 index_built 필드 추가
+
+  routes.py:
+    제거: GET /recommend/{user_id}, GET /user-profile/{user_id},
+          POST /feedback, POST /retrain
+    유지: GET /health, POST /recommend, GET /item/{domain}/{item_id}
+
+  dependencies.py (ModelManager):
+    load_model(): torch state_dict 로드
+    build_index(domain): 도메인 전체 아이템 encode → L2-정규화 임베딩 캐싱
+    search(query, top_k, domain=None):
+      domain=None → 전체 도메인 통합 검색
+      domain 지정 → 해당 도메인만 검색
+    get_item_info(domain, item_id): 메타데이터 조회
+    initialize_dependencies(): 서버 시작 시 모델 + 전 도메인 인덱스 자동 빌드
+
+
+================================================================================
+## 9. 구현 완료 — src/training/trainer.py (validation loop)
+================================================================================
+
+  _validate_stage_1():
+    Stage 1과 동일하게 InfoNCE 세 쌍(text↔query / text↔image / image↔query) 합산.
+    @torch.no_grad()로 gradient 차단, 종료 후 model.train() 복구.
+
+  _validate_stage_2():
+    z_query(교사)와 z_content(학생) 양쪽 모두 log_softmax 취한 뒤 KLDivLoss 계산.
+    학습 루프에서는 교사(z_query)만 no_grad로 막았지만,
+    검증에서는 양쪽 모두 gradient 불필요.
+
+  기록: history.add_stage1_val() / add_stage2_val() → plot_training.py 시각화 가능.
+
+
+================================================================================
+## 10. 남은 작업 (다음 세션)
+================================================================================
+
+  [데이터] — MusicBrainz 완료 대기 중
+  [ ] fetch_music_images_musicbrainz.py 완료 확인
+        현재: 323 / 18,082개 진행 중 (예상 잔여 ~25시간)
+  [ ] download_images.py 실행 (전 도메인, 디스크 여유 22TB 확인 완료)
+  [ ] generate_queries.py 실행 — movie / music / book (A100 필요)
+
+  [학습]
+  [ ] train.py 실행 (데이터 준비 완료 후)
+
+  [미완료 코드]
+  [ ] src/api/main.py: CORS allow_origins=["*"] → 배포 시 도메인 제한 필요
+
+================================================================================

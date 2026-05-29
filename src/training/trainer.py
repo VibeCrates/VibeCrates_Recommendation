@@ -106,8 +106,58 @@ class TwoStageTrainer:
             
             avg_loss = total_loss / len(train_loader)
             logger.info(f"Stage 1 - Epoch {epoch+1} Average Loss: {avg_loss:.4f}")
-            
-            # TODO: Add validation loop if val_loader is provided
+
+            if val_loader is not None:
+                val_loss = self._validate_stage_1(val_loader)
+                self.history.add_stage1_val(epoch, val_loss)
+                logger.info(f"Stage 1 - Epoch {epoch+1} Val Loss: {val_loss:.4f}")
+
+    @torch.no_grad()
+    def _validate_stage_1(self, val_loader) -> float:
+        """
+        Stage 1 검증: text-query / text-image / image-query 세 쌍의 InfoNCE 합산.
+        학습과 동일한 손실 함수를 gradient 없이 실행한다.
+        """
+        self.model.eval()
+        total_loss = 0.0
+
+        for batch in val_loader:
+            batch = {k: v.to(self.device) if isinstance(v, torch.Tensor) else v
+                     for k, v in batch.items()}
+            outputs = self.model(batch)
+            z_text, z_image, z_query = outputs['z_text'], outputs['z_image'], outputs['z_query']
+
+            loss = (self.contrastive_loss_fn(z_text, z_query)
+                    + self.contrastive_loss_fn(z_text, z_image)
+                    + self.contrastive_loss_fn(z_image, z_query))
+            total_loss += loss.item()
+
+        self.model.train()
+        return total_loss / len(val_loader)
+
+    @torch.no_grad()
+    def _validate_stage_2(self, val_loader) -> float:
+        """
+        Stage 2 검증: z_query(교사)의 분포를 z_content(학생)가 얼마나 잘 따라가는지
+        KL-Divergence로 측정한다.
+        학습과 동일하게 두 벡터 모두 log_softmax를 취한 뒤 KLDivLoss에 입력한다.
+        """
+        self.model.eval()
+        total_loss = 0.0
+
+        for batch in val_loader:
+            batch = {k: v.to(self.device) if isinstance(v, torch.Tensor) else v
+                     for k, v in batch.items()}
+            outputs = self.model(batch)
+            z_content, z_query = outputs['z_content'], outputs['z_query']
+
+            teacher_dist = F.log_softmax(z_query,   dim=-1)
+            student_dist = F.log_softmax(z_content, dim=-1)
+            loss = self.distillation_loss_fn(student_dist, teacher_dist)
+            total_loss += loss.item()
+
+        self.model.train()
+        return total_loss / len(val_loader)
 
     def _train_stage_2(self, train_loader, val_loader):
         """
@@ -162,5 +212,8 @@ class TwoStageTrainer:
                 
             avg_loss = total_loss / len(train_loader)
             logger.info(f"Stage 2 - Epoch {epoch+1} Average Loss: {avg_loss:.4f}")
-            
-            # TODO: Add validation loop if val_loader is provided
+
+            if val_loader is not None:
+                val_loss = self._validate_stage_2(val_loader)
+                self.history.add_stage2_val(epoch, val_loss)
+                logger.info(f"Stage 2 - Epoch {epoch+1} Val Loss: {val_loss:.4f}")

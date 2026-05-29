@@ -91,7 +91,17 @@ def build_synopsis(domain: str, row: pd.Series) -> str:
         )
 
 
-def download_image(url: str) -> Image.Image:
+LOCAL_IMAGE_DIRS = {
+    "movie": "data/images/movie",
+    "music": "data/images/music",
+    "book":  "data/images/book",
+}
+
+
+def load_image(domain: str, item_id: str, url: str) -> Image.Image:
+    local_path = os.path.join(LOCAL_IMAGE_DIRS[domain], f"{item_id}.jpg")
+    if os.path.exists(local_path):
+        return Image.open(local_path).convert("RGB")
     r = requests.get(url, timeout=10, headers={"User-Agent": "VibeCrates/1.0"}, stream=True)
     r.raise_for_status()
     return Image.open(BytesIO(r.content)).convert("RGB")
@@ -161,7 +171,7 @@ def main():
         prompt = PROMPT_TEMPLATE.format(synopsis=synopsis, role=cfg["role"])
 
         try:
-            image = download_image(str(row[cfg["image_col"]])) if cfg["has_image"](row) else PLACEHOLDER_IMG
+            image = load_image(args.domain, item_id, str(row[cfg["image_col"]])) if cfg["has_image"](row) else PLACEHOLDER_IMG
         except Exception:
             image = PLACEHOLDER_IMG
 

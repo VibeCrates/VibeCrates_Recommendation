@@ -1,137 +1,55 @@
 """
-API Routes - Define recommendation endpoints
+API Routes
 """
-from fastapi import APIRouter, HTTPException, Depends
-from typing import List, Optional
+from fastapi import APIRouter, Depends, HTTPException
+
+from .dependencies import get_model_manager
 from .schemas import (
-    RecommendationRequest, RecommendationResponse,
-    HealthCheckResponse, UserProfileRequest, UserProfileResponse,
-    ItemInfoRequest, ItemInfoResponse
+    HealthCheckResponse,
+    ItemInfoResponse,
+    RecommendationRequest,
+    RecommendationResponse,
 )
-from .dependencies import get_model
 
 router = APIRouter(prefix="/api/v1", tags=["recommendations"])
 
 
 @router.get("/health", response_model=HealthCheckResponse)
-async def health_check(model=Depends(get_model)) -> HealthCheckResponse:
-    """
-    TODO: Health check endpoint.
-    
-    Check if API and model are running properly.
-    """
+async def health_check(manager=Depends(get_model_manager)) -> HealthCheckResponse:
     return HealthCheckResponse(
         status="healthy",
-        message="API is running",
-        model_loaded=model is not None
+        model_loaded=manager.is_model_ready(),
+        index_built={domain: (domain in manager.indexes) for domain in ("movie", "music", "book")},
     )
 
 
 @router.post("/recommend", response_model=RecommendationResponse)
-async def get_recommendations(
+async def recommend(
     request: RecommendationRequest,
-    model=Depends(get_model)
+    manager=Depends(get_model_manager),
 ) -> RecommendationResponse:
-    """
-    TODO: Main recommendation endpoint.
-    
-    Generate personalized recommendations for a user.
-    
-    Args:
-        request: RecommendationRequest with user_id and parameters
-        model: Loaded recommendation model (injected)
-        
-    Returns:
-        RecommendationResponse with recommended items
-    """
-    # TODO: Implement recommendation logic
-    # 1. Validate user_id
-    # 2. Get user profile/history
-    # 3. Use model to generate recommendations
-    # 4. Apply filters if provided
-    # 5. Return top-k recommendations
-    pass
+    """자연어 쿼리 → 도메인 아이템 top-K 추천."""
+    if not manager.is_model_ready():
+        raise HTTPException(status_code=503, detail="모델이 로드되지 않았습니다.")
+    if request.domain and request.domain not in manager.indexes:
+        raise HTTPException(status_code=503, detail=f"{request.domain} 인덱스가 준비되지 않았습니다.")
+    if not manager.indexes:
+        raise HTTPException(status_code=503, detail="아직 준비된 인덱스가 없습니다.")
+
+    results = manager.search(request.query, request.top_k, domain=request.domain)
+    return RecommendationResponse(query=request.query, domain=request.domain, results=results)
 
 
-@router.get("/recommend/{user_id}", response_model=RecommendationResponse)
-async def get_recommendations_by_id(
-    user_id: int,
-    top_k: int = 10,
-    model=Depends(get_model)
-) -> RecommendationResponse:
-    """
-    TODO: Alternative endpoint for getting recommendations by user ID.
-    
-    Args:
-        user_id: ID of the user
-        top_k: Number of recommendations to return
-        model: Loaded recommendation model (injected)
-        
-    Returns:
-        RecommendationResponse with recommended items
-    """
-    pass
-
-
-@router.get("/user-profile/{user_id}", response_model=UserProfileResponse)
-async def get_user_profile(user_id: int) -> UserProfileResponse:
-    """
-    TODO: Get user profile information.
-    
-    Args:
-        user_id: ID of the user
-        
-    Returns:
-        UserProfileResponse with user information
-    """
-    pass
-
-
-@router.get("/item-info/{item_id}", response_model=ItemInfoResponse)
-async def get_item_info(item_id: int) -> ItemInfoResponse:
-    """
-    TODO: Get item information.
-    
-    Args:
-        item_id: ID of the item
-        
-    Returns:
-        ItemInfoResponse with item information
-    """
-    pass
-
-
-@router.post("/feedback")
-async def submit_feedback(user_id: int, item_id: int, rating: float) -> dict:
-    """
-    TODO: Submit feedback/rating for recommendations.
-    
-    This can be used to:
-    - Train online learning models
-    - Evaluate recommendation quality
-    - Improve future recommendations
-    
-    Args:
-        user_id: ID of the user
-        item_id: ID of the item
-        rating: User's rating/feedback
-        
-    Returns:
-        Confirmation message
-    """
-    # TODO: Implement feedback logging
-    pass
-
-
-@router.post("/retrain")
-async def retrain_model() -> dict:
-    """
-    TODO: Trigger model retraining endpoint.
-    
-    This could be called manually or scheduled periodically.
-    
-    Returns:
-        Status of retraining process
-    """
-    # TODO: Implement model retraining logic
-    pass
+@router.get("/item/{domain}/{item_id}", response_model=ItemInfoResponse)
+async def get_item_info(
+    domain: str,
+    item_id: str,
+    manager=Depends(get_model_manager),
+) -> ItemInfoResponse:
+    """도메인 아이템 메타데이터 조회."""
+    if domain not in ("movie", "music", "book"):
+        raise HTTPException(status_code=400, detail=f"지원하지 않는 도메인: {domain}")
+    info = manager.get_item_info(domain, item_id)
+    if info is None:
+        raise HTTPException(status_code=404, detail=f"아이템을 찾을 수 없습니다: {item_id}")
+    return ItemInfoResponse(item_id=item_id, domain=domain, info=info)
