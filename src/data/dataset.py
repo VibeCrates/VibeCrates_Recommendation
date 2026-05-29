@@ -41,7 +41,14 @@ class MultiModalDataset(Dataset):
         content_text = self.content_texts[idx]
 
         image_path = self.image_paths[idx]
-        image = Image.open(image_path).convert('RGB')
+        if str(image_path).startswith("http"):
+            import requests
+            from io import BytesIO
+            r = requests.get(image_path, timeout=10, headers={"User-Agent": "VibeCrates/1.0"})
+            r.raise_for_status()
+            image = Image.open(BytesIO(r.content)).convert('RGB')
+        else:
+            image = Image.open(image_path).convert('RGB')
         image = image.resize(self.image_size, Image.Resampling.LANCZOS)
 
         # DSV → List[str]; NaN이나 빈 값이면 빈 리스트 대신 원본 문자열 유지
