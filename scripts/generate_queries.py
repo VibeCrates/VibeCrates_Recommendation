@@ -20,7 +20,7 @@ from io import BytesIO
 from PIL import Image
 from tqdm import tqdm
 
-CHECKPOINT_EVERY = 500
+CHECKPOINT_EVERY = 50
 PLACEHOLDER_IMG = Image.new("RGB", (448, 448), (128, 128, 128))
 
 DOMAIN_CONFIGS = {
@@ -296,8 +296,8 @@ def main():
             raw = generate_fn(processor, model, image, prompt)
 
         dsv = validate_dsv(raw)
-        cache[item_id] = dsv if dsv else raw
         if dsv:
+            cache[item_id] = dsv
             valid_count += 1
 
         if i % CHECKPOINT_EVERY == 0:
@@ -312,8 +312,8 @@ def main():
     df["query"] = df[cfg["id_col"]].map(cache)
     df.to_csv(cfg["csv"], index=False)
 
-    valid = df["query"].notna().sum()
-    print(f"\n완료! 유효 쿼리: {valid:,} / {len(df):,}")
+    valid = len(cache)
+    print(f"\n완료! 유효 쿼리: {valid:,} / {len(df):,} (실패: {len(df)-valid:,}건 — 재실행 시 자동 재처리)")
     print(f"저장: {cfg['csv']}")
 
 
