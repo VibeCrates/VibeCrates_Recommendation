@@ -70,7 +70,8 @@ def download_one(item_id: str, url: str, out_path: Path) -> tuple[str, bool]:
 
 def run_domain(domain: str, workers: int):
     cfg = DOMAIN_CONFIGS[domain]
-    df = pd.read_csv(cfg["csv"], low_memory=False)
+    enc = "latin-1" if domain == "movie" else "utf-8"
+    df = pd.read_csv(cfg["csv"], low_memory=False, encoding=enc)
     out_dir = Path(cfg["out_dir"])
     out_dir.mkdir(parents=True, exist_ok=True)
 

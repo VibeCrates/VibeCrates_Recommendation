@@ -94,7 +94,7 @@ class QueryBlock(nn.Module):
     Input: query_text (max 77 tokens)
     Output: z_query (768 dim)
     """
-    def __init__(self, model_name: str = 'Bingsu/clip-vit-large-patch14-ko', output_dim: int = 768):
+    def __init__(self, model_name: str = 'openai/clip-vit-large-patch14', output_dim: int = 768):
         super().__init__()
         self.processor = CLIPProcessor.from_pretrained(model_name)
         self.text_encoder = CLIPTextModel.from_pretrained(model_name)

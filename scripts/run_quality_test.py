@@ -1,6 +1,6 @@
 """
 실제 generate_queries.py의 프롬프트/파라미터 그대로 사용.
-50건 랜덤 샘플, 도메인별 품질 측정.
+50건 랜덤 샘플, 도메인별 품질 측정. (영어 쿼리 기준)
 """
 import os, sys, json, random
 import torch
@@ -39,16 +39,16 @@ def run_test(domain: str, processor, model):
         raw = generate_query_qwen(processor, model, image, prompt)
         dsv = validate_dsv(raw)
 
-        has_eng   = bool(__import__('re').search(r'[A-Za-z]', raw))
+        has_kor   = bool(__import__('re').search(r'[가-힣]', raw))
         has_num   = bool(__import__('re').match(r'^\d+\.', raw))
-        has_label = bool(__import__('re').search(r'시인:|Space:|Poet:|Philosopher:|철학자:|공간:', raw))
+        has_label = bool(__import__('re').search(r'Poet:|Space:|Philosopher:', raw, __import__('re').IGNORECASE))
         parts     = raw.split("|")
 
         results.append({
             "id": item_id,
             "raw": raw,
             "dsv_valid": dsv is not None,
-            "has_eng": has_eng,
+            "has_kor": has_kor,
             "has_num_prefix": has_num,
             "has_label": has_label,
             "n_parts": len(parts),
@@ -59,13 +59,13 @@ def run_test(domain: str, processor, model):
     print(f"\n\n=== [{domain.upper()}] 품질 리포트 ({SAMPLE_N}건) ===")
     total = len(results)
     valid     = sum(1 for r in results if r["dsv_valid"])
-    eng       = sum(1 for r in results if r["has_eng"])
+    kor       = sum(1 for r in results if r["has_kor"])
     num_pre   = sum(1 for r in results if r["has_num_prefix"])
     label     = sum(1 for r in results if r["has_label"])
     bad_pipe  = sum(1 for r in results if r["n_parts"] != 3)
 
     print(f"  유효 DSV (파이프 3분할): {valid}/{total} ({valid/total*100:.0f}%)")
-    print(f"  영어 포함:               {eng}/{total} ({eng/total*100:.0f}%)")
+    print(f"  한국어 잔존:             {kor}/{total} ({kor/total*100:.0f}%)")
     print(f"  번호 prefix:             {num_pre}/{total} ({num_pre/total*100:.0f}%)")
     print(f"  페르소나 레이블 잔존:    {label}/{total} ({label/total*100:.0f}%)")
     print(f"  파이프 분할 이상:        {bad_pipe}/{total} ({bad_pipe/total*100:.0f}%)")

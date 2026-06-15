@@ -1,6 +1,6 @@
 """
 Qwen2.5-VL / PaliGemma 2를 사용하여 Movie/Music/Book 각 인스턴스의
-query 컬럼을 DSV(| 구분자, 4개 한국어 감성 쿼리) 형태로 생성.
+query 컬럼을 DSV(| 구분자, 3개 영어 감성 쿼리) 형태로 생성.
 체크포인트: data/query_cache_{domain}.json (500건마다)
 
 실행 예:
@@ -28,47 +28,47 @@ DOMAIN_CONFIGS = {
         "csv": "data/MovieGenre.csv",
         "id_col": "imdbId",
         "image_col": "Poster",
-        "role": "영화 마케팅 전문가",
+        "role": "a film marketing expert",
         "has_image": lambda row: pd.notna(row.get("Poster")) and str(row.get("Poster", "")).startswith("http"),
     },
     "music": {
         "csv": "data/music_features.csv",
         "id_col": "id",
         "image_col": "img",
-        "role": "음악 큐레이터",
+        "role": "a music curator",
         "has_image": lambda row: pd.notna(row.get("img")) and str(row.get("img", "")) not in ("no", "nan", ""),
     },
     "book": {
         "csv": "data/kindle_data-v2.csv",
         "id_col": "asin",
         "image_col": "imgUrl",
-        "role": "도서 편집자",
+        "role": "a book editor",
         "has_image": lambda row: pd.notna(row.get("imgUrl")) and str(row.get("imgUrl", "")).startswith("http"),
     },
 }
 
 PROMPT_TEMPLATE = (
     "[Context]\nSynopsis: {synopsis}\n\n"
-    "[Instruction]\n당신은 {role}입니다. "
-    "이미지의 시각적 분위기(색감, 조명, 구도)와 텍스트 정보를 융합하여 "
-    "아래 3가지 페르소나 스타일의 한국어 감성 검색 쿼리를 각각 1개씩 생성하세요.\n\n"
+    "[Instruction]\nYou are {role}. "
+    "Combine the visual mood of the image (color tone, lighting, composition) with the text information "
+    "to generate one English evocative search query per persona below.\n\n"
     "[Personas]\n"
-    "1. Poet(시인): 은유·서정적 표현. 예) '푸른 새벽의 파편', '잊혀진 계절의 잔향'\n"
-    "2. Space(공간): 날씨·장소·감각적 질감. 예) '비 오는 날 LP바', '새벽 3시 편의점 불빛'\n"
-    "3. Philosopher(철학자): 인간 본질·심연 테마. 예) '존재의 끝에서', '고독이 익어가는 시간'\n\n"
-    "[Example]\n"
+    "1. Poet: metaphorical, lyrical imagery. e.g. 'fragments of a blue dawn', 'echo of forgotten seasons'\n"
+    "2. Space: weather, place, sensory texture. e.g. 'rainy day vinyl bar', '3am convenience store glow'\n"
+    "3. Philosopher: human essence, existential depth. e.g. 'at the edge of existence', 'solitude slowly ripening'\n\n"
+    "[Examples]\n"
     "Synopsis: Title: Schindler's List / Genre: Drama, History / Overview: A businessman saves Jews during Holocaust.\n"
-    "Output: 재의 기억|잿빛 기차역 플랫폼|인류의 마지막 양심\n\n"
+    "Output: ashes of memory|grey platform at dawn|humanity's last conscience\n\n"
     "Synopsis: Title: Toy Story / Genre: Animation, Comedy / Overview: Toys come to life when humans aren't watching.\n"
-    "Output: 버려진 인형의 꿈|아이 방의 오후 햇살|존재 증명의 여정\n\n"
+    "Output: abandoned doll's quiet dream|golden afternoon in a child's room|a journey to prove you exist\n\n"
     "Synopsis: Title: The Dark Knight / Genre: Action, Crime / Overview: Batman faces the Joker who wants to plunge Gotham into anarchy.\n"
-    "Output: 어둠 속 정의의 균열|고담시 빗속 골목|선과 악의 경계에서\n\n"
+    "Output: fracture of justice in darkness|rain-soaked Gotham alley|where good and evil lose their names\n\n"
     "[Output Rules]\n"
-    "- 반드시 한국어로만 출력\n"
-    "- 정확히 3개의 쿼리를 | 로 구분하여 한 줄로만 출력\n"
-    "- 3개의 쿼리는 서로 달라야 함\n"
-    "- 각 쿼리는 5단어 이내 명사형, 설명문 금지\n"
-    "- 추가 설명·번호·레이블 없이 DSV 한 줄만 출력\n\n"
+    "- Output in English only\n"
+    "- Exactly 3 queries separated by | on a single line\n"
+    "- Each query must be distinct\n"
+    "- 5 words or fewer per query, noun-phrase style, no full sentences\n"
+    "- No labels, numbers, or explanation — one DSV line only\n\n"
     "[Output]"
 )
 
