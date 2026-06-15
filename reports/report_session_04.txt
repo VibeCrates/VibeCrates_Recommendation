@@ -1,0 +1,162 @@
+================================================================================
+VibeCrates Recommendation System — 세션 보고서 (4)
+작성일: 2026-05-29
+================================================================================
+
+
+## 1. 세션 시작 시점 상태 (session_03 이후)
+
+session_03에서 이월된 작업:
+  [ → 완료] Instrumental 트랙 4,092개 텍스트 생성 (fetch_music_descriptions.py 실행)
+  [ → 완료] 음악 이미지 없는 18,082개 처리 방향 결정 → B안(MusicBrainz) 채택
+  [ → 완료] Query 생성 파이프라인 설계 및 코드 반영
+  [ → 미완] data/preprocessing.py 구현
+  [ → 미완] src/api/ 구현
+  [ → 미완] scripts/evaluate.py, scripts/inference.py 구현
+  [ → 미완] models/utils.py 미완성 함수 구현
+
+
+================================================================================
+## 2. Instrumental 트랙 텍스트 생성 완료
+================================================================================
+
+  스크립트: scripts/fetch_music_descriptions.py
+  방법: Last.fm track.getInfo → Wikipedia fallback
+  대상: 4,092개 (lyrics 없는 instrumental 트랙)
+
+  [결과]
+    Last.fm 수집:   408개
+    Wikipedia 수집: 623개
+    미수집:       3,061개  (OL/Wikipedia 미등록 트랙)
+    최종 description 컬럼 채워진 행: 1,025개 / 40,036개
+
+  미수집이 많은 이유: instrumental 트랙 특성상 곡 단위 정보가 없는 경우가 많음.
+  모델 학습 시 description이 없는 트랙은 다른 메타데이터(장르, 아티스트 등)로 대체 예정.
+
+  저장: data/music_features.csv (description 컬럼 추가)
+
+
+================================================================================
+## 3. Query 생성 파이프라인 설계 및 코드 반영
+================================================================================
+
+### 3-1. 설계
+
+  PaliGemma 2 28B (4-bit NF4 quantization, A100)를 사용하여 각 아이템마다
+  N개의 자연어 쿼리를 생성. 생성된 쿼리는 DSV(| 구분자) 형태로 CSV query 컬럼에 저장.
+
+  프롬프트 구조:
+    - 입력: 아이템 이미지 + 텍스트(synopsis)
+    - 출력: Poet|Trendy|Space|Philosopher (4개 페르소나 쿼리, 각 5단어 이내 명사형)
+
+  학습 시 query 처리:
+    - N개 쿼리를 QueryBlock에 각각 통과 → (N, 768)
+    - Mean pooling → 최종 z_query (768)
+
+  DSV 예시: "푸른 새벽의 조각|갓생 살기 챌린지|비 내리는 LP바|고독의 끝에서"
+
+### 3-2. 신규/수정 파일
+
+  [신규] scripts/generate_queries.py
+    - PaliGemma 2 28B 4-bit 로드 (bitsandbytes, device_map="auto")
+    - --domain movie|music|book 인수로 도메인 선택
+    - 도메인별 이미지 + synopsis 텍스트 조합
+    - 500건마다 data/query_cache_{domain}.json 체크포인트
+    - 출력: CSV query 컬럼 (DSV)
+
+  [수정] src/data/dataset.py
+    - __getitem__: query DSV 문자열 → List[str] 파싱 ("|" 구분자)
+    - collate_fn: batch['query'] 타입 List[str] → List[List[str]] 변경
+
+  [수정] src/models/recommender.py
+    - DualEncoderModel.encode_query(): N개 쿼리 mean pooling 지원
+    - List[str] (단일 쿼리, inference) / List[List[str]] (학습, DSV) 모두 지원
+
+### 3-3. 실행 순서 (미실행, A100 필요)
+
+  python3 scripts/generate_queries.py --domain movie
+  python3 scripts/generate_queries.py --domain music
+  python3 scripts/generate_queries.py --domain book
+
+
+================================================================================
+## 4. 이미지 수집/다운로드 파이프라인 설계
+================================================================================
+
+### 4-1. 현재 이미지 보유 현황
+
+  도메인    | 전체   | 이미지 URL 보유 | 미보유
+  --------- | ------ | --------------- | ------
+  Movie     | 40,108 |         40,108  |      0  (Amazon CDN)
+  Music     | 40,036 |         21,954  | 18,082  (img='no')
+  Book      | 40,000 |         40,000  |      0  (Amazon CDN, 유효 이미지만 샘플링됨)
+
+### 4-2. 음악 미보유 이미지 — B안: MusicBrainz + Cover Art Archive
+
+  [신규] scripts/fetch_music_images_musicbrainz.py
+    - API 키 불필요
+    - MusicBrainz Search API → release MBID 획득 (1 req/sec rate limit 준수)
+    - Cover Art Archive API → 이미지 URL 조회
+    - 트랙당 최대 2 요청 × 1.1초 = 약 11시간 소요 예상
+    - 체크포인트: data/musicbrainz_cache.json (500건마다)
+    - 커버리지 예상: 30~50% (재즈/클래식/록 위주, 현대 팝/EDM 낮음)
+
+  실행:
+    nohup python3 -u scripts/fetch_music_images_musicbrainz.py > logs/musicbrainz.log 2>&1 &
+
+  실행 미완료 상태. 다음 세션에서 진행 예정.
+
+### 4-3. 전체 이미지 일괄 다운로드
+
+  [신규] scripts/download_images.py
+    - 도메인별 CSV의 이미지 URL을 로컬에 다운로드
+    - 저장 경로: data/images/{domain}/{id}.jpg
+    - ThreadPoolExecutor 병렬 처리 (기본 30 workers)
+    - API 키 불필요
+
+  ※ 주의: 전체 다운로드 시 약 5~10GB 디스크 공간 필요.
+           실행 전 여유 공간 반드시 확인할 것.
+
+  실행 순서:
+    1. fetch_music_images_musicbrainz.py 완료 후
+    2. python3 scripts/download_images.py --domain all
+
+  [수정] src/data/dataset.py
+    - 로컬 파일 경로 + HTTP URL 모두 지원하도록 이미지 로딩 수정
+
+
+================================================================================
+## 5. 현재 파일 상태 요약
+================================================================================
+
+  data/Books_final.csv         : 40,000개  층화 샘플링 완료, query 컬럼 생성 예정
+  data/Books_filtered.csv      : 123,774개 popularity + category 완료
+  data/MovieGenre.csv          : 40,108개  imdbId 패딩 완료, query 컬럼 생성 예정
+  data/music_features.csv      : 40,036개  description 컬럼 추가, query 컬럼 생성 예정
+                                           이미지 21,954개 보유 (MusicBrainz 수집 예정)
+
+
+================================================================================
+## 6. 남은 작업 (다음 세션)
+================================================================================
+
+  [데이터]
+  [ ] fetch_music_images_musicbrainz.py 실행 (약 11시간, nohup 백그라운드)
+  [ ] generate_queries.py 실행 — movie / music / book (A100 필요)
+  [ ] download_images.py 실행 (디스크 5~10GB 필요, 사전 확인 필수)
+
+  [모델/학습]
+  [ ] src/data/preprocessing.py 구현 (DataPreprocessor)
+        - 결측치 처리, 범주형 인코딩, 피처 정규화
+        - 사용자 프로필 생성, 아이템 피처 생성
+  [ ] models/utils.py 미완성 함수 구현
+        - split_train_test(), normalize_features(), calculate_similarity()
+
+  [서빙]
+  [ ] src/api/ 구현 (routes, dependencies)
+
+  [스크립트]
+  [ ] scripts/evaluate.py 구현
+  [ ] scripts/inference.py 구현
+
+================================================================================

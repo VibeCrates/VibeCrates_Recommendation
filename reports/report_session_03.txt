@@ -1,0 +1,138 @@
+================================================================================
+VibeCrates Recommendation System — 데이터 전처리 세션 보고서 (3)
+작성일: 2026-05-22
+================================================================================
+
+
+## 1. 세션 시작 시점 상태 확인
+
+이전 세션(report_session_02.txt)에서 add_book_popularity.py를 tmux 백그라운드로
+실행 중이었으나, 체크포인트 파일(books_popularity_cache.json)이 git에 올라오지
+않아 재수집 필요 여부를 확인함.
+
+[확인 결과]
+  Books_filtered.csv에 이미 아래 컬럼이 추가되어 있었음 → 이미 완료 상태.
+    - edition_count, already_read_count, want_to_read_count
+    - ratings_average, ratings_count, popularity_score
+    - main_category (15,543개 → 25개 정규화 완료, raw_category 보존)
+
+  직전 세션의 popularity 수집 및 카테고리 정규화는 다른 로컬에서 완료 후 push된 상태.
+
+
+## 2. Books_filtered.csv → Books_final.csv 층화 샘플링
+
+[목표]
+  123,774개 → 40,000개 (모델 학습 적정 규모)
+
+[방법]
+  popularity_score > 0 인 8,884개 전체 포함 (고정)
+  나머지 31,116개는 main_category 비율 유지 층화 샘플링 (score = 0 풀에서 추출)
+
+  할당 공식:
+    카테고리별 할당량 = round(31,116 × (카테고리별 score=0 수 / 전체 score=0 수))
+    단, 반올림 오차는 가장 큰 카테고리(Other)에 보정
+
+[결과]
+  저장: data/Books_final.csv (40,000개, random_state=42)
+  주요 분포:
+    Other          19,355개
+    Fiction         9,463개
+    Children's/YA   1,336개
+    Social/Political 1,104개
+    Mystery/Thriller 1,007개
+    ...
+
+
+## 3. 음악 데이터 이미지 유효성 검증
+
+[현황 파악]
+  img 컬럼 분포 (40,036개):
+    Spotify CDN URL : 21,742개
+    'no'            : 18,292개  ← 처리 대상
+    null            :      2개
+
+[Spotify API 시도 → 실패]
+  1차: 배치 엔드포인트 (GET /v1/tracks?ids=...) → 403 Forbidden
+       신규 앱에 대해 배치 엔드포인트 제한됨 (정책 변경)
+
+  2차: 단일 엔드포인트 (GET /v1/tracks/{id}) 개별 요청
+       50 workers로 대량 요청 → Retry-After: 82,970초 (≈ 23시간) rate limit 발생
+       스크립트 종료 후 iTunes Search API로 전환
+
+[iTunes Search API로 전환]
+  엔드포인트: https://itunes.apple.com/search
+  파라미터: term={track_name} {artist}, media=music, entity=song, limit=1
+  API 키 불필요 / artworkUrl100 → 600×600 업스케일
+
+  결과:
+    처리: 18,244개
+    이미지 발견: 162개  (처음 ~1,500개 구간에서만 응답, 이후 조용히 차단)
+    미수집: 18,082개
+
+  최종 이미지 보유: 21,954개 / 40,036개 (54.8%)
+
+[이미지 없는 18,082개 처리 방향 — 미결정]
+  후보 방안:
+    A. 이미지 없는 인스턴스 제외 → 21,954개로 규모 축소
+    B. MusicBrainz + Cover Art Archive 시도 (록/클래식 위주, 현대 팝 coverage 불확실)
+    C. 장르별 플레이스홀더 이미지 사용 (학습 품질 저하 감수)
+
+
+## 4. Instrumental 트랙 텍스트 처리
+
+[현황]
+  lyrics 없는 인스턴스: 4,092개
+  → 모두 instrumentalness > 0.5 (평균 0.84)
+  → Spotify track ID는 전부 존재
+
+[방향 논의]
+  제안된 방법:
+    A. Template 기반: audio features를 규칙으로 자연어 변환 (무료, 100% coverage)
+    B. LLM 생성: 메타데이터 기반 Claude API 호출 (품질 높음, 비용 발생)
+    C. Last.fm + Wikipedia 크롤링: 제목/아티스트명 기반 설명 수집 (무료)
+
+  C 채택 → fetch_music_descriptions.py 작성 완료 (Last.fm → Wikipedia fallback)
+  Last.fm API 키 발급 완료.
+  스크립트 실행은 다음 세션으로 이월.
+
+
+## 5. 현재 파일 상태 요약
+
+  data/Books_final.csv      : 40,000개  층화 샘플링 완료
+  data/Books_filtered.csv   : 123,774개 popularity + category 완료
+  data/MovieGenre.csv       :  40,108개 imdbId 패딩 완료 (변경 없음)
+  data/music_features.csv   :  40,036개 이미지 21,954개 보유 (img 컬럼 업데이트)
+  data/music_img_cache.json :  18,244개 iTunes fetch 체크포인트
+
+
+## 6. 작성된 스크립트
+
+  scripts/fetch_music_images.py      iTunes Search API 기반 앨범 아트 수집
+  scripts/fetch_music_descriptions.py Last.fm → Wikipedia fallback 설명 수집
+
+
+## 7. 남은 작업 (다음 세션)
+
+  [ ] 음악 이미지 없는 18,082개 처리 방향 결정 (A/B/C 중 선택)
+
+  [ ] Instrumental 4,092개 텍스트 생성
+      스크립트 준비 완료 (fetch_music_descriptions.py)
+      실행 필요: LASTFM_API_KEY="..." python3 scripts/fetch_music_descriptions.py
+
+  [ ] data/preprocessing.py 구현 (DataPreprocessor)
+      - 결측치 처리
+      - 범주형 인코딩
+      - 피처 정규화
+      - 사용자 프로필 생성
+      - 아이템 피처 생성
+
+  [ ] src/api/ 구현 (routes, dependencies)
+
+  [ ] scripts/evaluate.py, scripts/inference.py 구현
+
+  [ ] models/utils.py 미완성 함수 구현
+      - split_train_test()
+      - normalize_features()
+      - calculate_similarity()
+
+================================================================================
