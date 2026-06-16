@@ -144,7 +144,7 @@ class TwoStageTrainer:
             outputs = self.model(batch)
             z_content, z_query = outputs['z_content'], outputs['z_query']
 
-            teacher_dist = F.log_softmax(z_query,   dim=-1)
+            teacher_dist = F.log_softmax(F.normalize(z_query, p=2, dim=-1), dim=-1)
             student_dist = F.log_softmax(z_content, dim=-1)
             loss = self.distillation_loss_fn(student_dist, teacher_dist)
             total_loss += loss.item()
@@ -184,12 +184,13 @@ class TwoStageTrainer:
                 outputs = self.model(batch)
                 z_content, z_query = outputs['z_content'], outputs['z_query']
                 
-                # The "teacher" (z_query) should not have gradients flowing back to it
+                # Normalize both to the same scale before KL so log_softmax
+                # distributions are comparable (z_content is already L2-normalized
+                # from ContentBlock; z_query is not, causing distribution mismatch).
                 with torch.no_grad():
-                    teacher_dist = F.log_softmax(z_query, dim=-1)
-                
-                # The "student" (z_content)
-                student_dist = F.log_softmax(z_content, dim=-1)
+                    teacher_dist = F.log_softmax(F.normalize(z_query, p=2, dim=-1), dim=-1)
+
+                student_dist = F.log_softmax(z_content, dim=-1)  # z_content already normalized
                 
                 # Calculate KL-Divergence loss
                 loss = self.distillation_loss_fn(student_dist, teacher_dist)
