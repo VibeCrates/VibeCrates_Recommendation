@@ -45,13 +45,21 @@ def main(args):
     if args.domain:
         df = df[df["domain"] == args.domain].reset_index(drop=True)
         logger.info(f"Filtered to domain='{args.domain}': {len(df):,} rows")
+
+    image_embeddings = None
+    if args.image_embeddings:
+        logger.info(f"Loading image embeddings from {args.image_embeddings}...")
+        image_embeddings = torch.load(args.image_embeddings, weights_only=False)
+        logger.info(f"Loaded {len(image_embeddings):,} embeddings")
+
     dataloaders = get_dataloaders_from_df(
         df=df,
         batch_size=config.batch_size,
         test_size=1.0 - config.train_test_split,
         val_size=config.validation_split,
         num_workers=args.num_workers,
-        random_seed=config.random_seed
+        random_seed=config.random_seed,
+        image_embeddings=image_embeddings,
     )
     
     train_loader = dataloaders['train']
@@ -96,6 +104,12 @@ if __name__ == '__main__':
         type=str,
         default='data/sample_data.csv',
         help='Path to CSV file with training data'
+    )
+    parser.add_argument(
+        '--image-embeddings',
+        type=str,
+        default=None,
+        help='Path to pre-computed image embeddings (.pt file from extract_image_embeddings.py)'
     )
     parser.add_argument(
         '--domain',

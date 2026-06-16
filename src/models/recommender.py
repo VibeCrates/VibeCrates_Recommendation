@@ -85,10 +85,12 @@ class ImageBlock(nn.Module):
         self.mlp = MLP(self.vision_encoder.config.hidden_size, output_dim)
 
     def forward(self, images):
+        if isinstance(images, torch.Tensor):
+            # Pre-computed CLIP features (B, 1024) — skip frozen encoder
+            return self.mlp(images.to(next(self.mlp.parameters()).device))
         inputs = self.processor(images=images, return_tensors="pt").to(self.vision_encoder.device)
         image_features = self.vision_encoder(**inputs).pooler_output
-        z_image = self.mlp(image_features)
-        return z_image
+        return self.mlp(image_features)
 
 
 class QueryBlock(nn.Module):
