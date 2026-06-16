@@ -131,6 +131,43 @@ def create_dataloaders(
     return loaders
 
 
+def get_dataloaders_from_df(
+    df: pd.DataFrame,
+    batch_size: int = 32,
+    test_size: float = 0.2,
+    val_size: float = 0.1,
+    num_workers: int = 0,
+    random_seed: int = 42,
+) -> dict:
+    """
+    Create DataLoaders directly from a DataFrame (already loaded / filtered).
+
+    Expects columns: content_text, image_path, query
+    """
+    required = ["content_text", "image_path", "query"]
+    missing = [c for c in required if c not in df.columns]
+    if missing:
+        raise ValueError(f"DataFrame is missing required columns: {missing}")
+
+    full_dataset = MultiModalDataset(
+        df["content_text"].tolist(),
+        df["image_path"].tolist(),
+        df["query"].tolist(),
+    )
+
+    n = len(full_dataset)
+    test_count = int(n * test_size)
+    val_count = int((n - test_count) * val_size)
+    train_count = n - test_count - val_count
+
+    import torch
+    torch.manual_seed(random_seed)
+    train_ds, val_ds, test_ds = random_split(full_dataset, [train_count, val_count, test_count])
+
+    logger.info(f"Split: train={train_count:,} val={val_count:,} test={test_count:,}")
+    return create_dataloaders(train_ds, val_ds, test_ds, batch_size=batch_size, num_workers=num_workers)
+
+
 def get_dataloaders_from_csv(
     csv_path: Union[str, Path],
     batch_size: int = 32,

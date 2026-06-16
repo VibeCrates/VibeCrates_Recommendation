@@ -10,7 +10,8 @@ from argparse import ArgumentParser
 from src.training.config import TrainingConfig
 from src.training.trainer import TwoStageTrainer
 from src.models.recommender import DualEncoderModel
-from src.data.loader import get_dataloaders_from_csv
+import pandas as pd
+from src.data.loader import get_dataloaders_from_df
 
 # Setup logging
 logging.basicConfig(
@@ -40,8 +41,12 @@ def main(args):
     
     # Load data
     logger.info(f"Loading data from {args.data_path}...")
-    dataloaders = get_dataloaders_from_csv(
-        csv_path=args.data_path,
+    df = pd.read_csv(args.data_path)
+    if args.domain:
+        df = df[df["domain"] == args.domain].reset_index(drop=True)
+        logger.info(f"Filtered to domain='{args.domain}': {len(df):,} rows")
+    dataloaders = get_dataloaders_from_df(
+        df=df,
         batch_size=config.batch_size,
         num_workers=args.num_workers,
         random_seed=config.random_seed
@@ -89,6 +94,13 @@ if __name__ == '__main__':
         type=str,
         default='data/sample_data.csv',
         help='Path to CSV file with training data'
+    )
+    parser.add_argument(
+        '--domain',
+        type=str,
+        choices=['movie', 'music', 'book'],
+        default=None,
+        help='Filter training data to a single domain (default: use all domains in the CSV)'
     )
     parser.add_argument(
         '--num-workers',
