@@ -41,7 +41,7 @@ class TextBlock(nn.Module):
         lora_config = LoraConfig(
             r=16,
             lora_alpha=32,
-            target_modules=["query", "value"],
+            target_modules=["q", "v"],  # all-mpnet-base-v2 uses q/v not query/value
             lora_dropout=0.05,
             bias="none",
             task_type=TaskType.FEATURE_EXTRACTION
@@ -142,12 +142,13 @@ class ContentBlock(nn.Module):
         return z_content
 
 
-class DualEncoderModel(BaseRecommender):
+class DualEncoderModel(nn.Module, BaseRecommender):
     """
     The main model that orchestrates all blocks for training and inference.
     """
     def __init__(self):
-        super().__init__(name="DualEncoderModel")
+        nn.Module.__init__(self)
+        BaseRecommender.__init__(self, name="DualEncoderModel")
         self.text_block = TextBlock()
         self.image_block = ImageBlock()
         self.query_block = QueryBlock()
