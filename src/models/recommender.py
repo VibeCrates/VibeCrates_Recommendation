@@ -32,36 +32,39 @@ class TextBlock(nn.Module):
     Input: content_text (max 512 tokens)
     Output: z_text (768 dim)
     """
-    def __init__(self, model_name: str = 'paraphrase-multilingual-mpnet-base-v2', output_dim: int = 768):
+    def __init__(self, model_name: str = 'all-mpnet-base-v2', output_dim: int = 768):
         super().__init__()
         self.sbert = SentenceTransformer(model_name)
-        # Freeze SBERT parameters
         for param in self.sbert.parameters():
             param.requires_grad = False
-        
-        # Apply LoRA to the SBERT model
-        # Note: Applying LoRA to SentenceTransformer requires accessing the underlying transformer model.
-        # This is a simplified approach. For a full implementation, you might need to adapt the SentenceTransformer's modules.
+
         lora_config = LoraConfig(
             r=16,
             lora_alpha=32,
-            target_modules=["query", "value"], # Common target modules in transformers
+            target_modules=["query", "value"],
             lora_dropout=0.05,
             bias="none",
             task_type=TaskType.FEATURE_EXTRACTION
         )
-        # Get the underlying transformer model to apply PEFT
+        # Replace the underlying transformer with its LoRA-wrapped version so that
+        # self.sbert.encode() actually runs through the LoRA adapter during forward.
         transformer_model = self.sbert._first_module().auto_model
-        self.sbert_lora = get_peft_model(transformer_model, lora_config)
+        self.sbert._first_module().auto_model = get_peft_model(transformer_model, lora_config)
 
         self.mlp = MLP(self.sbert.get_sentence_embedding_dimension(), output_dim)
 
     def forward(self, text_list: list[str]):
-        # SentenceTransformer expects a list of strings
-        # The model will handle tokenization, padding, and truncation internally.
-        embeddings = self.sbert.encode(text_list, convert_to_tensor=True, device=self.sbert.device)
-        z_text = self.mlp(embeddings)
-        return z_text
+        transformer_module = self.sbert._first_module()
+        device = next(self.parameters()).device
+        tokenized = transformer_module.tokenizer(
+            text_list, padding=True, truncation=True, max_length=512, return_tensors="pt"
+        ).to(device)
+        model_output = transformer_module.auto_model(**tokenized)
+        # Mean pooling over non-padding tokens — mirrors sentence-transformers default
+        token_embeddings = model_output.last_hidden_state  # (B, T, H)
+        mask = tokenized["attention_mask"].unsqueeze(-1).expand(token_embeddings.size()).float()
+        embeddings = torch.sum(token_embeddings * mask, dim=1) / torch.clamp(mask.sum(dim=1), min=1e-9)
+        return self.mlp(embeddings)
 
 
 class ImageBlock(nn.Module):
@@ -70,7 +73,7 @@ class ImageBlock(nn.Module):
     Input: content_image (224, 224, 3)
     Output: z_image (768 dim)
     """
-    def __init__(self, model_name: str = 'Bingsu/clip-vit-large-patch14-ko', output_dim: int = 768):
+    def __init__(self, model_name: str = 'openai/clip-vit-large-patch14', output_dim: int = 768):
         super().__init__()
         self.processor = CLIPProcessor.from_pretrained(model_name)
         self.vision_encoder = CLIPVisionModel.from_pretrained(model_name)
@@ -159,24 +162,33 @@ class DualEncoderModel(BaseRecommender):
 
     def encode_query(self, queries: list[list[str]] | list[str]) -> torch.Tensor:
         """
-        N개 쿼리를 QueryBlock에 통과시킨 뒤 mean pooling → z_query (B, 768).
-        List[str] (단일 쿼리 inference) 과 List[List[str]] (학습, DSV) 모두 지원.
+        Encodes N queries per item via QueryBlock then mean-pools → z_query (B, 768).
+        Accepts both List[str] (single-query inference) and List[List[str]] (training, DSV).
+        Items with no queries get a zero vector.
         """
         if queries and isinstance(queries[0], str):
             queries = [[q] for q in queries]
 
         flat = [q for qs in queries for q in qs]
         counts = [len(qs) for qs in queries]
+        out_dim = self.query_block.mlp.layers[-1].out_features
+        device = next(self.parameters()).device
 
-        z_flat = self.query_block(flat)  # (sum(N), 768)
+        if not flat:
+            return torch.zeros(len(queries), out_dim, device=device)
+
+        z_flat = self.query_block(flat)  # (sum(N), D)
 
         pooled = []
         offset = 0
         for n in counts:
-            pooled.append(z_flat[offset:offset + n].mean(dim=0))
+            if n == 0:
+                pooled.append(torch.zeros(out_dim, device=device))
+            else:
+                pooled.append(z_flat[offset:offset + n].mean(dim=0))
             offset += n
 
-        return torch.stack(pooled)  # (B, 768)
+        return torch.stack(pooled)  # (B, D)
 
     def forward(self, batch):
         """

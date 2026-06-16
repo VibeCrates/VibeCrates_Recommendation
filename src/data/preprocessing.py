@@ -1,12 +1,12 @@
 """
 Preprocessing - Data preprocessing and feature engineering
 
-주요 역할:
-  - 도메인별 CSV(MovieGenre / music_features / kindle_data-v2) →
-    loader.py가 기대하는 표준 컬럼(content_text, image_path, query)으로 변환
-  - 결측치 처리, 범주형 인코딩, 수치 피처 정규화
-  - 사용자 프로필 집계, 아이템 피처 행렬 생성
-  - 이상치 제거, 클래스 불균형 처리
+Responsibilities:
+  - Converts domain CSVs (MovieGenre / music_features / kindle_data-v2) into
+    the standard schema expected by loader.py (content_text, image_path, query)
+  - Missing value handling, categorical encoding, numerical feature normalization
+  - Item feature matrix construction
+  - Outlier removal, class imbalance handling
 """
 import json
 import os
@@ -41,7 +41,7 @@ DOMAIN_CONFIG = {
 
 
 class DataPreprocessor:
-    """도메인 독립적인 전처리 파이프라인. fit/transform 패턴으로 train/val/test에 동일 스케일러 적용."""
+    """Domain-agnostic preprocessing pipeline. Uses fit/transform pattern to apply consistent scalers across train/val/test."""
 
     def __init__(self):
         self.scalers: Dict[str, object] = {}
@@ -99,7 +99,7 @@ class DataPreprocessor:
         """
         Args:
             method: "standardization" (StandardScaler) | "min-max" (MinMaxScaler)
-            key: 같은 피처 그룹에 같은 스케일러를 재사용하기 위한 식별자
+            key: identifier for reusing the same scaler across calls on the same feature group
         Returns:
             (scaled_X, scaler)
         """
@@ -113,11 +113,11 @@ class DataPreprocessor:
 
     def create_item_features(self, item_df: pd.DataFrame) -> np.ndarray:
         """
-        음악 도메인의 Spotify 오디오 피처를 정규화해 반환.
-        해당 컬럼이 없는 도메인(movie/book)은 영벡터 행렬 반환.
+        Normalizes Spotify audio features for the music domain.
+        Returns a zero matrix for domains without audio features (movie/book).
 
         Returns:
-            (N, D) float32 배열. D = 오디오 피처 수(9) 또는 1
+            float32 array of shape (N, D), where D = number of audio features (9) or 1
         """
         audio_cols = [c for c in MUSIC_AUDIO_FEATURES if c in item_df.columns]
         if not audio_cols:
@@ -133,11 +133,11 @@ class DataPreprocessor:
 
 
 # ---------------------------------------------------------------------------
-# 도메인별 표준화 함수
+# Domain-specific standardization helpers
 # ---------------------------------------------------------------------------
 
 def _build_content_text(domain: str, row: pd.Series) -> str:
-    """도메인 CSV 행 → content_text 문자열 (generate_queries.py의 build_synopsis와 동일 로직)."""
+    """Converts a domain CSV row into a content_text string. Mirrors build_synopsis logic in generate_queries.py."""
     if domain == "movie":
         text = f"Title: {row.get('Title', '')}\nGenre: {row.get('Genre', '')}"
         overview = str(row.get("text", "")).strip()
@@ -175,7 +175,7 @@ def _build_content_text(domain: str, row: pd.Series) -> str:
 
 
 def _resolve_image_path(domain: str, item_id: str, url: str, image_base_dir: str) -> str:
-    """로컬 파일 우선, 없으면 HTTP URL, 둘 다 없으면 빈 문자열."""
+    """Returns local file path if available, falls back to HTTP URL, empty string if neither exists."""
     local = os.path.join(image_base_dir, domain, f"{item_id}.jpg")
     if os.path.exists(local):
         return local
@@ -190,15 +190,14 @@ def prepare_domain_df(
     image_base_dir: str = "data/images",
 ) -> pd.DataFrame:
     """
-    도메인별 원본 DataFrame → loader.py 호환 표준 DataFrame.
+    Converts a raw domain DataFrame into the standard schema for loader.py.
 
-    출력 컬럼:
-      item_id, content_text, image_path, query
+    Output columns: item_id, content_text, image_path, query
 
     Args:
         domain: "movie" | "music" | "book"
-        df: 원본 도메인 CSV를 읽은 DataFrame
-        image_base_dir: 로컬 이미지 루트 디렉터리 (download_images.py의 저장 경로)
+        df: raw domain CSV as a DataFrame
+        image_base_dir: local image root directory (as written by download_images.py)
     """
     cfg = DOMAIN_CONFIG[domain]
     id_col = cfg["id_col"]
@@ -219,7 +218,7 @@ def prepare_domain_df(
 
 
 # ---------------------------------------------------------------------------
-# 모듈 레벨 유틸리티
+# Module-level utilities
 # ---------------------------------------------------------------------------
 
 def remove_duplicates(df: pd.DataFrame, subset: Optional[List[str]] = None) -> pd.DataFrame:

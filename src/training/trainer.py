@@ -114,10 +114,7 @@ class TwoStageTrainer:
 
     @torch.no_grad()
     def _validate_stage_1(self, val_loader) -> float:
-        """
-        Stage 1 검증: text-query / text-image / image-query 세 쌍의 InfoNCE 합산.
-        학습과 동일한 손실 함수를 gradient 없이 실행한다.
-        """
+        """Stage 1 validation: sum of InfoNCE losses across text-query, text-image, image-query pairs."""
         self.model.eval()
         total_loss = 0.0
 
@@ -137,11 +134,7 @@ class TwoStageTrainer:
 
     @torch.no_grad()
     def _validate_stage_2(self, val_loader) -> float:
-        """
-        Stage 2 검증: z_query(교사)의 분포를 z_content(학생)가 얼마나 잘 따라가는지
-        KL-Divergence로 측정한다.
-        학습과 동일하게 두 벡터 모두 log_softmax를 취한 뒤 KLDivLoss에 입력한다.
-        """
+        """Stage 2 validation: KL-Divergence between z_content (student) and z_query (teacher) distributions."""
         self.model.eval()
         total_loss = 0.0
 
@@ -173,7 +166,7 @@ class TwoStageTrainer:
 
         optimizer = optim.AdamW(
             filter(lambda p: p.requires_grad, self.model.parameters()),
-            lr=self.config.learning_rate,
+            lr=self.config.learning_rate_stage2,
             weight_decay=self.config.weight_decay
         )
 

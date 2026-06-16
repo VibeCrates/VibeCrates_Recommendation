@@ -51,7 +51,6 @@ class MultiModalDataset(Dataset):
             image = Image.open(image_path).convert('RGB')
         image = image.resize(self.image_size, Image.Resampling.LANCZOS)
 
-        # DSV → List[str]; NaN이나 빈 값이면 빈 리스트 대신 원본 문자열 유지
         raw = self.queries[idx]
         if isinstance(raw, str) and raw.strip():
             query = [q.strip() for q in raw.split("|") if q.strip()]

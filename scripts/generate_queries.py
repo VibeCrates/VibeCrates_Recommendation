@@ -1,9 +1,9 @@
 """
-Qwen2.5-VL / PaliGemma 2를 사용하여 Movie/Music/Book 각 인스턴스의
-query 컬럼을 DSV(| 구분자, 3개 영어 감성 쿼리) 형태로 생성.
-체크포인트: data/query_cache_{domain}.json (500건마다)
+Generates DSV queries (3 English evocative queries separated by |) for each
+Movie/Music/Book item using Qwen2.5-VL or PaliGemma 2.
+Checkpoints every 50 items to data/query_cache_{domain}.json.
 
-실행 예:
+Usage:
   /opt/conda/envs/ltv/bin/python scripts/generate_queries.py --domain movie --model-type qwen
   /opt/conda/envs/ltv/bin/python scripts/generate_queries.py --domain music --model-type qwen --limit 100
   /opt/conda/envs/ltv/bin/python scripts/generate_queries.py --domain movie --model-type paligemma
@@ -254,12 +254,12 @@ def main():
     cache_path = f"data/query_cache_{args.domain}.json"
 
     df = pd.read_csv(cfg["csv"], engine="python")
-    print(f"[{args.domain}] {len(df):,}개 로드")
+    print(f"[{args.domain}] loaded {len(df):,} rows")
 
     cache = json.load(open(cache_path)) if os.path.exists(cache_path) else {}
-    print(f"체크포인트 로드: {len(cache):,}개")
+    print(f"checkpoint loaded: {len(cache):,} entries")
 
-    print(f"모델 로드 중: {args.model_id} ({args.model_type})")
+    print(f"model loading: {args.model_id} ({args.model_type})")
     if args.model_type == "qwen":
         processor, model = load_qwen(args.model_id)
         generate_fn = generate_query_qwen
@@ -273,7 +273,7 @@ def main():
     ]
     if args.limit:
         to_process = to_process[:args.limit]
-    print(f"남은 처리 수: {len(to_process):,}개\n")
+    print(f"remaining: {len(to_process):,}\n")
 
     valid_count = sum(1 for v in cache.values() if v and validate_dsv(str(v)))
 
