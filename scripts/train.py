@@ -48,6 +48,8 @@ def main(args):
     dataloaders = get_dataloaders_from_df(
         df=df,
         batch_size=config.batch_size,
+        test_size=1.0 - config.train_test_split,
+        val_size=config.validation_split,
         num_workers=args.num_workers,
         random_seed=config.random_seed
     )

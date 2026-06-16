@@ -160,7 +160,6 @@ def get_dataloaders_from_df(
     val_count = int((n - test_count) * val_size)
     train_count = n - test_count - val_count
 
-    import torch
     torch.manual_seed(random_seed)
     train_ds, val_ds, test_ds = random_split(full_dataset, [train_count, val_count, test_count])
 
