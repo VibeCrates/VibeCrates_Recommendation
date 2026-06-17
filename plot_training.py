@@ -65,7 +65,7 @@ print(f"Saved → {out1}")
 
 # ── Stage 2 figure ────────────────────────────────────────────────────────────
 fig2, (ax3, ax4) = plt.subplots(1, 2, figsize=(13, 5))
-fig2.suptitle("Stage 2 – Fine-tuning", fontsize=13, fontweight="bold", y=1.01)
+fig2.suptitle("Stage 2 – Knowledge Distillation", fontsize=13, fontweight="bold", y=1.01)
 
 ax3.plot(s2_epochs, s2_train, color=BLUE,   marker="o", ms=4, label="Train")
 ax3.plot(s2_val_epochs, s2["val_loss"], color=ORANGE, marker="s", ms=5,
