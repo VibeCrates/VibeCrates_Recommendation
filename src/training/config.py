@@ -16,7 +16,7 @@ class TrainingConfig:
     # --- Stage 1: Contrastive Learning Parameters ---
     num_epochs_stage1: int = 10
     learning_rate: float = 1e-4
-    weight_decay: float = 1e-5
+    weight_decay: float = 1e-2
     temperature: float = 0.07  # For InfoNCE Loss
     
     # --- Stage 2: Distillation Learning Parameters ---
@@ -36,7 +36,7 @@ class TrainingConfig:
     # --- LoRA Configuration (for TextBlock) ---
     lora_r: int = 16
     lora_alpha: int = 32
-    lora_dropout: float = 0.05
+    lora_dropout: float = 0.1
     lora_target_modules: list[str] = field(default_factory=lambda: ["q", "v"])
 
     # --- Training Behavior ---

@@ -2,6 +2,10 @@
 Main training script for the recommendation model.
 Orchestrates data loading, model initialization, and training pipeline.
 """
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
+
 import torch
 import logging
 from pathlib import Path
@@ -12,6 +16,7 @@ from src.training.trainer import TwoStageTrainer
 from src.models.recommender import DualEncoderModel
 import pandas as pd
 from src.data.loader import get_dataloaders_from_df
+from scripts.build_index import build_and_save
 
 # Setup logging
 logging.basicConfig(
@@ -72,7 +77,8 @@ def main(args):
     
     # Initialize trainer
     logger.info("Initializing trainer...")
-    trainer = TwoStageTrainer(model, config, device)
+    checkpoint_dir = str(Path(args.save_path).parent)
+    trainer = TwoStageTrainer(model, config, device, checkpoint_dir=checkpoint_dir)
     
     # Train
     logger.info("Starting training...")
@@ -93,6 +99,17 @@ def main(args):
         logger.info(f"Model saved to {model_save_path}")
     
     logger.info("Training completed!")
+
+    # Build item index from best model weights
+    logger.info("Building item index...")
+    index_dir = args.index_dir
+    domains = [args.domain] if args.domain else ["movie", "music", "book"]
+    for domain in domains:
+        try:
+            build_and_save(domain, model, device, batch_size=args.batch_size, index_dir=index_dir)
+        except Exception as e:
+            logger.warning(f"[{domain}] Index build failed: {e}")
+    logger.info("Index build complete.")
 
 
 if __name__ == '__main__':
@@ -172,6 +189,12 @@ if __name__ == '__main__':
         type=str,
         default='logs/training_history.json',
         help='Path to save training history (loss curves)'
+    )
+    parser.add_argument(
+        '--index-dir',
+        type=str,
+        default='indexes',
+        help='Directory to save pre-computed item embeddings'
     )
     
     args = parser.parse_args()

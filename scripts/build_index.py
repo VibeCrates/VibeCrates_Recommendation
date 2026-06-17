@@ -23,7 +23,8 @@ from torch.utils.data import DataLoader
 INDEX_DIR = os.getenv("INDEX_DIR", "indexes")
 
 
-def build_and_save(domain: str, model: DualEncoderModel, device: torch.device, batch_size: int) -> None:
+def build_and_save(domain: str, model: DualEncoderModel, device: torch.device, batch_size: int,
+                   index_dir: str = INDEX_DIR) -> None:
     cfg = DOMAIN_CONFIG[domain]
     df = pd.read_csv(cfg["csv"], low_memory=False)
     std_df = prepare_domain_df(domain, df, image_base_dir=IMAGE_DIR)
@@ -47,9 +48,9 @@ def build_and_save(domain: str, model: DualEncoderModel, device: torch.device, b
     z_contents_n = F.normalize(torch.cat(all_embeddings), p=2, dim=1)
     meta_df = _build_meta_df(domain, df, std_df)
 
-    os.makedirs(INDEX_DIR, exist_ok=True)
-    emb_path  = os.path.join(INDEX_DIR, f"{domain}_embeddings.pt")
-    meta_path = os.path.join(INDEX_DIR, f"{domain}_meta.parquet")
+    os.makedirs(index_dir, exist_ok=True)
+    emb_path  = os.path.join(index_dir, f"{domain}_embeddings.pt")
+    meta_path = os.path.join(index_dir, f"{domain}_meta.parquet")
 
     torch.save(z_contents_n, emb_path)
     meta_df.to_parquet(meta_path, index=False)
