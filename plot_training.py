@@ -59,7 +59,7 @@ ax2.legend(fontsize=9)
 ax2.grid(alpha=0.3)
 
 fig1.tight_layout()
-out1 = "logs/training_history_stage1.png"
+out1 = "assets/training_history_stage1.png"
 fig1.savefig(out1, dpi=150, bbox_inches="tight")
 print(f"Saved → {out1}")
 
@@ -89,6 +89,6 @@ ax4.annotate(f"{final_val:.6f}", xy=(s2_val_epochs[-1], final_val),
              arrowprops=dict(arrowstyle="->", color="gray"), fontsize=9)
 
 fig2.tight_layout()
-out2 = "logs/training_history_stage2.png"
+out2 = "assets/training_history_stage2.png"
 fig2.savefig(out2, dpi=150, bbox_inches="tight")
 print(f"Saved → {out2}")
