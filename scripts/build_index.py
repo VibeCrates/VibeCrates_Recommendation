@@ -14,11 +14,14 @@ import torch.nn.functional as F
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
-from src.api.dependencies import MODEL_PATH, IMAGE_DIR, _build_meta_df
 from src.data.dataset import MultiModalDataset, collate_fn
+from src.data.meta import build_meta_df
 from src.data.preprocessing import DOMAIN_CONFIG, prepare_domain_df
 from src.models.recommender import DualEncoderModel
 from torch.utils.data import DataLoader
+
+MODEL_PATH = os.getenv("MODEL_PATH", "models/trained_model.pt")
+IMAGE_DIR  = os.getenv("IMAGE_DIR",  "data/images")
 
 INDEX_DIR = os.getenv("INDEX_DIR", "indexes")
 
@@ -46,7 +49,7 @@ def build_and_save(domain: str, model: DualEncoderModel, device: torch.device, b
             all_embeddings.append(z.cpu())
 
     z_contents_n = F.normalize(torch.cat(all_embeddings), p=2, dim=1)
-    meta_df = _build_meta_df(domain, df, std_df)
+    meta_df = build_meta_df(domain, df, std_df)
 
     os.makedirs(index_dir, exist_ok=True)
     emb_path  = os.path.join(index_dir, f"{domain}_embeddings.pt")

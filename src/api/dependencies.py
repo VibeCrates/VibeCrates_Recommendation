@@ -6,11 +6,11 @@ import os
 from functools import lru_cache
 from typing import Optional
 
-import numpy as np
 import pandas as pd
 import torch
 import torch.nn.functional as F
 
+from src.data.meta import build_meta_df
 from src.data.preprocessing import DOMAIN_CONFIG, prepare_domain_df
 from src.models.recommender import DualEncoderModel
 from .schemas import RecommendationItem
@@ -107,7 +107,7 @@ class ModelManager:
         z_contents_n = F.normalize(z_contents, p=2, dim=1)
 
         # 메타 정보 구성 (도메인별)
-        meta_df = _build_meta_df(domain, df, std_df)
+        meta_df = build_meta_df(domain, df, std_df)
 
         self.indexes[domain] = (z_contents_n, meta_df)
         logger.info(f"[{domain}] Index built: {z_contents_n.shape}")
@@ -163,31 +163,6 @@ class ModelManager:
             return None
         row = rows.iloc[0]
         return {"title": row["title"], **(row.get("extra") or {})}
-
-
-# ---------------------------------------------------------------------------
-# 도메인별 메타 DataFrame 생성
-# ---------------------------------------------------------------------------
-
-def _build_meta_df(domain: str, raw_df: pd.DataFrame, std_df: pd.DataFrame) -> pd.DataFrame:
-    """item_id, title, extra(dict) 컬럼을 가진 DataFrame."""
-    records = []
-    for i, (_, raw_row) in enumerate(raw_df.iterrows()):
-        item_id = std_df.iloc[i]["item_id"]
-        if domain == "movie":
-            title = str(raw_row.get("Title", ""))
-            extra = {"genre": str(raw_row.get("Genre", "")), "poster": str(raw_row.get("Poster", ""))}
-        elif domain == "music":
-            title = str(raw_row.get("name", ""))
-            extra = {"artists": str(raw_row.get("artists", "")), "album": str(raw_row.get("album_name", "")),
-                     "genre": str(raw_row.get("genre", "")), "img": str(raw_row.get("img", ""))}
-        else:  # book
-            title = str(raw_row.get("title", ""))
-            extra = {"author": str(raw_row.get("author", "")),
-                     "category": str(raw_row.get("category_name", "")),
-                     "image": str(raw_row.get("imgUrl", ""))}
-        records.append({"item_id": item_id, "title": title, "extra": extra})
-    return pd.DataFrame(records)
 
 
 # ---------------------------------------------------------------------------
