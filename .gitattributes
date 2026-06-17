@@ -22,3 +22,5 @@ data/books_category_cache.json filter=lfs diff=lfs merge=lfs -text
 data/books_invalid_indices.json filter=lfs diff=lfs merge=lfs -text
 data/musicbrainz_cache.json filter=lfs diff=lfs merge=lfs -text
 data/train_dataset.csv filter=lfs diff=lfs merge=lfs -text
+indexes/*.pt filter=lfs diff=lfs merge=lfs -text
+indexes/*.parquet filter=lfs diff=lfs merge=lfs -text

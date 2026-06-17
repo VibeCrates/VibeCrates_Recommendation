@@ -19,6 +19,7 @@ logger = logging.getLogger(__name__)
 
 MODEL_PATH  = os.getenv("MODEL_PATH",  "models/trained_model.pt")
 IMAGE_DIR   = os.getenv("IMAGE_DIR",   "data/images")
+INDEX_DIR   = os.getenv("INDEX_DIR",   "indexes")
 DEVICE      = os.getenv("DEVICE",      "cuda" if torch.cuda.is_available() else "cpu")
 
 
@@ -57,6 +58,19 @@ class ModelManager:
     # ------------------------------------------------------------------
     # 아이템 인덱스
     # ------------------------------------------------------------------
+
+    def load_index(self, domain: str, index_dir: str = INDEX_DIR) -> bool:
+        """저장된 임베딩 파일이 있으면 로드. 성공 시 True 반환."""
+        emb_path  = os.path.join(index_dir, f"{domain}_embeddings.pt")
+        meta_path = os.path.join(index_dir, f"{domain}_meta.parquet")
+        if not (os.path.exists(emb_path) and os.path.exists(meta_path)):
+            return False
+        z_contents_n = torch.load(emb_path, map_location="cpu")
+        meta_df = pd.read_parquet(meta_path)
+        meta_df["domain"] = domain
+        self.indexes[domain] = (z_contents_n, meta_df)
+        logger.info(f"[{domain}] Index loaded from disk: {z_contents_n.shape}")
+        return True
 
     @torch.no_grad()
     def build_index(self, domain: str, batch_size: int = 64) -> None:
@@ -194,9 +208,13 @@ async def initialize_dependencies() -> None:
         _manager.load_model()
         for domain in ("movie", "music", "book"):
             try:
-                _manager.build_index(domain)
+                if not _manager.load_index(domain):
+                    logger.warning(
+                        f"[{domain}] Pre-built index not found in '{INDEX_DIR}/'. "
+                        "Run `python scripts/build_index.py` after training."
+                    )
             except Exception as e:
-                logger.warning(f"[{domain}] Index build failed: {e}")
+                logger.warning(f"[{domain}] Index load failed: {e}")
     except Exception as e:
         logger.error(f"Model load failed: {e}")
 
