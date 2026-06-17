@@ -42,7 +42,7 @@ class TextBlock(nn.Module):
             r=16,
             lora_alpha=32,
             target_modules=["q", "v"],  # all-mpnet-base-v2 uses q/v not query/value
-            lora_dropout=0.05,
+            lora_dropout=0.1,
             bias="none",
             task_type=TaskType.FEATURE_EXTRACTION
         )

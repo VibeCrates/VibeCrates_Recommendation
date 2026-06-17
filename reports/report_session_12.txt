@@ -1,0 +1,182 @@
+================================================================================
+VibeCrates Recommendation System — 세션 보고서 (12)
+작성일: 2026-06-17
+================================================================================
+
+
+## 1. 세션 시작 시점 상태 (session_11 이후)
+
+  session_11에서 이월된 작업:
+    [완료] DualEncoderModel 학습 (vibecrates tmux 세션)
+           - Stage 1: Contrastive Learning (10 epochs)
+           - Stage 2: Knowledge Distillation (15 epochs)
+           - 완료 시각: 2026-06-17 00:39:51
+           - 저장 위치: models/trained_model.pt (2.1GB)
+
+
+================================================================================
+## 2. 학습 결과 확인 및 그래프 작성
+================================================================================
+
+  학습 히스토리 분석 (logs/training_history.json):
+    ┌──────────────────────────────────────────────────────────┐
+    │ Stage 1 — Contrastive Pre-training (10 epochs)          │
+    │   Train Total Loss : 1.67 → 0.22                        │
+    │   Val Loss         : 1.13 → 0.97 (epoch 2 이후 plateau) │
+    ├──────────────────────────────────────────────────────────┤
+    │ Stage 2 — Knowledge Distillation (15 epochs)            │
+    │   Train Loss : 0.000340 → 0.000255                      │
+    │   Val Loss   : 0.000365 → 0.000348                      │
+    └──────────────────────────────────────────────────────────┘
+
+  그래프 생성 (assets/):
+    - training_history_stage1.png : Stage 1 Total Loss + Component Losses
+    - training_history_stage2.png : Stage 2 Train/Val Loss + Val detail
+    - Stage 별 분리 (스케일 차이가 커서 합치면 읽기 불편)
+    - Stage 2 제목 오류 수정: "Fine-tuning" → "Knowledge Distillation"
+    - plot_training.py : 재생성 스크립트 (assets/ 저장)
+
+  학습 곡선 분석 결과:
+    Stage 1 문제점:
+      - Train loss는 epoch 9까지 지속 하강, Val loss는 epoch 2~3 이후 plateau
+      - 전형적인 overfitting 패턴 (contrastive 특성상 배치 내 negative 암기)
+      - Text↔Image(ti) 수렴이 가장 빠름, Text↔Query(tq)/Image↔Query(iq)는 느림
+
+    Stage 2 상태:
+      - Val이 올라가지 않아 Stage 1보다 안정적
+      - Epoch 15 끝에도 val이 완만하게 하강 중 (추가 epoch 여지 있음)
+
+
+================================================================================
+## 3. 아이템 임베딩 저장 구조 설계 및 구현
+================================================================================
+
+  기존 구조 (문제):
+    - 서버 시작 시마다 전체 아이템 인퍼런스 (build_index 호출)
+    - 학습 후 z_content 미저장 → 서버 재시작 비용 큼
+
+  목표 구조:
+    - 학습 종료 → 아이템 임베딩 저장 (indexes/)
+    - 서버 시작 → 디스크에서 로드만 (인퍼런스 없음)
+    - 서비스 시점: 쿼리 임베딩만 실시간 계산, 내적 서치
+
+  구현:
+    scripts/build_index.py (신규):
+      - 도메인별 전체 아이템 z_content 추출 후 저장
+      - indexes/{domain}_embeddings.pt  : (N, 768) L2-정규화 텐서
+      - indexes/{domain}_meta.parquet   : item_id, domain, title, extra
+      - 독립 실행 가능 (--domains, --batch-size 인자 지원)
+
+    src/api/dependencies.py (수정):
+      - load_index() 추가: 디스크에서 임베딩/메타 로드
+      - initialize_dependencies(): build_index → load_index 전환
+        (파일 없으면 경고 로그 출력)
+
+    src/data/meta.py (신규):
+      - build_meta_df() 공통 유틸로 분리
+      - 기존 dependencies.py의 _build_meta_df() 제거
+      - domain 컬럼 포함하여 저장
+
+    .gitattributes (수정):
+      - indexes/*.pt, indexes/*.parquet → LFS 트래킹 추가
+
+
+================================================================================
+## 4. 학습 파이프라인 개선
+================================================================================
+
+  개선 목표:
+    1) Stage 1 overfitting 완화
+    2) 학습 → 벡터 저장 자동화 (train.py 한 번으로 완결)
+
+  4-1. Early Stopping + Best Checkpoint 저장
+
+    src/training/trainer.py:
+      - TwoStageTrainer.__init__에 checkpoint_dir 파라미터 추가
+      - Stage 1: val_loss 기준 best_stage1.pt 저장 + early stopping
+      - Stage 2: val_loss 기준 best_stage2.pt 저장 + early stopping
+      - 각 stage 완료 시 best checkpoint 자동 로드 (최종 모델 = best val)
+      - patience=3 (config.early_stopping_patience — 기존에 선언만 있고 미구현)
+
+  4-2. Regularization 강화
+
+    src/training/config.py:
+      - weight_decay : 1e-5 → 1e-2 (Stage 1 overfitting 완화)
+
+    src/models/recommender.py:
+      - TextBlock LoRA lora_dropout : 0.05 → 0.1
+
+    주의사항:
+      - config.lora_dropout은 모델 초기화에 전달되지 않음
+        (DualEncoderModel()이 config를 파라미터로 받지 않음)
+      - 이번 세션에서 recommender.py 직접 수정으로 대응
+      - 향후 DualEncoderModel이 config를 받도록 리팩토링 권장
+
+  4-3. train.py 파이프라인 통합
+
+    scripts/train.py:
+      - 학습 완료 후 자동으로 build_and_save() 호출
+      - --index-dir 인자 추가 (기본값: indexes/)
+      - checkpoint_dir = save_path의 상위 디렉토리로 설정
+
+    scripts/__init__.py (신규):
+      - scripts/ 를 Python 패키지로 명시 (namespace package 의존 제거)
+
+
+================================================================================
+## 5. 코드 리뷰 결과
+================================================================================
+
+  검토 항목 및 결과:
+    ✅ Early stopping 로직 : patience 카운터 및 break 정상
+    ✅ Best checkpoint 로드 : 각 stage 루프 종료 후 로드
+    ✅ Stage 2 teacher freeze : torch.no_grad() 블록 내 teacher_dist 계산
+    ✅ build_index 임포트 분리 : API 의존성 없이 독립 실행 가능
+    ✅ meta_df domain 컬럼 : build_meta_df에서 포함, load_index에서 중복 세팅 (무해)
+    ⚠️  lora_dropout config 미연동 : recommender.py 직접 수정으로 대응 (위 참조)
+    ✅ val_loader=None 케이스 : checkpoint 없을 시 load 스킵 처리
+
+
+================================================================================
+## 6. 재학습 실행
+================================================================================
+
+  실행 커맨드:
+    /opt/conda/envs/ltv/bin/python scripts/train.py \
+      --data-path data/train_dataset.csv \
+      --image-embeddings data/image_embeddings.pt \
+      --save-path models/trained_model.pt \
+      --history-path logs/training_history.json \
+      --epochs-stage1 10 \
+      --epochs-stage2 15 \
+      --batch-size 32 \
+      --num-workers 4
+
+  실행 환경: vibecrates tmux 세션 (2026-06-17 07:45)
+  현재 상태: Stage 1 Epoch 1 진행 중
+
+
+================================================================================
+## 7. 커밋 목록
+================================================================================
+
+  d618670  fix: Correct Stage 2 graph title to Knowledge Distillation
+  4fbe319  feat: Save training graphs to assets/ and update output paths
+  d2c0ced  feat: Add training history visualization script
+  1bfffbe  feat: Pre-compute and persist item embeddings via build_index script
+  689595e  feat: Add early stopping, best checkpoint, and auto index build to training pipeline
+  982e795  refactor: Extract build_meta_df to src/data/meta.py to remove API dependency from build_index
+  (이번 세션 커밋 예정) fix: lora_dropout hardcode fix + scripts/__init__.py
+
+
+================================================================================
+## 8. 다음 세션 이월 작업
+================================================================================
+
+  [ ] 재학습 완료 확인 (Stage 1 early stopping 동작 여부 확인)
+  [ ] 새 학습 곡선 그래프 생성 및 비교 (overfitting 개선 여부)
+  [ ] indexes/ LFS 커밋 (학습 완료 후 생성되는 *.pt, *.parquet)
+  [ ] DualEncoderModel config 파라미터 연동 리팩토링 (lora 설정)
+  [ ] API 서버 연동 테스트 (load_index → search 전체 플로우)
+
+================================================================================
