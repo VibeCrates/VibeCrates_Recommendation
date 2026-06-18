@@ -1,0 +1,234 @@
+================================================================================
+VibeCrates Recommendation System — 언어/스타일별 추천 품질 평가 보고서
+작성일: 2026-06-18
+대상 파일: experiments/eval_lang_20260618_en_valids.csv
+================================================================================
+
+
+## 1. 실험 개요
+
+  목적:
+    학습된 DualEncoderModel이 영어 쿼리에 대해 어떤 품질의 추천을 내놓는지
+    스타일·도메인·쿼리 단위로 정량 평가한다.
+
+  쿼리 구성:
+    - 4가지 스타일 × 4쌍 = 16개 영어 쿼리
+    - 스타일: philosophical(P), poet(T), atmosphere(A), direct(D)
+    - 각 쿼리 × 4 도메인 필터(movie/music/book/all) × top-5 = 최대 320행
+
+  평가 방법:
+    - item_id 기반으로 data/train_dataset.csv의 content_text를 읽어
+      쿼리와의 관련성을 3단계로 평가
+    - o: 쿼리에 부합하는 최상 추천
+    - a: 부분적으로 관련 있는 허용 가능한 추천
+    - x: 쿼리와 무관한 실패 추천
+    - 155행은 사람(사용자)이 직접 평가, 165행은 Claude가 content_text 기반 평가
+
+  점수 환산:
+    o=2, a=1, x=0 으로 환산하여 avg_score를 산출
+
+
+## 2. 전체 결과 요약
+
+  ┌───────────────────────┬───────┬──────────┐
+  │ 등급                  │  수   │  비율    │
+  ├───────────────────────┼───────┼──────────┤
+  │ o (최상)              │  141  │  44.1%   │
+  │ a (부분 일치)         │   85  │  26.6%   │
+  │ x (실패)              │   94  │  29.4%   │
+  │ 합계                  │  320  │ 100.0%   │
+  └───────────────────────┴───────┴──────────┘
+
+  o+a 합산 70.6%가 어느 정도 관련 있는 추천을 받았으나,
+  전체의 약 1/3 (29.4%) 은 완전히 무관한 추천이다.
+
+
+## 3. 패턴 분석
+
+────────────────────────────────────────────────────────────────────────────────
+## 3-1. 스타일별 격차 — 가장 결정적인 분기 요인
+
+  ┌──────────────────┬───────────┬───────┬───────┬───────┐
+  │ 스타일           │ avg_score │ o율   │ a율   │ x율   │
+  ├──────────────────┼───────────┼───────┼───────┼───────┤
+  │ philosophical    │   1.70    │ 78.8% │  12.5%│  8.8% │
+  │ atmosphere       │   1.01    │ 21.3% │  58.8%│ 20.0% │
+  │ direct           │   1.01    │ 37.5% │  26.3%│ 36.3% │
+  │ poet             │   0.86    │ 38.8% │   8.8%│ 52.5% │
+  └──────────────────┴───────────┴───────┴───────┴───────┘
+
+  [philosophical이 압도적 1위]
+    "What is a human being" (1.95), "Reflection on solitude and existence" (1.85)
+    모델이 추상적·개념적 쿼리를 SBERT 표현 공간에서 잘 처리한다.
+    학습 데이터의 책·영화 장르 레이블(Philosophy, Drama, Memoir)이
+    이 쿼리들의 임베딩과 자연스럽게 정렬되기 때문으로 추정된다.
+
+  [poet이 최악, x율 52.5%]
+    "A voice whispering under moonlight" (0.00)
+    "Like the excitement of a spring day" (0.15)
+    감각적·시적 이미지는 장르 레이블이나 가사 키워드와 매핑되지 않는다.
+    같은 poet 스타일이어도 "In the name of love" (1.90) 처럼
+    감정 키워드가 명확한 경우는 잘 동작하므로,
+    추상 이미지 vs 감정 키워드 간 성능 분기가 핵심이다.
+
+
+────────────────────────────────────────────────────────────────────────────────
+## 3-2. 쿼리 단위 양극화
+
+  [순위: avg_score 내림차순]
+
+  P1_EN  avg=1.95  ooooooooooooooooooo a  "What is a human being"
+  T1_EN  avg=1.90  oooooooooooooooooo aa  "In the name of love"
+  P4_EN  avg=1.85  oooooooooooooooooo ax  "Reflection on solitude and existence"
+  P2_EN  avg=1.70  oooooooooooooooo aaxx  "A journey to find the meaning of life"
+  D2_EN  avg=1.45  ooooooooo aaaaaaaaaaa  "Soulful music featuring jazz piano"
+  D3_EN  avg=1.45  oooooooooooo aaaaaaxxx  "Mystery thriller novel with a twist ending"
+  T3_EN  avg=1.40  oooooooooooo aaaaxxx x  "What remains after farewell"
+  P3_EN  avg=1.30  oooooooooo aaaaaaxxx x  "Between freedom and responsibility"
+  A2_EN  avg=1.25  oooooo aaaaaaaaaaaaax  "A quiet afternoon with the sound of rain"
+  A1_EN  avg=1.20  ooooooo aaaaaaaaaaxxx  "A sunlit cafe"
+  D4_EN  avg=1.15  ooooooooo aaaaaxxxxxx  "A film about a romance between two people"
+  A3_EN  avg=0.90  oooo aaaaaaaaaxxxxxxx  "In front of a warm fireplace in midwinter"
+  A4_EN  avg=0.70  aaaaaaaaaaaaaa xxxxxx  "Empty city streets at dawn"
+  T2_EN  avg=0.15  oa xxxxxxxxxxxxxxxxxx  "Like the excitement of a spring day"
+  D1_EN  avg=0.00  xxxxxxxxxxxxxxxxxxxx   "Action movie set in space"
+  T4_EN  avg=0.00  xxxxxxxxxxxxxxxxxxxx   "A voice whispering under moonlight"
+
+  주목할 케이스:
+    - D1_EN 완전 실패:
+        "Action movie set in space" → 영화 제작 다큐멘터리, 응원단 영화 등
+        "Action" 키워드가 acting/film production 관련 콘텐츠와
+        코사인 유사도가 높게 계산됨.
+        "space" 역시 Sci-Fi 장르 아이템보다 추상 공간 개념 콘텐츠로 연결.
+        두 키워드 모두 의도와 다른 방향으로 끌려간 이중 오정렬 사례.
+
+    - T4_EN 완전 실패 (사용자 평가):
+        "A voice whispering under moonlight" → 역시 전원 x
+        감각적 분위기 이미지는 콘텐츠 텍스트에서 유사 패턴을 찾지 못함.
+
+    - D2_EN, D3_EN 선방 (avg=1.45):
+        직접 특성(Direct)이어도 도메인 지식이 풍부한 쿼리는 성능이 높다.
+        "jazz piano", "mystery thriller" 같은 장르 키워드가 메타데이터에
+        직접 존재하기 때문.
+
+
+────────────────────────────────────────────────────────────────────────────────
+## 3-3. Rank 순위가 품질을 보장하지 않는다
+
+  ┌────────┬───────────┐
+  │ rank   │ avg_score │
+  ├────────┼───────────┤
+  │   1    │   1.312   │
+  │   2    │   1.094   │
+  │   3    │   1.250   │  ← rank 2보다 높음 (역전)
+  │   4    │   0.984   │
+  │   5    │   1.094   │  ← rank 4보다 높음 (역전)
+  └────────┴───────────┘
+
+  rank 1 > rank 2 > rank 3 순서로 단조 감소해야 하는데
+  rank 3 > rank 2, rank 5 = rank 2 역전이 발생한다.
+
+  코사인 유사도 기반 top-k 정렬이 실제 품질 순서와 일치하지 않는다.
+  표현 공간이 아직 충분히 정제되지 않아 유사도 값 자체의 신뢰도가 낮은 상태.
+
+
+────────────────────────────────────────────────────────────────────────────────
+## 3-4. 도메인 필터별·결과 도메인별 품질
+
+  [도메인 필터별 — 어느 도메인을 검색했는가]
+
+  ┌────────────────┬───────────┬───────┬───────┐
+  │ domain_filter  │ avg_score │ o율   │ x율   │
+  ├────────────────┼───────────┼───────┼───────┤
+  │ all            │   1.24    │ 51.3% │ 27.5% │
+  │ book           │   1.19    │ 50.0% │ 31.3% │
+  │ movie          │   1.18    │ 43.8% │ 26.3% │
+  │ music          │   0.99    │ 31.3% │ 32.5% │
+  └────────────────┴───────────┴───────┴───────┘
+
+  전도메인 검색(all)이 단일 도메인보다 오히려 낫다.
+  올바른 도메인의 고품질 아이템이 다른 도메인의 저품질 아이템을
+  자연스럽게 밀어내는 효과. 도메인 필터가 항상 유리하지 않음을 시사.
+
+  [결과 도메인별 — 어떤 도메인 아이템이 추천됐는가]
+
+  ┌───────────────┬───────────┬───────┬───────┐
+  │ result_domain │ avg_score │ o율   │ x율   │
+  ├───────────────┼───────────┼───────┼───────┤
+  │ book          │   1.20    │ 51.1% │ 31.2% │
+  │ movie         │   1.16    │ 42.7% │ 27.0% │
+  │ music         │   1.06    │ 34.4% │ 28.9% │
+  └───────────────┴───────────┴───────┴───────┘
+
+  music 아이템이 전반적으로 저조하다.
+  book은 제목·저자·카테고리로 구성된 구조화된 텍스트가
+  쿼리 임베딩과 더 잘 매칭되는 것으로 보인다.
+
+  [스타일 × 도메인 필터 교차 (avg_score)]
+
+  ┌──────────────────┬──────┬──────┬───────┬───────┐
+  │ style            │ all  │ book │ movie │ music │
+  ├──────────────────┼──────┼──────┼───────┼───────┤
+  │ philosophical    │ 1.95 │ 1.95 │  1.60 │  1.30 │
+  │ atmosphere       │ 1.00 │ 0.95 │  1.05 │  1.05 │
+  │ direct           │ 1.15 │ 1.00 │  1.15 │  0.75 │
+  │ poet             │ 0.85 │ 0.85 │  0.90 │  0.85 │
+  └──────────────────┴──────┴──────┴───────┴───────┘
+
+  philosophical은 모든 도메인에서 고른 강세.
+  direct는 music 도메인에서 특히 약하다 (0.75) —
+  D1_EN(space action)이 음악 추천에서 완전히 실패한 영향.
+
+
+## 4. 총평
+
+  모델의 현재 추천 품질은 쿼리 스타일에 따라 크게 갈린다.
+  추상적 개념을 표현하는 철학적 쿼리에서는 준수한 성능을 보이지만,
+  감각 이미지나 분위기 기반 쿼리에서는 표현 공간의 정렬이 부족하다.
+
+  특히 두 가지 구조적 문제가 확인된다:
+    1) 코사인 유사도 순위가 실제 품질 순위와 일치하지 않아
+       top-1 추천의 신뢰도가 낮다.
+    2) 키워드 오정렬(D1_EN 사례)이 발생할 경우 전체 추천이 붕괴된다.
+
+
+## 5. 개선 방향
+
+  [우선순위 높음]
+
+  5-1. Hard Negative Mining
+    - D1_EN 사례처럼 "Action" → 영화 제작 도서, "space" → 추상 공간 오정렬
+    - 현재 배치 내 랜덤 negative는 너무 쉬워서 경계 케이스를 학습 못 함
+    - In-batch hard negative (가장 높은 cosine 쌍을 negative로 선택)로
+      표현 공간 경계를 세밀하게 조정 필요
+
+  5-2. Poet/Atmosphere 스타일 쿼리 학습 데이터 증강
+    - 현재 학습 쿼리가 직접적(Direct) 특성 위주로 구성된 것으로 추정
+    - "A voice whispering under moonlight" 같은 감각 이미지 쿼리를
+      학습 데이터에 추가하면 T/A 스타일 성능 향상 기대
+
+  5-3. Stage 2 Epoch 확장
+    - Knowledge Distillation이 더 진행될수록 CLIP 교사 모델의
+      강한 이미지-텍스트 정렬이 학생 모델로 이전됨
+    - rank 순위 신뢰도 향상에 간접적으로 기여할 수 있음
+
+  [우선순위 중간]
+
+  5-4. Music 도메인 임베딩 품질 개선
+    - 가사 텍스트가 있어도 쿼리와 맞지 않을 경우 크게 어긋남
+    - 가사 대신 장르·분위기·감정 태그를 보강한 content_text 재구성 검토
+
+  5-5. Rank 순위 보정
+    - 현재 top-5를 코사인 유사도 순으로 그대로 반환
+    - 표현 공간이 개선될 때까지 임시방편으로 diversity-aware reranking 검토
+
+
+## 6. 관련 파일
+
+  experiments/eval_lang_20260618.csv           — 전체 실험 결과 (640행, KO+EN)
+  experiments/eval_lang_20260618_en.csv        — 영어 쿼리만 추출 (320행)
+  experiments/eval_lang_20260618_en_valids.csv — Validity 평가 완료본 (320행)
+  scripts/eval_lang.py                         — 실험 실행 스크립트
+  scripts/fill_validity.py                     — Validity 자동 평가 스크립트
+
+================================================================================
