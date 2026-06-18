@@ -1,321 +1,321 @@
-query_id,style,pair_id,lang,query,domain_filter,result_domain,item_id,title,extra,score,rank,Validity
+﻿query_id,style,pair_id,lang,query,domain_filter,result_domain,item_id,title,extra,score,rank,Validity
 P1_EN,philosophical,1,en,What is a human being,movie,movie,1741225,I Am (2010),,0.622235894203186,1,o
-P1_EN,philosophical,1,en,What is a human being,movie,movie,3327994,Human (2015),,0.5794081091880800,2,o
-P1_EN,philosophical,1,en,What is a human being,movie,movie,1817287,Is the Man Who Is Tall Happy? (2013),,0.5181113481521610,3,o
-P1_EN,philosophical,1,en,What is a human being,movie,movie,432232,The Century of the Self,,0.5123640298843380,4,o
-P1_EN,philosophical,1,en,What is a human being,movie,movie,3326110,Un altro mondo (2014),,0.5097192525863650,5,o
-P1_EN,philosophical,1,en,What is a human being,music,music,45PxuJqJBnPXZKLxoo9Apj,SUPERPOSITION,,0.4472115635871890,1,o
-P1_EN,philosophical,1,en,What is a human being,music,music,6ghnKwHcGX1RLPWjJYKbGd,From God's Perspective,,0.4429606199264530,2,o
-P1_EN,philosophical,1,en,What is a human being,music,music,2PyDqCtFcXsucZqTF4rE3i,I Am That I Am,,0.4329527020454410,3,o
-P1_EN,philosophical,1,en,What is a human being,music,music,4QVD4vVkYveZuO0xkyi6AX,Same Direction,,0.4160998463630680,4,o
-P1_EN,philosophical,1,en,What is a human being,music,music,5KqdkuWE9AkTtoAiPpdD0E,ART IS DEAD,,0.3977497220039370,5,A
-P1_EN,philosophical,1,en,What is a human being,book,book,B0064SUUG6,El hombre en busca del sentido último: El análisis existencial y la conciencia espiritual del ser humano (Contextos) (Spanish Edition),,0.6322160959243770,1,O
+P1_EN,philosophical,1,en,What is a human being,movie,movie,3327994,Human (2015),,0.57940810918808,2,o
+P1_EN,philosophical,1,en,What is a human being,movie,movie,1817287,Is the Man Who Is Tall Happy? (2013),,0.518111348152161,3,o
+P1_EN,philosophical,1,en,What is a human being,movie,movie,432232,The Century of the Self,,0.512364029884338,4,o
+P1_EN,philosophical,1,en,What is a human being,movie,movie,3326110,Un altro mondo (2014),,0.509719252586365,5,o
+P1_EN,philosophical,1,en,What is a human being,music,music,45PxuJqJBnPXZKLxoo9Apj,SUPERPOSITION,,0.447211563587189,1,o
+P1_EN,philosophical,1,en,What is a human being,music,music,6ghnKwHcGX1RLPWjJYKbGd,From God's Perspective,,0.442960619926453,2,o
+P1_EN,philosophical,1,en,What is a human being,music,music,2PyDqCtFcXsucZqTF4rE3i,I Am That I Am,,0.432952702045441,3,o
+P1_EN,philosophical,1,en,What is a human being,music,music,4QVD4vVkYveZuO0xkyi6AX,Same Direction,,0.416099846363068,4,o
+P1_EN,philosophical,1,en,What is a human being,music,music,5KqdkuWE9AkTtoAiPpdD0E,ART IS DEAD,,0.397749722003937,5,a
+P1_EN,philosophical,1,en,What is a human being,book,book,B0064SUUG6,El hombre en busca del sentido último: El análisis existencial y la conciencia espiritual del ser humano (Contextos) (Spanish Edition),,0.632216095924377,1,o
 P1_EN,philosophical,1,en,What is a human being,book,book,B08H87G2WN,Existentialism Is a Humanism,,0.61239093542099,2,o
-P1_EN,philosophical,1,en,What is a human being,book,book,B099GSW9DM,Dignos de ser humanos: Una nueva perspectiva histórica de la humanidad (Spanish Edition),,0.6079539060592650,3,o
+P1_EN,philosophical,1,en,What is a human being,book,book,B099GSW9DM,Dignos de ser humanos: Una nueva perspectiva histórica de la humanidad (Spanish Edition),,0.607953906059265,3,o
 P1_EN,philosophical,1,en,What is a human being,book,book,B0BLQW96HJ,"I Feel, Therefore I Am: The Triumph of Woke Subjectivism",,0.602863073348999,4,o
 P1_EN,philosophical,1,en,What is a human being,book,book,B0B42LB3YT,Sobre la dignidad humana (Estructuras y Procesos. Derecho) (Spanish Edition),,0.595093846321106,5,o
-P1_EN,philosophical,1,en,What is a human being,all,book,B0064SUUG6,El hombre en busca del sentido último: El análisis existencial y la conciencia espiritual del ser humano (Contextos) (Spanish Edition),,0.6322160959243770,1,o
+P1_EN,philosophical,1,en,What is a human being,all,book,B0064SUUG6,El hombre en busca del sentido último: El análisis existencial y la conciencia espiritual del ser humano (Contextos) (Spanish Edition),,0.632216095924377,1,o
 P1_EN,philosophical,1,en,What is a human being,all,movie,1741225,I Am (2010),,0.622235894203186,2,o
 P1_EN,philosophical,1,en,What is a human being,all,book,B08H87G2WN,Existentialism Is a Humanism,,0.61239093542099,3,o
-P1_EN,philosophical,1,en,What is a human being,all,book,B099GSW9DM,Dignos de ser humanos: Una nueva perspectiva histórica de la humanidad (Spanish Edition),,0.6079539060592650,4,o
+P1_EN,philosophical,1,en,What is a human being,all,book,B099GSW9DM,Dignos de ser humanos: Una nueva perspectiva histórica de la humanidad (Spanish Edition),,0.607953906059265,4,o
 P1_EN,philosophical,1,en,What is a human being,all,book,B0BLQW96HJ,"I Feel, Therefore I Am: The Triumph of Woke Subjectivism",,0.602863073348999,5,o
-P2_EN,philosophical,2,en,A journey to find the meaning of life,movie,movie,1441912,The Way (2010),,0.5650818943977360,1,o
-P2_EN,philosophical,2,en,A journey to find the meaning of life,movie,movie,2406422,Walking the Camino: Six Ways to Santiago (2013),,0.5146478414535520,2,o
-P2_EN,philosophical,2,en,A journey to find the meaning of life,movie,movie,210777,The Journey (2001),,0.4705852270126340,3,o
-P2_EN,philosophical,2,en,A journey to find the meaning of life,movie,movie,1196672,The Nature of Existence (2010),,0.4624054133892060,4,O
-P2_EN,philosophical,2,en,A journey to find the meaning of life,movie,movie,403778,Long Way Round,,0.4457197189331050,5,o
-P2_EN,philosophical,2,en,A journey to find the meaning of life,music,music,1vvNmPOiUuyCbgWmtc6yfm,My Way,,0.2889346480369570,1,o
-P2_EN,philosophical,2,en,A journey to find the meaning of life,music,music,35LDid9nvuYrUyZk5qGD0i,Belief,,0.2766010463237760,2,a
-P2_EN,philosophical,2,en,A journey to find the meaning of life,music,music,5lSOVaPDk7x9Ey6c9DqGZx,Sweet Harmony,,0.2632026076316830,3,a
-P2_EN,philosophical,2,en,A journey to find the meaning of life,music,music,2IR01O6kw4IB68hcV9FWYN,I Just Don't Think I'll Ever Get Over You,,0.2553818523883820,4,X
-P2_EN,philosophical,2,en,A journey to find the meaning of life,music,music,5fJD7wh9yoSTpl9d5rgl7l,The Theory of Everything,,0.2548620104789730,5,x
-P2_EN,philosophical,2,en,A journey to find the meaning of life,book,book,B07GNW3X3G,THE LIFE YOU WERE BORN TO LIVE:: A Guide to Finding Your Life Purpose,,0.6432393789291380,1,o
-P2_EN,philosophical,2,en,A journey to find the meaning of life,book,book,B00J1IQW6I,The Happiness of Pursuit: Finding the Quest That Will Bring Purpose to Your Life,,0.5960580110549930,2,o
-P2_EN,philosophical,2,en,A journey to find the meaning of life,book,book,B073ZXJG8K,Living an Examined Life: Wisdom for the Second Half of the Journey,,0.5920816659927370,3,o
-P2_EN,philosophical,2,en,A journey to find the meaning of life,book,book,B09QD437HY,The Philosophical Journey: An Interactive Approach,,0.5914715528488160,4,o
+P2_EN,philosophical,2,en,A journey to find the meaning of life,movie,movie,1441912,The Way (2010),,0.565081894397736,1,o
+P2_EN,philosophical,2,en,A journey to find the meaning of life,movie,movie,2406422,Walking the Camino: Six Ways to Santiago (2013),,0.514647841453552,2,o
+P2_EN,philosophical,2,en,A journey to find the meaning of life,movie,movie,210777,The Journey (2001),,0.470585227012634,3,o
+P2_EN,philosophical,2,en,A journey to find the meaning of life,movie,movie,1196672,The Nature of Existence (2010),,0.462405413389206,4,o
+P2_EN,philosophical,2,en,A journey to find the meaning of life,movie,movie,403778,Long Way Round,,0.445719718933105,5,o
+P2_EN,philosophical,2,en,A journey to find the meaning of life,music,music,1vvNmPOiUuyCbgWmtc6yfm,My Way,,0.288934648036957,1,o
+P2_EN,philosophical,2,en,A journey to find the meaning of life,music,music,35LDid9nvuYrUyZk5qGD0i,Belief,,0.276601046323776,2,a
+P2_EN,philosophical,2,en,A journey to find the meaning of life,music,music,5lSOVaPDk7x9Ey6c9DqGZx,Sweet Harmony,,0.263202607631683,3,a
+P2_EN,philosophical,2,en,A journey to find the meaning of life,music,music,2IR01O6kw4IB68hcV9FWYN,I Just Don't Think I'll Ever Get Over You,,0.255381852388382,4,x
+P2_EN,philosophical,2,en,A journey to find the meaning of life,music,music,5fJD7wh9yoSTpl9d5rgl7l,The Theory of Everything,,0.254862010478973,5,x
+P2_EN,philosophical,2,en,A journey to find the meaning of life,book,book,B07GNW3X3G,THE LIFE YOU WERE BORN TO LIVE:: A Guide to Finding Your Life Purpose,,0.643239378929138,1,o
+P2_EN,philosophical,2,en,A journey to find the meaning of life,book,book,B00J1IQW6I,The Happiness of Pursuit: Finding the Quest That Will Bring Purpose to Your Life,,0.596058011054993,2,o
+P2_EN,philosophical,2,en,A journey to find the meaning of life,book,book,B073ZXJG8K,Living an Examined Life: Wisdom for the Second Half of the Journey,,0.592081665992737,3,o
+P2_EN,philosophical,2,en,A journey to find the meaning of life,book,book,B09QD437HY,The Philosophical Journey: An Interactive Approach,,0.591471552848816,4,o
 P2_EN,philosophical,2,en,A journey to find the meaning of life,book,book,B0B8WPVBLB,I Will Find My Way: A Personal Journey of Self-Discovery along the Camino de Santiago,,0.591042160987854,5,o
-P2_EN,philosophical,2,en,A journey to find the meaning of life,all,book,B07GNW3X3G,THE LIFE YOU WERE BORN TO LIVE:: A Guide to Finding Your Life Purpose,,0.6432393789291380,1,o
-P2_EN,philosophical,2,en,A journey to find the meaning of life,all,book,B00J1IQW6I,The Happiness of Pursuit: Finding the Quest That Will Bring Purpose to Your Life,,0.5960580110549930,2,o
-P2_EN,philosophical,2,en,A journey to find the meaning of life,all,book,B073ZXJG8K,Living an Examined Life: Wisdom for the Second Half of the Journey,,0.5920816659927370,3,o
-P2_EN,philosophical,2,en,A journey to find the meaning of life,all,book,B09QD437HY,The Philosophical Journey: An Interactive Approach,,0.5914715528488160,4,o
+P2_EN,philosophical,2,en,A journey to find the meaning of life,all,book,B07GNW3X3G,THE LIFE YOU WERE BORN TO LIVE:: A Guide to Finding Your Life Purpose,,0.643239378929138,1,o
+P2_EN,philosophical,2,en,A journey to find the meaning of life,all,book,B00J1IQW6I,The Happiness of Pursuit: Finding the Quest That Will Bring Purpose to Your Life,,0.596058011054993,2,o
+P2_EN,philosophical,2,en,A journey to find the meaning of life,all,book,B073ZXJG8K,Living an Examined Life: Wisdom for the Second Half of the Journey,,0.592081665992737,3,o
+P2_EN,philosophical,2,en,A journey to find the meaning of life,all,book,B09QD437HY,The Philosophical Journey: An Interactive Approach,,0.591471552848816,4,o
 P2_EN,philosophical,2,en,A journey to find the meaning of life,all,book,B0B8WPVBLB,I Will Find My Way: A Personal Journey of Self-Discovery along the Camino de Santiago,,0.591042160987854,5,o
-P3_EN,philosophical,3,en,Between freedom and responsibility,movie,movie,2059255,No (2012),,0.5085888504982000,1,a
-P3_EN,philosophical,3,en,Between freedom and responsibility,movie,movie,3621952,The Choice Is Ours (2015),,0.5078228116035460,2,x
-P3_EN,philosophical,3,en,Between freedom and responsibility,movie,movie,1558952,Freedom Riders (2010),,0.4882081151008610,3,a
-P3_EN,philosophical,3,en,Between freedom and responsibility,movie,movie,454921,The Pursuit of Happyness (2006),,0.4684085547924040,4,x
-P3_EN,philosophical,3,en,Between freedom and responsibility,movie,movie,979263,The Trap: What Happened to Our Dream of Freedom,,0.4558928608894350,5,o
-P3_EN,philosophical,3,en,Between freedom and responsibility,music,music,2PyDqCtFcXsucZqTF4rE3i,I Am That I Am,,0.4710656702518460,1,x
-P3_EN,philosophical,3,en,Between freedom and responsibility,music,music,1o0lfRVsQfRZ6VeAb82vum,Equal Rights,,0.4523606598377230,2,a
-P3_EN,philosophical,3,en,Between freedom and responsibility,music,music,5NShvMH3lRmQPW4qc0hYKY,Solidarity Forever,,0.4196630418300630,3,a
-P3_EN,philosophical,3,en,Between freedom and responsibility,music,music,0s8OsDxW96cl290PcsI2mX,Duck And Run,,0.4189896583557130,4,o
-P3_EN,philosophical,3,en,Between freedom and responsibility,music,music,5PxJMuvCFAEbAGaG0J4mLr,Stepping Razor,,0.4183783233165740,5,x
-P3_EN,philosophical,3,en,Between freedom and responsibility,book,book,B00M20I134,How I Found Freedom in an Unfree World: A Handbook for Personal Liberty,,0.6889358758926390,1,o
-P3_EN,philosophical,3,en,Between freedom and responsibility,book,book,B00C2C8XUS,"The Freedom Manifesto: How to Free Yourself from Anxiety, Fear, Mortgages, Money, Guilt, Debt, Government, Boredom, Supermarkets, Bills, Melancholy, Pain, Depression, Work, and Waste",,0.6797125339508060,2,a
+P3_EN,philosophical,3,en,Between freedom and responsibility,movie,movie,2059255,No (2012),,0.5085888504982,1,a
+P3_EN,philosophical,3,en,Between freedom and responsibility,movie,movie,3621952,The Choice Is Ours (2015),,0.507822811603546,2,x
+P3_EN,philosophical,3,en,Between freedom and responsibility,movie,movie,1558952,Freedom Riders (2010),,0.488208115100861,3,a
+P3_EN,philosophical,3,en,Between freedom and responsibility,movie,movie,454921,The Pursuit of Happyness (2006),,0.468408554792404,4,x
+P3_EN,philosophical,3,en,Between freedom and responsibility,movie,movie,979263,The Trap: What Happened to Our Dream of Freedom,,0.455892860889435,5,o
+P3_EN,philosophical,3,en,Between freedom and responsibility,music,music,2PyDqCtFcXsucZqTF4rE3i,I Am That I Am,,0.471065670251846,1,x
+P3_EN,philosophical,3,en,Between freedom and responsibility,music,music,1o0lfRVsQfRZ6VeAb82vum,Equal Rights,,0.452360659837723,2,a
+P3_EN,philosophical,3,en,Between freedom and responsibility,music,music,5NShvMH3lRmQPW4qc0hYKY,Solidarity Forever,,0.419663041830063,3,a
+P3_EN,philosophical,3,en,Between freedom and responsibility,music,music,0s8OsDxW96cl290PcsI2mX,Duck And Run,,0.418989658355713,4,o
+P3_EN,philosophical,3,en,Between freedom and responsibility,music,music,5PxJMuvCFAEbAGaG0J4mLr,Stepping Razor,,0.418378323316574,5,x
+P3_EN,philosophical,3,en,Between freedom and responsibility,book,book,B00M20I134,How I Found Freedom in an Unfree World: A Handbook for Personal Liberty,,0.688935875892639,1,o
+P3_EN,philosophical,3,en,Between freedom and responsibility,book,book,B00C2C8XUS,"The Freedom Manifesto: How to Free Yourself from Anxiety, Fear, Mortgages, Money, Guilt, Debt, Government, Boredom, Supermarkets, Bills, Melancholy, Pain, Depression, Work, and Waste",,0.679712533950806,2,a
 P3_EN,philosophical,3,en,Between freedom and responsibility,book,book,B00H0FEQH6,Human Rights Transformed: Positive Rights and Positive Duties,,0.670017421245575,3,o
-P3_EN,philosophical,3,en,Between freedom and responsibility,book,book,B00B3LCE3G,The Ten Keys To Total Freedom: A Conversation with Gary M. Douglas & Dr. Dain Heer,,0.6699590682983400,4,o
-P3_EN,philosophical,3,en,Between freedom and responsibility,book,book,B004MYFLBS,Free To Choose: A Personal Statement,,0.6695914268493650,5,o
-P3_EN,philosophical,3,en,Between freedom and responsibility,all,book,B00M20I134,How I Found Freedom in an Unfree World: A Handbook for Personal Liberty,,0.6889358758926390,1,o
-P3_EN,philosophical,3,en,Between freedom and responsibility,all,book,B00C2C8XUS,"The Freedom Manifesto: How to Free Yourself from Anxiety, Fear, Mortgages, Money, Guilt, Debt, Government, Boredom, Supermarkets, Bills, Melancholy, Pain, Depression, Work, and Waste",,0.6797125339508060,2,a
+P3_EN,philosophical,3,en,Between freedom and responsibility,book,book,B00B3LCE3G,The Ten Keys To Total Freedom: A Conversation with Gary M. Douglas & Dr. Dain Heer,,0.66995906829834,4,o
+P3_EN,philosophical,3,en,Between freedom and responsibility,book,book,B004MYFLBS,Free To Choose: A Personal Statement,,0.669591426849365,5,o
+P3_EN,philosophical,3,en,Between freedom and responsibility,all,book,B00M20I134,How I Found Freedom in an Unfree World: A Handbook for Personal Liberty,,0.688935875892639,1,o
+P3_EN,philosophical,3,en,Between freedom and responsibility,all,book,B00C2C8XUS,"The Freedom Manifesto: How to Free Yourself from Anxiety, Fear, Mortgages, Money, Guilt, Debt, Government, Boredom, Supermarkets, Bills, Melancholy, Pain, Depression, Work, and Waste",,0.679712533950806,2,a
 P3_EN,philosophical,3,en,Between freedom and responsibility,all,book,B00H0FEQH6,Human Rights Transformed: Positive Rights and Positive Duties,,0.670017421245575,3,o
-P3_EN,philosophical,3,en,Between freedom and responsibility,all,book,B00B3LCE3G,The Ten Keys To Total Freedom: A Conversation with Gary M. Douglas & Dr. Dain Heer,,0.6699590682983400,4,o
-P3_EN,philosophical,3,en,Between freedom and responsibility,all,book,B004MYFLBS,Free To Choose: A Personal Statement,,0.6695914268493650,5,o
-P4_EN,philosophical,4,en,Reflection on solitude and existence,movie,movie,192718,Un homme qui dort (1974),,0.6140828728675840,1,o
-P4_EN,philosophical,4,en,Reflection on solitude and existence,movie,movie,376821,Det perfekte menneske (1967),,0.5957410931587220,2,o
-P4_EN,philosophical,4,en,Reflection on solitude and existence,movie,movie,432232,The Century of the Self,,0.5494245886802670,3,x
-P4_EN,philosophical,4,en,Reflection on solitude and existence,movie,movie,71600,Les hautes solitudes (1974),,0.5489194989204410,4,o
-P4_EN,philosophical,4,en,Reflection on solitude and existence,movie,movie,1741225,I Am (2010),,0.5231623649597170,5,o
+P3_EN,philosophical,3,en,Between freedom and responsibility,all,book,B00B3LCE3G,The Ten Keys To Total Freedom: A Conversation with Gary M. Douglas & Dr. Dain Heer,,0.66995906829834,4,o
+P3_EN,philosophical,3,en,Between freedom and responsibility,all,book,B004MYFLBS,Free To Choose: A Personal Statement,,0.669591426849365,5,o
+P4_EN,philosophical,4,en,Reflection on solitude and existence,movie,movie,192718,Un homme qui dort (1974),,0.614082872867584,1,o
+P4_EN,philosophical,4,en,Reflection on solitude and existence,movie,movie,376821,Det perfekte menneske (1967),,0.595741093158722,2,o
+P4_EN,philosophical,4,en,Reflection on solitude and existence,movie,movie,432232,The Century of the Self,,0.549424588680267,3,x
+P4_EN,philosophical,4,en,Reflection on solitude and existence,movie,movie,71600,Les hautes solitudes (1974),,0.548919498920441,4,o
+P4_EN,philosophical,4,en,Reflection on solitude and existence,movie,movie,1741225,I Am (2010),,0.523162364959717,5,o
 P4_EN,philosophical,4,en,Reflection on solitude and existence,music,music,45PxuJqJBnPXZKLxoo9Apj,SUPERPOSITION,,0.648328423500061,1,o
 P4_EN,philosophical,4,en,Reflection on solitude and existence,music,music,21UkknmSYISvDaQbaMIOgq,Solitude,,0.612037718296051,2,o
-P4_EN,philosophical,4,en,Reflection on solitude and existence,music,music,1IdTIzkTK6CcpKKgMUGbg7,Vultures,,0.6059417724609380,3,o
-P4_EN,philosophical,4,en,Reflection on solitude and existence,music,music,24IdPCimVnJJDRuB5YSDiS,I Don't Care Anymore - 2016 Remaster,,0.5999063849449160,4,o
-P4_EN,philosophical,4,en,Reflection on solitude and existence,music,music,5imShWWzwqfAJ9gXFpGAQh,Waiting On the World to Change,,0.5985373258590700,5,a
-P4_EN,philosophical,4,en,Reflection on solitude and existence,book,book,B07GNV22WM,Being and Nothingness,,0.6694023609161380,1,o
-P4_EN,philosophical,4,en,Reflection on solitude and existence,book,book,B08H87G2WN,Existentialism Is a Humanism,,0.6634149551391600,2,o
-P4_EN,philosophical,4,en,Reflection on solitude and existence,book,book,B08HY38C94,Being No One: The Self-Model Theory of Subjectivity,,0.6617122888565060,3,o
-P4_EN,philosophical,4,en,Reflection on solitude and existence,book,book,B0CB1HPR3C,Alone: Reflections on Solitary Living,,0.6374362707138060,4,o
-P4_EN,philosophical,4,en,Reflection on solitude and existence,book,book,B0B6YYD5C9,The Art of Living a Meaningless Existence: Ideas from Philosophy That Change the Way You Think,,0.6339789032936100,5,o
-P4_EN,philosophical,4,en,Reflection on solitude and existence,all,book,B07GNV22WM,Being and Nothingness,,0.6694023609161380,1,o
-P4_EN,philosophical,4,en,Reflection on solitude and existence,all,book,B08H87G2WN,Existentialism Is a Humanism,,0.6634149551391600,2,o
-P4_EN,philosophical,4,en,Reflection on solitude and existence,all,book,B08HY38C94,Being No One: The Self-Model Theory of Subjectivity,,0.6617122888565060,3,o
+P4_EN,philosophical,4,en,Reflection on solitude and existence,music,music,1IdTIzkTK6CcpKKgMUGbg7,Vultures,,0.605941772460938,3,o
+P4_EN,philosophical,4,en,Reflection on solitude and existence,music,music,24IdPCimVnJJDRuB5YSDiS,I Don't Care Anymore - 2016 Remaster,,0.599906384944916,4,o
+P4_EN,philosophical,4,en,Reflection on solitude and existence,music,music,5imShWWzwqfAJ9gXFpGAQh,Waiting On the World to Change,,0.59853732585907,5,a
+P4_EN,philosophical,4,en,Reflection on solitude and existence,book,book,B07GNV22WM,Being and Nothingness,,0.669402360916138,1,o
+P4_EN,philosophical,4,en,Reflection on solitude and existence,book,book,B08H87G2WN,Existentialism Is a Humanism,,0.66341495513916,2,o
+P4_EN,philosophical,4,en,Reflection on solitude and existence,book,book,B08HY38C94,Being No One: The Self-Model Theory of Subjectivity,,0.661712288856506,3,o
+P4_EN,philosophical,4,en,Reflection on solitude and existence,book,book,B0CB1HPR3C,Alone: Reflections on Solitary Living,,0.637436270713806,4,o
+P4_EN,philosophical,4,en,Reflection on solitude and existence,book,book,B0B6YYD5C9,The Art of Living a Meaningless Existence: Ideas from Philosophy That Change the Way You Think,,0.63397890329361,5,o
+P4_EN,philosophical,4,en,Reflection on solitude and existence,all,book,B07GNV22WM,Being and Nothingness,,0.669402360916138,1,o
+P4_EN,philosophical,4,en,Reflection on solitude and existence,all,book,B08H87G2WN,Existentialism Is a Humanism,,0.66341495513916,2,o
+P4_EN,philosophical,4,en,Reflection on solitude and existence,all,book,B08HY38C94,Being No One: The Self-Model Theory of Subjectivity,,0.661712288856506,3,o
 P4_EN,philosophical,4,en,Reflection on solitude and existence,all,music,45PxuJqJBnPXZKLxoo9Apj,SUPERPOSITION,,0.648328423500061,4,o
-P4_EN,philosophical,4,en,Reflection on solitude and existence,all,book,B0CB1HPR3C,Alone: Reflections on Solitary Living,,0.6374362707138060,5,o
-T1_EN,poet,1,en,In the name of love,movie,movie,1637612,An Affair of the Heart (2012),,0.3932909965515140,1,o
-T1_EN,poet,1,en,In the name of love,movie,movie,1225703,No Greater Love (2009),,0.3817009925842290,2,o
-T1_EN,poet,1,en,In the name of love,movie,movie,2202471,Love (2012),,0.3811918497085570,3,o
-T1_EN,poet,1,en,In the name of love,movie,movie,332280,The Notebook (2004),,0.3791924118995670,4,o
-T1_EN,poet,1,en,In the name of love,movie,movie,903657,Love & Mercy (2014),,0.3780116438865660,5,o
-T1_EN,poet,1,en,In the name of love,music,music,2lmCr96Mhghs0KUVABx4RP,Be My Lady (feat. Pieter Tuhoro & Jah Maoli),,0.4632405042648320,1,o
-T1_EN,poet,1,en,In the name of love,music,music,0oTtnnedK0C4unALxVTPhz,Mystery of Love (From the Original Motion Picture “Call Me by Your Name”),,0.4598113596439360,2,o
-T1_EN,poet,1,en,In the name of love,music,music,0MNNKSUU9OOQ8DSGWduw79,Mystery of Love,,0.4577125012874600,3,o
-T1_EN,poet,1,en,In the name of love,music,music,4Eda1y3heYypvl4KRcJcKs,God Of This City,,0.4524143934249880,4,a
-T1_EN,poet,1,en,In the name of love,music,music,0UERoCKd24PKovd4BwRzBQ,It Takes Two,,0.4425564408302310,5,a
-T1_EN,poet,1,en,In the name of love,book,book,B0BYC83HZD,Call of Love,,0.4742336869239810,1,o
+P4_EN,philosophical,4,en,Reflection on solitude and existence,all,book,B0CB1HPR3C,Alone: Reflections on Solitary Living,,0.637436270713806,5,o
+T1_EN,poet,1,en,In the name of love,movie,movie,1637612,An Affair of the Heart (2012),,0.393290996551514,1,o
+T1_EN,poet,1,en,In the name of love,movie,movie,1225703,No Greater Love (2009),,0.381700992584229,2,o
+T1_EN,poet,1,en,In the name of love,movie,movie,2202471,Love (2012),,0.381191849708557,3,o
+T1_EN,poet,1,en,In the name of love,movie,movie,332280,The Notebook (2004),,0.379192411899567,4,o
+T1_EN,poet,1,en,In the name of love,movie,movie,903657,Love & Mercy (2014),,0.378011643886566,5,o
+T1_EN,poet,1,en,In the name of love,music,music,2lmCr96Mhghs0KUVABx4RP,Be My Lady (feat. Pieter Tuhoro & Jah Maoli),,0.463240504264832,1,o
+T1_EN,poet,1,en,In the name of love,music,music,0oTtnnedK0C4unALxVTPhz,Mystery of Love (From the Original Motion Picture “Call Me by Your Name”),,0.459811359643936,2,o
+T1_EN,poet,1,en,In the name of love,music,music,0MNNKSUU9OOQ8DSGWduw79,Mystery of Love,,0.45771250128746,3,o
+T1_EN,poet,1,en,In the name of love,music,music,4Eda1y3heYypvl4KRcJcKs,God Of This City,,0.452414393424988,4,a
+T1_EN,poet,1,en,In the name of love,music,music,0UERoCKd24PKovd4BwRzBQ,It Takes Two,,0.442556440830231,5,a
+T1_EN,poet,1,en,In the name of love,book,book,B0BYC83HZD,Call of Love,,0.474233686923981,1,o
 T1_EN,poet,1,en,In the name of love,book,book,B0BBS8GWKP,Forever Love: A Duet,,0.45900559425354,2,o
-T1_EN,poet,1,en,In the name of love,book,book,B007V8Z4O6,Down Where My Love Lives,,0.4573473334312440,3,o
-T1_EN,poet,1,en,In the name of love,book,book,B01EFM8NI4,The Four Loves,,0.4527392983436580,4,o
-T1_EN,poet,1,en,In the name of love,book,book,B0BJF2P7SW,"The Love Stories of the Bible Speak: Biblical Lessons on Romance, Friendship, and Faith",,0.4491994976997380,5,o
-T1_EN,poet,1,en,In the name of love,all,book,B0BYC83HZD,Call of Love,,0.4742336869239810,1,o
-T1_EN,poet,1,en,In the name of love,all,music,2lmCr96Mhghs0KUVABx4RP,Be My Lady (feat. Pieter Tuhoro & Jah Maoli),,0.4632405042648320,2,o
-T1_EN,poet,1,en,In the name of love,all,music,0oTtnnedK0C4unALxVTPhz,Mystery of Love (From the Original Motion Picture “Call Me by Your Name”),,0.4598113596439360,3,o
+T1_EN,poet,1,en,In the name of love,book,book,B007V8Z4O6,Down Where My Love Lives,,0.457347333431244,3,o
+T1_EN,poet,1,en,In the name of love,book,book,B01EFM8NI4,The Four Loves,,0.452739298343658,4,o
+T1_EN,poet,1,en,In the name of love,book,book,B0BJF2P7SW,"The Love Stories of the Bible Speak: Biblical Lessons on Romance, Friendship, and Faith",,0.449199497699738,5,o
+T1_EN,poet,1,en,In the name of love,all,book,B0BYC83HZD,Call of Love,,0.474233686923981,1,o
+T1_EN,poet,1,en,In the name of love,all,music,2lmCr96Mhghs0KUVABx4RP,Be My Lady (feat. Pieter Tuhoro & Jah Maoli),,0.463240504264832,2,o
+T1_EN,poet,1,en,In the name of love,all,music,0oTtnnedK0C4unALxVTPhz,Mystery of Love (From the Original Motion Picture “Call Me by Your Name”),,0.459811359643936,3,o
 T1_EN,poet,1,en,In the name of love,all,book,B0BBS8GWKP,Forever Love: A Duet,,0.45900559425354,4,o
-T1_EN,poet,1,en,In the name of love,all,music,0MNNKSUU9OOQ8DSGWduw79,Mystery of Love,,0.4577125012874600,5,o
-T2_EN,poet,2,en,Like the excitement of a spring day,movie,movie,82902,Pick-up Summer (1980),,0.6012539863586430,1,x
-T2_EN,poet,2,en,Like the excitement of a spring day,movie,movie,1547230,Judy Moody and the Not Bummer Summer (2011),,0.5948951840400700,2,x
-T2_EN,poet,2,en,Like the excitement of a spring day,movie,movie,3921418,L for Leisure (2014),,0.5702340602874760,3,x
-T2_EN,poet,2,en,Like the excitement of a spring day,movie,movie,91680,One Crazy Summer (1986),,0.5642160773277280,4,x
-T2_EN,poet,2,en,Like the excitement of a spring day,movie,movie,1758795,The To Do List (2013),,0.5512377023696900,5,a
-T2_EN,poet,2,en,Like the excitement of a spring day,music,music,5dl8WFCxndWZlsDXuzT00p,The Best Day Ever,,0.5590384006500240,1,o
-T2_EN,poet,2,en,Like the excitement of a spring day,music,music,7Feaw9WAEREY0DUOSXJLOM,Summer Days (feat. Macklemore & Patrick Stump of Fall Out Boy),,0.5463127493858340,2,x
+T1_EN,poet,1,en,In the name of love,all,music,0MNNKSUU9OOQ8DSGWduw79,Mystery of Love,,0.45771250128746,5,o
+T2_EN,poet,2,en,Like the excitement of a spring day,movie,movie,82902,Pick-up Summer (1980),,0.601253986358643,1,x
+T2_EN,poet,2,en,Like the excitement of a spring day,movie,movie,1547230,Judy Moody and the Not Bummer Summer (2011),,0.59489518404007,2,x
+T2_EN,poet,2,en,Like the excitement of a spring day,movie,movie,3921418,L for Leisure (2014),,0.570234060287476,3,x
+T2_EN,poet,2,en,Like the excitement of a spring day,movie,movie,91680,One Crazy Summer (1986),,0.564216077327728,4,x
+T2_EN,poet,2,en,Like the excitement of a spring day,movie,movie,1758795,The To Do List (2013),,0.55123770236969,5,a
+T2_EN,poet,2,en,Like the excitement of a spring day,music,music,5dl8WFCxndWZlsDXuzT00p,The Best Day Ever,,0.559038400650024,1,o
+T2_EN,poet,2,en,Like the excitement of a spring day,music,music,7Feaw9WAEREY0DUOSXJLOM,Summer Days (feat. Macklemore & Patrick Stump of Fall Out Boy),,0.546312749385834,2,x
 T2_EN,poet,2,en,Like the excitement of a spring day,music,music,3bMfUUpzUzqWp9II00yRhE,Christmas Time Is Here - Vocal - Album Version,,0.537554144859314,3,x
-T2_EN,poet,2,en,Like the excitement of a spring day,music,music,4SZbG1h04TXi6e9JOyjY1z,Ida's Summer Song,,0.5315395593643190,4,x
-T2_EN,poet,2,en,Like the excitement of a spring day,music,music,6NqfslFfCCOyBQ0Xw8kN8E,What Time Is It,,0.5298798084259030,5,x
-T2_EN,poet,2,en,Like the excitement of a spring day,book,book,B0C6B28N99,The Worst Summer Book in the Whole Entire World: A funny and silly children's story about vacation season for kids and parents who need a laugh. (Entire World Books),,0.6366869211196900,1,x
-T2_EN,poet,2,en,Like the excitement of a spring day,book,book,1951046382,The Worst Summer Book in the Whole Entire World (Entire World Books),,0.6273474097251890,2,x
-T2_EN,poet,2,en,Like the excitement of a spring day,book,book,545741726,"Swing it, Sunny: A Graphic Novel (Sunny #2) (2)",,0.6144114136695860,3,x
-T2_EN,poet,2,en,Like the excitement of a spring day,book,book,B08HDD1HRZ,Staying Out for the Summer,,0.6041180491447450,4,x
-T2_EN,poet,2,en,Like the excitement of a spring day,book,book,B08FZ8GNRT,Cool for the Summer,,0.6019313335418700,5,x
-T2_EN,poet,2,en,Like the excitement of a spring day,all,book,B0C6B28N99,The Worst Summer Book in the Whole Entire World: A funny and silly children's story about vacation season for kids and parents who need a laugh. (Entire World Books),,0.6366869211196900,1,x
-T2_EN,poet,2,en,Like the excitement of a spring day,all,book,1951046382,The Worst Summer Book in the Whole Entire World (Entire World Books),,0.6273474097251890,2,x
-T2_EN,poet,2,en,Like the excitement of a spring day,all,book,545741726,"Swing it, Sunny: A Graphic Novel (Sunny #2) (2)",,0.6144114136695860,3,x
-T2_EN,poet,2,en,Like the excitement of a spring day,all,book,B08HDD1HRZ,Staying Out for the Summer,,0.6041180491447450,4,x
-T2_EN,poet,2,en,Like the excitement of a spring day,all,book,B08FZ8GNRT,Cool for the Summer,,0.6019313335418700,5,x
-T3_EN,poet,3,en,What remains after farewell,movie,movie,165078,After Life (1998),,0.5390020608901980,1,o
-T3_EN,poet,3,en,What remains after farewell,movie,movie,1172957,How to Live Forever (2009),,0.5007796287536620,2,x
-T3_EN,poet,3,en,What remains after farewell,movie,movie,253200,Last Orders (2001),,0.4862959384918210,3,o
-T3_EN,poet,3,en,What remains after farewell,movie,movie,207805,Tuesdays with Morrie (1999),,0.4851750433444980,4,o
+T2_EN,poet,2,en,Like the excitement of a spring day,music,music,4SZbG1h04TXi6e9JOyjY1z,Ida's Summer Song,,0.531539559364319,4,x
+T2_EN,poet,2,en,Like the excitement of a spring day,music,music,6NqfslFfCCOyBQ0Xw8kN8E,What Time Is It,,0.529879808425903,5,x
+T2_EN,poet,2,en,Like the excitement of a spring day,book,book,B0C6B28N99,The Worst Summer Book in the Whole Entire World: A funny and silly children's story about vacation season for kids and parents who need a laugh. (Entire World Books),,0.63668692111969,1,x
+T2_EN,poet,2,en,Like the excitement of a spring day,book,book,1951046382,The Worst Summer Book in the Whole Entire World (Entire World Books),,0.627347409725189,2,x
+T2_EN,poet,2,en,Like the excitement of a spring day,book,book,545741726,"Swing it, Sunny: A Graphic Novel (Sunny #2) (2)",,0.614411413669586,3,x
+T2_EN,poet,2,en,Like the excitement of a spring day,book,book,B08HDD1HRZ,Staying Out for the Summer,,0.604118049144745,4,x
+T2_EN,poet,2,en,Like the excitement of a spring day,book,book,B08FZ8GNRT,Cool for the Summer,,0.60193133354187,5,x
+T2_EN,poet,2,en,Like the excitement of a spring day,all,book,B0C6B28N99,The Worst Summer Book in the Whole Entire World: A funny and silly children's story about vacation season for kids and parents who need a laugh. (Entire World Books),,0.63668692111969,1,x
+T2_EN,poet,2,en,Like the excitement of a spring day,all,book,1951046382,The Worst Summer Book in the Whole Entire World (Entire World Books),,0.627347409725189,2,x
+T2_EN,poet,2,en,Like the excitement of a spring day,all,book,545741726,"Swing it, Sunny: A Graphic Novel (Sunny #2) (2)",,0.614411413669586,3,x
+T2_EN,poet,2,en,Like the excitement of a spring day,all,book,B08HDD1HRZ,Staying Out for the Summer,,0.604118049144745,4,x
+T2_EN,poet,2,en,Like the excitement of a spring day,all,book,B08FZ8GNRT,Cool for the Summer,,0.60193133354187,5,x
+T3_EN,poet,3,en,What remains after farewell,movie,movie,165078,After Life (1998),,0.539002060890198,1,o
+T3_EN,poet,3,en,What remains after farewell,movie,movie,1172957,How to Live Forever (2009),,0.500779628753662,2,x
+T3_EN,poet,3,en,What remains after farewell,movie,movie,253200,Last Orders (2001),,0.486295938491821,3,o
+T3_EN,poet,3,en,What remains after farewell,movie,movie,207805,Tuesdays with Morrie (1999),,0.485175043344498,4,o
 T3_EN,poet,3,en,What remains after farewell,movie,movie,1446208,Ways to Live Forever (2010),,0.481907457113266,5,a
-T3_EN,poet,3,en,What remains after farewell,music,music,7FCYixd46BlSiO2memrsPo,Older Chests,,0.3673595488071440,1,
-T3_EN,poet,3,en,What remains after farewell,music,music,6YPb7DMon2lInNJciLwgzG,Turning Page (Instrumental),,0.3571181893348690,2,
-T3_EN,poet,3,en,What remains after farewell,music,music,3yxpqMbfUVMLL7Ap3W71W4,End Of Me,,0.3520513772964480,3,
-T3_EN,poet,3,en,What remains after farewell,music,music,34dkZZNQJzEJRqPkywYmEY,A Quick One Before the Eternal Worm Devours Connecticut,,0.350500077009201,4,
-T3_EN,poet,3,en,What remains after farewell,music,music,1V8BSBe2fB5Np30sXmUCNU,Where Have All the Flowers Gone - 2004 Remaster,,0.3281600475311280,5,
-T3_EN,poet,3,en,What remains after farewell,book,book,B08661427S,We all know how this ends: Lessons about life and living from working with death and dying,,0.6213711500167850,1,o
-T3_EN,poet,3,en,What remains after farewell,book,book,B007SGM3P4,The End of Your Life Book Club,,0.6189244985580440,2,o
-T3_EN,poet,3,en,What remains after farewell,book,book,B007NK578A,At the End of Life: True Stories About How We Die,,0.6133712530136110,3,o
-T3_EN,poet,3,en,What remains after farewell,book,book,B079L52779,Let's Talk about Death (over Dinner): An Invitation and Guide to Life's Most Important Conversation,,0.6073743104934690,4,a
-T3_EN,poet,3,en,What remains after farewell,book,book,B07RL547K9,When My Time Comes: Conversations About Whether Those Who Are Dying Should Have the Right to Determine When Life Should End,,0.5984507203102110,5,x
-T3_EN,poet,3,en,What remains after farewell,all,book,B08661427S,We all know how this ends: Lessons about life and living from working with death and dying,,0.6213711500167850,1,o
-T3_EN,poet,3,en,What remains after farewell,all,book,B007SGM3P4,The End of Your Life Book Club,,0.6189244985580440,2,o
-T3_EN,poet,3,en,What remains after farewell,all,book,B007NK578A,At the End of Life: True Stories About How We Die,,0.6133712530136110,3,o
-T3_EN,poet,3,en,What remains after farewell,all,book,B079L52779,Let's Talk about Death (over Dinner): An Invitation and Guide to Life's Most Important Conversation,,0.6073743104934690,4,a
-T3_EN,poet,3,en,What remains after farewell,all,book,B07RL547K9,When My Time Comes: Conversations About Whether Those Who Are Dying Should Have the Right to Determine When Life Should End,,0.5984507203102110,5,x
-T4_EN,poet,4,en,A voice whispering under moonlight,movie,movie,2113683,I Know That Voice (2013),,0.6096088886260990,1,x
-T4_EN,poet,4,en,A voice whispering under moonlight,movie,movie,1125387,See What I'm Saying: The Deaf Entertainers Documentary (2009),,0.5653725862503050,2,x
+T3_EN,poet,3,en,What remains after farewell,music,music,7FCYixd46BlSiO2memrsPo,Older Chests,,0.367359548807144,1,o
+T3_EN,poet,3,en,What remains after farewell,music,music,6YPb7DMon2lInNJciLwgzG,Turning Page (Instrumental),,0.357118189334869,2,a
+T3_EN,poet,3,en,What remains after farewell,music,music,3yxpqMbfUVMLL7Ap3W71W4,End Of Me,,0.352051377296448,3,o
+T3_EN,poet,3,en,What remains after farewell,music,music,34dkZZNQJzEJRqPkywYmEY,A Quick One Before the Eternal Worm Devours Connecticut,,0.350500077009201,4,x
+T3_EN,poet,3,en,What remains after farewell,music,music,1V8BSBe2fB5Np30sXmUCNU,Where Have All the Flowers Gone - 2004 Remaster,,0.328160047531128,5,o
+T3_EN,poet,3,en,What remains after farewell,book,book,B08661427S,We all know how this ends: Lessons about life and living from working with death and dying,,0.621371150016785,1,o
+T3_EN,poet,3,en,What remains after farewell,book,book,B007SGM3P4,The End of Your Life Book Club,,0.618924498558044,2,o
+T3_EN,poet,3,en,What remains after farewell,book,book,B007NK578A,At the End of Life: True Stories About How We Die,,0.613371253013611,3,o
+T3_EN,poet,3,en,What remains after farewell,book,book,B079L52779,Let's Talk about Death (over Dinner): An Invitation and Guide to Life's Most Important Conversation,,0.607374310493469,4,a
+T3_EN,poet,3,en,What remains after farewell,book,book,B07RL547K9,When My Time Comes: Conversations About Whether Those Who Are Dying Should Have the Right to Determine When Life Should End,,0.598450720310211,5,x
+T3_EN,poet,3,en,What remains after farewell,all,book,B08661427S,We all know how this ends: Lessons about life and living from working with death and dying,,0.621371150016785,1,o
+T3_EN,poet,3,en,What remains after farewell,all,book,B007SGM3P4,The End of Your Life Book Club,,0.618924498558044,2,o
+T3_EN,poet,3,en,What remains after farewell,all,book,B007NK578A,At the End of Life: True Stories About How We Die,,0.613371253013611,3,o
+T3_EN,poet,3,en,What remains after farewell,all,book,B079L52779,Let's Talk about Death (over Dinner): An Invitation and Guide to Life's Most Important Conversation,,0.607374310493469,4,a
+T3_EN,poet,3,en,What remains after farewell,all,book,B07RL547K9,When My Time Comes: Conversations About Whether Those Who Are Dying Should Have the Right to Determine When Life Should End,,0.598450720310211,5,x
+T4_EN,poet,4,en,A voice whispering under moonlight,movie,movie,2113683,I Know That Voice (2013),,0.609608888626099,1,x
+T4_EN,poet,4,en,A voice whispering under moonlight,movie,movie,1125387,See What I'm Saying: The Deaf Entertainers Documentary (2009),,0.565372586250305,2,x
 T4_EN,poet,4,en,A voice whispering under moonlight,movie,movie,1734477,Public Speaking (2010),,0.542789101600647,3,x
 T4_EN,poet,4,en,A voice whispering under moonlight,movie,movie,796368,Talk to Me (2007),,0.536506712436676,4,x
-T4_EN,poet,4,en,A voice whispering under moonlight,movie,movie,147004,Little Voice (1998),,0.5170176029205320,5,x
-T4_EN,poet,4,en,A voice whispering under moonlight,music,music,3fzJcLWDgzx4l1tTdkAxYd,Watch What Happens,,0.4050086438655850,1,x
-T4_EN,poet,4,en,A voice whispering under moonlight,music,music,4j1Pc3I3CQTg4EAE6kCpNV,Yep,,0.3686842918396000,2,x
-T4_EN,poet,4,en,A voice whispering under moonlight,music,music,4vVIHxe9kdEsIrrTeHnHyG,People Watching,,0.3452287316322330,3,x
-T4_EN,poet,4,en,A voice whispering under moonlight,music,music,6dr7ekfhlbquvsVY8D7gyk,"Aaron Burr, Sir",,0.3408916294574740,4,x
-T4_EN,poet,4,en,A voice whispering under moonlight,music,music,5umt6j4cZkfrL18u8KOnyq,Once And For All,,0.3369264006614690,5,x
-T4_EN,poet,4,en,A voice whispering under moonlight,book,book,B07XGS22NC,"Speak and Be Heard: 101 Vocal Exercises for Voice Actors, Public Speakers and Professionals",,0.6404346823692320,1,x
-T4_EN,poet,4,en,A voice whispering under moonlight,book,book,B0B17HF2PL,The Right to Speak: Working with the Voice (Bloomsbury Revelations),,0.6370272636413570,2,x
-T4_EN,poet,4,en,A voice whispering under moonlight,book,book,B07D36LXQQ,Voice-Over Voice Actor: The Extended Edition,,0.6206974983215330,3,x
-T4_EN,poet,4,en,A voice whispering under moonlight,book,book,B003F3PMFM,Frank: The Voice,,0.6193962693214420,4,x
-T4_EN,poet,4,en,A voice whispering under moonlight,book,book,B011H55RTA,Ted Talks: The Official TED Guide to Public Speaking,,0.6131170392036440,5,x
-T4_EN,poet,4,en,A voice whispering under moonlight,all,book,B07XGS22NC,"Speak and Be Heard: 101 Vocal Exercises for Voice Actors, Public Speakers and Professionals",,0.6404346823692320,1,x
-T4_EN,poet,4,en,A voice whispering under moonlight,all,book,B0B17HF2PL,The Right to Speak: Working with the Voice (Bloomsbury Revelations),,0.6370272636413570,2,x
-T4_EN,poet,4,en,A voice whispering under moonlight,all,book,B07D36LXQQ,Voice-Over Voice Actor: The Extended Edition,,0.6206974983215330,3,x
-T4_EN,poet,4,en,A voice whispering under moonlight,all,book,B003F3PMFM,Frank: The Voice,,0.6193962693214420,4,x
-T4_EN,poet,4,en,A voice whispering under moonlight,all,book,B011H55RTA,Ted Talks: The Official TED Guide to Public Speaking,,0.6131170392036440,5,x
-A1_EN,atmosphere,1,en,A sunlit cafe,movie,movie,2967006,The Trip to Italy (2014),,0.5938265323638920,1,
-A1_EN,atmosphere,1,en,A sunlit cafe,movie,movie,1323520,French Roast (2008),,0.5619031190872190,2,
-A1_EN,atmosphere,1,en,A sunlit cafe,movie,movie,152176,Restaurant (1998),,0.5491583943367000,3,
-A1_EN,atmosphere,1,en,A sunlit cafe,movie,movie,1259520,Bon appÌ©tit (2010),,0.5470829010009770,4,
-A1_EN,atmosphere,1,en,A sunlit cafe,movie,movie,1954701,A Coffee in Berlin (2012),,0.5458282232284550,5,
-A1_EN,atmosphere,1,en,A sunlit cafe,music,music,7f9sC9fvtjYSZYOLSmKJlq,Tom's Diner,,0.4592321515083310,1,
-A1_EN,atmosphere,1,en,A sunlit cafe,music,music,2pSSSjVhTbSxa5a9vbzWhK,On An Evening In Roma (Sott'er Celo De Roma) - Remastered,,0.4401718378067020,2,
-A1_EN,atmosphere,1,en,A sunlit cafe,music,music,0Blojh3eznTkOiIJSDKb6W,Opening Up,,0.4176502823829650,3,
-A1_EN,atmosphere,1,en,A sunlit cafe,music,music,3lec706q3lBqypMop9y7pr,Nice Girls Don't Stay For Breakfast,,0.4131163656711580,4,
-A1_EN,atmosphere,1,en,A sunlit cafe,music,music,3OIoLMnnWzAUORFQxRAhdF,You Matter to Me,,0.4123338460922240,5,
-A1_EN,atmosphere,1,en,A sunlit cafe,book,book,B01L7BD980,Between Meals: An Appetite for Paris,,0.6481386423110960,1,
-A1_EN,atmosphere,1,en,A sunlit cafe,book,book,B08VHMGMFN,Flavour with Benefits: France,,0.6378775238990780,2,
-A1_EN,atmosphere,1,en,A sunlit cafe,book,book,B0CBXTQVS4,Eating & Drinking in Paris: French Menu Translator and Restaurant Guide (12th edition) Made Easy Travel Guides 2023,,0.6355682611465450,3,
-A1_EN,atmosphere,1,en,A sunlit cafe,book,book,B08FHWDTSW,Milk Street: Tuesday Nights Mediterranean: 125 Simple Weeknight Recipes from the World's Healthiest Cuisine,,0.6340487003326420,4,
-A1_EN,atmosphere,1,en,A sunlit cafe,book,book,B00GU2RGXG,"The Food Lover's Guide to Paris: The Best Restaurants, Bistros, Cafés, Markets, Bakeries, and More",,0.6339638233184810,5,
-A1_EN,atmosphere,1,en,A sunlit cafe,all,book,B01L7BD980,Between Meals: An Appetite for Paris,,0.6481386423110960,1,
-A1_EN,atmosphere,1,en,A sunlit cafe,all,book,B08VHMGMFN,Flavour with Benefits: France,,0.6378775238990780,2,
-A1_EN,atmosphere,1,en,A sunlit cafe,all,book,B0CBXTQVS4,Eating & Drinking in Paris: French Menu Translator and Restaurant Guide (12th edition) Made Easy Travel Guides 2023,,0.6355682611465450,3,
-A1_EN,atmosphere,1,en,A sunlit cafe,all,book,B08FHWDTSW,Milk Street: Tuesday Nights Mediterranean: 125 Simple Weeknight Recipes from the World's Healthiest Cuisine,,0.6340487003326420,4,
-A1_EN,atmosphere,1,en,A sunlit cafe,all,book,B00GU2RGXG,"The Food Lover's Guide to Paris: The Best Restaurants, Bistros, Cafés, Markets, Bakeries, and More",,0.6339638233184810,5,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,movie,movie,328825,Al primo soffio di vento (2002),,0.4938578307628630,1,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,movie,movie,71600,Les hautes solitudes (1974),,0.4778274297714230,2,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,movie,movie,1314291,Oto-na-ri (2009),,0.4740281999111180,3,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,movie,movie,1079450,The Silence Before Bach (2007),,0.467039406299591,4,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,movie,movie,3667648,Une heure de tranquillitÌ© (2014),,0.4605373442173000,5,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,music,music,6aNXqtLgxBPRFAH4tkn2Xn,Spring Rain,,0.6875855922698980,1,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,music,music,0eXDbW9ymC4TX6aWWOhkrf,Good Night Sleep,,0.6840364933013920,2,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,music,music,5fD4liUw1zytutz64zFlX7,Sleep Rain,,0.6800519824028020,3,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,music,music,6c7uYlmHJtZPnenPjqG7Ir,Sleeping Lotus,,0.6783533096313480,4,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,music,music,6UZ9khOOfpeJ0Fss5pNs1K,Water Pour,,0.6770294904708860,5,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,book,book,B0C5V266S4,Sleep Psalms: Nightly Moments of Mindfulness and Rest,,0.6081644296646120,1,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,book,book,B00CPE3LMI,Goodnight Mind: Turn Off Your Noisy Thoughts and Get a Good Night's Sleep,,0.5701404213905330,2,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,book,book,B073XL3DTX,Silence: In the Age of Noise,,0.560177206993103,3,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,book,book,B003YRIKSU,The Perfume of Silence,,0.555716872215271,4,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,book,book,B00MEIMCVG,Silence: The Power of Quiet in a World Full of Noise,,0.5493742227554320,5,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,all,music,6aNXqtLgxBPRFAH4tkn2Xn,Spring Rain,,0.6875855922698980,1,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,all,music,0eXDbW9ymC4TX6aWWOhkrf,Good Night Sleep,,0.6840364933013920,2,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,all,music,5fD4liUw1zytutz64zFlX7,Sleep Rain,,0.6800519824028020,3,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,all,music,6c7uYlmHJtZPnenPjqG7Ir,Sleeping Lotus,,0.6783533096313480,4,
-A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,all,music,6UZ9khOOfpeJ0Fss5pNs1K,Water Pour,,0.6770294904708860,5,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,movie,movie,1722515,Hjem til jul (2010),,0.454502522945404,1,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,movie,movie,999872,Thomas Kinkade's Christmas Cottage (2008),,0.4509292244911190,2,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,movie,movie,1583323,Miesten vuoro (2010),,0.439377099275589,3,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,movie,movie,103961,Christmas in Connecticut (1992),,0.433315634727478,4,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,movie,movie,1491605,Kansakunnan olohuone (2009),,0.4306062459945680,5,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,music,music,3W93koK957HaoaNHyA3dTm,St. Patrick's Day,,0.546374499797821,1,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,music,music,4vHp893kV7HksfB5FN1Nk5,I Live My Life for You,,0.5153489112854000,2,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,music,music,6Xajr512QEGAZ20bqAWkyT,Near Light,,0.5105723142623900,3,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,music,music,0YPagAr3GhXlRX06E4nUcw,Tomorrow's Song,,0.4751565158367160,4,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,music,music,20Y6MNDyaBRpFrQ1Dt5CNF,The Day Before You - Acoustic,,0.4698664546012880,5,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,book,book,B08NHX7R6C,Cozy White Cottage Seasons: 100 Ways to Be Cozy All Year Long,,0.5706356763839720,1,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,book,book,B00QSRUK5E,Cold-Weather Cooking,,0.5570504665374760,2,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,book,book,B00ZJJ1CVS,Camping Cookbook Dutch Oven Recipes (Camp Cooking),,0.5296085476875310,3,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,book,book,B07B285Q8T,"Open Sandwiches: 70 Smørrebrød Ideas for Morning, Noon and Night",,0.5276820659637450,4,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,book,book,B08L9LY9ZW,Cook & Ladder Company No. 1: A Firehouse Cookbook,,0.5276275873184200,5,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,all,book,B08NHX7R6C,Cozy White Cottage Seasons: 100 Ways to Be Cozy All Year Long,,0.5706356763839720,1,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,all,book,B00QSRUK5E,Cold-Weather Cooking,,0.5570504665374760,2,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,all,music,3W93koK957HaoaNHyA3dTm,St. Patrick's Day,,0.546374499797821,3,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,all,book,B00ZJJ1CVS,Camping Cookbook Dutch Oven Recipes (Camp Cooking),,0.5296085476875310,4,
-A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,all,book,B07B285Q8T,"Open Sandwiches: 70 Smørrebrød Ideas for Morning, Noon and Night",,0.5276820659637450,5,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,movie,movie,311072,En la ciudad sin lí_mites (2002),,0.6049185395240780,1,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,movie,movie,1845838,Metro Manila (2013),,0.5902794599533080,2,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,movie,movie,1086214,Los (2008),,0.587106466293335,3,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,movie,movie,1543701,Quchis dgeebi (2010),,0.5791566967964170,4,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,movie,movie,1270494,Zero Bridge (2008),,0.5768136978149410,5,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,music,music,1VuBmEauSZywQVtqbxNqka,Beautiful Day,,0.4560773968696590,1,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,music,music,3yjGZ9mlBxlGih186finfS,Walk On,,0.4435517191886900,2,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,music,music,3JeT6Xcv6MlEHHylk8SKQ1,lovers’ carvings,,0.4429651498794560,3,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,music,music,5vuJuBqwzHJgCA1ysRfwxZ,good kid,,0.4407466053962710,4,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,music,music,3xjTuTBaihydhSC7ByNoSb,Stuck In A Moment You Can't Get Out Of,,0.4407177567481990,5,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,book,book,B00JHCNVNU,On the Run: Fugitive Life in an American City (Fieldwork Encounters and Discoveries),,0.5902580618858340,1,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,book,book,B08YN3LGW4,"Invisible Child: Poverty, Survival & Hope in an American City (Pulitzer Prize Winner)",,0.5570739507675170,2,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,book,book,B08CHKHKLC,No Way Home: The Crisis of Homelessness and How to Fix It with Intelligence and Humanity,,0.5554847717285160,3,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,book,book,B08NWT7LZ7,There Is Nothing for You Here: Finding Opportunity in the Twenty-First Century,,0.5510355830192570,4,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,book,book,B09TQ412SN,"The Other Side of Prospect: A Story of Violence, Injustice, and the American City",,0.547408938407898,5,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,all,movie,311072,En la ciudad sin lí_mites (2002),,0.6049185395240780,1,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,all,movie,1845838,Metro Manila (2013),,0.5902794599533080,2,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,all,book,B00JHCNVNU,On the Run: Fugitive Life in an American City (Fieldwork Encounters and Discoveries),,0.5902580618858340,3,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,all,movie,1086214,Los (2008),,0.587106466293335,4,
-A4_EN,atmosphere,4,en,Empty city streets at dawn,all,movie,1543701,Quchis dgeebi (2010),,0.5791566967964170,5,
-D1_EN,direct,1,en,Action movie set in space,movie,movie,450295,Make Your Own Damn Movie! (2005),,0.5307990312576290,1,
-D1_EN,direct,1,en,Action movie set in space,movie,movie,488953,Awesome; I Fuckin' Shot That! (2006),,0.5304318070411680,2,
-D1_EN,direct,1,en,Action movie set in space,movie,movie,77952,Movie Movie (1978),,0.5059501528739930,3,
-D1_EN,direct,1,en,Action movie set in space,movie,movie,1605782,Comic-Con Episode IV: A Fan's Hope (2011),,0.4990944862365720,4,
-D1_EN,direct,1,en,Action movie set in space,movie,movie,972785,Bring It On: In It to Win It (2007),,0.4966567158699040,5,
-D1_EN,direct,1,en,Action movie set in space,music,music,48UDhM2xL9wUuYLfrpK2Jv,Stand Out,,0.492497980594635,1,
-D1_EN,direct,1,en,Action movie set in space,music,music,5l9o6d6cRchPUhwQ8C3Ld2,"Playing with the Boys - 12"" Version",,0.4804688990116120,2,
-D1_EN,direct,1,en,Action movie set in space,music,music,00Y9r5SfbDdEjJhNg7laQr,"Top Gun Anthem - From ""Top Gun"" Original Soundtrack",,0.4786019027233120,3,
-D1_EN,direct,1,en,Action movie set in space,music,music,5dulYd9AKIprMoF837OTDb,"Gonna Fly Now - Theme From ""Rocky"" / Remastered 2006",,0.475884735584259,4,
-D1_EN,direct,1,en,Action movie set in space,music,music,5umt6j4cZkfrL18u8KOnyq,Once And For All,,0.4615390598773960,5,
-D1_EN,direct,1,en,Action movie set in space,book,book,B0BHBVFKXY,Action!: Professional Acting for Film and Television,,0.5947045087814330,1,
-D1_EN,direct,1,en,Action movie set in space,book,book,B0CFBKYY8T,More Popcorn Principles: The Sequel!: (Further Cinematic Storytelling Strategies for Novelists) (The Popcorn Principles Book 2),,0.5665728449821470,2,
-D1_EN,direct,1,en,Action movie set in space,book,book,B0C6X6DXTB,Running the Show: Television from the Inside,,0.5456044673919680,3,
-D1_EN,direct,1,en,Action movie set in space,book,book,B0BR8NZFQ8,The Popcorn Principles: A Novelist's Guide To Learning From Movies,,0.5417753458023070,4,
-D1_EN,direct,1,en,Action movie set in space,book,book,B091M6D5P3,Directing Actors - 25th Anniversary Edition: Creating Memorable Performances for Film and Television,,0.5334140062332150,5,
-D1_EN,direct,1,en,Action movie set in space,all,book,B0BHBVFKXY,Action!: Professional Acting for Film and Television,,0.5947045087814330,1,
-D1_EN,direct,1,en,Action movie set in space,all,book,B0CFBKYY8T,More Popcorn Principles: The Sequel!: (Further Cinematic Storytelling Strategies for Novelists) (The Popcorn Principles Book 2),,0.5665728449821470,2,
-D1_EN,direct,1,en,Action movie set in space,all,book,B0C6X6DXTB,Running the Show: Television from the Inside,,0.5456044673919680,3,
-D1_EN,direct,1,en,Action movie set in space,all,book,B0BR8NZFQ8,The Popcorn Principles: A Novelist's Guide To Learning From Movies,,0.5417753458023070,4,
-D1_EN,direct,1,en,Action movie set in space,all,book,B091M6D5P3,Directing Actors - 25th Anniversary Edition: Creating Memorable Performances for Film and Television,,0.5334140062332150,5,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,movie,movie,221300,Jazz,,0.7270801067352300,1,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,movie,movie,843838,Anita O'Day: The Life of a Jazz Singer (2007),,0.7178115844726560,2,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,movie,movie,47873,The Benny Goodman Story (1956),,0.6906356811523440,3,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,movie,movie,49170,The Eddy Duchin Story (1956),,0.6808812618255620,4,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,movie,movie,108328,Thirty Two Short Films About Glenn Gould (1993),,0.6671828031539920,5,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,music,music,5L8ta4ECl5zeA6bGqY7G38,"Sing, Sing, Sing",,0.722281277179718,1,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,music,music,02E4skBHp6ZyoEDgXHcQgu,Satin Doll,,0.7173075675964360,2,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,music,music,26zJinKqbORQyrDyMFLQhS,Blues My Naughty Sweetie Gives To Me,,0.71718829870224,3,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,music,music,3CoBpiBcaqi1qq58mzaJNi,I Hear Music,,0.7083129286766050,4,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,music,music,2xm9ihELo6xwrRKrBbPql9,Body and Soul,,0.70106440782547,5,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,book,book,B0BSX27BHX,Gentleman of Jazz: A Life in Music,,0.7728335857391360,1,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,book,book,B07CKR6S4C,Berklee Jazz Piano,,0.7564384937286380,2,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,book,book,B00FJ6BYVE,"Oscar Peterson - Jazz Exercises, Minuets, Etudes & Pieces for Piano: Jazz Exercises, Minuets, Etudes and Pieces for Piano",,0.7552403807640080,3,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,book,book,B001R4CO48,Miles Davis: The Definitive Biography,,0.7359445095062260,4,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,book,book,B01AFE3994,How to Listen to Jazz,,0.7357933521270750,5,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,all,book,B0BSX27BHX,Gentleman of Jazz: A Life in Music,,0.7728335857391360,1,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,all,book,B07CKR6S4C,Berklee Jazz Piano,,0.7564384937286380,2,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,all,book,B00FJ6BYVE,"Oscar Peterson - Jazz Exercises, Minuets, Etudes & Pieces for Piano: Jazz Exercises, Minuets, Etudes and Pieces for Piano",,0.7552403807640080,3,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,all,book,B001R4CO48,Miles Davis: The Definitive Biography,,0.7359445095062260,4,
-D2_EN,direct,2,en,Soulful music featuring jazz piano,all,book,B01AFE3994,How to Listen to Jazz,,0.7357933521270750,5,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,movie,movie,88930,Clue (1985),,0.5560285449028020,1,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,movie,movie,811026,Prime Suspect 7: The Final Act,,0.5480562448501590,2,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,movie,movie,69281,Sleuth (1972),,0.5394514799118040,3,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,movie,movie,87749,Miss Marple: The Moving Finger,,0.5358540415763860,4,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,movie,movie,30491,Nancy Drew: Detective (1938),,0.5339330434799190,5,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,music,music,0cm6cAtRu0C0sEZzDjZFsx,Discombobulate,,0.2756652534008030,1,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,music,music,0OAnoLrIVxpdne3mkVLrwr,We Have All The Time In The World - Remastered,,0.240206241607666,2,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,music,music,2YwjSPeznyCvkUYvqKbXa9,Take Care Of Business,,0.1908310055732730,3,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,music,music,79oesFYaS2VT39ShdA19u9,After Today,,0.1904334127902980,4,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,music,music,7t3qBNw37k2P2OmgK0MilM,Puttin' on the Ritz,,0.1900610774755480,5,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,book,book,B00BI9VZ1A,McNally's Caper (The Archy McNally Series Book 4),,0.67308509349823,1,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,book,book,B00TND3N7C,Tricky Twenty-Two: A Stephanie Plum Novel,,0.6699185371398930,2,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,book,book,B0942Y274J,Patricia Fisher's Mystery Adventures - A Ten Book Boxed Set (Patricia Fisher's Big Boxed Sets 2),,0.6561324596405030,3,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,book,book,B097YDZJCQ,"Off Target (A Hailey Webb Mystery, Volume 3)",,0.6551447510719300,4,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,book,book,B0849Y1T2Y,What Sam Knew (Patricia Fisher Mystery Adventures Book 1),,0.6514548659324650,5,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,all,book,B00BI9VZ1A,McNally's Caper (The Archy McNally Series Book 4),,0.67308509349823,1,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,all,book,B00TND3N7C,Tricky Twenty-Two: A Stephanie Plum Novel,,0.6699185371398930,2,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,all,book,B0942Y274J,Patricia Fisher's Mystery Adventures - A Ten Book Boxed Set (Patricia Fisher's Big Boxed Sets 2),,0.6561324596405030,3,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,all,book,B097YDZJCQ,"Off Target (A Hailey Webb Mystery, Volume 3)",,0.6551447510719300,4,
-D3_EN,direct,3,en,Mystery thriller novel with a twist ending,all,book,B0849Y1T2Y,What Sam Knew (Patricia Fisher Mystery Adventures Book 1),,0.6514548659324650,5,
-D4_EN,direct,4,en,A film about a romance between two people,movie,movie,2915662,Double Play: James Benning and Richard Linklater (2013),,0.5985047221183780,1,
-D4_EN,direct,4,en,A film about a romance between two people,movie,movie,1656194,The Comedian (2012),,0.5932351350784300,2,
-D4_EN,direct,4,en,A film about a romance between two people,movie,movie,1528224,Deux de la Vague (2010),,0.5909734964370730,3,
-D4_EN,direct,4,en,A film about a romance between two people,movie,movie,2679480,Sulemani Keeda (2014),,0.5893694758415220,4,
-D4_EN,direct,4,en,A film about a romance between two people,movie,movie,93961,The Short & Curlies (1988),,0.586966872215271,5,
-D4_EN,direct,4,en,A film about a romance between two people,music,music,6jUZ27rzs0wtkqFcFpdoP5,Keep It Gay,,0.412617564201355,1,
-D4_EN,direct,4,en,A film about a romance between two people,music,music,24h9onmUBreB167OG10RV6,We Had Today,,0.387620210647583,2,
-D4_EN,direct,4,en,A film about a romance between two people,music,music,2LhA68Vm5k6lh0QenNFrDV,"Glasgow Love Theme - From ""Love Actually""",,0.3647708296775820,3,
-D4_EN,direct,4,en,A film about a romance between two people,music,music,2zSnnXvex1yMcPUn4mg27H,I Could Write a Book,,0.3647187650203710,4,
-D4_EN,direct,4,en,A film about a romance between two people,music,music,2zSnnXvex1yMcPUn4mg27H,I Could Write a Book,,0.3647187650203710,5,
-D4_EN,direct,4,en,A film about a romance between two people,book,book,B07RTXQ9D4,"Writing The Romantic Comedy, 20th Anniversary Expanded and Updated Edition: The Art of Crafting Funny Love Stories for the Screen",,0.6031991243362430,1,
-D4_EN,direct,4,en,A film about a romance between two people,book,book,B07BFB1X5Z,The Coen Brothers: This Book Really Ties the Films Together,,0.5780094861984250,2,
-D4_EN,direct,4,en,A film about a romance between two people,book,book,B08175VGTP,"Film Studies, second edition: An Introduction (Film and Culture Series)",,0.5729519724845890,3,
-D4_EN,direct,4,en,A film about a romance between two people,book,book,B0755YBJC3,"Leonard Maltin's Movie Guide: The Modern Era, Previously Published as Leonard Maltin's 2015 Movie Guide",,0.5706839561462400,4,
-D4_EN,direct,4,en,A film about a romance between two people,book,book,B0BQX897QY,The Way We Were: The Making of a Romantic Classic,,0.5681539177894590,5,
-D4_EN,direct,4,en,A film about a romance between two people,all,book,B07RTXQ9D4,"Writing The Romantic Comedy, 20th Anniversary Expanded and Updated Edition: The Art of Crafting Funny Love Stories for the Screen",,0.6031991243362430,1,
-D4_EN,direct,4,en,A film about a romance between two people,all,movie,2915662,Double Play: James Benning and Richard Linklater (2013),,0.5985047221183780,2,
-D4_EN,direct,4,en,A film about a romance between two people,all,movie,1656194,The Comedian (2012),,0.5932351350784300,3,
-D4_EN,direct,4,en,A film about a romance between two people,all,movie,1528224,Deux de la Vague (2010),,0.5909734964370730,4,
-D4_EN,direct,4,en,A film about a romance between two people,all,movie,2679480,Sulemani Keeda (2014),,0.5893694758415220,5,
+T4_EN,poet,4,en,A voice whispering under moonlight,movie,movie,147004,Little Voice (1998),,0.517017602920532,5,x
+T4_EN,poet,4,en,A voice whispering under moonlight,music,music,3fzJcLWDgzx4l1tTdkAxYd,Watch What Happens,,0.405008643865585,1,x
+T4_EN,poet,4,en,A voice whispering under moonlight,music,music,4j1Pc3I3CQTg4EAE6kCpNV,Yep,,0.3686842918396,2,x
+T4_EN,poet,4,en,A voice whispering under moonlight,music,music,4vVIHxe9kdEsIrrTeHnHyG,People Watching,,0.345228731632233,3,x
+T4_EN,poet,4,en,A voice whispering under moonlight,music,music,6dr7ekfhlbquvsVY8D7gyk,"Aaron Burr, Sir",,0.340891629457474,4,x
+T4_EN,poet,4,en,A voice whispering under moonlight,music,music,5umt6j4cZkfrL18u8KOnyq,Once And For All,,0.336926400661469,5,x
+T4_EN,poet,4,en,A voice whispering under moonlight,book,book,B07XGS22NC,"Speak and Be Heard: 101 Vocal Exercises for Voice Actors, Public Speakers and Professionals",,0.640434682369232,1,x
+T4_EN,poet,4,en,A voice whispering under moonlight,book,book,B0B17HF2PL,The Right to Speak: Working with the Voice (Bloomsbury Revelations),,0.637027263641357,2,x
+T4_EN,poet,4,en,A voice whispering under moonlight,book,book,B07D36LXQQ,Voice-Over Voice Actor: The Extended Edition,,0.620697498321533,3,x
+T4_EN,poet,4,en,A voice whispering under moonlight,book,book,B003F3PMFM,Frank: The Voice,,0.619396269321442,4,x
+T4_EN,poet,4,en,A voice whispering under moonlight,book,book,B011H55RTA,Ted Talks: The Official TED Guide to Public Speaking,,0.613117039203644,5,x
+T4_EN,poet,4,en,A voice whispering under moonlight,all,book,B07XGS22NC,"Speak and Be Heard: 101 Vocal Exercises for Voice Actors, Public Speakers and Professionals",,0.640434682369232,1,x
+T4_EN,poet,4,en,A voice whispering under moonlight,all,book,B0B17HF2PL,The Right to Speak: Working with the Voice (Bloomsbury Revelations),,0.637027263641357,2,x
+T4_EN,poet,4,en,A voice whispering under moonlight,all,book,B07D36LXQQ,Voice-Over Voice Actor: The Extended Edition,,0.620697498321533,3,x
+T4_EN,poet,4,en,A voice whispering under moonlight,all,book,B003F3PMFM,Frank: The Voice,,0.619396269321442,4,x
+T4_EN,poet,4,en,A voice whispering under moonlight,all,book,B011H55RTA,Ted Talks: The Official TED Guide to Public Speaking,,0.613117039203644,5,x
+A1_EN,atmosphere,1,en,A sunlit cafe,movie,movie,2967006,The Trip to Italy (2014),,0.593826532363892,1,a
+A1_EN,atmosphere,1,en,A sunlit cafe,movie,movie,1323520,French Roast (2008),,0.561903119087219,2,o
+A1_EN,atmosphere,1,en,A sunlit cafe,movie,movie,152176,Restaurant (1998),,0.5491583943367,3,a
+A1_EN,atmosphere,1,en,A sunlit cafe,movie,movie,1259520,Bon appÌ©tit (2010),,0.547082901000977,4,a
+A1_EN,atmosphere,1,en,A sunlit cafe,movie,movie,1954701,A Coffee in Berlin (2012),,0.545828223228455,5,a
+A1_EN,atmosphere,1,en,A sunlit cafe,music,music,7f9sC9fvtjYSZYOLSmKJlq,Tom's Diner,,0.459232151508331,1,o
+A1_EN,atmosphere,1,en,A sunlit cafe,music,music,2pSSSjVhTbSxa5a9vbzWhK,On An Evening In Roma (Sott'er Celo De Roma) - Remastered,,0.440171837806702,2,a
+A1_EN,atmosphere,1,en,A sunlit cafe,music,music,0Blojh3eznTkOiIJSDKb6W,Opening Up,,0.417650282382965,3,o
+A1_EN,atmosphere,1,en,A sunlit cafe,music,music,3lec706q3lBqypMop9y7pr,Nice Girls Don't Stay For Breakfast,,0.413116365671158,4,x
+A1_EN,atmosphere,1,en,A sunlit cafe,music,music,3OIoLMnnWzAUORFQxRAhdF,You Matter to Me,,0.412333846092224,5,a
+A1_EN,atmosphere,1,en,A sunlit cafe,book,book,B01L7BD980,Between Meals: An Appetite for Paris,,0.648138642311096,1,a
+A1_EN,atmosphere,1,en,A sunlit cafe,book,book,B08VHMGMFN,Flavour with Benefits: France,,0.637877523899078,2,a
+A1_EN,atmosphere,1,en,A sunlit cafe,book,book,B0CBXTQVS4,Eating & Drinking in Paris: French Menu Translator and Restaurant Guide (12th edition) Made Easy Travel Guides 2023,,0.635568261146545,3,o
+A1_EN,atmosphere,1,en,A sunlit cafe,book,book,B08FHWDTSW,Milk Street: Tuesday Nights Mediterranean: 125 Simple Weeknight Recipes from the World's Healthiest Cuisine,,0.634048700332642,4,x
+A1_EN,atmosphere,1,en,A sunlit cafe,book,book,B00GU2RGXG,"The Food Lover's Guide to Paris: The Best Restaurants, Bistros, Cafés, Markets, Bakeries, and More",,0.633963823318481,5,o
+A1_EN,atmosphere,1,en,A sunlit cafe,all,book,B01L7BD980,Between Meals: An Appetite for Paris,,0.648138642311096,1,a
+A1_EN,atmosphere,1,en,A sunlit cafe,all,book,B08VHMGMFN,Flavour with Benefits: France,,0.637877523899078,2,a
+A1_EN,atmosphere,1,en,A sunlit cafe,all,book,B0CBXTQVS4,Eating & Drinking in Paris: French Menu Translator and Restaurant Guide (12th edition) Made Easy Travel Guides 2023,,0.635568261146545,3,o
+A1_EN,atmosphere,1,en,A sunlit cafe,all,book,B08FHWDTSW,Milk Street: Tuesday Nights Mediterranean: 125 Simple Weeknight Recipes from the World's Healthiest Cuisine,,0.634048700332642,4,x
+A1_EN,atmosphere,1,en,A sunlit cafe,all,book,B00GU2RGXG,"The Food Lover's Guide to Paris: The Best Restaurants, Bistros, Cafés, Markets, Bakeries, and More",,0.633963823318481,5,o
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,movie,movie,328825,Al primo soffio di vento (2002),,0.493857830762863,1,a
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,movie,movie,71600,Les hautes solitudes (1974),,0.477827429771423,2,a
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,movie,movie,1314291,Oto-na-ri (2009),,0.474028199911118,3,a
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,movie,movie,1079450,The Silence Before Bach (2007),,0.467039406299591,4,a
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,movie,movie,3667648,Une heure de tranquillitÌ© (2014),,0.4605373442173,5,a
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,music,music,6aNXqtLgxBPRFAH4tkn2Xn,Spring Rain,,0.687585592269898,1,o
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,music,music,0eXDbW9ymC4TX6aWWOhkrf,Good Night Sleep,,0.684036493301392,2,a
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,music,music,5fD4liUw1zytutz64zFlX7,Sleep Rain,,0.680051982402802,3,o
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,music,music,6c7uYlmHJtZPnenPjqG7Ir,Sleeping Lotus,,0.678353309631348,4,a
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,music,music,6UZ9khOOfpeJ0Fss5pNs1K,Water Pour,,0.677029490470886,5,a
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,book,book,B0C5V266S4,Sleep Psalms: Nightly Moments of Mindfulness and Rest,,0.608164429664612,1,a
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,book,book,B00CPE3LMI,Goodnight Mind: Turn Off Your Noisy Thoughts and Get a Good Night's Sleep,,0.570140421390533,2,x
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,book,book,B073XL3DTX,Silence: In the Age of Noise,,0.560177206993103,3,o
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,book,book,B003YRIKSU,The Perfume of Silence,,0.555716872215271,4,a
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,book,book,B00MEIMCVG,Silence: The Power of Quiet in a World Full of Noise,,0.549374222755432,5,o
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,all,music,6aNXqtLgxBPRFAH4tkn2Xn,Spring Rain,,0.687585592269898,1,o
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,all,music,0eXDbW9ymC4TX6aWWOhkrf,Good Night Sleep,,0.684036493301392,2,a
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,all,music,5fD4liUw1zytutz64zFlX7,Sleep Rain,,0.680051982402802,3,o
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,all,music,6c7uYlmHJtZPnenPjqG7Ir,Sleeping Lotus,,0.678353309631348,4,a
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,all,music,6UZ9khOOfpeJ0Fss5pNs1K,Water Pour,,0.677029490470886,5,a
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,movie,movie,1722515,Hjem til jul (2010),,0.454502522945404,1,a
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,movie,movie,999872,Thomas Kinkade's Christmas Cottage (2008),,0.450929224491119,2,o
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,movie,movie,1583323,Miesten vuoro (2010),,0.439377099275589,3,a
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,movie,movie,103961,Christmas in Connecticut (1992),,0.433315634727478,4,o
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,movie,movie,1491605,Kansakunnan olohuone (2009),,0.430606245994568,5,a
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,music,music,3W93koK957HaoaNHyA3dTm,St. Patrick's Day,,0.546374499797821,1,a
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,music,music,4vHp893kV7HksfB5FN1Nk5,I Live My Life for You,,0.5153489112854,2,x
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,music,music,6Xajr512QEGAZ20bqAWkyT,Near Light,,0.51057231426239,3,a
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,music,music,0YPagAr3GhXlRX06E4nUcw,Tomorrow's Song,,0.475156515836716,4,a
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,music,music,20Y6MNDyaBRpFrQ1Dt5CNF,The Day Before You - Acoustic,,0.469866454601288,5,a
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,book,book,B08NHX7R6C,Cozy White Cottage Seasons: 100 Ways to Be Cozy All Year Long,,0.570635676383972,1,o
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,book,book,B00QSRUK5E,Cold-Weather Cooking,,0.557050466537476,2,a
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,book,book,B00ZJJ1CVS,Camping Cookbook Dutch Oven Recipes (Camp Cooking),,0.529608547687531,3,x
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,book,book,B07B285Q8T,"Open Sandwiches: 70 Smørrebrød Ideas for Morning, Noon and Night",,0.527682065963745,4,x
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,book,book,B08L9LY9ZW,Cook & Ladder Company No. 1: A Firehouse Cookbook,,0.52762758731842,5,x
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,all,book,B08NHX7R6C,Cozy White Cottage Seasons: 100 Ways to Be Cozy All Year Long,,0.570635676383972,1,o
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,all,book,B00QSRUK5E,Cold-Weather Cooking,,0.557050466537476,2,a
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,all,music,3W93koK957HaoaNHyA3dTm,St. Patrick's Day,,0.546374499797821,3,a
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,all,book,B00ZJJ1CVS,Camping Cookbook Dutch Oven Recipes (Camp Cooking),,0.529608547687531,4,x
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,all,book,B07B285Q8T,"Open Sandwiches: 70 Smørrebrød Ideas for Morning, Noon and Night",,0.527682065963745,5,x
+A4_EN,atmosphere,4,en,Empty city streets at dawn,movie,movie,311072,En la ciudad sin lí_mites (2002),,0.604918539524078,1,x
+A4_EN,atmosphere,4,en,Empty city streets at dawn,movie,movie,1845838,Metro Manila (2013),,0.590279459953308,2,a
+A4_EN,atmosphere,4,en,Empty city streets at dawn,movie,movie,1086214,Los (2008),,0.587106466293335,3,x
+A4_EN,atmosphere,4,en,Empty city streets at dawn,movie,movie,1543701,Quchis dgeebi (2010),,0.579156696796417,4,a
+A4_EN,atmosphere,4,en,Empty city streets at dawn,movie,movie,1270494,Zero Bridge (2008),,0.576813697814941,5,a
+A4_EN,atmosphere,4,en,Empty city streets at dawn,music,music,1VuBmEauSZywQVtqbxNqka,Beautiful Day,,0.456077396869659,1,a
+A4_EN,atmosphere,4,en,Empty city streets at dawn,music,music,3yjGZ9mlBxlGih186finfS,Walk On,,0.44355171918869,2,a
+A4_EN,atmosphere,4,en,Empty city streets at dawn,music,music,3JeT6Xcv6MlEHHylk8SKQ1,lovers’ carvings,,0.442965149879456,3,a
+A4_EN,atmosphere,4,en,Empty city streets at dawn,music,music,5vuJuBqwzHJgCA1ysRfwxZ,good kid,,0.440746605396271,4,a
+A4_EN,atmosphere,4,en,Empty city streets at dawn,music,music,3xjTuTBaihydhSC7ByNoSb,Stuck In A Moment You Can't Get Out Of,,0.440717756748199,5,x
+A4_EN,atmosphere,4,en,Empty city streets at dawn,book,book,B00JHCNVNU,On the Run: Fugitive Life in an American City (Fieldwork Encounters and Discoveries),,0.590258061885834,1,a
+A4_EN,atmosphere,4,en,Empty city streets at dawn,book,book,B08YN3LGW4,"Invisible Child: Poverty, Survival & Hope in an American City (Pulitzer Prize Winner)",,0.557073950767517,2,a
+A4_EN,atmosphere,4,en,Empty city streets at dawn,book,book,B08CHKHKLC,No Way Home: The Crisis of Homelessness and How to Fix It with Intelligence and Humanity,,0.555484771728516,3,a
+A4_EN,atmosphere,4,en,Empty city streets at dawn,book,book,B08NWT7LZ7,There Is Nothing for You Here: Finding Opportunity in the Twenty-First Century,,0.551035583019257,4,x
+A4_EN,atmosphere,4,en,Empty city streets at dawn,book,book,B09TQ412SN,"The Other Side of Prospect: A Story of Violence, Injustice, and the American City",,0.547408938407898,5,a
+A4_EN,atmosphere,4,en,Empty city streets at dawn,all,movie,311072,En la ciudad sin lí_mites (2002),,0.604918539524078,1,x
+A4_EN,atmosphere,4,en,Empty city streets at dawn,all,movie,1845838,Metro Manila (2013),,0.590279459953308,2,a
+A4_EN,atmosphere,4,en,Empty city streets at dawn,all,book,B00JHCNVNU,On the Run: Fugitive Life in an American City (Fieldwork Encounters and Discoveries),,0.590258061885834,3,a
+A4_EN,atmosphere,4,en,Empty city streets at dawn,all,movie,1086214,Los (2008),,0.587106466293335,4,x
+A4_EN,atmosphere,4,en,Empty city streets at dawn,all,movie,1543701,Quchis dgeebi (2010),,0.579156696796417,5,a
+D1_EN,direct,1,en,Action movie set in space,movie,movie,450295,Make Your Own Damn Movie! (2005),,0.530799031257629,1,x
+D1_EN,direct,1,en,Action movie set in space,movie,movie,488953,Awesome; I Fuckin' Shot That! (2006),,0.530431807041168,2,x
+D1_EN,direct,1,en,Action movie set in space,movie,movie,77952,Movie Movie (1978),,0.505950152873993,3,x
+D1_EN,direct,1,en,Action movie set in space,movie,movie,1605782,Comic-Con Episode IV: A Fan's Hope (2011),,0.499094486236572,4,x
+D1_EN,direct,1,en,Action movie set in space,movie,movie,972785,Bring It On: In It to Win It (2007),,0.496656715869904,5,x
+D1_EN,direct,1,en,Action movie set in space,music,music,48UDhM2xL9wUuYLfrpK2Jv,Stand Out,,0.492497980594635,1,x
+D1_EN,direct,1,en,Action movie set in space,music,music,5l9o6d6cRchPUhwQ8C3Ld2,"Playing with the Boys - 12"" Version",,0.480468899011612,2,x
+D1_EN,direct,1,en,Action movie set in space,music,music,00Y9r5SfbDdEjJhNg7laQr,"Top Gun Anthem - From ""Top Gun"" Original Soundtrack",,0.478601902723312,3,x
+D1_EN,direct,1,en,Action movie set in space,music,music,5dulYd9AKIprMoF837OTDb,"Gonna Fly Now - Theme From ""Rocky"" / Remastered 2006",,0.475884735584259,4,x
+D1_EN,direct,1,en,Action movie set in space,music,music,5umt6j4cZkfrL18u8KOnyq,Once And For All,,0.461539059877396,5,x
+D1_EN,direct,1,en,Action movie set in space,book,book,B0BHBVFKXY,Action!: Professional Acting for Film and Television,,0.594704508781433,1,x
+D1_EN,direct,1,en,Action movie set in space,book,book,B0CFBKYY8T,More Popcorn Principles: The Sequel!: (Further Cinematic Storytelling Strategies for Novelists) (The Popcorn Principles Book 2),,0.566572844982147,2,x
+D1_EN,direct,1,en,Action movie set in space,book,book,B0C6X6DXTB,Running the Show: Television from the Inside,,0.545604467391968,3,x
+D1_EN,direct,1,en,Action movie set in space,book,book,B0BR8NZFQ8,The Popcorn Principles: A Novelist's Guide To Learning From Movies,,0.541775345802307,4,x
+D1_EN,direct,1,en,Action movie set in space,book,book,B091M6D5P3,Directing Actors - 25th Anniversary Edition: Creating Memorable Performances for Film and Television,,0.533414006233215,5,x
+D1_EN,direct,1,en,Action movie set in space,all,book,B0BHBVFKXY,Action!: Professional Acting for Film and Television,,0.594704508781433,1,x
+D1_EN,direct,1,en,Action movie set in space,all,book,B0CFBKYY8T,More Popcorn Principles: The Sequel!: (Further Cinematic Storytelling Strategies for Novelists) (The Popcorn Principles Book 2),,0.566572844982147,2,x
+D1_EN,direct,1,en,Action movie set in space,all,book,B0C6X6DXTB,Running the Show: Television from the Inside,,0.545604467391968,3,x
+D1_EN,direct,1,en,Action movie set in space,all,book,B0BR8NZFQ8,The Popcorn Principles: A Novelist's Guide To Learning From Movies,,0.541775345802307,4,x
+D1_EN,direct,1,en,Action movie set in space,all,book,B091M6D5P3,Directing Actors - 25th Anniversary Edition: Creating Memorable Performances for Film and Television,,0.533414006233215,5,x
+D2_EN,direct,2,en,Soulful music featuring jazz piano,movie,movie,221300,Jazz,,0.72708010673523,1,a
+D2_EN,direct,2,en,Soulful music featuring jazz piano,movie,movie,843838,Anita O'Day: The Life of a Jazz Singer (2007),,0.717811584472656,2,a
+D2_EN,direct,2,en,Soulful music featuring jazz piano,movie,movie,47873,The Benny Goodman Story (1956),,0.690635681152344,3,a
+D2_EN,direct,2,en,Soulful music featuring jazz piano,movie,movie,49170,The Eddy Duchin Story (1956),,0.680881261825562,4,o
+D2_EN,direct,2,en,Soulful music featuring jazz piano,movie,movie,108328,Thirty Two Short Films About Glenn Gould (1993),,0.667182803153992,5,a
+D2_EN,direct,2,en,Soulful music featuring jazz piano,music,music,5L8ta4ECl5zeA6bGqY7G38,"Sing, Sing, Sing",,0.722281277179718,1,a
+D2_EN,direct,2,en,Soulful music featuring jazz piano,music,music,02E4skBHp6ZyoEDgXHcQgu,Satin Doll,,0.717307567596436,2,o
+D2_EN,direct,2,en,Soulful music featuring jazz piano,music,music,26zJinKqbORQyrDyMFLQhS,Blues My Naughty Sweetie Gives To Me,,0.71718829870224,3,a
+D2_EN,direct,2,en,Soulful music featuring jazz piano,music,music,3CoBpiBcaqi1qq58mzaJNi,I Hear Music,,0.708312928676605,4,o
+D2_EN,direct,2,en,Soulful music featuring jazz piano,music,music,2xm9ihELo6xwrRKrBbPql9,Body and Soul,,0.70106440782547,5,a
+D2_EN,direct,2,en,Soulful music featuring jazz piano,book,book,B0BSX27BHX,Gentleman of Jazz: A Life in Music,,0.772833585739136,1,o
+D2_EN,direct,2,en,Soulful music featuring jazz piano,book,book,B07CKR6S4C,Berklee Jazz Piano,,0.756438493728638,2,o
+D2_EN,direct,2,en,Soulful music featuring jazz piano,book,book,B00FJ6BYVE,"Oscar Peterson - Jazz Exercises, Minuets, Etudes & Pieces for Piano: Jazz Exercises, Minuets, Etudes and Pieces for Piano",,0.755240380764008,3,o
+D2_EN,direct,2,en,Soulful music featuring jazz piano,book,book,B001R4CO48,Miles Davis: The Definitive Biography,,0.735944509506226,4,a
+D2_EN,direct,2,en,Soulful music featuring jazz piano,book,book,B01AFE3994,How to Listen to Jazz,,0.735793352127075,5,a
+D2_EN,direct,2,en,Soulful music featuring jazz piano,all,book,B0BSX27BHX,Gentleman of Jazz: A Life in Music,,0.772833585739136,1,o
+D2_EN,direct,2,en,Soulful music featuring jazz piano,all,book,B07CKR6S4C,Berklee Jazz Piano,,0.756438493728638,2,o
+D2_EN,direct,2,en,Soulful music featuring jazz piano,all,book,B00FJ6BYVE,"Oscar Peterson - Jazz Exercises, Minuets, Etudes & Pieces for Piano: Jazz Exercises, Minuets, Etudes and Pieces for Piano",,0.755240380764008,3,o
+D2_EN,direct,2,en,Soulful music featuring jazz piano,all,book,B001R4CO48,Miles Davis: The Definitive Biography,,0.735944509506226,4,a
+D2_EN,direct,2,en,Soulful music featuring jazz piano,all,book,B01AFE3994,How to Listen to Jazz,,0.735793352127075,5,a
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,movie,movie,88930,Clue (1985),,0.556028544902802,1,o
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,movie,movie,811026,Prime Suspect 7: The Final Act,,0.548056244850159,2,o
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,movie,movie,69281,Sleuth (1972),,0.539451479911804,3,o
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,movie,movie,87749,Miss Marple: The Moving Finger,,0.535854041576386,4,o
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,movie,movie,30491,Nancy Drew: Detective (1938),,0.533933043479919,5,o
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,music,music,0cm6cAtRu0C0sEZzDjZFsx,Discombobulate,,0.275665253400803,1,o
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,music,music,0OAnoLrIVxpdne3mkVLrwr,We Have All The Time In The World - Remastered,,0.240206241607666,2,a
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,music,music,2YwjSPeznyCvkUYvqKbXa9,Take Care Of Business,,0.190831005573273,3,x
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,music,music,79oesFYaS2VT39ShdA19u9,After Today,,0.190433412790298,4,x
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,music,music,7t3qBNw37k2P2OmgK0MilM,Puttin' on the Ritz,,0.190061077475548,5,x
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,book,book,B00BI9VZ1A,McNally's Caper (The Archy McNally Series Book 4),,0.67308509349823,1,o
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,book,book,B00TND3N7C,Tricky Twenty-Two: A Stephanie Plum Novel,,0.669918537139893,2,a
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,book,book,B0942Y274J,Patricia Fisher's Mystery Adventures - A Ten Book Boxed Set (Patricia Fisher's Big Boxed Sets 2),,0.656132459640503,3,o
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,book,book,B097YDZJCQ,"Off Target (A Hailey Webb Mystery, Volume 3)",,0.65514475107193,4,a
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,book,book,B0849Y1T2Y,What Sam Knew (Patricia Fisher Mystery Adventures Book 1),,0.651454865932465,5,o
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,all,book,B00BI9VZ1A,McNally's Caper (The Archy McNally Series Book 4),,0.67308509349823,1,o
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,all,book,B00TND3N7C,Tricky Twenty-Two: A Stephanie Plum Novel,,0.669918537139893,2,a
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,all,book,B0942Y274J,Patricia Fisher's Mystery Adventures - A Ten Book Boxed Set (Patricia Fisher's Big Boxed Sets 2),,0.656132459640503,3,o
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,all,book,B097YDZJCQ,"Off Target (A Hailey Webb Mystery, Volume 3)",,0.65514475107193,4,a
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,all,book,B0849Y1T2Y,What Sam Knew (Patricia Fisher Mystery Adventures Book 1),,0.651454865932465,5,o
+D4_EN,direct,4,en,A film about a romance between two people,movie,movie,2915662,Double Play: James Benning and Richard Linklater (2013),,0.598504722118378,1,x
+D4_EN,direct,4,en,A film about a romance between two people,movie,movie,1656194,The Comedian (2012),,0.59323513507843,2,o
+D4_EN,direct,4,en,A film about a romance between two people,movie,movie,1528224,Deux de la Vague (2010),,0.590973496437073,3,a
+D4_EN,direct,4,en,A film about a romance between two people,movie,movie,2679480,Sulemani Keeda (2014),,0.589369475841522,4,o
+D4_EN,direct,4,en,A film about a romance between two people,movie,movie,93961,The Short & Curlies (1988),,0.586966872215271,5,o
+D4_EN,direct,4,en,A film about a romance between two people,music,music,6jUZ27rzs0wtkqFcFpdoP5,Keep It Gay,,0.412617564201355,1,x
+D4_EN,direct,4,en,A film about a romance between two people,music,music,24h9onmUBreB167OG10RV6,We Had Today,,0.387620210647583,2,a
+D4_EN,direct,4,en,A film about a romance between two people,music,music,2LhA68Vm5k6lh0QenNFrDV,"Glasgow Love Theme - From ""Love Actually""",,0.364770829677582,3,o
+D4_EN,direct,4,en,A film about a romance between two people,music,music,2zSnnXvex1yMcPUn4mg27H,I Could Write a Book,,0.364718765020371,4,a
+D4_EN,direct,4,en,A film about a romance between two people,music,music,2zSnnXvex1yMcPUn4mg27H,I Could Write a Book,,0.364718765020371,5,a
+D4_EN,direct,4,en,A film about a romance between two people,book,book,B07RTXQ9D4,"Writing The Romantic Comedy, 20th Anniversary Expanded and Updated Edition: The Art of Crafting Funny Love Stories for the Screen",,0.603199124336243,1,o
+D4_EN,direct,4,en,A film about a romance between two people,book,book,B07BFB1X5Z,The Coen Brothers: This Book Really Ties the Films Together,,0.578009486198425,2,x
+D4_EN,direct,4,en,A film about a romance between two people,book,book,B08175VGTP,"Film Studies, second edition: An Introduction (Film and Culture Series)",,0.572951972484589,3,x
+D4_EN,direct,4,en,A film about a romance between two people,book,book,B0755YBJC3,"Leonard Maltin's Movie Guide: The Modern Era, Previously Published as Leonard Maltin's 2015 Movie Guide",,0.57068395614624,4,x
+D4_EN,direct,4,en,A film about a romance between two people,book,book,B0BQX897QY,The Way We Were: The Making of a Romantic Classic,,0.568153917789459,5,o
+D4_EN,direct,4,en,A film about a romance between two people,all,book,B07RTXQ9D4,"Writing The Romantic Comedy, 20th Anniversary Expanded and Updated Edition: The Art of Crafting Funny Love Stories for the Screen",,0.603199124336243,1,o
+D4_EN,direct,4,en,A film about a romance between two people,all,movie,2915662,Double Play: James Benning and Richard Linklater (2013),,0.598504722118378,2,x
+D4_EN,direct,4,en,A film about a romance between two people,all,movie,1656194,The Comedian (2012),,0.59323513507843,3,o
+D4_EN,direct,4,en,A film about a romance between two people,all,movie,1528224,Deux de la Vague (2010),,0.590973496437073,4,a
+D4_EN,direct,4,en,A film about a romance between two people,all,movie,2679480,Sulemani Keeda (2014),,0.589369475841522,5,o
