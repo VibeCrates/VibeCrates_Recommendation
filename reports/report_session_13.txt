@@ -1,0 +1,200 @@
+================================================================================
+VibeCrates Recommendation System — 세션 보고서 (13)
+작성일: 2026-06-18
+================================================================================
+
+
+## 1. 세션 시작 시점 상태 (session_12 이후)
+
+  session_12에서 이월된 작업:
+    [완료] 재학습 완료 확인 (Stage 1 early stopping 동작 여부 확인)
+    [완료] 새 학습 곡선 그래프 생성 및 비교 (overfitting 개선 여부)
+    [ → ] indexes/ LFS 커밋 (학습 완료 후 생성되는 *.pt, *.parquet)
+    [ → ] DualEncoderModel config 파라미터 연동 리팩토링 (lora 설정)
+    [ → ] API 서버 연동 테스트 (load_index → search 전체 플로우)
+
+  재학습 완료 확인:
+    - 완료 시각: 2026-06-18 01:56 (vibecrates tmux 세션)
+    - 저장 위치: models/trained_model.pt, best_stage1.pt, best_stage2.pt
+
+
+================================================================================
+## 2. 두 번의 학습 — 목적과 배경
+================================================================================
+
+  프로젝트 목표:
+    DualEncoderModel (TextBlock + ImageBlock + QueryBlock) 을 학습시켜
+    사용자 쿼리 임베딩과 아이템 임베딩(텍스트+이미지 융합) 사이의
+    거리가 가까울수록 높은 관련성을 가지도록 표현 공간을 정렬하는 것.
+
+    - Stage 1 (Contrastive Learning): CLIP 방식으로 쿼리·텍스트·이미지를
+      같은 공간에 정렬 (InfoNCE loss 3쌍: TQ / TI / IQ)
+    - Stage 2 (Knowledge Distillation): 사전학습 CLIP 교사 모델의 분포를
+      KL-divergence로 증류, 표현 품질 정제
+
+  학습 1회차 동기 (Session 11):
+    - 파이프라인 구성 완료 후 첫 full 학습 실행
+    - 베이스라인 확보 목적
+    - Regularization 설정이 보수적 (weight_decay=1e-5, lora_dropout=0.05)
+    - Early stopping 코드는 선언만 있고 미구현 상태
+
+  학습 2회차 동기 (Session 12):
+    - 1회차 분석에서 Stage 1 overfitting 패턴 명확히 포착
+    - 세 가지 개선 사항을 적용한 뒤 효과 검증 목적
+
+
+================================================================================
+## 3. 두 차례 학습 결과 비교
+================================================================================
+
+  하이퍼파라미터 변경 내역:
+    ┌──────────────────────┬──────────────┬──────────────┐
+    │ 항목                 │ 1회차        │ 2회차        │
+    ├──────────────────────┼──────────────┼──────────────┤
+    │ weight_decay         │ 1e-5         │ 1e-2         │
+    │ lora_dropout         │ 0.05         │ 0.10         │
+    │ early stopping       │ 미구현       │ patience=3   │
+    │ best checkpoint 저장 │ 없음         │ stage별 저장 │
+    └──────────────────────┴──────────────┴──────────────┘
+
+  Stage 1 — Contrastive Learning 결과:
+    ┌──────────────────────────┬──────────────┬──────────────────────────────┐
+    │ 항목                     │ 1회차        │ 2회차                        │
+    ├──────────────────────────┼──────────────┼──────────────────────────────┤
+    │ 실행 epoch               │ 10 (full)    │ 7 (early stop at patience=3) │
+    │ Train Loss (start→end)   │ 1.67 → 0.22  │ 1.68 → 0.34                 │
+    │ Val Loss (start→end)     │ 1.13 → 0.97  │ 1.13 → 0.95                 │
+    │ Best Val Loss            │ 0.9674       │ 0.9235  (epoch 4)            │
+    │ 개선 폭 (best val)       │ —            │ -0.044  (-4.5%)              │
+    └──────────────────────────┴──────────────┴──────────────────────────────┘
+
+  Stage 2 — Knowledge Distillation 결과:
+    ┌──────────────────────────┬──────────────┬──────────────┐
+    │ 항목                     │ 1회차        │ 2회차        │
+    ├──────────────────────────┼──────────────┼──────────────┤
+    │ 실행 epoch               │ 15           │ 15           │
+    │ Train Loss (start→end)   │ 0.000340     │ 0.000348     │
+    │                          │ → 0.000255   │ → 0.000258   │
+    │ Val Loss (start→end)     │ 0.000365     │ 0.000326     │
+    │                          │ → 0.000348   │ → 0.000303   │
+    │ 최종 Val Loss 개선       │ —            │ -0.000045 (-13%) │
+    └──────────────────────────┴──────────────┴──────────────┘
+
+  시각 자료:
+    assets/training_history_stage1.png           — 1회차 학습 곡선
+    assets/training_history_stage2.png           — 1회차 학습 곡선
+    assets/training_history_20260618_stage1.png  — 2회차 학습 곡선
+    assets/training_history_20260618_stage2.png  — 2회차 학습 곡선
+    assets/training_history_20260618_comparison.png — 1·2회차 Val Loss 비교
+
+
+================================================================================
+## 4. 포착된 패턴
+================================================================================
+
+  [패턴 1] Stage 1: 구조적 overfitting — Regularization으로 완화되나 해소 안 됨
+
+    - 두 회차 모두 Stage 1 val loss는 epoch 3~4 이후 plateau 또는 소폭 반등
+    - Train loss는 계속 하강 → train/val gap이 벌어지는 전형적 overfitting
+    - 2회차에서 weight_decay×100 + dropout×2 + early stopping 적용했음에도
+      수렴 패턴이 동일하게 나타남
+    - 원인: InfoNCE loss 특성상 배치 내 negative를 암기하는 것만으로도
+      train loss가 쉽게 하강 가능. Negative가 고정된 배치 안에서만 분리되면
+      되기 때문에 일반화 능력과 train loss의 연관이 약함
+
+  [패턴 2] Stage 1 개별 손실 수렴 속도 비대칭
+
+    - Text↔Image (TI): 수렴 가장 빠름
+      → 사전학습 CLIP의 시각-언어 정렬이 이미 강하게 형성되어 있음
+    - Text↔Query (TQ), Image↔Query (IQ): 상대적으로 느림
+      → 쿼리 공간(QueryBlock)이 CLIP 공간과 거리가 멀어 맞추는 데 더 많은
+         학습이 필요. 프로젝트의 핵심 정렬 과제이기도 함
+
+  [패턴 3] Stage 2: best checkpoint 출발점 효과
+
+    - 1회차: Stage 1 final checkpoint(epoch 10)에서 Stage 2 시작
+      → Stage 2 val 초기값 0.000365 (과적합된 표현에서 출발)
+    - 2회차: Stage 1 best checkpoint(epoch 4)에서 Stage 2 시작
+      → Stage 2 val 초기값 0.000326 (11% 낮은 출발)
+    - 최종 val도 0.000348 → 0.000303으로 하락. best checkpoint 도입 효과 명확
+
+  [패턴 4] Stage 2: epoch 15에서도 val loss가 단조 감소 중
+
+    - 두 회차 모두 Stage 2 val이 15 epoch 끝에서 여전히 완만히 하강 중
+    - 수렴 plateau에 도달하지 않은 상태 → 추가 epoch 여지 있음
+    - 단, 감소 폭이 epoch당 ~0.000001~0.000002 수준으로 미미해지고 있음
+
+
+================================================================================
+## 5. 앞으로 할 수 있는 것
+================================================================================
+
+  [우선순위 높음]
+
+  5-1. Stage 1 Overfitting 근본 해결: Hard Negative Mining
+
+    현재: 배치 내 랜덤 아이템들을 negative로 사용 (easy negatives)
+    문제: 학습이 진행될수록 현재 negative들이 너무 쉬워져 정보량 감소
+
+    방안:
+      a) In-batch Hard Negative: 같은 배치에서 가장 높은 cosine similarity를
+         가진 쌍을 negative로 선택 (별도 샘플링 불필요, 구현 간단)
+      b) Cross-domain Negative 보강: Movie–Book 같이 도메인이 다른 아이템을
+         negative로 섞어 도메인 불변 표현 유도
+      c) MoCo-style Queue: momentum encoder + negative 큐로 배치 크기 독립적인
+         대규모 negative pool 유지 (구현 복잡도 높음)
+
+  5-2. Stage 2 Epoch 확장
+
+    - 현재 15 epoch에서 val loss가 여전히 하강 중
+    - 20~25 epoch으로 늘려 수렴점 확인
+    - Stage 2는 overfitting이 없으므로 epoch 추가 리스크 낮음
+
+  [우선순위 중간]
+
+  5-3. DualEncoderModel config 연동 리팩토링
+
+    - 현재 lora_dropout이 recommender.py에 하드코딩 (config 미연동)
+    - DualEncoderModel(config)로 수정해야 실험 추적 용이
+    - config.py에서 lora_dropout 선언은 이미 있음 → 연결만 하면 됨
+
+  5-4. indexes/ LFS 커밋 및 API 서버 연동 테스트
+
+    - 2회차 학습 완료 후 build_index 자동 실행 → indexes/ 파일 생성됨
+    - indexes/*.pt, indexes/*.parquet LFS 추가 후 커밋
+    - API 서버에서 load_index() → search 전체 플로우 검증
+
+  [우선순위 낮음]
+
+  5-5. Batch Size 실험
+
+    - 현재 batch_size=32. InfoNCE는 배치 클수록 negative diversity 증가
+    - GPU 메모리 허용 범위 내에서 64→128 실험 가능
+    - Hard Negative Mining과 병행 시 효과 상승 기대
+
+  5-6. QueryBlock 전용 Pre-training 검토
+
+    - TQ/IQ 수렴이 느린 근본 원인: QueryBlock이 CLIP 공간 밖에서 초기화
+    - 쿼리 텍스트 → 아이템 텍스트 간 단순 매칭으로 QueryBlock만 먼저 워밍업하는
+      Stage 0 추가 가능 (실험적)
+
+
+================================================================================
+## 6. 커밋 목록
+================================================================================
+
+  a9c70b7  feat: Add 20260618 training graphs and comparison with previous run
+  a59e0c5  fix: Sync lora_dropout to 0.1 in recommender.py, add scripts/__init__.py
+
+
+================================================================================
+## 7. 다음 세션 이월 작업
+================================================================================
+
+  [ ] indexes/ LFS 커밋 (*.pt, *.parquet)
+  [ ] API 서버 연동 테스트 (load_index → search 플로우)
+  [ ] DualEncoderModel config 파라미터 연동 리팩토링
+  [ ] Stage 1 Hard Negative Mining 구현 및 3회차 학습 실험
+  [ ] Stage 2 epoch 20~25로 확장 실험 (Hard Negative와 함께 또는 별도)
+
+================================================================================
