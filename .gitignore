@@ -6,6 +6,7 @@
 *.h5
 *.pt
 *.pth
+!indexes/*.pt
 *.joblib
 
 # Python
