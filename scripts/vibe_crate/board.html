@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<title>보드 — VibeCrates</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="style.css" />
+<style>
+  /*
+    보드 페이지. URL의 ?id= 로 어떤 보드를 보여줄지 결정한다
+    (boards.js의 BOARDS 배열, 또는 localStorage에 저장된 커스텀 보드).
+    캡쳐하기 버튼은 html2canvas(CDN)를 써서 실제로 동작한다 — 이 페이지를
+    인터넷 연결 없이 열면 캡쳐 버튼만 실패하고 나머지는 정상 동작함.
+  */
+
+  .board-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: #fff;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 1rem;
+    padding: .8rem clamp(1rem, 4vw, 2rem);
+    border-bottom: 1px solid #eee;
+  }
+  .board-header .searchbar-row { padding: 0; }
+  .action-group { display: flex; gap: .5rem; justify-self: end; }
+
+  .board-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: clamp(1.5rem, 5vw, 3rem) clamp(1rem, 4vw, 2rem) clamp(2.5rem, 6vw, 4rem);
+  }
+
+  h1.board-title {
+    font-weight: 800;
+    font-size: clamp(2rem, 6.5vw, 3.2rem);
+    line-height: 1.05;
+    text-align: center;
+    text-wrap: balance;
+    margin: 0 0 clamp(2rem, 5vw, 3rem);
+  }
+</style>
+</head>
+<body>
+
+<header class="board-header">
+  <button type="button" class="btn" id="exitBtn">← 나가기</button>
+
+  <form class="searchbar-row" id="searchForm">
+    <div class="searchbar">
+      <input type="text" id="searchInput" placeholder="create your own collection via searching" />
+      <button type="submit" aria-label="검색">→</button>
+    </div>
+  </form>
+
+  <div class="action-group">
+    <button type="button" class="btn" id="saveBtn" aria-pressed="false">내 컬렉션에 저장</button>
+    <button type="button" class="btn primary" id="captureBtn">캡쳐하기</button>
+  </div>
+</header>
+
+<div class="board-wrap" id="captureArea">
+  <h1 class="board-title" id="boardTitle"></h1>
+  <div class="canvas" id="canvas"></div>
+</div>
+
+<div class="modal-backdrop" id="exitModal">
+  <div class="modal-card">
+    <p>보드를 저장하지 않고 이동하시겠습니까?</p>
+    <div class="modal-actions">
+      <button type="button" class="btn" id="modalCancel">취소</button>
+      <button type="button" class="btn primary" id="modalLeave">그냥 나가기</button>
+    </div>
+  </div>
+</div>
+
+<script src="boards.js"></script>
+<script src="common.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+  var params = new URLSearchParams(location.search);
+  var boardId = params.get("id") || (window.BOARDS && window.BOARDS[0] && window.BOARDS[0].id);
+  var board = findBoardById(boardId);
+
+  if (!board) {
+    document.getElementById("boardTitle").textContent = "보드를 찾을 수 없어요";
+  } else {
+    document.getElementById("boardTitle").textContent = board.title;
+    document.getElementById("searchInput").value = board.title;
+    renderBoardCanvas(document.getElementById("canvas"), board.items, { interactive: true });
+
+    var saveBtn = document.getElementById("saveBtn");
+    function refreshSaveBtn() {
+      var saved = isBoardSaved(board.id);
+      saveBtn.setAttribute("aria-pressed", saved ? "true" : "false");
+      saveBtn.textContent = saved ? "저장됨 ✓" : "내 컬렉션에 저장";
+    }
+    refreshSaveBtn();
+    saveBtn.addEventListener("click", function () {
+      toggleBoardSaved(board.id);
+      refreshSaveBtn();
+    });
+  }
+
+  // 검색창: 데모 단계라 새 추천을 실제로 불러오진 않고, 보드 제목만 갱신함.
+  // 실서비스에서는 여기서 추천 API를 호출해 items를 새로 받아와야 함.
+  document.getElementById("searchForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var q = document.getElementById("searchInput").value.trim();
+    if (q) document.getElementById("boardTitle").textContent = q;
+  });
+
+  // 나가기: 저장 안 된 보드면 확인 모달, 저장된 보드면 바로 이동
+  var exitModal = document.getElementById("exitModal");
+  document.getElementById("exitBtn").addEventListener("click", function () {
+    if (board && isBoardSaved(board.id)) {
+      location.href = "main.html";
+    } else {
+      exitModal.classList.add("open");
+    }
+  });
+  document.getElementById("modalCancel").addEventListener("click", function () {
+    exitModal.classList.remove("open");
+  });
+  document.getElementById("modalLeave").addEventListener("click", function () {
+    location.href = "main.html";
+  });
+
+  // 캡쳐하기: html2canvas로 제목+캔버스 영역을 PNG로 다운로드
+  document.getElementById("captureBtn").addEventListener("click", function () {
+    if (typeof html2canvas === "undefined") {
+      alert("캡쳐 기능은 인터넷 연결이 필요해요 (html2canvas CDN 로드 실패)");
+      return;
+    }
+    html2canvas(document.getElementById("captureArea"), { backgroundColor: "#ffffff", scale: 2 }).then(function (canvasEl) {
+      var link = document.createElement("a");
+      link.download = (board ? board.title : "board") + ".png";
+      link.href = canvasEl.toDataURL("image/png");
+      link.click();
+    });
+  });
+</script>
+</body>
+</html>
