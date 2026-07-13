@@ -1,0 +1,162 @@
+================================================================================
+VibeCrates Recommendation System — 세션 보고서 (14)
+작성일: 2026-07-06
+================================================================================
+
+
+## 1. 세션 배경
+
+  방학 로드맵 1단계("~7월 말: 학습 안정화, 데이터 클렌징")의 일환으로,
+  백엔드 DB에 아이템 메타데이터를 넘기기 위한 별도 작업이 진행됨.
+
+  session_13 이후 보고되지 않은 상태로 아래 3개 산출물이 작업 트리에 추가됨:
+    - data/MovieGenre_enriched.csv   (신규, untracked)
+    - scripts/fetch_movie_meta.py    (신규, untracked)
+    - scripts/transform_datasets.py  (신규, untracked)
+    - data/music_features.csv        (기존 파일, 수정됨)
+    - data/kindle_data-v2.csv        (기존 파일, 수정됨)
+
+
+================================================================================
+## 2. scripts/fetch_movie_meta.py — TMDB 메타데이터 수집
+================================================================================
+
+  [목적]
+    session_06에서 IMDB WAF 차단으로 text(overview/tagline/keywords)만
+    TMDB로 수집했는데, 이번에는 release_date / running_time / director /
+    actor(top 5)를 추가로 수집해 MovieGenre.csv를 보강.
+
+  [동작]
+    IMDB ID → TMDB /find (imdb_id 매칭) → TMDB /movie?append_to_response=credits
+    영화당 2회 API 호출, 요청 간 0.12초 지연 (~8 req/s)
+    체크포인트: data/tmdb_meta_cache.json (500건마다 저장, 중단 후 재개 가능)
+    출력: data/MovieGenre_enriched.csv (원본 12컬럼 + release_date/running_time/
+          director/actor 4컬럼)
+
+  [수집 결과] (전체 40,109건)
+    ┌───────────────┬─────────┬────────┐
+    │ 항목          │ 수집 건 │ 비율   │
+    ├───────────────┼─────────┼────────┤
+    │ release_date  │  39,596 │ 98.7%  │
+    │ running_time  │  39,613 │ 98.8%  │
+    │ director      │  39,504 │ 98.5%  │
+    │ actor         │  38,754 │ 96.6%  │
+    └───────────────┴─────────┴────────┘
+    tmdb_meta_cache.json 캐시 엔트리: 39,516건 (TMDB 미매칭 약 590건 존재)
+
+  [보안 문제 발견 및 수정]
+    API_KEY가 스크립트에 하드코딩되어 있었음 (커밋 전 상태에서 발견).
+    → os.environ["TMDB_API_KEY"] 로 변경, docstring 실행 예시도
+      `TMDB_API_KEY="..." python3 scripts/fetch_movie_meta.py` 로 갱신.
+    → 기존 scripts/fetch_music_descriptions.py의 LASTFM_API_KEY 패턴과 동일하게
+      맞춤 (기본값 없이 필수 환경변수로 강제, .env 로딩 없이 셸에서 export).
+    → 노출됐던 키는 git 히스토리에는 커밋된 적 없음 (untracked 상태에서 발견).
+
+
+================================================================================
+## 3. scripts/transform_datasets.py — DB 스키마 변환
+================================================================================
+
+  [목적]
+    백엔드 DB 스키마와의 자료형 불일치를 줄이기 위해 3개 도메인 CSV의
+    필드 포맷을 변환.
+
+  [변환 내역]
+    Movie : Genre  "A|B|C"            → JSON array string '["A","B","C"]'
+            Title  "Toy Story (1995)" → "Toy Story" (연도 제거)
+            running_time : float → int (null 유지)
+    Music : genre  "Hip-Hop"          → JSON array string '["Hip-Hop"]'
+            year   2020.0 (float)     → "2020-01-01" (date string)
+    Book  : category_name             → JSON array string
+            publishedDate : 이미 YYYY-MM-DD, 변경 없음
+
+  [입출력 경로 — 도메인별 비대칭]
+    Movie : MOVIE_INPUT  = data/MovieGenre_enriched.csv
+            MOVIE_OUTPUT = data/MovieGenre_enriched.csv   (원본 MovieGenre.csv는 미접촉)
+    Music : MUSIC_INPUT  = data/music_features.csv
+            MUSIC_OUTPUT = data/music_features.csv        (동일 파일 in-place 덮어쓰기)
+    Book  : BOOK_INPUT   = data/kindle_data-v2.csv
+            BOOK_OUTPUT  = data/kindle_data-v2.csv         (동일 파일 in-place 덮어쓰기)
+
+    → Movie는 결과적으로 원본과 분리된 반면, Music/Book은 학습 파이프라인이
+      직접 읽는 원본 파일을 그대로 덮어썼음. 아래 4절에서 이로 인한 문제 확인.
+
+
+================================================================================
+## 4. 발견된 문제 — 학습 텍스트 손상
+================================================================================
+
+  [원인]
+    src/data/preprocessing.py의 _build_content_text()가 genre / category_name
+    값을 그대로 f-string에 삽입:
+      music: f"...\nGenre: {row.get('genre', '')}"          (line 156)
+      book : f"...\nCategory: {row.get('category_name', '')}" (line 169)
+
+    transform_datasets.py가 music_features.csv / kindle_data-v2.csv를
+    in-place로 덮어쓰면서 해당 컬럼이 JSON array 문자열로 바뀜.
+
+  [실제 확인된 값] (2026-07-06 기준 워킹 트리)
+    genre         : "Hip-Hop" → '["Hip-Hop"]'
+    category_name : "Parenting & Relationships" → '["Parenting & Relationships"]'
+
+  [영향]
+    SBERT(TextBlock) 입력 텍스트에 "Genre: [\"Hip-Hop\"]" 같은 JSON 잡음이
+    그대로 섞여 들어감. Movie는 MovieGenre_enriched.csv로 분리되어 있고
+    DOMAIN_CONFIG는 여전히 MovieGenre.csv를 가리키므로 이 문제에서 제외됨.
+    music/book 도메인만 해당.
+
+  [현재 상태]
+    두 파일 모두 git에 커밋되지 않은 unstaged 변경 상태 →
+    `git checkout -- data/music_features.csv data/kindle_data-v2.csv`로
+    원복 가능. 이번 세션에서는 원복 여부를 사용자 확인 후 진행 예정 (미실행).
+
+  [year 필드 관련 참고]
+    music의 year float→date string 변경은 _build_content_text / loader.py /
+    dataset.py 어디에서도 직접 참조되지 않아 학습 텍스트에는 영향 없음.
+    다만 향후 수치 피처로 year를 사용할 계획이 있다면 date string 포맷은
+    재변환이 필요함.
+
+
+================================================================================
+## 5. 아키텍처 검토 — 학습용/DB용 데이터셋 이원화 여부
+================================================================================
+
+  [질문]
+    학습에 쓰는 데이터셋과 백엔드 DB 전달용 MovieGenre_enriched를
+    이원화 상태로 유지할지, 학습 데이터셋과 일원화할지.
+
+  [검토]
+    - 완전 일원화(동일 파일을 학습에도 쓰고 DB 변환도 in-place 적용):
+      4절에서 확인했듯 학습 코드가 원본 포맷(파이프 문자열, float)을
+      가정하고 있어 DB 포맷 변환이 학습 데이터 품질을 실제로 저하시킴.
+      지금 music/book이 이 상태.
+    - 완전 이원화(서로 독립된 별도 파일 유지):
+      소스 drift 위험 (아이템 추가/수정 시 두 파이프라인 모두 갱신 필요),
+      TMDB로 새로 수집한 release_date/director 등을 추후 학습에
+      활용하려면 재통합 작업이 다시 필요함.
+
+  [권장]
+    이원화도 현재 방식의 일원화도 아닌 "단일 소스 + 비파괴적 변환" 구조.
+      1) 정본(canonical) 파일은 도메인당 하나만 유지
+         (enriched 버전 — 사람이 읽기 좋은 원본 포맷 유지)
+      2) DOMAIN_CONFIG가 이 정본 파일을 가리키도록 함
+         (movie: MovieGenre_enriched.csv로 전환 필요, 현재는 미전환)
+      3) DB 스키마용 변환(JSON array, ISO date 등)은 정본을 덮어쓰지 않고
+         별도 산출물로 생성 (예: data/db_export/*.csv, 혹은 DB적재
+         스크립트 내부에서 즉석 변환)
+      4) 실질 조치: transform_datasets.py의 MUSIC_OUTPUT/BOOK_OUTPUT을
+         INPUT과 다른 경로로 분리 — Movie가 이미 (의도치 않게) 이 구조이므로
+         동일 패턴을 Music/Book에 일반화하면 됨
+
+
+================================================================================
+## 6. 다음 세션 이월 작업
+================================================================================
+
+  [ ] music_features.csv / kindle_data-v2.csv in-place 변경 원복 여부 결정
+  [ ] transform_datasets.py 출력 경로를 입력과 분리 (DB export 전용 산출물로)
+  [ ] DOMAIN_CONFIG movie 항목을 MovieGenre_enriched.csv로 전환할지 결정
+  [ ] MovieGenre_enriched.csv / transform_datasets.py 산출물 git 커밋
+  [ ] TMDB 미매칭 약 590건 (release_date 없음) 처리 방침 결정
+
+================================================================================

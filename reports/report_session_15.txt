@@ -1,0 +1,128 @@
+================================================================================
+VibeCrates Recommendation System — 세션 보고서 (15)
+작성일: 2026-07-09
+================================================================================
+
+
+## 1. 세션 배경
+
+  session_14에서 발견한 문제(학습 파이프라인이 읽는 원본 CSV를
+  DB 스키마 변환이 in-place로 덮어써 학습 텍스트가 손상되는 문제)에 대해
+  다음 두 조치를 실행:
+    1) music_features.csv / kindle_data-v2.csv 원복
+    2) transform_datasets.py 출력 경로를 원본과 분리 (db_export 구조로 전환)
+
+
+================================================================================
+## 2. music_features.csv / kindle_data-v2.csv 원복
+================================================================================
+
+  git checkout -- data/music_features.csv data/kindle_data-v2.csv
+
+  두 파일 모두 unstaged 상태였으므로 정상 원복.
+  원복 후 확인:
+    genre         : '["Hip-Hop"]' → "Hip-Hop"                     (정상)
+    category_name : '["Parenting & Relationships"]' → "Parenting & Relationships" (정상)
+
+
+================================================================================
+## 3. transform_datasets.py 리팩토링 — 출력 경로 분리
+================================================================================
+
+  [변경]
+    DB_EXPORT_DIR = "data/db_export" 신설.
+    MOVIE_OUTPUT / MUSIC_OUTPUT / BOOK_OUTPUT을 각각
+      data/db_export/MovieGenre_db.csv
+      data/db_export/music_features_db.csv
+      data/db_export/kindle_data_db.csv
+    로 변경 (기존에는 각 INPUT과 동일 경로였음).
+    main()에 os.makedirs(DB_EXPORT_DIR, exist_ok=True) 추가.
+    docstring에 "원본 CSV(정본)는 절대 덮어쓰지 않는다" 경고 추가.
+
+  [결과]
+    학습 파이프라인이 읽는 원본(data/music_features.csv, data/kindle_data-v2.csv,
+    data/MovieGenre.csv)은 이제 transform_datasets.py 실행과 무관하게 보존됨.
+    DB용 변환 결과물은 data/db_export/ 아래 별도 파일로만 생성.
+
+
+================================================================================
+## 4. 실행 중 발견된 추가 버그 — MovieGenre_enriched.csv 이중 인코딩
+================================================================================
+
+  [증상]
+    리팩토링된 transform_datasets.py를 최초 실행했을 때 Movie Genre 값이
+    ["[\"Animation\", \"Adventure\", \"Comedy\"]"] 형태로 이중 인코딩됨.
+
+  [원인]
+    data/MovieGenre_enriched.csv 자체가 session_14 이전에 이미 한 번
+    in-place 변환을 거친 상태였음 (당시 MOVIE_OUTPUT = MOVIE_INPUT =
+    MovieGenre_enriched.csv였기 때문). 즉 정본이라고 생각했던 파일이
+    Genre="JSON array string", Title="연도 제거됨" 상태로 이미 오염되어
+    있었고, 여기에 변환을 한 번 더 적용하면서 이중 인코딩 발생.
+
+  [1차 복구 시도 — 실패]
+    원본 data/MovieGenre.csv(미접촉, 정상 포맷)와 오염된
+    MovieGenre_enriched.csv를 imdbId 기준 pd.merge로 재결합 시도.
+    → 40,109행이 41,295행으로 늘어남 (실패).
+    원인: 원본 MovieGenre.csv 자체에 imdbId 중복 1,186행 존재
+    (unique imdbId 39,516개, 총 40,109행 — 같은 영화가 다른 행으로
+    두 번 들어있는 사례 다수, 예: imdbId 1000771 "Recount (2008)" 2회).
+    양쪽에 중복 키가 있는 상태로 merge하면 cartesian 곱 발생.
+
+  [2차 복구 — 성공]
+    fetch_movie_meta.py 원래 로직과 동일하게 merge 대신 dict 기반
+    .map() 조회로 재구성:
+      원본 MovieGenre.csv (40,109행, 정상 포맷) 로드
+      data/tmdb_meta_cache.json (imdbId → 메타데이터 dict, 39,516 유니크 키) 로드
+      imdbId별로 release_date/running_time/director/actor를 map()으로 lookup
+    → 40,109행 유지, 중복 imdbId 행도 각자 올바르게 동일 메타데이터 참조.
+    이 방식으로 data/MovieGenre_enriched.csv 재생성 (TMDB 재호출 없이,
+    기존 캐시만으로 완전 복구).
+
+  [검증]
+    transform_datasets.py 재실행 → Genre 단일 인코딩 확인
+    (["Animation", "Adventure", "Comedy"]), 이중 인코딩 없음.
+    data/db_export/ 3개 파일 정상 생성 (kindle_data_db.csv,
+    MovieGenre_db.csv, music_features_db.csv).
+
+
+================================================================================
+## 5. 최종 상태
+================================================================================
+
+  [정본 (학습 파이프라인이 참조, 원본 그대로 유지)]
+    data/MovieGenre.csv        — DOMAIN_CONFIG가 실제로 읽는 파일, 미접촉
+    data/music_features.csv   — 원복 완료, genre 평문 유지
+    data/kindle_data-v2.csv   — 원복 완료, category_name 평문 유지
+
+  [enriched 정본 (TMDB 메타데이터 추가, DB 변환 미적용 상태로 정정)]
+    data/MovieGenre_enriched.csv — 40,109행, Genre 파이프 포맷,
+      Title에 연도 포함 (원본과 동일 포맷 + release_date/running_time/
+      director/actor 4컬럼)
+
+  [DB 적재용 산출물 (신규 위치, 정본과 완전 분리)]
+    data/db_export/MovieGenre_db.csv
+    data/db_export/kindle_data_db.csv
+    data/db_export/music_features_db.csv
+
+  [git 상태]
+    music_features.csv / kindle_data-v2.csv — 변경 없음 (원복으로 clean)
+    나머지 신규 파일들은 여전히 untracked (커밋 여부 결정 대기)
+
+
+================================================================================
+## 6. 다음 세션 이월 작업
+================================================================================
+
+  [ ] MovieGenre_enriched.csv / db_export/ / 스크립트들 커밋 여부 및 범위 결정
+      (db_export/*.csv는 대용량 산출물 — .gitignore 처리 여부 검토 필요,
+       kindle_data_db.csv 76MB, music_features_db.csv 81MB, MovieGenre_db.csv 33MB)
+  [ ] DOMAIN_CONFIG movie 항목을 MovieGenre.csv → MovieGenre_enriched.csv로
+      전환할지 결정 (전환 시 _build_content_text에 director/actor 등
+      신규 필드 반영 여부도 함께 검토)
+  [ ] TMDB 미매칭 약 590~593건(원본 기준 unique imdbId 중 캐시에 메타데이터가
+      비어있는 항목) 처리 방침 결정
+  [ ] transform_datasets.py를 백엔드 DB 적재 스크립트/파이프라인에서
+      실제로 어떻게 소비할지 (직접 import vs 별도 실행 후 파일 전달) 확정
+
+================================================================================
