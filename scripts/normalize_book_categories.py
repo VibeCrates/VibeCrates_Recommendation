@@ -1,5 +1,5 @@
 """
-Books_filtered.csv의 main_category를 정규화.
+legacy/Books_filtered.csv의 main_category를 정규화.
 
 3단계 처리:
   1) 명시적 동의어 매핑 (규칙 기반)
@@ -14,8 +14,8 @@ from collections import Counter
 from pathlib import Path
 
 DATA_DIR = Path(__file__).parent.parent / "data"
-INPUT_CSV  = DATA_DIR / "Books_filtered.csv"
-OUTPUT_CSV = DATA_DIR / "Books_filtered.csv"
+INPUT_CSV  = DATA_DIR / "legacy" / "Books_filtered.csv"
+OUTPUT_CSV = DATA_DIR / "legacy" / "Books_filtered.csv"
 
 # ── Step 1: 명시적 동의어 매핑 ────────────────────────────────────────────────
 EXPLICIT_MAP: dict[str, str] = {

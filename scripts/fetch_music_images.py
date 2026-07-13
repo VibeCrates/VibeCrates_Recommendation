@@ -1,7 +1,7 @@
 """
 iTunes Search API로 img='no' 또는 null인 트랙의 앨범 아트 URL을 수집.
 API 키 불필요. 아티스트명 + 트랙명으로 검색.
-체크포인트: data/music_img_cache.json (500건마다)
+체크포인트: data/cache/music_img_cache.json (500건마다)
 """
 
 import json
@@ -10,7 +10,7 @@ import requests
 import pandas as pd
 import os
 
-CHECKPOINT_PATH = "data/music_img_cache.json"
+CHECKPOINT_PATH = "data/cache/music_img_cache.json"
 CHECKPOINT_EVERY = 500
 REQUEST_DELAY = 0.1  # 초당 10req
 
@@ -53,7 +53,7 @@ def save_checkpoint(cache: dict):
 
 
 def main():
-    df = pd.read_csv("data/music_features.csv", low_memory=False)
+    df = pd.read_csv("data/canonical/music_canonical.csv", low_memory=False)
     no_img_mask = df.img.isna() | (df.img == "no")
     target = df[no_img_mask][["id", "name", "artists"]].copy()
     print(f"이미지 없는 트랙: {len(target):,}개", flush=True)
@@ -103,13 +103,13 @@ def main():
         axis=1,
     )
     df["img"] = df["img"].fillna("no")
-    df.to_csv("data/music_features.csv", index=False)
+    df.to_csv("data/canonical/music_canonical.csv", index=False)
 
     total_img = (df.img != "no").sum()
     print(f"\n완료!")
     print(f"iTunes 수집: {found:,}개 | 미수집: {not_found:,}개")
     print(f"전체 이미지 있음: {total_img:,}개 / {len(df):,}개")
-    print(f"저장: data/music_features.csv")
+    print(f"저장: data/canonical/music_canonical.csv")
 
 
 if __name__ == "__main__":

@@ -21,9 +21,9 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(mess
 logger = logging.getLogger(__name__)
 
 QUERY_CACHE_PATHS = {
-    "movie": "data/query_cache_movie.json",
-    "music": "data/query_cache_music.json",
-    "book":  "data/query_cache_book.json",
+    "movie": "data/cache/query_cache_movie.json",
+    "music": "data/cache/query_cache_music.json",
+    "book":  "data/cache/query_cache_book.json",
 }
 
 

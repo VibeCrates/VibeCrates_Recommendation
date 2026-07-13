@@ -1,5 +1,5 @@
 """
-Amazon 상품 페이지에서 kindle_data-v2.csv 책 설명(description) 수집.
+Amazon 상품 페이지에서 book_canonical.csv 책 설명(description) 수집.
 
 - 실패 항목은 MAX_RETRIES까지 자동 재시도
 - MAX_RETRIES 초과 시 영구 스킵 → 반드시 종료됨
@@ -31,8 +31,8 @@ import requests
 from bs4 import BeautifulSoup
 from tqdm import tqdm
 
-CSV_PATH         = "data/kindle_data-v2.csv"
-CACHE_PATH       = "data/kindle_desc_cache.json"
+CSV_PATH         = "data/canonical/book_canonical.csv"
+CACHE_PATH       = "data/cache/kindle_desc_cache.json"
 CHECKPOINT_EVERY = 500
 REQUEST_DELAY    = 1.0
 MAX_RETRIES      = 3
@@ -51,7 +51,7 @@ SELECTORS = [
 
 
 def shard_cache_path(shard: int) -> str:
-    return f"data/kindle_desc_cache_s{shard}.json"
+    return f"data/cache/kindle_desc_cache_s{shard}.json"
 
 
 def fetch_description(asin: str, url: str) -> str:
@@ -151,7 +151,7 @@ def run_merge(df: pd.DataFrame, num_shards: int):
     """모든 샤드 캐시 합산 후 CSV 업데이트."""
     merged: dict = load_cache(CACHE_PATH)  # 기존 메인 캐시 베이스
 
-    shard_files = sorted(glob.glob("data/kindle_desc_cache_s*.json"))
+    shard_files = sorted(glob.glob("data/cache/kindle_desc_cache_s*.json"))
     if not shard_files:
         print("샤드 캐시 파일 없음. 메인 캐시만으로 CSV 업데이트.")
     else:

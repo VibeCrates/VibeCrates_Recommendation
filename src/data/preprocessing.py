@@ -2,7 +2,7 @@
 Preprocessing - Data preprocessing and feature engineering
 
 Responsibilities:
-  - Converts domain CSVs (MovieGenre / music_features / kindle_data-v2) into
+  - Converts domain canonical CSVs (movie_canonical / music_canonical / book_canonical) into
     the standard schema expected by loader.py (content_text, image_path, query)
   - Missing value handling, categorical encoding, numerical feature normalization
   - Item feature matrix construction
@@ -23,17 +23,17 @@ MUSIC_AUDIO_FEATURES = [
 
 DOMAIN_CONFIG = {
     "movie": {
-        "csv": "data/MovieGenre.csv",
+        "csv": "data/canonical/movie_canonical.csv",
         "id_col": "imdbId",
         "image_col": "Poster",
     },
     "music": {
-        "csv": "data/music_features.csv",
+        "csv": "data/canonical/music_canonical.csv",
         "id_col": "id",
         "image_col": "img",
     },
     "book": {
-        "csv": "data/kindle_data-v2.csv",
+        "csv": "data/canonical/book_canonical.csv",
         "id_col": "asin",
         "image_col": "imgUrl",
     },

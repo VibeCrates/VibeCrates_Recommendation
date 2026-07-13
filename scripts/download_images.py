@@ -23,21 +23,21 @@ from tqdm import tqdm
 
 DOMAIN_CONFIGS = {
     "movie": {
-        "csv": "data/MovieGenre.csv",
+        "csv": "data/canonical/movie_canonical.csv",
         "id_col": "imdbId",
         "url_col": "Poster",
         "out_dir": "data/images/movie",
         "valid_url": lambda url: isinstance(url, str) and url.startswith("http"),
     },
     "music": {
-        "csv": "data/music_features.csv",
+        "csv": "data/canonical/music_canonical.csv",
         "id_col": "id",
         "url_col": "img",
         "out_dir": "data/images/music",
         "valid_url": lambda url: isinstance(url, str) and url.startswith("http") and url not in ("no", "nan"),
     },
     "book": {
-        "csv": "data/kindle_data-v2.csv",
+        "csv": "data/canonical/book_canonical.csv",
         "id_col": "asin",
         "url_col": "imgUrl",
         "out_dir": "data/images/book",

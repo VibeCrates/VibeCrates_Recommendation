@@ -10,8 +10,8 @@ import re
 import json
 import pandas as pd
 
-CACHE_PATH = "data/query_cache_movie.json"
-CSV_PATH   = "data/MovieGenre.csv"
+CACHE_PATH = "data/cache/query_cache_movie.json"
+CSV_PATH   = "data/canonical/movie_canonical.csv"
 
 LABEL_PATTERN = re.compile(r"시인:|공간:|철학자:|Poet:|Space:|Philosopher:")
 NUM_PATTERN   = re.compile(r"^\d+\.")

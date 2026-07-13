@@ -1,5 +1,5 @@
 """
-Books_filtered.csv에 Open Library Search API로 popularity 관련 컬럼 추가.
+legacy/Books_filtered.csv에 Open Library Search API로 popularity 관련 컬럼 추가.
 
 수집 지표:
   - edition_count      : 출판 판본 수 (역사적 인기 / 고전 강도)
@@ -25,9 +25,9 @@ import requests
 
 # ── 경로 ─────────────────────────────────────────────────────────────────────
 DATA_DIR = Path(__file__).parent.parent / "data"
-INPUT_CSV = DATA_DIR / "Books_filtered.csv"
-OUTPUT_CSV = DATA_DIR / "Books_filtered.csv"
-CHECKPOINT = DATA_DIR / "books_popularity_cache.json"  # {ISBN: {...}}
+INPUT_CSV = DATA_DIR / "legacy" / "Books_filtered.csv"
+OUTPUT_CSV = DATA_DIR / "legacy" / "Books_filtered.csv"
+CHECKPOINT = DATA_DIR / "cache" / "books_popularity_cache.json"  # {ISBN: {...}}
 
 # ── 파라미터 ──────────────────────────────────────────────────────────────────
 MAX_WORKERS = 50

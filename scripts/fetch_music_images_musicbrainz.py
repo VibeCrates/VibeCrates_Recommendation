@@ -5,9 +5,9 @@ API 키 불필요. MusicBrainz rate limit: 1 req/sec.
 동작 순서:
   1. MusicBrainz Search API로 트랙명 + 아티스트 검색 → release MBID 획득
   2. Cover Art Archive API로 해당 release의 이미지 URL 조회
-  3. music_features.csv의 img 컬럼 업데이트
+  3. music_canonical.csv의 img 컬럼 업데이트
 
-체크포인트: data/musicbrainz_cache.json (500건마다)
+체크포인트: data/cache/musicbrainz_cache.json (500건마다)
 
 실행 예:
   python3 scripts/fetch_music_images_musicbrainz.py
@@ -23,7 +23,7 @@ import requests
 import pandas as pd
 from tqdm import tqdm
 
-CHECKPOINT_PATH = "data/musicbrainz_cache.json"
+CHECKPOINT_PATH = "data/cache/musicbrainz_cache.json"
 CHECKPOINT_EVERY = 500
 REQUEST_DELAY = 1.1  # MusicBrainz 1 req/sec 준수
 
@@ -98,7 +98,7 @@ def main():
     parser.add_argument("--limit", type=int, default=None, help="처리할 최대 건수 (테스트용)")
     args = parser.parse_args()
 
-    df = pd.read_csv("data/music_features.csv", low_memory=False)
+    df = pd.read_csv("data/canonical/music_canonical.csv", low_memory=False)
 
     no_img_mask = df["img"].isna() | (df["img"].astype(str).str.strip().isin(["no", "nan", ""]))
     target = df[no_img_mask][["id", "name", "artists"]].copy()
@@ -150,7 +150,7 @@ def main():
     df["id"] = df["id"].astype(str)
     update_mask = no_img_mask & df["id"].isin(url_map)
     df.loc[update_mask, "img"] = df.loc[update_mask, "id"].map(url_map)
-    df.to_csv("data/music_features.csv", index=False)
+    df.to_csv("data/canonical/music_canonical.csv", index=False)
 
     updated = update_mask.sum()
     total_with_img = (df["img"].notna() & ~df["img"].isin(["no", "nan", ""])).sum()
@@ -158,7 +158,7 @@ def main():
     print(f"MBID 발견: {mbid_hit:,} | 이미지 URL 수집: {art_hit:,} | 미수집: {no_hit:,}")
     print(f"img 컬럼 업데이트: {updated:,}개")
     print(f"전체 이미지 보유: {total_with_img:,} / {len(df):,}개")
-    print(f"저장: data/music_features.csv")
+    print(f"저장: data/canonical/music_canonical.csv")
 
 
 if __name__ == "__main__":

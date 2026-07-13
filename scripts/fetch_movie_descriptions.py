@@ -1,13 +1,13 @@
 """
-TMDB API로 MovieGenre.csv 각 영화의 text 컬럼 수집.
+TMDB API로 movie_canonical.csv 각 영화의 text 컬럼 수집.
 
 text = overview + tagline + keywords 조합 (SBERT 입력용)
 IMDB ID → TMDB /find → /movie?append_to_response=keywords (1 req/movie)
-체크포인트: data/movie_text_cache.json (500건마다)
+체크포인트: data/cache/movie_text_cache.json (500건마다)
 
 실행 예:
-  python3 scripts/fetch_movie_descriptions.py
-  python3 scripts/fetch_movie_descriptions.py --limit 100
+  TMDB_API_KEY="..." python3 scripts/fetch_movie_descriptions.py
+  TMDB_API_KEY="..." python3 scripts/fetch_movie_descriptions.py --limit 100
 """
 import argparse
 import json
@@ -18,12 +18,12 @@ import pandas as pd
 import requests
 from tqdm import tqdm
 
-CSV_PATH         = "data/MovieGenre.csv"
-CACHE_PATH       = "data/movie_text_cache.json"
+CSV_PATH         = "data/canonical/movie_canonical.csv"
+CACHE_PATH       = "data/cache/movie_text_cache.json"
 CHECKPOINT_EVERY = 500
 REQUEST_DELAY    = 0.05   # TMDB 50 req/s 제한 여유분
 
-API_KEY = "4151e3ad80ae9a608e0b71bcfa4b6f19"
+API_KEY = os.environ["TMDB_API_KEY"]
 SESSION = requests.Session()
 SESSION.headers.update({"Accept": "application/json", "User-Agent": "VibeCrates/1.0"})
 

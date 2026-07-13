@@ -81,7 +81,7 @@ def main():
     model.eval()
     print("모델 로드 완료\n")
 
-    df = pd.read_csv("data/MovieGenre.csv", engine="python")
+    df = pd.read_csv("data/canonical/movie_canonical.csv", engine="python")
     samples = df.head(TEST_N)
 
     results = []

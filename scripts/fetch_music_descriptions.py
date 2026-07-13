@@ -2,8 +2,8 @@
 instrumental 트랙(lyrics 없음)의 설명을 수집.
 1차: Last.fm track.getInfo (wiki.summary)
 2차: Wikipedia API 검색 (Last.fm 실패 시)
-결과: music_features.csv에 description 컬럼 추가
-체크포인트: data/music_desc_cache.json (500건마다)
+결과: music_canonical.csv에 description 컬럼 추가
+체크포인트: data/cache/music_desc_cache.json (500건마다)
 """
 
 import os
@@ -14,7 +14,7 @@ import requests
 import pandas as pd
 
 LASTFM_API_KEY = os.environ["LASTFM_API_KEY"]
-CHECKPOINT_PATH = "data/music_desc_cache.json"
+CHECKPOINT_PATH = "data/cache/music_desc_cache.json"
 CHECKPOINT_EVERY = 500
 REQUEST_DELAY = 0.25  # 초당 4req
 
@@ -99,7 +99,7 @@ def save_checkpoint(cache: dict):
 
 
 def main():
-    df = pd.read_csv("data/music_features.csv", low_memory=False)
+    df = pd.read_csv("data/canonical/music_canonical.csv", low_memory=False)
 
     no_lyrics_mask = df.lyrics.isna() | (df.lyrics.astype(str).str.strip().isin(["", "nan"]))
     target = df[no_lyrics_mask][["id", "name", "artists"]].copy()
@@ -163,13 +163,13 @@ def main():
         axis=1,
     )
 
-    df.to_csv("data/music_features.csv", index=False)
+    df.to_csv("data/canonical/music_canonical.csv", index=False)
 
     total_desc = df["description"].notna().sum()
     print(f"\n완료!")
     print(f"Last.fm 수집: {lastfm_hit:,}개 | Wikipedia 수집: {wiki_hit:,}개 | 미수집: {no_hit:,}개")
     print(f"description 컬럼 채워진 행: {total_desc:,}개 / {len(df):,}개")
-    print(f"저장: data/music_features.csv")
+    print(f"저장: data/canonical/music_canonical.csv")
 
 
 if __name__ == "__main__":

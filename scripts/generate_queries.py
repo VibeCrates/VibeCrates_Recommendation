@@ -1,7 +1,7 @@
 """
 Generates DSV queries (3 English evocative queries separated by |) for each
 Movie/Music/Book item using Qwen2.5-VL or PaliGemma 2.
-Checkpoints every 50 items to data/query_cache_{domain}.json.
+Checkpoints every 50 items to data/cache/query_cache_{domain}.json.
 
 Usage:
   /opt/conda/envs/ltv/bin/python scripts/generate_queries.py --domain movie --model-type qwen
@@ -25,21 +25,21 @@ PLACEHOLDER_IMG = Image.new("RGB", (448, 448), (128, 128, 128))
 
 DOMAIN_CONFIGS = {
     "movie": {
-        "csv": "data/MovieGenre.csv",
+        "csv": "data/canonical/movie_canonical.csv",
         "id_col": "imdbId",
         "image_col": "Poster",
         "role": "a film marketing expert",
         "has_image": lambda row: pd.notna(row.get("Poster")) and str(row.get("Poster", "")).startswith("http"),
     },
     "music": {
-        "csv": "data/music_features.csv",
+        "csv": "data/canonical/music_canonical.csv",
         "id_col": "id",
         "image_col": "img",
         "role": "a music curator",
         "has_image": lambda row: pd.notna(row.get("img")) and str(row.get("img", "")) not in ("no", "nan", ""),
     },
     "book": {
-        "csv": "data/kindle_data-v2.csv",
+        "csv": "data/canonical/book_canonical.csv",
         "id_col": "asin",
         "image_col": "imgUrl",
         "role": "a book editor",
@@ -251,7 +251,7 @@ def main():
         )
 
     cfg = DOMAIN_CONFIGS[args.domain]
-    cache_path = f"data/query_cache_{args.domain}.json"
+    cache_path = f"data/cache/query_cache_{args.domain}.json"
 
     df = pd.read_csv(cfg["csv"], engine="python")
     print(f"[{args.domain}] loaded {len(df):,} rows")

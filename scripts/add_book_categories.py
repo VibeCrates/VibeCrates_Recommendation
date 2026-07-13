@@ -1,5 +1,5 @@
 """
-Books_filtered.csv에 Open Library API로 category 컬럼을 추가.
+legacy/Books_filtered.csv에 Open Library API로 category 컬럼을 추가.
 
 - ISBN 100개씩 배치 요청 → 전체 ~1,500 요청
 - ThreadPoolExecutor로 병렬 처리
@@ -17,9 +17,9 @@ import requests
 
 # ── 경로 설정 ─────────────────────────────────────────────────────────────────
 DATA_DIR = Path(__file__).parent.parent / "data"
-INPUT_CSV = DATA_DIR / "Books_filtered.csv"
-OUTPUT_CSV = DATA_DIR / "Books_filtered.csv"
-CHECKPOINT = DATA_DIR / "books_category_cache.json"  # {ISBN: category}
+INPUT_CSV = DATA_DIR / "legacy" / "Books_filtered.csv"
+OUTPUT_CSV = DATA_DIR / "legacy" / "Books_filtered.csv"
+CHECKPOINT = DATA_DIR / "cache" / "books_category_cache.json"  # {ISBN: category}
 
 # ── 파라미터 ──────────────────────────────────────────────────────────────────
 BATCH_SIZE = 100

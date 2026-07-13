@@ -1,5 +1,5 @@
 """
-Books.csv의 Image-URL-M 컬럼 유효성 검증.
+legacy/Books.csv의 Image-URL-M 컬럼 유효성 검증.
 
 Amazon CDN은 존재하지 않는 이미지에도 200을 반환하며 플레이스홀더를 전송한다.
 - 43B  GIF (1×1 픽셀) : 완전 무효
@@ -22,9 +22,9 @@ import requests
 
 # ── 경로 설정 ─────────────────────────────────────────────────────────────────
 DATA_DIR = Path(__file__).parent.parent / "data"
-INPUT_CSV = DATA_DIR / "Books.csv"
-OUTPUT_CSV = DATA_DIR / "Books_filtered.csv"
-CHECKPOINT = DATA_DIR / "books_url_check.json"  # {row_idx: True/False}
+INPUT_CSV = DATA_DIR / "legacy" / "Books.csv"
+OUTPUT_CSV = DATA_DIR / "legacy" / "Books_filtered.csv"
+CHECKPOINT = DATA_DIR / "cache" / "books_url_check.json"  # {row_idx: True/False}
 
 # ── 검증 파라미터 ──────────────────────────────────────────────────────────────
 MAX_WORKERS = 200       # 동시 요청 수
@@ -168,7 +168,7 @@ def main():
     print(f"\n무효 URL 행 수: {len(invalid_indices):,}")
     print(f"무효 행 인덱스 (처음 20개): {invalid_indices[:20]}")
 
-    invalid_path = DATA_DIR / "books_invalid_indices.json"
+    invalid_path = DATA_DIR / "cache" / "books_invalid_indices.json"
     with open(invalid_path, "w") as f:
         json.dump(invalid_indices, f)
     print(f"무효 행 인덱스 저장: {invalid_path}")
