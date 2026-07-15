@@ -119,7 +119,7 @@ vibe_crate/
 
 `scripts/build_vibe_mockup.py`가 이 폴더(`boards.js` + `images/`)를 생성합니다.
 아이템 풀은 스크립트 상단 `ITEM_POOL`, 보드 12개의 제목/섹션은 `BOARD_TITLES`에
-있고, 아이템의 제목/연도/URL은 전부 실제 데이터셋(`data/enriched/movie_enriched.csv`,
+있고, 아이템의 제목/연도/URL은 전부 실제 데이터셋(`data/canonical/movie_canonical.csv`,
 `data/canonical/music_canonical.csv`, `data/canonical/book_canonical.csv`)에서 그때그때 조회합니다 —
 하드코딩된 값 없음. 다만 지금은 보드 12개가 같은 아이템 풀을 순환 이동만
 해서 재사용하는 상태라, 보드마다 실제로 다른 추천 결과를 보여주는 건 아닙니다

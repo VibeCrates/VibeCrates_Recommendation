@@ -33,7 +33,7 @@ import pandas as pd
 
 DB_EXPORT_DIR = "data/db_export"
 
-MOVIE_INPUT  = "data/enriched/movie_enriched.csv"
+MOVIE_INPUT  = "data/canonical/movie_canonical.csv"
 MOVIE_OUTPUT = os.path.join(DB_EXPORT_DIR, "MovieGenre_db.csv")
 
 MUSIC_INPUT  = "data/canonical/music_canonical.csv"

@@ -5,7 +5,7 @@ example.png(콜라주 "vibe" 무드보드 밈) 레이아웃을 참고한 VibeCra
 정적 프론트엔드 소스(scripts/vibe_crate/main.html, board.html, style.css,
 common.js — 레이아웃/인터랙션 로직)는 그대로 두고, 이 스크립트는 두 가지만 만든다:
   1. boards.js — BOARDS 배열 (보드 여러 개, 각 보드는 아이템 배열을 가짐)
-     아이템의 title/year/url은 실제 데이터셋(movie_enriched.csv /
+     아이템의 title/year/url은 실제 데이터셋(movie_canonical.csv /
      music_canonical.csv / book_canonical.csv)에서 직접 조회, 하드코딩 없음.
   2. images/  — /Users/hyun/images에서 실제 표지 이미지를 리사이즈해 복사
 
@@ -50,7 +50,7 @@ STATIC_FILES = ["main.html", "board.html", "style.css", "common.js", "README.md"
 DEFAULT_OUTPUT = "mockups/vibe_crate"
 DEFAULT_TARGET_WIDTH = 400  # px
 
-MOVIE_CSV = "data/enriched/movie_enriched.csv"
+MOVIE_CSV = "data/canonical/movie_canonical.csv"
 MUSIC_CSV = "data/canonical/music_canonical.csv"
 BOOK_CSV  = "data/canonical/book_canonical.csv"
 

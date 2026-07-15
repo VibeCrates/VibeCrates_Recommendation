@@ -143,6 +143,25 @@ def _build_content_text(domain: str, row: pd.Series) -> str:
         overview = str(row.get("text", "")).strip()
         if overview and overview != "nan":
             text += f"\nOverview: {overview}"
+
+        try:
+            directors = json.loads(str(row.get("director", "[]")))
+        except Exception:
+            directors = []
+        if directors:
+            text += f"\nDirector: {', '.join(directors)}"
+
+        try:
+            actors = json.loads(str(row.get("actor", "[]")))
+        except Exception:
+            actors = []
+        if actors:
+            text += f"\nCast: {', '.join(actors)}"
+
+        release_date = str(row.get("release_date", "")).strip()
+        if release_date and release_date != "nan":
+            text += f"\nRelease Date: {release_date}"
+
         return text
 
     if domain == "music":

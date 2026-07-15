@@ -4,7 +4,9 @@ TMDB API로 movie_canonical.csv 각 영화의 메타데이터 수집.
 수집 항목: release_date, running_time, director (list), actor (list, top 5)
 IMDB ID → TMDB /find → /movie?append_to_response=credits (2 req/movie)
 체크포인트: data/cache/tmdb_meta_cache.json (500건마다)
-출력: data/enriched/movie_enriched.csv
+출력: movie_canonical.csv에 4컬럼을 덧붙여 그 자리에 덮어씀 (기존 8컬럼은
+      건드리지 않음 — Title/text/query에 latin-1 오독으로 인한 mojibake를
+      만들었던 과거 버그가 있었으므로 CSV는 반드시 UTF-8로 읽는다)
 
 실행 예:
   TMDB_API_KEY="..." python3 scripts/fetch_movie_meta.py
@@ -21,7 +23,6 @@ from tqdm import tqdm
 
 CSV_PATH         = "data/canonical/movie_canonical.csv"
 CACHE_PATH       = "data/cache/tmdb_meta_cache.json"
-OUTPUT_PATH      = "data/enriched/movie_enriched.csv"
 CHECKPOINT_EVERY = 500
 REQUEST_DELAY    = 0.12   # ~8 req/s (2 calls/movie → ~4 movies/s, TMDB 한도 여유)
 MAX_ACTORS       = 5
@@ -107,7 +108,7 @@ def main():
     parser.add_argument("--limit", type=int, default=None, help="처리할 최대 행 수")
     args = parser.parse_args()
 
-    df = pd.read_csv(CSV_PATH, low_memory=False, encoding="latin-1")
+    df = pd.read_csv(CSV_PATH, low_memory=False)
     if args.limit:
         df = df.head(args.limit)
 
@@ -152,14 +153,14 @@ def main():
     df["director"]      = df["imdbId"].map(lambda x: _get_field(x, "director"))
     df["actor"]         = df["imdbId"].map(lambda x: _get_field(x, "actor"))
 
-    df.to_csv(OUTPUT_PATH, index=False, encoding="utf-8")
+    df.to_csv(CSV_PATH, index=False, encoding="utf-8")
 
     print(f"\n=== 수집 결과 ===")
     print(f"  release_date 수집: {(df['release_date'].fillna('') != '').sum():,} / {len(df):,}")
     print(f"  running_time 수집: {df['running_time'].notna().sum():,} / {len(df):,}")
     print(f"  director 수집    : {(df['director'].fillna('[]') != '[]').sum():,} / {len(df):,}")
     print(f"  actor 수집       : {(df['actor'].fillna('[]') != '[]').sum():,} / {len(df):,}")
-    print(f"\n출력 저장 → {OUTPUT_PATH}")
+    print(f"\n출력 저장 → {CSV_PATH}")
 
 
 if __name__ == "__main__":

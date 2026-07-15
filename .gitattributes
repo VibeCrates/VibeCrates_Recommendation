@@ -22,7 +22,6 @@ data/cache/books_category_cache.json filter=lfs diff=lfs merge=lfs -text
 data/cache/books_invalid_indices.json filter=lfs diff=lfs merge=lfs -text
 data/cache/musicbrainz_cache.json filter=lfs diff=lfs merge=lfs -text
 data/train_dataset.csv filter=lfs diff=lfs merge=lfs -text
-data/enriched/movie_enriched.csv filter=lfs diff=lfs merge=lfs -text
 data/cache/tmdb_meta_cache.json filter=lfs diff=lfs merge=lfs -text
 indexes/*.pt filter=lfs diff=lfs merge=lfs -text
 indexes/*.parquet filter=lfs diff=lfs merge=lfs -text
