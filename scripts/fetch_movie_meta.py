@@ -11,6 +11,7 @@ IMDB ID → TMDB /find → /movie?append_to_response=credits (2 req/movie)
 실행 예:
   TMDB_API_KEY="..." python3 scripts/fetch_movie_meta.py
   TMDB_API_KEY="..." python3 scripts/fetch_movie_meta.py --limit 100
+  TMDB_API_KEY="..." python3 scripts/fetch_movie_meta.py --retry-unmatched
 """
 import argparse
 import json
@@ -54,6 +55,10 @@ def _get(url: str, params: dict, retries: int = 3) -> dict | None:
     return None
 
 
+EMPTY_RESULT_RETRIES = 3
+EMPTY_RESULT_BACKOFF = 1.5  # seconds, multiplied by attempt number
+
+
 def fetch_meta(imdb_id: str) -> dict:
     """
     IMDB ID → TMDB find → movie+credits.
@@ -62,15 +67,24 @@ def fetch_meta(imdb_id: str) -> dict:
     """
     empty = {"release_date": "", "running_time": None, "director": [], "actor": []}
 
-    # Step 1: IMDB ID → TMDB movie_id
-    find_data = _get(
-        f"https://api.themoviedb.org/3/find/tt{str(imdb_id).zfill(7)}",
-        {"api_key": API_KEY, "external_source": "imdb_id"},
-    )
-    if not find_data:
-        return empty
+    # Step 1: IMDB ID → TMDB movie_id.
+    # _get() already retries network errors/429s, but a 200 response with an
+    # empty movie_results list slips past that — retry that case separately,
+    # since some empty responses turned out to be transient, not "not found".
+    results = []
+    for attempt in range(EMPTY_RESULT_RETRIES):
+        find_data = _get(
+            f"https://api.themoviedb.org/3/find/tt{str(imdb_id).zfill(7)}",
+            {"api_key": API_KEY, "external_source": "imdb_id"},
+        )
+        if not find_data:
+            return empty
+        results = find_data.get("movie_results", [])
+        if results:
+            break
+        if attempt < EMPTY_RESULT_RETRIES - 1:
+            time.sleep(EMPTY_RESULT_BACKOFF * (attempt + 1))
 
-    results = find_data.get("movie_results", [])
     if not results:
         return empty
 
@@ -106,6 +120,10 @@ def fetch_meta(imdb_id: str) -> dict:
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--limit", type=int, default=None, help="처리할 최대 행 수")
+    parser.add_argument(
+        "--retry-unmatched", action="store_true",
+        help="release_date/director가 둘 다 비어있는 기존 캐시 항목을 지우고 재시도",
+    )
     args = parser.parse_args()
 
     df = pd.read_csv(CSV_PATH, low_memory=False)
@@ -113,6 +131,13 @@ def main():
         df = df.head(args.limit)
 
     cache: dict = json.load(open(CACHE_PATH)) if os.path.exists(CACHE_PATH) else {}
+
+    if args.retry_unmatched:
+        unmatched = [k for k, v in cache.items() if not v.get("release_date") and not v.get("director")]
+        for k in unmatched:
+            del cache[k]
+        print(f"미매칭 {len(unmatched):,}건 캐시에서 제거 — 재시도 대상\n")
+
     print(f"전체: {len(df):,}개 | 캐시: {len(cache):,}개 | 남은 처리: {len(df) - len(cache):,}개\n")
 
     remaining = [row for _, row in df.iterrows() if str(row["imdbId"]) not in cache]
