@@ -1,7 +1,6 @@
 # Data and models - should not be committed
 /data/raw/
 /data/processed/
-/data/db_export/
 /mockups/
 /models/
 *.pkl
