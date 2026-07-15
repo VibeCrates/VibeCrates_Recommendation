@@ -80,7 +80,7 @@ def main():
     parser.add_argument("--limit", type=int, default=None)
     args = parser.parse_args()
 
-    df = pd.read_csv(CSV_PATH, low_memory=False, encoding="latin-1")
+    df = pd.read_csv(CSV_PATH, low_memory=False)
     if args.limit:
         df = df.head(args.limit)
 
