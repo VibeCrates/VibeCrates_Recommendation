@@ -1,22 +1,27 @@
 """
-instrumental 트랙(lyrics 없음)의 설명을 수집.
+전체 트랙(가사 유무 무관)의 설명을 수집.
 1차: Last.fm track.getInfo (wiki.summary)
 2차: Wikipedia API 검색 (Last.fm 실패 시)
 결과: music_canonical.csv에 description 컬럼 추가
-체크포인트: data/cache/music_desc_cache.json (500건마다)
+체크포인트: data/cache/music_desc_cache.json (500건마다) — 이미 캐시에 있는 트랙은 재조회하지 않음
+
+병목이 요청 딜레이가 아니라 API 왕복 시간이라 ThreadPoolExecutor로 동시 요청 처리.
 """
 
 import os
 import re
 import json
 import time
+import threading
 import requests
 import pandas as pd
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 LASTFM_API_KEY = os.environ["LASTFM_API_KEY"]
 CHECKPOINT_PATH = "data/cache/music_desc_cache.json"
 CHECKPOINT_EVERY = 500
-REQUEST_DELAY = 0.25  # 초당 4req
+REQUEST_DELAY = 0.15  # 워커별 요청 사이 소폭 딜레이 (과도한 동시 요청 방지)
+MAX_WORKERS = 6
 
 
 def parse_artists(artists_str: str) -> list[str]:
@@ -98,56 +103,75 @@ def save_checkpoint(cache: dict):
         json.dump(cache, f, ensure_ascii=False)
 
 
+def process_one(row: dict) -> tuple[str, dict]:
+    tid = row["id"]
+    name = str(row["name"])
+    artists = parse_artists(str(row["artists"]))
+    artist = artists[0] if artists else ""
+
+    time.sleep(REQUEST_DELAY)
+    desc = fetch_lastfm(name, artist)
+    source = "lastfm"
+
+    if not desc:
+        desc = fetch_wikipedia(name, artist)
+        source = "wikipedia"
+
+    if desc:
+        return tid, {"text": desc, "source": source}
+    return tid, {"text": None, "source": None}
+
+
 def main():
     df = pd.read_csv("data/canonical/music_canonical.csv", low_memory=False)
 
-    no_lyrics_mask = df.lyrics.isna() | (df.lyrics.astype(str).str.strip().isin(["", "nan"]))
-    target = df[no_lyrics_mask][["id", "name", "artists"]].copy()
-    print(f"대상 트랙: {len(target):,}개")
+    target = df[["id", "name", "artists"]].copy()
+    print(f"대상 트랙: {len(target):,}개", flush=True)
 
     if os.path.exists(CHECKPOINT_PATH):
         with open(CHECKPOINT_PATH) as f:
             cache = json.load(f)
-        print(f"체크포인트 로드: {len(cache):,}개")
+        print(f"체크포인트 로드: {len(cache):,}개", flush=True)
     else:
         cache = {}
 
     remaining = target[~target["id"].isin(cache)].to_dict("records")
     total = len(remaining)
-    print(f"남은 처리 수: {total:,}개 | 예상 시간: {total * REQUEST_DELAY / 60:.0f}~{total * REQUEST_DELAY * 2 / 60:.0f}분\n")
+    print(f"남은 처리 수: {total:,}개 | 워커 {MAX_WORKERS}개 동시 처리\n", flush=True)
 
     lastfm_hit = sum(1 for v in cache.values() if v and v.get("source") == "lastfm")
     wiki_hit = sum(1 for v in cache.values() if v and v.get("source") == "wikipedia")
     no_hit = sum(1 for v in cache.values() if not v or not v.get("text"))
 
-    for i, row in enumerate(remaining, 1):
-        tid = row["id"]
-        name = str(row["name"])
-        artists = parse_artists(str(row["artists"]))
-        artist = artists[0] if artists else ""
+    lock = threading.Lock()
+    done = 0
+    start = time.time()
 
-        time.sleep(REQUEST_DELAY)
-        desc = fetch_lastfm(name, artist)
-        source = "lastfm"
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        futures = [executor.submit(process_one, row) for row in remaining]
+        for future in as_completed(futures):
+            tid, result = future.result()
+            with lock:
+                cache[tid] = result
+                done += 1
+                if result.get("text"):
+                    if result["source"] == "lastfm":
+                        lastfm_hit += 1
+                    else:
+                        wiki_hit += 1
+                else:
+                    no_hit += 1
 
-        if not desc:
-            time.sleep(REQUEST_DELAY)
-            desc = fetch_wikipedia(name, artist)
-            source = "wikipedia"
-
-        if desc:
-            cache[tid] = {"text": desc, "source": source}
-            if source == "lastfm":
-                lastfm_hit += 1
-            else:
-                wiki_hit += 1
-        else:
-            cache[tid] = {"text": None, "source": None}
-            no_hit += 1
-
-        if i % CHECKPOINT_EVERY == 0:
-            save_checkpoint(cache)
-            print(f"  {i:,}/{total:,} | Last.fm: {lastfm_hit:,} | Wikipedia: {wiki_hit:,} | 없음: {no_hit:,}")
+                if done % CHECKPOINT_EVERY == 0:
+                    save_checkpoint(cache)
+                    elapsed = time.time() - start
+                    rate = done / elapsed * 60
+                    eta_min = (total - done) / rate if rate else float("inf")
+                    print(
+                        f"  {done:,}/{total:,} | Last.fm: {lastfm_hit:,} | Wikipedia: {wiki_hit:,} | "
+                        f"없음: {no_hit:,} | {rate:.0f}건/분 | 남은 시간 약 {eta_min:.0f}분",
+                        flush=True,
+                    )
 
     save_checkpoint(cache)
 
@@ -157,19 +181,17 @@ def main():
         df["description"] = None
 
     df["description"] = df.apply(
-        lambda row: desc_map.get(row["id"], row.get("description"))
-        if (pd.isna(row.get("lyrics")) or str(row.get("lyrics", "")).strip() in ["", "nan"])
-        else row.get("description"),
+        lambda row: desc_map.get(row["id"], row.get("description")),
         axis=1,
     )
 
     df.to_csv("data/canonical/music_canonical.csv", index=False)
 
     total_desc = df["description"].notna().sum()
-    print(f"\n완료!")
-    print(f"Last.fm 수집: {lastfm_hit:,}개 | Wikipedia 수집: {wiki_hit:,}개 | 미수집: {no_hit:,}개")
-    print(f"description 컬럼 채워진 행: {total_desc:,}개 / {len(df):,}개")
-    print(f"저장: data/canonical/music_canonical.csv")
+    print(f"\n완료!", flush=True)
+    print(f"Last.fm 수집: {lastfm_hit:,}개 | Wikipedia 수집: {wiki_hit:,}개 | 미수집: {no_hit:,}개", flush=True)
+    print(f"description 컬럼 채워진 행: {total_desc:,}개 / {len(df):,}개", flush=True)
+    print(f"저장: data/canonical/music_canonical.csv", flush=True)
 
 
 if __name__ == "__main__":

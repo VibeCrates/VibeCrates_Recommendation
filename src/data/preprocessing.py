@@ -176,10 +176,10 @@ def _build_content_text(domain: str, row: pd.Series) -> str:
         )
         desc = row.get("description", "")
         lyrics = row.get("lyrics", "")
-        if pd.notna(desc) and str(desc).strip() not in ("", "nan"):
-            text += f"\nDescription: {str(desc)[:500]}"
-        elif pd.notna(lyrics) and str(lyrics).strip() not in ("", "nan"):
+        if pd.notna(lyrics) and str(lyrics).strip() not in ("", "nan"):
             text += f"\nLyrics: {str(lyrics)[:500]}"
+        elif pd.notna(desc) and str(desc).strip() not in ("", "nan"):
+            text += f"\nDescription: {str(desc)[:500]}"
         return text
 
     # book
@@ -187,7 +187,7 @@ def _build_content_text(domain: str, row: pd.Series) -> str:
         f"Title: {row.get('title', '')}\nAuthor: {row.get('author', '')}\n"
         f"Category: {row.get('category_name', '')}"
     )
-    desc = str(row.get("description", "")).strip()
+    desc = str(row.get("description_clean", row.get("description", ""))).strip()
     if desc and desc != "nan":
         text += f"\nDescription: {desc}"
     return text
