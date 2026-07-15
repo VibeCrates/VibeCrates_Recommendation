@@ -34,13 +34,13 @@ import pandas as pd
 DB_EXPORT_DIR = "data/db_export"
 
 MOVIE_INPUT  = "data/canonical/movie_canonical.csv"
-MOVIE_OUTPUT = os.path.join(DB_EXPORT_DIR, "MovieGenre_db.csv")
+MOVIE_OUTPUT = os.path.join(DB_EXPORT_DIR, "movie_db.csv")
 
 MUSIC_INPUT  = "data/canonical/music_canonical.csv"
-MUSIC_OUTPUT = os.path.join(DB_EXPORT_DIR, "music_features_db.csv")
+MUSIC_OUTPUT = os.path.join(DB_EXPORT_DIR, "music_db.csv")
 
 BOOK_INPUT   = "data/canonical/book_canonical.csv"
-BOOK_OUTPUT  = os.path.join(DB_EXPORT_DIR, "kindle_data_db.csv")
+BOOK_OUTPUT  = os.path.join(DB_EXPORT_DIR, "book_db.csv")
 
 
 def to_json_array(val, sep: str | None = None) -> str:
