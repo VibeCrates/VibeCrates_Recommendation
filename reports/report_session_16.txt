@@ -1,0 +1,195 @@
+================================================================================
+VibeCrates Recommendation System — 세션 보고서 (16)
+작성일: 2026-07-16
+주제: 음악 도메인 SBERT 텍스트 입력 품질 — 근본 원인 진단 및 개선 PoC/설계
+================================================================================
+
+
+## 1. 세션 배경
+
+  로드맵 1단계(학습 안정화/데이터 클렌징) 진행 중, 음악 데이터셋의 근본 문제를 점검.
+  표면 증상: music description(또는 lyrics) 부재.
+  문제 제기: 다른 도메인은 콘텐츠 "설명"을 쉽게 확보하는 반면, 음악은
+    - 가사(lyrics)로 naive하게 대체하거나
+    - instrumental이면 description으로 폴백
+  하는데, 이는 "설명"이라는 정의와 어긋남. 구조적/데이터 관점 보완책을 도출.
+
+
+================================================================================
+## 2. 점검 결과 — 현행 파이프라인 실제 동작
+================================================================================
+
+  [모델 구조] src/models/recommender.py — DualEncoderModel
+    z_text  ← SBERT(all-mpnet-base-v2) + LoRA(r=16, q/v) → MLP
+    z_image ← CLIP(ViT-L/14) 앨범 커버 → MLP
+    z_query ← CLIP 텍스트 인코더, Qwen-VL 생성 DSV 쿼리 3개 mean-pool
+    z_content ← ContentBlock(z_text ⊕ z_image)
+
+  [학습] src/training/trainer.py
+    Stage1: InfoNCE(text↔query) + InfoNCE(text↔image) + InfoNCE(image↔query)
+    Stage2: KL 증류 (student z_content ← teacher z_query)
+
+  [content_text 생성] src/data/preprocessing.py::_build_content_text
+    movie: Title/Genre + text(overview)            = 3인칭 줄거리 설명
+    book : Title/Author/Category + description       = 3인칭 블러브 설명
+    music: Track/Artist/Album/Genre
+           + lyrics(있으면, [:500]) 아니면 description  ← 문제의 지점
+
+  [쿼리(라벨) 생성] scripts/generate_queries.py::build_synopsis
+    content_text와 사실상 동일 로직으로 synopsis 구성 후 Qwen-VL에 입력.
+
+
+================================================================================
+## 3. 실측 데이터 (data/canonical/music_canonical.csv, 40,036 트랙)
+================================================================================
+
+  description 有 : 12,119 (30.3%)
+  lyrics 有      : 35,944 (89.8%)
+  둘 다 有       : 11,713
+  둘 다 無       :  3,686 (9.2%)   ← 순수 메타데이터만 존재
+  description만  :    406
+  lyrics만       : 24,231          ← 텍스트 슬롯의 ~60%가 raw lyrics
+  query 有       : 36,531 (91.2%)
+  instrumentalness>0.5 (instrumental 추정): 5,637 (14.1%)
+
+  육안 검증: 기존 description 상당수가 mood/내용이 아니라 발매이력 trivia
+    예) "It was released on July 24, 2020 as the lead single from ... debut album"
+    → 실제 "쓸만한 vibe 설명" 커버리지는 30%보다 더 낮음.
+
+
+================================================================================
+## 4. 근본 원인 진단 (4가지)
+================================================================================
+
+  (A) 텍스트 "타입" 불일치 [가장 치명적]
+      movie/book = 3인칭 콘텐츠 설명, music ~60% = 1인칭 가사 원문.
+      SBERT가 이 둘을 서로 다른 의미공간 영역에 임베딩 →
+      같은 vibe라도 음악이 영화/책과 다른 클러스터로 분리 →
+      공유 텍스트 공간을 쓰는 크로스도메인 추천이 근본적으로 어긋남.
+      가사는 "설명"이 아니라 콘텐츠 자체 = 슬롯을 잘못 채운 것.
+
+  (B) description 커버리지/품질 부족
+      쓸만한 설명 30% 미만, 무텍스트 9.2%, instrumental 14.1%는
+      가사·설명 모두 취약.
+
+  (C) 오디오 피처 모델 미사용 [코드 검증 완료]
+      create_item_features(danceability/energy/loudness/speechiness/
+      acousticness/instrumentalness/liveness/valence/tempo 9개 정규화)가
+      preprocessing.py에 정의만 되어 있고 model/trainer 어디서도 호출되지 않음
+      (grep 결과 호출 0건). 음악에서 가장 객관적·고유한 신호가 통째로 버려짐.
+      instrumental 트랙을 살릴 핵심 수단이 미사용 상태.
+
+  (D) 라벨 오염 커플링
+      build_synopsis가 content_text(SBERT 입력)와 Qwen 쿼리(학습 라벨)
+      둘 다를 동일 원문에서 생성. 가사 noise가 입력·라벨 양쪽을 동시 오염 →
+      train loss는 낮아 보여도 일반화 실패(overfitting과 유사 증상)를 유발.
+
+
+================================================================================
+## 5. 개선 방향
+================================================================================
+
+  ★ 권장: "통합 vibe description"을 전 트랙에 LLM 합성
+    기존 generate_queries.py의 Qwen-VL + 앨범이미지 + 프롬프트 인프라 재사용.
+    쿼리 생성 앞단에 description 생성 스텝 추가.
+    입력 신호(가진 것 전부):
+      - 메타 (title/artist/album/genre/year/niche_genres)
+      - 오디오 피처 (danceability/energy/valence/acousticness/
+        instrumentalness/tempo → mood의 객관적 근거)
+      - 가사 = "요약 소스"로만 (인용 금지, 테마/정서만)
+      - 기존 description (참고)
+      - 앨범 커버 (Qwen-VL이 이미 봄)
+    효과:
+      ① 텍스트 타입 3도메인 통일 (A 해소)
+      ② instrumental·무텍스트 포함 100% 커버리지 (B 해소)
+      ③ mood를 오디오 피처에 grounding, hallucination 억제 (C 부분 해소)
+      ④ 쿼리를 raw lyrics 아닌 깨끗한 description에서 생성 (D 차단)
+
+  보조:
+    - 오디오 피처를 모델에 실제 투입 (LLM 자연어화 or numeric 브랜치)
+    - content_text 스키마를 3도메인 동일 계약으로 고정,
+      raw lyrics 직접 주입 코드 제거
+
+  트레이드오프
+    현행(lyrics 폴백)       : 커버 91% / 타입일관 ✗ / 비용 0    / instrumental ✗
+    오디오피처 템플릿 문장  : 커버 100% / 타입일관 △ / 비용 0    / instrumental ○
+    LLM 통합 description    : 커버 100% / 타입일관 ○ / 비용 GPU / instrumental ○ (권장)
+
+
+================================================================================
+## 6. 이번 세션 실행 결과 (개요)
+================================================================================
+
+  1) 진단을 메모리에 저장 (project_music_text_diagnosis.md)
+  2) 본 리포트 작성
+  3) PoC: description 합성 스크립트 작성·검증 (7절)
+  4) 오디오 피처 모델 투입 아키텍처 설계 문서 작성 (8절)
+  5) 세션 결과 메모리 반영
+
+
+================================================================================
+## 7. PoC — 통합 description 합성 스크립트
+================================================================================
+
+  [산출물] scripts/generate_music_descriptions.py
+    - verbalize_audio(): 오디오 피처 → 자연어 mood 서술구.
+      결측 처리: 0~1 피처의 -1 sentinel / NaN 스킵, loudness는 dB(음수 정상) 별도,
+      tempo NaN(4,092건)·mode NaN 스킵.
+    - build_prompt(): 메타 + 오디오프로필 + 가사(요약소스, 인용금지) + 기존desc(참고)
+      를 조립. movie overview와 동일 register의 2~3문장 3인칭 설명 요구.
+    - 실제 합성은 기존 generate_queries.py와 동일한 Qwen2.5-VL 인프라 재사용.
+    - --dry-run: 모델 없이 프롬프트만 조립·덤프 (로컬 입력품질 검증용).
+    - 출력은 description_synth 컬럼 (기존 description 보존).
+
+  [검증 — dry-run, 층화 샘플 199건 + 전체 40,036 정량]
+    - 층화 버킷(lyrics_only / has_desc / neither / instrumental) 전부에서
+      동일 타입(3인칭 mood 설명) 프롬프트로 통일됨.
+    - 오디오 프로필 생성: 전체 40,036 / 40,036 = 100.0% (트랙당 평균 5.9 서술구)
+    - 현행 무텍스트(desc·lyrics 둘다無) 3,686건 → 전량 오디오 프로필로 커버.
+      예) Medeski 재즈 즉흥곡, Vivaldi 첼로협주곡, Michael Giacchino 영화음악
+      (앨범/장르/가사/설명 전무) → "calm and mellow, ..., largely acoustic,
+      instrumental" 식 실제 mood 설명 확보.
+    - meta 필드 nan/None/[] 노출 제거(clean()) 적용.
+
+  [결론] 오디오 피처 자연어화만으로 100% 커버리지 + 타입 통일 달성 가능함을 실측 확인.
+    실제 LLM 합성(GPU)은 다음 단계.
+
+
+================================================================================
+## 8. 오디오 피처 모델 투입 아키텍처 설계
+================================================================================
+
+  [산출물] docs/design_audio_feature_integration.md
+
+  경로 A (텍스트 경유): 7절 PoC가 곧 경로 A. verbalize_audio 결과가 합성
+    description → content_text → SBERT로 간접 투입. 아키텍처 변경 0, 타입 통일
+    부수효과. 한계는 bin+토크나이즈로 인한 정밀도 손실.
+
+  경로 B (명시적 numeric 브랜치): AudioBlock 신설(9→768), ContentBlock 입력을
+    1536→2304로 확장해 z_text ⊕ z_image ⊕ z_audio 3-모달 융합.
+    - has_audio presence flag로 게이팅 → movie/book(오디오 無)은 z_audio=0,
+      기존 동작 보존(회귀 방지)이 핵심.
+    - Dataset/collate/loader에 audio_features·has_audio 컬럼 배선 필요.
+    - Stage1 손실 유지, 오디오는 Stage2 z_content로 흘림. (선택) 음악 배치 한정
+      InfoNCE(z_audio, z_query) 추가 가능.
+    - create_item_features 개선점: 매 호출 재fit → train fit 후 scaler 저장/로드
+      분리, -1 sentinel을 NaN 치환 후 대치.
+
+  권장 순서: ① 경로 A 먼저(즉효·저위험, 타입통일+커버) → 학습 재실행 baseline 확인
+             ② 경로 B 증분 적용(게이팅으로 안전)으로 오디오 정밀도 회수.
+
+
+================================================================================
+## 9. 다음 세션 이월 작업
+================================================================================
+
+  [ ] generate_music_descriptions.py를 GPU 서버에서 실제 실행(--limit로 소량
+      먼저 → 품질 확인 → 전량). description_synth 컬럼 채우기.
+  [ ] _build_content_text(music)를 lyrics 폴백 → description_synth 우선 사용으로
+      전환. raw lyrics 직접 주입 제거.
+  [ ] 쿼리 재생성 여부 결정: 깨끗한 description_synth 기반으로 generate_queries
+      재실행할지 (라벨 오염 D 해소).
+  [ ] 경로 B 구현 착수 여부 결정 (docs/design_audio_feature_integration.md 체크리스트).
+  [ ] 학습 재실행 후 baseline(이전 세션 eval) 대비 추천 품질 비교.
+
+================================================================================
