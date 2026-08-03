@@ -6,6 +6,12 @@
 
 # Capstone result report materials (screenshots, drafts) - local only
 /for_result_report/
+
+# Claude Code local state (worktrees, settings)
+/.claude/
+
+# Prompt dry-run dumps (regenerable via --dry-run)
+/data/cache/*_dryrun.txt
 *.pkl
 *.h5
 *.pt
