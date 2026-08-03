@@ -21,6 +21,7 @@ VibeCrates_Recommendation/
 ├── tests/                  # 유닛 테스트
 ├── notebooks/              # Jupyter 노트북
 ├── docker/                 # Docker 설정
+├── for_result_report/      # 캡스톤 결과보고서 작성용 자료 (gitignore, 로컬 전용)
 └── requirements.txt        # Python 의존성
 ```
 

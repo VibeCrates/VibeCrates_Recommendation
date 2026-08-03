@@ -21,6 +21,7 @@ VibeCrates_Recommendation/
 ├── tests/                  # Unit tests
 ├── notebooks/              # Jupyter notebooks
 ├── docker/                 # Docker configuration
+├── for_result_report/      # Capstone result report materials (gitignored, local only)
 └── requirements.txt        # Python dependencies
 ```
 

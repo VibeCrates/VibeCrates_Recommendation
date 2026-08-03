@@ -3,6 +3,9 @@
 /data/processed/
 /mockups/
 /models/
+
+# Capstone result report materials (screenshots, drafts) - local only
+/for_result_report/
 *.pkl
 *.h5
 *.pt
