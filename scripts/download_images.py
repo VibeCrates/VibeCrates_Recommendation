@@ -15,9 +15,11 @@ URL이 없거나 다운로드 실패한 항목은 건너뜁니다.
 
 import os
 import argparse
+import threading
 import pandas as pd
 import requests
 from pathlib import Path
+from urllib.parse import urlparse
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 
@@ -37,7 +39,12 @@ DOMAIN_CONFIGS = {
         "valid_url": lambda url: isinstance(url, str) and url.startswith("http") and url not in ("no", "nan"),
     },
     "book": {
-        "csv": "data/canonical/book_canonical.csv",
+        # v2 = 3소스 병합본. BX 42,823권의 imgUrl은 Open Library 커버 API URL이며
+        # merge_book_sources.py에서 `?default=false`를 붙여 조립해뒀다 —
+        # 이게 없으면 커버 없는 책에 43바이트 빈 이미지가 200으로 돌아와
+        # 해당 책들이 전부 동일한 z_image를 갖게 된다. default=false면 404가 나서
+        # raise_for_status가 걸러낸다 (아래 1KB 하한이 2차 방어선).
+        "csv": "data/canonical/book_canonical_v2.csv",
         "id_col": "asin",
         "url_col": "imgUrl",
         "out_dir": "data/images/book",
@@ -51,10 +58,31 @@ SESSION.headers.update({
     "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8",
 })
 
+# 호스트별 동시 요청 상한. book 도메인은 Amazon CDN / Goodreads CDN / Open Library가
+# 섞여 있는데, 앞의 둘은 30~50 req/s를 받아내지만 Open Library는 실측 4.8 req/s
+# (worker 6, 레이트리밋 에러 0)가 한계다. --workers를 그대로 태우면 OL만 막힌다.
+HOST_LIMITS = {"covers.openlibrary.org": 6}
+_host_locks: dict[str, threading.Semaphore] = {}
+_locks_guard = threading.Lock()
+
+
+def host_slot(url: str) -> threading.Semaphore | None:
+    host = urlparse(url).netloc
+    limit = HOST_LIMITS.get(host)
+    if limit is None:
+        return None
+    with _locks_guard:
+        if host not in _host_locks:
+            _host_locks[host] = threading.Semaphore(limit)
+        return _host_locks[host]
+
 
 def download_one(item_id: str, url: str, out_path: Path) -> tuple[str, bool]:
     if out_path.exists():
         return item_id, True
+    slot = host_slot(url)
+    if slot is not None:
+        slot.acquire()
     try:
         r = SESSION.get(url, timeout=15, stream=True)
         r.raise_for_status()
@@ -66,12 +94,14 @@ def download_one(item_id: str, url: str, out_path: Path) -> tuple[str, bool]:
         return item_id, True
     except Exception:
         return item_id, False
+    finally:
+        if slot is not None:
+            slot.release()
 
 
 def run_domain(domain: str, workers: int):
     cfg = DOMAIN_CONFIGS[domain]
-    enc = "latin-1" if domain == "movie" else "utf-8"
-    df = pd.read_csv(cfg["csv"], low_memory=False, encoding=enc)
+    df = pd.read_csv(cfg["csv"], low_memory=False)
     out_dir = Path(cfg["out_dir"])
     out_dir.mkdir(parents=True, exist_ok=True)
 

@@ -33,7 +33,10 @@ DOMAIN_CONFIG = {
         "image_col": "img",
     },
     "book": {
-        "csv": "data/canonical/book_canonical.csv",
+        # v2 = Kindle/Goodreads/BX 3소스 병합본 (110,594권, 블러브 100%).
+        # 기존 book_canonical.csv는 133,102권이지만 블러브 15.0%라 85%의 content_text가
+        # 제목·저자·카테고리뿐이었다 — poet 등 추상 쿼리가 매칭할 mood 표적이 없었다.
+        "csv": "data/canonical/book_canonical_v2.csv",
         "id_col": "asin",
         "image_col": "imgUrl",
     },
@@ -136,11 +139,28 @@ class DataPreprocessor:
 # Domain-specific standardization helpers
 # ---------------------------------------------------------------------------
 
+def _synth_text(row: pd.Series) -> str:
+    """LLM이 합성한 vibe description.
+
+    세션 16 진단 (A) "텍스트 타입 불일치"의 해소 지점이다. 이전에는 도메인마다 다른
+    *타입*의 텍스트가 이 슬롯에 들어갔다 — movie/book은 3인칭 설명, music은 약 60%가
+    1인칭 가사 원문. SBERT가 이를 서로 다른 의미공간 영역에 임베딩해 공유 텍스트 공간을
+    쓰는 크로스도메인 추천이 어긋났다. description_synth는 3도메인 모두 동일 계약
+    (2~3문장 3인칭 mood 설명, film-synopsis register)으로 생성된다.
+
+    아직 합성되지 않은 항목만 기존 원문으로 폴백한다(합성 100% 커버 시 미실행).
+    """
+    v = str(row.get("description_synth", "") or "").strip()
+    return "" if v in ("", "nan", "None") else v
+
+
 def _build_content_text(domain: str, row: pd.Series) -> str:
     """Converts a domain CSV row into a content_text string. Mirrors build_synopsis logic in generate_queries.py."""
+    synth = _synth_text(row)
+
     if domain == "movie":
         text = f"Title: {row.get('Title', '')}\nGenre: {row.get('Genre', '')}"
-        overview = str(row.get("text", "")).strip()
+        overview = synth or str(row.get("text", "")).strip()
         if overview and overview != "nan":
             text += f"\nOverview: {overview}"
 
@@ -176,7 +196,11 @@ def _build_content_text(domain: str, row: pd.Series) -> str:
         )
         desc = row.get("description", "")
         lyrics = row.get("lyrics", "")
-        if pd.notna(lyrics) and str(lyrics).strip() not in ("", "nan"):
+        if synth:
+            # raw lyrics 직접 주입이 있던 자리. 가사는 "설명"이 아니라 콘텐츠 자체이므로
+            # 이 슬롯의 오용이었다 (세션 16 진단 A).
+            text += f"\nDescription: {synth}"
+        elif pd.notna(lyrics) and str(lyrics).strip() not in ("", "nan"):
             text += f"\nLyrics: {str(lyrics)[:500]}"
         elif pd.notna(desc) and str(desc).strip() not in ("", "nan"):
             text += f"\nDescription: {str(desc)[:500]}"
@@ -187,7 +211,7 @@ def _build_content_text(domain: str, row: pd.Series) -> str:
         f"Title: {row.get('title', '')}\nAuthor: {row.get('author', '')}\n"
         f"Category: {row.get('category_name', '')}"
     )
-    desc = str(row.get("description_clean", row.get("description", ""))).strip()
+    desc = synth or str(row.get("description_clean", row.get("description", ""))).strip()
     if desc and desc != "nan":
         text += f"\nDescription: {desc}"
     return text

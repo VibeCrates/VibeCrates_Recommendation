@@ -323,12 +323,55 @@ def generate_qwen(processor, model, image, prompt: str) -> str:
     return processor.decode(out[0][input_len:], skip_special_tokens=True).strip()
 
 
+# ── 배치 합성 (vLLM) ──────────────────────────────────────────────────────────
+
+def run_vllm(args, cfg, todo, cache, cache_path, id_col):
+    """HF 경로와 프롬프트·디코딩 설정은 같고 배치만 다르다. 캐시 계약도 동일하므로
+    두 경로를 섞어 돌려도(중단 후 엔진 교체) 이미 만든 건 그대로 재사용된다."""
+    from concurrent.futures import ThreadPoolExecutor
+    from scripts.vllm_runner import VLLMRunner, chunks
+
+    runner = VLLMRunner(args.model_id)
+    image_col = cfg["image_col"]
+    done = 0
+
+    def fetch(item_id: str, row: pd.Series):
+        # 이미지 로드는 디스크·네트워크 대기다. GPU 구간과 겹치지 않게 배치 단위로
+        # 미리 병렬로 채워 넣는다 (실패는 None = 텍스트 전용 요청).
+        try:
+            return load_image(args.domain, item_id, str(row.get(image_col, "")))
+        except Exception:
+            return None
+
+    for batch in chunks(todo, args.batch):
+        rows = [pd.Series(r) for r in batch]
+        ids = [str(r[id_col]) for r in rows]
+        with ThreadPoolExecutor(max_workers=16) as ex:
+            images = list(ex.map(fetch, ids, rows))
+
+        items = [
+            (build_prompt(args.domain, row, has_img=img is not None), img)
+            for row, img in zip(rows, images)
+        ]
+        for item_id, desc in zip(ids, runner.generate(items)):
+            if desc:
+                cache[item_id] = desc
+
+        done += len(batch)
+        json.dump(cache, open(cache_path, "w"), ensure_ascii=False)
+        print(f"  진행 {done:,}/{len(todo):,} (캐시 {len(cache):,})", flush=True)
+
+
 # ── main ──────────────────────────────────────────────────────────────────────
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--domain", required=True, choices=list(DOMAIN_CONFIGS))
     ap.add_argument("--model-id", default="Qwen/Qwen2.5-VL-7B-Instruct")
+    ap.add_argument("--engine", default="hf", choices=["hf", "vllm"],
+                    help="hf=batch1 참조 경로 / vllm=배치 추론 (venv_vllm에서 실행)")
+    ap.add_argument("--batch", type=int, default=512,
+                    help="vllm 엔진에서 한 번에 넘길 요청 수 (이미지 로드 단위이기도 함)")
     ap.add_argument("--limit", type=int, default=None, help="실제 합성 시 처리 건수 제한")
     ap.add_argument("--dry-run", action="store_true", help="모델 없이 프롬프트만 조립")
     ap.add_argument("--sample", type=int, default=200, help="dry-run 샘플 수")
@@ -351,6 +394,11 @@ def main():
         todo = todo[:args.limit]
     print(f"remaining: {len(todo):,}")
 
+    if args.engine == "vllm":
+        run_vllm(args, cfg, todo, cache, cache_path, id_col)
+        write_output(args, cfg, df, cache, id_col)
+        return
+
     processor, model = load_qwen(args.model_id)
     from tqdm import tqdm
     for i, row in enumerate(tqdm(todo), 1):
@@ -372,6 +420,10 @@ def main():
             json.dump(cache, open(cache_path, "w"), ensure_ascii=False)
 
     json.dump(cache, open(cache_path, "w"), ensure_ascii=False)
+    write_output(args, cfg, df, cache, id_col)
+
+
+def write_output(args, cfg, df, cache, id_col):
     df[id_col] = df[id_col].astype(str)
     df["description_synth"] = df[id_col].map(cache)
     df["description_synth_basis"] = df.apply(lambda r: synth_basis(args.domain, r), axis=1)

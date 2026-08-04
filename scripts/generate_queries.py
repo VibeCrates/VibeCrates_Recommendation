@@ -39,7 +39,7 @@ DOMAIN_CONFIGS = {
         "has_image": lambda row: pd.notna(row.get("img")) and str(row.get("img", "")) not in ("no", "nan", ""),
     },
     "book": {
-        "csv": "data/canonical/book_canonical.csv",
+        "csv": "data/canonical/book_canonical_v2.csv",
         "id_col": "asin",
         "image_col": "imgUrl",
         "role": "a book editor",
@@ -73,10 +73,21 @@ PROMPT_TEMPLATE = (
 )
 
 
+def synth_text(row: pd.Series) -> str:
+    """합성된 vibe description. 세션 16 진단 (D) 해소의 핵심 —
+    content_text와 쿼리(라벨)가 같은 오염된 원문에서 나오던 커플링을 끊는다.
+    3도메인 모두 이걸 우선 쓰고, 아직 합성 전인 항목만 기존 원문으로 폴백한다.
+    (합성이 100% 커버되면 폴백은 실행되지 않는다.)"""
+    v = str(row.get("description_synth", "") or "").strip()
+    return "" if v in ("", "nan", "None") else v
+
+
 def build_synopsis(domain: str, row: pd.Series) -> str:
+    synth = synth_text(row)
+
     if domain == "movie":
         text = f"Title: {row.get('Title', '')}\nGenre: {row.get('Genre', '')}"
-        overview = str(row.get("text", "")).strip()
+        overview = synth or str(row.get("text", "")).strip()
         if overview and overview != "nan":
             text += f"\nOverview: {overview[:600]}"
         return text
@@ -93,7 +104,11 @@ def build_synopsis(domain: str, row: pd.Series) -> str:
         )
         desc = row.get("description")
         lyrics = row.get("lyrics")
-        if pd.notna(lyrics) and str(lyrics).strip() not in ("", "nan"):
+        if synth:
+            # 가사 원문(1인칭 콘텐츠 자체)이 라벨 생성 입력으로 들어가던 자리.
+            # 합성 description은 movie/book과 같은 3인칭 설명 타입이다.
+            text += f"\nDescription: {synth[:600]}"
+        elif pd.notna(lyrics) and str(lyrics).strip() not in ("", "nan"):
             text += f"\nLyrics: {str(lyrics)[:500]}"
         elif pd.notna(desc) and str(desc).strip() not in ("", "nan"):
             text += f"\nDescription: {str(desc)[:500]}"
@@ -104,7 +119,7 @@ def build_synopsis(domain: str, row: pd.Series) -> str:
             f"Title: {row.get('title', '')}\nAuthor: {row.get('author', '')}\n"
             f"Category: {row.get('category_name', '')}"
         )
-        desc = str(row.get("description_clean", row.get("description", ""))).strip()
+        desc = synth or str(row.get("description_clean", row.get("description", ""))).strip()
         if desc and desc != "nan":
             text += f"\nDescription: {desc[:600]}"
         return text
@@ -234,6 +249,49 @@ def generate_query_paligemma(processor, model, image: Image.Image, prompt: str) 
     return processor.decode(output_ids[0][input_len:], skip_special_tokens=True).strip()
 
 
+# ── 배치 생성 (vLLM) ──────────────────────────────────────────────────────────
+
+def run_vllm(args, cfg, to_process, cache, cache_path):
+    """HF 경로와 프롬프트·디코딩 설정은 같고 배치만 다르다 (scripts/vllm_runner.py 참조).
+    캐시 계약도 같아 엔진을 바꿔 이어 돌려도 기존 결과가 재사용된다."""
+    from concurrent.futures import ThreadPoolExecutor
+    from scripts.vllm_runner import VLLMRunner, chunks
+
+    # 쿼리는 "3개 DSV 한 줄"이라 description보다 훨씬 짧다.
+    runner = VLLMRunner(args.model_id, max_new_tokens=64)
+    id_col = cfg["id_col"]
+    done = valid = 0
+
+    def fetch(item_id: str, row: dict):
+        if not cfg["has_image"](row):
+            return None
+        try:
+            return load_image(args.domain, item_id, str(row[cfg["image_col"]]))
+        except Exception:
+            return None
+
+    for batch in chunks(to_process, args.batch):
+        ids = [str(r[id_col]) for r in batch]
+        with ThreadPoolExecutor(max_workers=16) as ex:
+            images = list(ex.map(fetch, ids, batch))
+
+        items = []
+        for row, img in zip(batch, images):
+            synopsis = build_synopsis(args.domain, pd.Series(row))
+            items.append((PROMPT_TEMPLATE.format(synopsis=synopsis, role=cfg["role"]), img))
+
+        for item_id, raw in zip(ids, runner.generate(items)):
+            dsv = validate_dsv(raw)
+            if dsv:
+                cache[item_id] = dsv
+                valid += 1
+
+        done += len(batch)
+        with open(cache_path, "w") as f:
+            json.dump(cache, f, ensure_ascii=False)
+        print(f"  진행 {done:,}/{len(to_process):,} | 유효 DSV {valid:,}", flush=True)
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
@@ -242,6 +300,9 @@ def main():
     parser.add_argument("--model-type", default="qwen", choices=["qwen", "paligemma"])
     parser.add_argument("--model-id", default=None, help="HuggingFace 모델 ID (기본값 자동 선택)")
     parser.add_argument("--limit", type=int, default=None)
+    parser.add_argument("--engine", default="hf", choices=["hf", "vllm"],
+                        help="hf=batch1 참조 경로 / vllm=배치 추론 (venv_vllm에서 실행)")
+    parser.add_argument("--batch", type=int, default=512)
     args = parser.parse_args()
 
     if args.model_id is None:
@@ -259,14 +320,6 @@ def main():
     cache = json.load(open(cache_path)) if os.path.exists(cache_path) else {}
     print(f"checkpoint loaded: {len(cache):,} entries")
 
-    print(f"model loading: {args.model_id} ({args.model_type})")
-    if args.model_type == "qwen":
-        processor, model = load_qwen(args.model_id)
-        generate_fn = generate_query_qwen
-    else:
-        processor, model = load_paligemma(args.model_id)
-        generate_fn = generate_query_paligemma
-
     to_process = [
         row for row in df.to_dict("records")
         if str(row[cfg["id_col"]]) not in cache
@@ -274,6 +327,19 @@ def main():
     if args.limit:
         to_process = to_process[:args.limit]
     print(f"remaining: {len(to_process):,}\n")
+
+    if args.engine == "vllm":
+        run_vllm(args, cfg, to_process, cache, cache_path)
+        write_output(cfg, df, cache)
+        return
+
+    print(f"model loading: {args.model_id} ({args.model_type})")
+    if args.model_type == "qwen":
+        processor, model = load_qwen(args.model_id)
+        generate_fn = generate_query_qwen
+    else:
+        processor, model = load_paligemma(args.model_id)
+        generate_fn = generate_query_paligemma
 
     valid_count = sum(1 for v in cache.values() if v and validate_dsv(str(v)))
 
@@ -308,6 +374,10 @@ def main():
     with open(cache_path, "w") as f:
         json.dump(cache, f, ensure_ascii=False)
 
+    write_output(cfg, df, cache)
+
+
+def write_output(cfg, df, cache):
     df[cfg["id_col"]] = df[cfg["id_col"]].astype(str)
     df["query"] = df[cfg["id_col"]].map(cache)
     df.to_csv(cfg["csv"], index=False)
