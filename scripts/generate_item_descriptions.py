@@ -219,7 +219,7 @@ DOMAIN_CONFIGS = {
         "has_image": lambda row: str(row.get("Poster", "")).startswith("http"),
     },
     "book": {
-        "csv": "data/canonical/book_canonical.csv",
+        "csv": "data/canonical/book_canonical_v2.csv",
         "id_col": "asin",
         "image_col": "imgUrl",
         "name_col": "title",
