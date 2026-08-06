@@ -36,6 +36,12 @@ class MultiModalDataset(Dataset):
         self.queries = queries
         self.image_size = image_size
         self.image_embeddings = image_embeddings  # {image_path: np.array(D)}
+        # 임베딩을 쓰는 경우 배치 전체가 텐서여야 한다 (collate_fn은 첫 항목 타입만 보고
+        # torch.stack 한다 — 하나라도 PIL이 섞이면 거기서 터진다).
+        self.embedding_dim = (
+            len(next(iter(image_embeddings.values()))) if image_embeddings else None
+        )
+        self.missing_embeddings = 0
 
     def __len__(self) -> int:
         return len(self.content_texts)
@@ -44,8 +50,20 @@ class MultiModalDataset(Dataset):
         content_text = self.content_texts[idx]
         image_path = self.image_paths[idx]
 
-        if self.image_embeddings is not None and image_path in self.image_embeddings:
-            image = torch.tensor(self.image_embeddings[image_path], dtype=torch.float32)
+        if self.image_embeddings is not None:
+            emb = self.image_embeddings.get(image_path)
+            if emb is not None:
+                image = torch.tensor(emb, dtype=torch.float32)
+            else:
+                # 임베딩이 없는 항목(로컬 파일 없음 → image_path가 http URL이거나 빈 문자열).
+                # 여기서 아래 PIL 경로로 떨어뜨리면 세 가지가 한꺼번에 잘못된다:
+                #   1) 배치에 텐서와 PIL이 섞여 collate_fn의 torch.stack이 터진다,
+                #   2) 학습 스텝마다 원격 이미지를 받으러 나간다(에폭마다 반복),
+                #   3) 실패 시 전부 같은 검은 이미지가 되어 "이미지 없음" 항목끼리
+                #      CLIP 공간의 한 점에 뭉친다 — 조용히 변별력을 깎는다.
+                # 0 벡터로 통일해 "시각 신호 없음"을 명시한다.
+                image = torch.zeros(self.embedding_dim, dtype=torch.float32)
+                self.missing_embeddings += 1
         else:
             try:
                 if str(image_path).startswith("http"):
