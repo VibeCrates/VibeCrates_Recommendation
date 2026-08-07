@@ -40,7 +40,8 @@ def main(args):
         num_epochs_stage1=args.epochs_stage1,
         num_epochs_stage2=args.epochs_stage2,
         batch_size=args.batch_size,
-        learning_rate=args.learning_rate
+        learning_rate=args.learning_rate,
+        early_stopping_patience=args.early_stopping_patience,
     )
     logger.info(f"Training config: {config.to_dict()}")
     
@@ -166,6 +167,13 @@ if __name__ == '__main__':
         type=int,
         default=15,
         help='Number of epochs for stage 2 (distillation)'
+    )
+    parser.add_argument(
+        '--early-stopping-patience',
+        type=int,
+        default=3,
+        help='개선 없는 에폭이 이만큼 연속되면 중단. 각 스테이지의 best 체크포인트는 '
+             'models/best_stage{1,2}.pt에 저장되고 스테이지 종료 시 되불러온다.'
     )
     
     # Device arguments

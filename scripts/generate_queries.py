@@ -145,16 +145,31 @@ def load_image(domain: str, item_id: str, url: str) -> Image.Image:
     return Image.open(BytesIO(r.content)).convert("RGB")
 
 
+MIN_PARTS = 3
+
+
 def validate_dsv(text: str) -> str | None:
-    # "[Output]" 같은 레이블 라인 건너뛰고 첫 유효 DSV 줄 반환
+    """레이블 줄을 건너뛰고 첫 유효 DSV 줄에서 앞 3개 쿼리를 취한다.
+
+    이전에는 파트가 **정확히 3개**여야 통과시켰다. 그 결과 movie 12.9% / book 14.6%가
+    폐기됐는데, 실패분 64건을 재생성해 원본 출력을 확인해 보니(2026-08-07) 89%가
+    "쿼리가 3개가 아니라 7~16개"였다. 내용 자체는 정상이다:
+
+      [Toy Story] 'vibrant toy adventure|childhood nostalgia|innocent playtime joy|
+                   warmth from pixels|toy dreams awakening|friendship under stars|...'
+
+    프롬프트가 3개를 요구해도 모델이 목록을 늘어놓는 것이고, 이건 품질 문제가 아니라
+    형식 문제다. 앞 3개를 취해 2만 건 이상을 GPU 재생성 없이 회수한다.
+    (3개 미만이거나 구분자가 없는 줄은 그대로 거절한다 — 실패의 나머지 4.7%.)
+    """
     for line in text.strip().splitlines():
         line = line.strip()
         if not line or line.startswith("["):
             continue
         parts = [p.strip() for p in line.split("|")]
-        # 정확히 4개이고, 각 파트가 비어있지 않으며, 각 파트 내 줄바꿈 없을 것
-        if len(parts) == 3 and all(parts) and all("\n" not in p for p in parts):
-            return "|".join(parts)
+        if len(parts) >= MIN_PARTS and all(parts[:MIN_PARTS]) and \
+                all("\n" not in p for p in parts[:MIN_PARTS]):
+            return "|".join(parts[:MIN_PARTS])
     return None
 
 
