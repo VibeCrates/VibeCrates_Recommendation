@@ -130,7 +130,11 @@ class TwoStageTrainer:
 
     @torch.no_grad()
     def _validate_stage_2(self, val_loader) -> float:
-        """Stage 2 validation: KL-Divergence between z_content (student) and z_query (teacher) distributions."""
+        """Stage 2 validation: 학습과 같은 InfoNCE(z_content ↔ z_query, in-batch negatives).
+
+        학습 손실과 같은 식이어야 early stopping이 옳은 지점을 고른다. 배치 크기에 따라
+        오답 수가 달라져 값이 변하므로, 실행 간 비교는 같은 batch_size에서만 유효하다.
+        """
         self.model.eval()
         total_loss = 0.0
 
@@ -138,11 +142,7 @@ class TwoStageTrainer:
             batch = {k: v.to(self.device) if isinstance(v, torch.Tensor) else v
                      for k, v in batch.items()}
             outputs = self.model(batch)
-            z_content, z_query = outputs['z_content'], outputs['z_query']
-
-            teacher_dist = F.log_softmax(F.normalize(z_query, p=2, dim=-1), dim=-1)
-            student_dist = F.log_softmax(z_content, dim=-1)
-            loss = self.distillation_loss_fn(student_dist, teacher_dist)
+            loss = self.contrastive_loss_fn(outputs['z_content'], outputs['z_query'])
             total_loss += loss.item()
 
         self.model.train()
@@ -177,17 +177,25 @@ class TwoStageTrainer:
                 outputs = self.model(batch)
                 z_content, z_query = outputs["z_content"], outputs["z_query"]
 
-                with torch.no_grad():
-                    teacher_dist = F.log_softmax(F.normalize(z_query, p=2, dim=-1), dim=-1)
-                student_dist = F.log_softmax(z_content, dim=-1)
-
-                loss = self.distillation_loss_fn(student_dist, teacher_dist)
+                # 검색은 z_query·z_content 내적으로 이뤄지므로, 이 단계의 손실은 그 기하를
+                # 다듬어야 한다. 배치 안의 다른 아이템을 오답으로 써서 "자기 쿼리에는 가깝게,
+                # 나머지 N-1개보다는 멀게"를 학습시킨다.
+                #
+                # 이전에는 KLDiv(log_softmax(z_content, dim=-1), log_softmax(z_query, dim=-1))
+                # 였다 — 후보가 아니라 768개 임베딩 "차원"에 대한 분포를 맞추는 형태다.
+                # 차원은 배타적 선택지가 아니라 좌표라서 질문 자체가 성립하지 않고, 수치적으로도
+                # L2 정규화된 768차원 벡터는 성분이 ±1/√768≈0.036이라 softmax가 거의 균등해진다.
+                # 실측상 완전히 무관한 두 벡터의 KL이 0.00128인데 학습 val loss는 0.00031로,
+                # "잘 맞춤"과 "무관함"이 손실 값에서 구분되지 않아 기울기가 소멸했다.
+                # 그 결과 content_block이 사실상 학습되지 않았다(아이템 간 평균 코사인
+                # 랜덤 초기화 0.352 → 15에폭 후 0.441).
+                loss = self.contrastive_loss_fn(z_content, z_query)
                 loss.backward()
                 optimizer.step()
 
                 self.history.add_stage2_batch(epoch, loss.item())
                 total_loss += loss.item()
-                progress_bar.set_postfix({"loss": f"{loss.item():.6f}"})
+                progress_bar.set_postfix({"loss": f"{loss.item():.4f}"})
 
             avg_loss = total_loss / len(train_loader)
             logger.info(f"Stage 2 - Epoch {epoch+1} Average Loss: {avg_loss:.4f}")
@@ -201,7 +209,7 @@ class TwoStageTrainer:
                     best_val_loss = val_loss
                     patience_counter = 0
                     torch.save(self.model.state_dict(), ckpt_path)
-                    logger.info(f"Stage 2 - Best checkpoint saved (val_loss={best_val_loss:.6f})")
+                    logger.info(f"Stage 2 - Best checkpoint saved (val_loss={best_val_loss:.4f})")
                 else:
                     patience_counter += 1
                     logger.info(f"Stage 2 - No improvement ({patience_counter}/{self.config.early_stopping_patience})")
@@ -211,4 +219,4 @@ class TwoStageTrainer:
 
         if os.path.exists(ckpt_path):
             self.model.load_state_dict(torch.load(ckpt_path, map_location=self.device))
-            logger.info(f"Stage 2 - Loaded best checkpoint (val_loss={best_val_loss:.6f})")
+            logger.info(f"Stage 2 - Loaded best checkpoint (val_loss={best_val_loss:.4f})")
