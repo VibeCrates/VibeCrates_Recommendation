@@ -20,10 +20,14 @@ import torch.nn.functional as F
 
 from src.models.recommender import DualEncoderModel
 
-MODEL_PATH = "models/trained_model.pt"
-INDEX_DIR  = "indexes"
+MODEL_PATH = os.environ.get("EVAL_MODEL_PATH", "models/trained_model.pt")
+INDEX_DIR  = os.environ.get("EVAL_INDEX_DIR", "indexes")
 OUT_DIR    = "experiments"
-OUT_CSV    = f"{OUT_DIR}/eval_lang_20260618.csv"
+# 실행 날짜로 파일명을 만든다. 이전에는 20260618로 하드코딩돼 있어 재실행하면 6월
+# baseline(eval_lang_20260618.csv)을 덮어썼다 — 비교 대상 자체가 사라진다.
+OUT_CSV    = os.environ.get(
+    "EVAL_OUT_CSV", f"{OUT_DIR}/eval_lang_{__import__('datetime').date.today():%Y%m%d}.csv"
+)
 DEVICE     = "cuda" if torch.cuda.is_available() else "cpu"
 
 # ──────────────────────────────────────────────────────────────────────────────

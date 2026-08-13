@@ -27,7 +27,16 @@ INDEX_DIR = os.getenv("INDEX_DIR", "indexes")
 
 
 def build_and_save(domain: str, model: DualEncoderModel, device: torch.device, batch_size: int,
-                   index_dir: str = INDEX_DIR) -> None:
+                   index_dir: str = INDEX_DIR, image_embeddings=None) -> None:
+    """image_embeddings를 반드시 학습 때와 같은 것으로 넘겨야 한다.
+
+    넘기지 않으면 MultiModalDataset이 PIL 경로로 떨어져 **학습과 다른 이미지**를 쓴다.
+    로컬 파일이 없는 항목은 학습 시 0 벡터였는데(dataset.py), 인덱싱 시에는 image_path에
+    남아 있던 http URL로 실제 이미지를 내려받아 인코딩한다 — music 13,290건(33%),
+    book 3%, movie 2.2%가 학습·검색에서 서로 다른 시각 신호를 갖게 된다.
+    부작용으로 느리기도 하다: 8/7 실행에서 music 40K가 2시간 44분 걸렸다(다운로드 때문에,
+    book 110K가 39분인 것과 대비된다).
+    """
     cfg = DOMAIN_CONFIG[domain]
     df = pd.read_csv(cfg["csv"], low_memory=False)
     std_df = prepare_domain_df(domain, df, image_base_dir=IMAGE_DIR)
@@ -38,6 +47,7 @@ def build_and_save(domain: str, model: DualEncoderModel, device: torch.device, b
         content_texts=std_df["content_text"].tolist(),
         image_paths=std_df["image_path"].tolist(),
         queries=std_df["query"].fillna("").tolist(),
+        image_embeddings=image_embeddings,
     )
     loader = DataLoader(dataset, batch_size=batch_size, shuffle=False, collate_fn=collate_fn)
 
@@ -67,6 +77,10 @@ def main():
     parser.add_argument("--domains", nargs="+", default=["movie", "music", "book"])
     parser.add_argument("--batch-size", type=int, default=64)
     parser.add_argument("--model-path", default=MODEL_PATH)
+    parser.add_argument("--image-embeddings", default=None,
+                        help="학습에 쓴 것과 같은 .pt. 생략하면 인덱스가 학습과 다른 "
+                             "이미지를 쓰게 된다(build_and_save 주석 참조)")
+    parser.add_argument("--index-dir", default=INDEX_DIR)
     args = parser.parse_args()
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -75,8 +89,16 @@ def main():
     model.load_state_dict(torch.load(args.model_path, map_location=device))
     model.to(device)
 
+    image_embeddings = None
+    if args.image_embeddings:
+        image_embeddings = torch.load(args.image_embeddings, map_location="cpu", weights_only=False)
+        print(f"Loaded {len(image_embeddings):,} image embeddings")
+    else:
+        print("[warn] --image-embeddings 없음 — 인덱스가 학습과 다른 이미지를 쓴다")
+
     for domain in args.domains:
-        build_and_save(domain, model, device, args.batch_size)
+        build_and_save(domain, model, device, args.batch_size,
+                       index_dir=args.index_dir, image_embeddings=image_embeddings)
 
     print("Done.")
 
