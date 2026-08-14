@@ -1,0 +1,23 @@
+# 이미지에 들어가면 안 되는 것들. 모델·인덱스·데이터는 실행 시 볼륨으로 마운트한다
+# (Dockerfile 주석 참조) — 여기 두면 빌드 컨텍스트 전송만 수 GB가 된다.
+models/
+indexes/
+indexes_*/
+data/
+experiments/
+logs/
+checkpoints/
+for_result_report/
+
+.git/
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pt
+*.parquet
+*.csv
+
+notebooks/
+reports/
+docs/

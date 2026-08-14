@@ -1,17 +1,39 @@
 """
 API Routes
 """
-from fastapi import APIRouter, Depends, HTTPException
+from datetime import datetime, timezone
 
-from .dependencies import get_model_manager
+from fastapi import APIRouter, Depends, HTTPException, Query
+
+from .dependencies import get_model_manager, get_manager_unchecked
 from .schemas import (
     HealthCheckResponse,
     ItemInfoResponse,
+    PingResponse,
     RecommendationRequest,
     RecommendationResponse,
 )
 
 router = APIRouter(prefix="/api/v1", tags=["recommendations"])
+
+
+@router.get("/ping", response_model=PingResponse)
+async def ping(
+    n: int | None = Query(default=None, description="돌려받고 싶은 숫자. 생략하면 기본값 0"),
+) -> PingResponse:
+    """백엔드 ↔ 추천 서버 통신 확인용.
+
+    **모델·인덱스에 의존하지 않는다.** 통신 경로(네트워크, 포트, 프록시, 컨테이너)만
+    확인하는 것이 목적이므로, 모델이 없어도 200을 돌려줘야 실패 지점이 분리된다.
+    n을 실어 보내면 그대로 돌려주므로 요청 본문이 실제로 전달됐는지도 함께 확인된다.
+    """
+    manager = get_manager_unchecked()
+    return PingResponse(
+        value=n if n is not None else 0,
+        received=n,
+        server_time=datetime.now(timezone.utc).isoformat(),
+        model_loaded=manager.is_model_ready(),
+    )
 
 
 @router.get("/health", response_model=HealthCheckResponse)
