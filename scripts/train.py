@@ -75,7 +75,7 @@ def main(args):
     
     # Initialize model
     logger.info("Initializing DualEncoderModel...")
-    model = DualEncoderModel()
+    model = DualEncoderModel(query_lora=args.query_lora)
     
     # Initialize trainer
     logger.info("Initializing trainer...")
@@ -168,6 +168,12 @@ if __name__ == '__main__':
         type=int,
         default=15,
         help='Number of epochs for stage 2 (distillation)'
+    )
+    parser.add_argument(
+        '--query-lora', action='store_true',
+        help='개선안 1: QueryBlock의 CLIP 텍스트 인코더에 LoRA를 붙여 쿼리 쪽도 적응 가능하게 '
+             '한다(콘텐츠 TextBlock과 대칭). state_dict 키가 달라지므로 이 플래그로 만든 '
+             '체크포인트는 build_index/eval에서도 같은 플래그로 읽어야 한다.'
     )
     parser.add_argument(
         '--sample-one-query', action='store_true',

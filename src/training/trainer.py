@@ -43,12 +43,53 @@ class TwoStageTrainer:
         logger.info("Training finished.")
         return self.history
 
+    @staticmethod
+    def _is_stage1_trainable(name: str) -> bool:
+        """Stage 1에서 열 파라미터: LoRA 어댑터 + 각 블록의 **헤드** MLP.
+
+        이전 규칙은 `'lora' in name or 'mlp' in name`이었는데, CLIP 트랜스포머의 각 층에
+        `mlp`라는 이름의 feed-forward 서브모듈이 있어서 인코더 내부까지 전부 열렸다.
+        생성자에서 `requires_grad = False`로 동결한 것을 여기서 되살려 놓는 셈이라,
+        "CLIP은 동결하고 LoRA/헤드만 학습한다"는 설계가 실제로는 지켜지지 않았다:
+
+            query_block  헤드 1,574,656 / LoRA 589,824 / 인코더 내부  56,669,184  ← 열림
+            image_block  헤드 1,836,800 / LoRA       0 / 인코더 내부 201,449,472  ← 열림
+            text_block   헤드 1,574,656 / LoRA 589,824 / 인코더 내부          0  ← 정상
+
+        SBERT만 무사했던 이유는 내부 층 이름이 intermediate.dense/output.dense라
+        'mlp'에 걸리지 않기 때문이다. 결과적으로 CLIP 사전학습 지식이 19만 건·25에폭
+        full fine-tuning으로 덮여 catastrophic forgetting 위험이 컸고, Stage 1이
+        6에폭부터 과적합(train↓ val↑)한 것도 이와 무관하지 않다.
+
+        헤드 MLP는 `<block>.mlp.`로 시작하고 인코더 내부 FFN은 `...encoder.layers.N.mlp.`
+        처럼 중간 경로에 있으므로, 앞 두 조각으로 판별한다.
+        """
+        if "lora" in name:
+            return True
+        parts = name.split(".")
+        return len(parts) > 1 and parts[1] == "mlp"
+
+    def _log_trainable(self, stage: str) -> None:
+        """무엇이 실제로 열렸는지 블록별로 찍는다.
+
+        이름 규칙으로 동결/해제를 정하는 구조라 의도와 실제가 조용히 어긋날 수 있다
+        (실제로 'mlp' in name이 CLIP 내부 FFN까지 열어 258M을 full fine-tuning 했다).
+        학습 시작 시점에 수치로 남겨두면 다음에는 로그만 봐도 잡힌다.
+        """
+        by_block: dict[str, int] = {}
+        total = 0
+        for name, param in self.model.named_parameters():
+            if param.requires_grad:
+                blk = name.split(".")[0]
+                by_block[blk] = by_block.get(blk, 0) + param.numel()
+                total += param.numel()
+        detail = " / ".join(f"{k} {v:,}" for k, v in sorted(by_block.items()))
+        logger.info(f"{stage} - 학습 파라미터 {total:,} ({detail})")
+
     def _train_stage_1(self, train_loader, val_loader):
         for name, param in self.model.named_parameters():
-            if 'lora' in name or 'mlp' in name:
-                param.requires_grad = True
-            else:
-                param.requires_grad = False
+            param.requires_grad = self._is_stage1_trainable(name)
+        self._log_trainable("Stage 1")
 
         optimizer = optim.AdamW(
             filter(lambda p: p.requires_grad, self.model.parameters()),
@@ -154,6 +195,7 @@ class TwoStageTrainer:
                 param.requires_grad = True
             else:
                 param.requires_grad = False
+        self._log_trainable("Stage 2")
 
         optimizer = optim.AdamW(
             filter(lambda p: p.requires_grad, self.model.parameters()),

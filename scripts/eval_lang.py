@@ -151,9 +151,13 @@ DOMAINS = ["movie", "music", "book", "all"]
 TOP_K = 10   # 5 → 10 (2026-08-14): 표본을 늘려 표준오차를 낮춘다
 
 
+# --query-lora로 학습한 체크포인트는 state_dict 키가 다르므로 같은 구조로 만들어야 한다.
+QUERY_LORA = os.environ.get("EVAL_QUERY_LORA", "0") == "1"
+
+
 def load_model(path: str) -> DualEncoderModel:
-    print(f"모델 로딩: {path}", flush=True)
-    model = DualEncoderModel()
+    print(f"모델 로딩: {path} (query_lora={QUERY_LORA})", flush=True)
+    model = DualEncoderModel(query_lora=QUERY_LORA)
     state = torch.load(path, map_location=DEVICE, weights_only=False)
     model.load_state_dict(state)
     model.to(DEVICE)

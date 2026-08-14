@@ -99,7 +99,8 @@ class QueryBlock(nn.Module):
     Input: query_text (max 77 tokens)
     Output: z_query (768 dim)
     """
-    def __init__(self, model_name: str = 'openai/clip-vit-large-patch14', output_dim: int = 768):
+    def __init__(self, model_name: str = 'openai/clip-vit-large-patch14', output_dim: int = 768,
+                 use_lora: bool = False):
         super().__init__()
         self.processor = CLIPProcessor.from_pretrained(model_name)
         self.text_encoder = CLIPTextModel.from_pretrained(model_name)
@@ -107,6 +108,28 @@ class QueryBlock(nn.Module):
         # Freeze CLIP parameters
         for param in self.text_encoder.parameters():
             param.requires_grad = False
+
+        # 개선안 1 (설계 노트 근본원인 1) — 쿼리 인코더 대칭화.
+        # 콘텐츠 쪽 TextBlock은 SBERT+LoRA로 적응 가능한데 쿼리 쪽만 완전 동결이라
+        # 인코더가 비대칭이었다. CLIP text는 이미지-캡션으로 학습돼 구체·시각 언어에
+        # 강하고 은유에 약한데, 동결이라 poet 언어에 적응할 capacity가 없다.
+        # LoRA를 붙여 소량의 파라미터만 여는 것이 TextBlock과 대칭인 최소 변경안이다.
+        # target_modules는 CLIP의 어텐션 명명(q_proj/v_proj)을 따른다 — mpnet의 q/v와 다르다.
+        self.use_lora = use_lora
+        if use_lora:
+            lora_config = LoraConfig(
+                r=16,
+                lora_alpha=32,
+                target_modules=["q_proj", "v_proj"],
+                lora_dropout=0.1,
+                bias="none",
+                # task_type은 지정하지 않는다. FEATURE_EXTRACTION을 주면 peft가
+                # PeftModelForFeatureExtraction으로 감싸는데, 그 forward가 inputs_embeds를
+                # 넘겨 CLIPTextTransformer 내부의 encoder 호출과 충돌한다
+                # ("got multiple values for keyword argument 'inputs_embeds'").
+                # task_type 없이 감싸면 forward가 base 모델로 그대로 위임된다.
+            )
+            self.text_encoder = get_peft_model(self.text_encoder, lora_config)
 
         self.mlp = MLP(self.text_encoder.config.hidden_size, output_dim)
 
@@ -148,12 +171,15 @@ class DualEncoderModel(nn.Module, BaseRecommender):
     """
     The main model that orchestrates all blocks for training and inference.
     """
-    def __init__(self):
+    def __init__(self, query_lora: bool = False):
         nn.Module.__init__(self)
         BaseRecommender.__init__(self, name="DualEncoderModel")
         self.text_block = TextBlock()
         self.image_block = ImageBlock()
-        self.query_block = QueryBlock()
+        # query_lora=True면 QueryBlock의 CLIP 텍스트 인코더에 LoRA가 붙는다(개선안 1).
+        # 그 파라미터 이름에 'lora'가 들어가므로 Stage 1의 requires_grad 규칙
+        # ('lora' or 'mlp')에 자동으로 포함된다 — 트레이너 수정은 필요 없다.
+        self.query_block = QueryBlock(use_lora=query_lora)
         self.content_block = ContentBlock()
 
     def encode_content(self, text_list: list[str], images):

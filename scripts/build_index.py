@@ -81,11 +81,13 @@ def main():
                         help="학습에 쓴 것과 같은 .pt. 생략하면 인덱스가 학습과 다른 "
                              "이미지를 쓰게 된다(build_and_save 주석 참조)")
     parser.add_argument("--index-dir", default=INDEX_DIR)
+    parser.add_argument("--query-lora", action="store_true",
+                        help="--query-lora로 학습한 체크포인트를 읽을 때 필요 (state_dict 키가 다르다)")
     args = parser.parse_args()
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Loading model from {args.model_path} on {device}")
-    model = DualEncoderModel()
+    model = DualEncoderModel(query_lora=args.query_lora)
     model.load_state_dict(torch.load(args.model_path, map_location=device))
     model.to(device)
 
