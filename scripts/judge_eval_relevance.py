@@ -249,10 +249,13 @@ def main():
         cells = "".join(f"{row[r]:>14.3f}" for r in runs)
         tail = ""
         if len(runs) > 1:
-            a = judged[(judged.style == style) & (judged.run_label == runs[-2])]["value"]
-            b = judged[(judged.style == style) & (judged.run_label == runs[-1])]["value"]
+            # judged["style"]로 써야 한다 — judged.style은 pandas의 Styler 속성이라
+            # 컬럼이 아니라 Styler 객체가 잡히고, 비교가 조용히 전부 False가 된다.
+            a = judged[(judged["style"] == style) & (judged["run_label"] == runs[-2])]["value"]
+            b = judged[(judged["style"] == style) & (judged["run_label"] == runs[-1])]["value"]
             delta = b.mean() - a.mean()
-            se = (a.var(ddof=1) / len(a) + b.var(ddof=1) / len(b)) ** 0.5
+            se = ((a.var(ddof=1) / len(a) + b.var(ddof=1) / len(b)) ** 0.5
+                  if len(a) > 1 and len(b) > 1 else 0.0)
             tail = f"{delta:>+9.3f}{(abs(delta) / se if se else 0):>8.1f}"
         lines.append("  " + f"{style:16s}" + cells + tail)
     lines.append("  ※ SE배수 2 이상이면 유의, 1 미만이면 노이즈로 본다 (마지막 두 실행 기준)")
