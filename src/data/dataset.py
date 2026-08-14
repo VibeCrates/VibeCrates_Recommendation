@@ -2,6 +2,8 @@
 Custom PyTorch Dataset for multi-modal recommendation data.
 Handles text, image, and query loading.
 """
+import random
+
 import torch
 from torch.utils.data import Dataset
 from PIL import Image
@@ -27,6 +29,7 @@ class MultiModalDataset(Dataset):
         queries: List[str],
         image_size: Tuple[int, int] = (224, 224),
         image_embeddings: Optional[Dict[str, np.ndarray]] = None,
+        sample_one_query: bool = False,
     ):
         assert len(content_texts) == len(image_paths) == len(queries), \
             "All input lists must have the same length"
@@ -36,6 +39,15 @@ class MultiModalDataset(Dataset):
         self.queries = queries
         self.image_size = image_size
         self.image_embeddings = image_embeddings  # {image_path: np.array(D)}
+        # 개선안 2 (설계 노트 근본원인 2) — 학습 시 아이템당 쿼리 1개만 무작위로 쓴다.
+        # encode_query가 Poet/Space/Philosopher 3개를 mean-pooling 하면 콘텐츠는 세 방향의
+        # 타협 centroid에 정렬되고, 개별 poet 쿼리는 한 번도 검색 앵커로 학습되지 않는다.
+        # 추론 시 순수 poet 쿼리가 그 centroid에서 벗어나 실패하는 것이 6월 평가에서 poet이
+        # 전역 최하였던 원인 중 하나다. 매 스텝 하나를 뽑으면 에폭을 거치며 콘텐츠가 세
+        # 페르소나를 각각 직접 앵커로 경험하고, 같은 아이템의 다른 페르소나가 배치 안에서
+        # false negative가 되는 일도 없다(설계 노트의 "방법 B").
+        # mean-pooling은 추론 경로(멀티 쿼리 입력)에만 남는다 — 이 플래그는 학습에서만 켠다.
+        self.sample_one_query = sample_one_query
         # 임베딩을 쓰는 경우 배치 전체가 텐서여야 한다 (collate_fn은 첫 항목 타입만 보고
         # torch.stack 한다 — 하나라도 PIL이 섞이면 거기서 터진다).
         self.embedding_dim = (
@@ -83,6 +95,9 @@ class MultiModalDataset(Dataset):
             query = [q.strip() for q in raw.split("|") if q.strip()]
         else:
             query = []
+
+        if self.sample_one_query and len(query) > 1:
+            query = [random.choice(query)]
 
         return {
             "content_text": content_text,

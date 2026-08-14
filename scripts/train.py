@@ -66,6 +66,7 @@ def main(args):
         num_workers=args.num_workers,
         random_seed=config.random_seed,
         image_embeddings=image_embeddings,
+        sample_one_query=args.sample_one_query,
     )
     
     train_loader = dataloaders['train']
@@ -167,6 +168,11 @@ if __name__ == '__main__':
         type=int,
         default=15,
         help='Number of epochs for stage 2 (distillation)'
+    )
+    parser.add_argument(
+        '--sample-one-query', action='store_true',
+        help='개선안 2: 학습 시 아이템당 DSV 쿼리 3개 중 1개를 매 스텝 무작위로 뽑는다. '
+             '끄면 3개를 mean-pool 해 콘텐츠가 세 방향의 타협 centroid에 정렬된다.'
     )
     parser.add_argument(
         '--early-stopping-patience',

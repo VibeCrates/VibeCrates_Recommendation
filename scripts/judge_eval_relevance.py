@@ -221,20 +221,41 @@ def main():
                       f"  완전일치 {agree:.1%} / 인접일치(±1등급) {adj:.1%} / 대상 {len(v):,}행",
                       "  ※ 완전일치가 낮으면 이하 절대값보다 실행 간 '차이'만 보아야 한다.", ""]
 
-    lines += ["## 1. 실행별 종합", f"  {'실행':10s} {'행':>6s} {'avg':>7s} {'o율':>7s} {'a율':>7s} {'x율':>7s}"]
+    lines += ["## 1. 실행별 종합", f"  {'실행':14s} {'행':>6s} {'avg':>7s} {'±SE':>6s} "
+              f"{'o율':>7s} {'a율':>7s} {'x율':>7s}"]
     for run, g in judged.groupby("run_label"):
-        lines.append(f"  {run:10s} {len(g):>6,} {g['value'].mean():>7.3f} "
+        se = g["value"].std(ddof=1) / (len(g) ** 0.5)
+        lines.append(f"  {run:14s} {len(g):>6,} {g['value'].mean():>7.3f} {se:>6.3f} "
                      f"{(g['grade']=='o').mean():>7.1%} {(g['grade']=='a').mean():>7.1%} "
                      f"{(g['grade']=='x').mean():>7.1%}")
+
+    # 확장 쿼리(pair_id 5~10)는 6월에 없다. 섞어서 평균 내면 baseline 대비 수치가 무의미해지므로
+    # 같은 쿼리 집합끼리만 비교할 수 있도록 분리해 둔다.
+    if "pair_id" in judged.columns and (judged["pair_id"] > 4).any():
+        base = judged[judged["pair_id"] <= 4]
+        lines += ["", "  [6월과 공통인 쿼리(pair_id 1~4)로 한정]"]
+        for run, g in base.groupby("run_label"):
+            se = g["value"].std(ddof=1) / (len(g) ** 0.5)
+            lines.append(f"  {run:14s} {len(g):>6,} {g['value'].mean():>7.3f} {se:>6.3f}")
 
     lines += ["", "## 2. 스타일별 avg_score (핵심 — poet이 6월 최하였다)"]
     piv = judged.pivot_table(index="style", columns="run_label", values="value", aggfunc="mean")
     runs = list(piv.columns)
-    lines.append("  " + f"{'스타일':16s}" + "".join(f"{r:>10s}" for r in runs) + f"{'변화':>9s}")
+    # 마지막 두 실행의 차이를 표준오차로 나눠 노이즈와 구분한다. 스타일당 표본이 적으면
+    # 0.1 수준의 차이는 판정할 수 없다 — 8/13 실행에서 poet +0.138이 1.5 SE였다.
+    lines.append("  " + f"{'스타일':16s}" + "".join(f"{r:>14s}" for r in runs) +
+                 f"{'변화':>9s}{'SE배수':>8s}")
     for style, row in piv.iterrows():
-        delta = row[runs[-1]] - row[runs[0]] if len(runs) > 1 else float("nan")
-        lines.append("  " + f"{style:16s}" + "".join(f"{row[r]:>10.3f}" for r in runs) +
-                     (f"{delta:>+9.3f}" if len(runs) > 1 else ""))
+        cells = "".join(f"{row[r]:>14.3f}" for r in runs)
+        tail = ""
+        if len(runs) > 1:
+            a = judged[(judged.style == style) & (judged.run_label == runs[-2])]["value"]
+            b = judged[(judged.style == style) & (judged.run_label == runs[-1])]["value"]
+            delta = b.mean() - a.mean()
+            se = (a.var(ddof=1) / len(a) + b.var(ddof=1) / len(b)) ** 0.5
+            tail = f"{delta:>+9.3f}{(abs(delta) / se if se else 0):>8.1f}"
+        lines.append("  " + f"{style:16s}" + cells + tail)
+    lines.append("  ※ SE배수 2 이상이면 유의, 1 미만이면 노이즈로 본다 (마지막 두 실행 기준)")
 
     lines += ["", "## 3. 도메인별 avg_score"]
     piv2 = judged.pivot_table(index="domain_filter", columns="run_label", values="value", aggfunc="mean")
