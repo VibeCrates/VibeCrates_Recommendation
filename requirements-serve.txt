@@ -1,0 +1,37 @@
+# 서빙(API) 전용 의존성.
+#
+# 왜 나누는가:
+#   requirements.txt는 학습·실험·개발 도구까지 모두 담고 있다(jupyter, matplotlib,
+#   black, mypy, pytest, faiss, sklearn...). 그것을 그대로 컨테이너에 넣으면 이미지가
+#   불필요하게 커지고, 빌드가 느려지고, 서빙과 무관한 패키지가 깨져서 배포가 막히는
+#   일이 생긴다. 서버에 올라가는 것은 적을수록 좋다.
+#
+# 포함 기준: `uvicorn src.api.main:app`으로 앱을 띄우고 /ping·/health·/recommend를
+#   처리하는 데 실제로 필요한 것만. 인덱스는 미리 만들어 둔 파일을 읽기만 하므로
+#   (dependencies.ModelManager.load_index) 학습·인덱스 생성용 패키지는 빠진다.
+
+# --- API 서버 ---
+fastapi>=0.95.0
+uvicorn[standard]>=0.21.0
+pydantic>=1.9.0
+
+# --- 모델 추론 ---
+# 학습은 GPU가 필요하지만 추론은 쿼리 1건당 CLIP 텍스트 인코더 통과 + 인덱스와의
+# 내적뿐이라 CPU로 충분하다. 컨테이너에서는 CPU 빌드를 쓴다(Dockerfile 참조).
+torch>=2.0.0
+transformers>=4.40.0
+sentence-transformers>=2.2.0
+peft>=0.5.0
+
+# --- 인덱스/메타 로딩 ---
+numpy>=1.21.0
+pandas>=1.3.0
+pyarrow>=14.0.0   # meta.parquet 읽기. 없으면 인덱스가 조용히 로드되지 않는다
+                  # (8/7 서버에서 실제로 이것 때문에 평가가 3일간 멈췄다)
+
+# 의도적으로 제외한 것 (학습·실험 전용):
+#   scikit-learn, imbalanced-learn  — preprocessing의 학습용 함수에서만 쓰인다
+#   faiss-cpu                        — 현재 검색은 torch 내적. 인덱스가 커지면 재검토
+#   matplotlib, seaborn, jupyter, ipython
+#   pytest, pytest-cov, black, flake8, mypy
+#   scipy, joblib

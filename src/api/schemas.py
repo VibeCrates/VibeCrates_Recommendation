@@ -37,3 +37,11 @@ class HealthCheckResponse(BaseModel):
     status: str = Field(default="healthy")
     model_loaded: bool = Field(default=False)
     index_built: dict = Field(default_factory=dict, description="도메인별 인덱스 구축 여부")
+
+
+class PingResponse(BaseModel):
+    """백엔드 ↔ 추천 서버 통신 확인용. 모델·인덱스와 무관하게 응답한다."""
+    value: int = Field(description="서버가 돌려주는 숫자. n을 보내면 그 값, 없으면 기본값")
+    received: Optional[int] = Field(default=None, description="요청에 실려 온 n (없으면 null)")
+    server_time: str = Field(description="서버 시각 ISO8601 — 시계·타임존 확인용")
+    model_loaded: bool = Field(description="모델 적재 여부. 통신 확인 단계에서는 false여도 정상")

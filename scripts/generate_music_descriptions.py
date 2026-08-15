@@ -241,9 +241,42 @@ def generate_qwen(processor, model, image, prompt: str) -> str:
 
 # ── main ──────────────────────────────────────────────────────────────────────
 
+def run_vllm(args, todo, cache):
+    """movie/book의 generate_item_descriptions.run_vllm과 같은 구조·같은 캐시 계약.
+    (음악은 verbalize_audio로 오디오 피처를 자연어화해 프롬프트에 넣는 점만 다르다.)"""
+    from concurrent.futures import ThreadPoolExecutor
+    from scripts.vllm_runner import VLLMRunner, chunks
+
+    runner = VLLMRunner(args.model_id)
+    done = 0
+
+    def fetch(item_id: str, row: dict):
+        try:
+            return load_image(item_id, str(row.get("img", "")))
+        except Exception:
+            return None
+
+    for batch in chunks(todo, args.batch):
+        ids = [str(r["id"]) for r in batch]
+        with ThreadPoolExecutor(max_workers=16) as ex:
+            images = list(ex.map(fetch, ids, batch))
+
+        items = [(build_prompt(pd.Series(row)), img) for row, img in zip(batch, images)]
+        for item_id, desc in zip(ids, runner.generate(items)):
+            if desc:
+                cache[item_id] = desc
+
+        done += len(batch)
+        json.dump(cache, open(CACHE_PATH, "w"), ensure_ascii=False)
+        print(f"  진행 {done:,}/{len(todo):,} (캐시 {len(cache):,})", flush=True)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model-id", default="Qwen/Qwen2.5-VL-7B-Instruct")
+    ap.add_argument("--engine", default="hf", choices=["hf", "vllm"],
+                    help="hf=batch1 참조 경로 / vllm=배치 추론 (venv_vllm에서 실행)")
+    ap.add_argument("--batch", type=int, default=512)
     ap.add_argument("--limit", type=int, default=None, help="실제 합성 시 처리 건수 제한")
     ap.add_argument("--dry-run", action="store_true", help="모델 없이 프롬프트만 조립")
     ap.add_argument("--sample", type=int, default=200, help="dry-run 샘플 수")
@@ -262,6 +295,11 @@ def main():
     if args.limit:
         todo = todo[:args.limit]
     print(f"remaining: {len(todo):,}")
+
+    if args.engine == "vllm":
+        run_vllm(args, todo, cache)
+        write_output(df, cache)
+        return
 
     processor, model = load_qwen(args.model_id)
     from tqdm import tqdm
@@ -284,6 +322,10 @@ def main():
             json.dump(cache, open(CACHE_PATH, "w"), ensure_ascii=False)
 
     json.dump(cache, open(CACHE_PATH, "w"), ensure_ascii=False)
+    write_output(df, cache)
+
+
+def write_output(df: pd.DataFrame, cache: dict):
     df["id"] = df["id"].astype(str)
     df["description_synth"] = df["id"].map(cache)
     df.to_csv(CSV_PATH, index=False)

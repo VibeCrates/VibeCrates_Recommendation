@@ -20,10 +20,14 @@ import torch.nn.functional as F
 
 from src.models.recommender import DualEncoderModel
 
-MODEL_PATH = "models/trained_model.pt"
-INDEX_DIR  = "indexes"
+MODEL_PATH = os.environ.get("EVAL_MODEL_PATH", "models/trained_model.pt")
+INDEX_DIR  = os.environ.get("EVAL_INDEX_DIR", "indexes")
 OUT_DIR    = "experiments"
-OUT_CSV    = f"{OUT_DIR}/eval_lang_20260618.csv"
+# 실행 날짜로 파일명을 만든다. 이전에는 20260618로 하드코딩돼 있어 재실행하면 6월
+# baseline(eval_lang_20260618.csv)을 덮어썼다 — 비교 대상 자체가 사라진다.
+OUT_CSV    = os.environ.get(
+    "EVAL_OUT_CSV", f"{OUT_DIR}/eval_lang_{__import__('datetime').date.today():%Y%m%d}.csv"
+)
 DEVICE     = "cuda" if torch.cuda.is_available() else "cpu"
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -71,16 +75,89 @@ QUERIES = [
     ("D", 3, "en", "Mystery thriller novel with a twist ending"),
     ("D", 4, "ko", "두 사람의 로맨스를 다룬 영화"),
     ("D", 4, "en", "A film about a romance between two people"),
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # 확장분 (pair_id 5~10, 2026-08-14 추가)
+    # 기존 1~4는 6월 사람 라벨이 붙어 있는 고정 집합이므로 건드리지 않는다 —
+    # baseline 비교는 그 부분집합으로만 해야 성립한다.
+    # 확장 이유: 스타일당 4쌍 × top-5면 스타일당 80행뿐이라 표준오차가 ~0.1이고,
+    # 실제로 stage2 손실 수정의 poet 개선(+0.138)이 1.5 SE에 그쳐 판정이 불가능했다.
+    # 스타일당 10쌍 × top-10이면 스타일당 400행으로 SE가 절반 이하가 된다.
+    # ─────────────────────────────────────────────────────────────────────────
+
+    # 철학 (Philosophical)
+    ("P", 5, "ko", "기억은 나를 얼마나 만드는가"),
+    ("P", 5, "en", "How much of me is made of memory"),
+    ("P", 6, "ko", "우연과 운명의 경계"),
+    ("P", 6, "en", "The border between chance and fate"),
+    ("P", 7, "ko", "타인을 이해한다는 것의 한계"),
+    ("P", 7, "en", "The limits of understanding another person"),
+    ("P", 8, "ko", "죽음을 앞에 둔 삶의 무게"),
+    ("P", 8, "en", "The weight of a life facing its end"),
+    ("P", 9, "ko", "옳음과 다정함 중 무엇을 택할까"),
+    ("P", 9, "en", "Choosing between being right and being kind"),
+    ("P", 10, "ko", "반복되는 일상 속의 의미"),
+    ("P", 10, "en", "Meaning inside a repeating daily life"),
+
+    # 시인 (Poet) — 추상·감각 이미지. 6월 최대 실패 지점이라 표본을 두텁게 둔다.
+    ("T", 5, "ko", "식어가는 커피처럼 멀어지는 마음"),
+    ("T", 5, "en", "A heart cooling like forgotten coffee"),
+    ("T", 6, "ko", "오래된 편지에서 나는 냄새"),
+    ("T", 6, "en", "The smell rising from an old letter"),
+    ("T", 7, "ko", "유리창에 맺힌 겨울 숨결"),
+    ("T", 7, "en", "Winter breath fogging a windowpane"),
+    ("T", 8, "ko", "말하지 못한 채 지나간 계절"),
+    ("T", 8, "en", "A season that passed without being spoken"),
+    ("T", 9, "ko", "모래처럼 빠져나가는 시간"),
+    ("T", 9, "en", "Time slipping away like sand"),
+    ("T", 10, "ko", "불 꺼진 방에 남은 온기"),
+    ("T", 10, "en", "Warmth left in a room after the lights go out"),
+
+    # 공간 (Atmosphere)
+    ("A", 5, "ko", "여름밤 열어둔 창가"),
+    ("A", 5, "en", "An open window on a summer night"),
+    ("A", 6, "ko", "눈 내리는 밤의 시골 기차역"),
+    ("A", 6, "en", "A country train station on a snowy night"),
+    ("A", 7, "ko", "늦은 밤 편의점의 형광등 불빛"),
+    ("A", 7, "en", "Fluorescent glow of a late-night convenience store"),
+    ("A", 8, "ko", "바닷가 낡은 모텔 방"),
+    ("A", 8, "en", "A worn motel room by the sea"),
+    ("A", 9, "ko", "장마철 눅눅한 지하 서점"),
+    ("A", 9, "en", "A damp basement bookshop during the rainy season"),
+    ("A", 10, "ko", "해질녘 고속도로 휴게소"),
+    ("A", 10, "en", "A highway rest stop at sunset"),
+
+    # 직접 (Direct)
+    ("D", 5, "ko", "실화를 바탕으로 한 법정 드라마"),
+    ("D", 5, "en", "A courtroom drama based on a true story"),
+    ("D", 6, "ko", "기타 리프가 강렬한 록 음악"),
+    ("D", 6, "en", "Rock music with a heavy guitar riff"),
+    ("D", 7, "ko", "가족의 비밀을 다룬 소설"),
+    ("D", 7, "en", "A novel about a family secret"),
+    ("D", 8, "ko", "1980년대를 배경으로 한 청춘 영화"),
+    ("D", 8, "en", "A coming-of-age film set in the 1980s"),
+    ("D", 9, "ko", "차분한 피아노 연주곡"),
+    ("D", 9, "en", "A calm solo piano piece"),
+    ("D", 10, "ko", "우주 탐사를 다룬 논픽션"),
+    ("D", 10, "en", "Nonfiction about space exploration"),
 ]
+
+# 6월 baseline과 비교 가능한 부분집합. 확장분을 섞어 평균 내면 baseline 대비 수치가
+# 무의미해지므로, 리포트에서 이 집합을 따로 볼 수 있도록 pair_id로 구분한다.
+BASELINE_PAIR_IDS = {1, 2, 3, 4}
 
 STYLE_NAMES = {"P": "philosophical", "T": "poet", "A": "atmosphere", "D": "direct"}
 DOMAINS = ["movie", "music", "book", "all"]
-TOP_K = 5
+TOP_K = 10   # 5 → 10 (2026-08-14): 표본을 늘려 표준오차를 낮춘다
+
+
+# --query-lora로 학습한 체크포인트는 state_dict 키가 다르므로 같은 구조로 만들어야 한다.
+QUERY_LORA = os.environ.get("EVAL_QUERY_LORA", "0") == "1"
 
 
 def load_model(path: str) -> DualEncoderModel:
-    print(f"모델 로딩: {path}", flush=True)
-    model = DualEncoderModel()
+    print(f"모델 로딩: {path} (query_lora={QUERY_LORA})", flush=True)
+    model = DualEncoderModel(query_lora=QUERY_LORA)
     state = torch.load(path, map_location=DEVICE, weights_only=False)
     model.load_state_dict(state)
     model.to(DEVICE)

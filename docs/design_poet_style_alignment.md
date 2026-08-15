@@ -12,7 +12,7 @@
 movie 0.90 / music 0.85로 균일하게 실패. “Action movie set in space”(영화 direct 쿼리)도
 전멸. 즉 음악만의 문제가 아니라 추상/은유 쿼리 전반의 정렬 실패다.
 
-## 근본 원인 (3겹)
+## 근본 원인 (4겹)
 1. **쿼리 인코더가 CLIP text + 완전 동결.** `src/models/recommender.py::QueryBlock`은
    CLIPTextModel을 freeze하고 MLP 헤드만 학습. CLIP text는 이미지-캡션으로 학습돼 구체·시각
    언어에 강하고 은유에 약하며, 동결이라 poet 언어에 적응할 capacity가 없다. (콘텐츠 쪽
@@ -22,6 +22,29 @@ movie 0.90 / music 0.85로 균일하게 실패. “Action movie set in space”(
    앵커로 학습되지 않는다. 추론 시 순수 poet 쿼리는 centroid에서 벗어나 실패.
 3. **콘텐츠 텍스트에 mood 어휘 부재.** content_text는 사실/화제 서술(overview·블러브·메타·가사)
    뿐. poet 쿼리의 mood(친밀·야간·나직함)와 SBERT 공간에서 겹칠 표적이 없다.
+4. **검색에 쓰는 표현이 순위 목적함수를 본 적이 없다.** (2026-08-13 세션 19에서 추가)
+   인덱스에 저장되고 실제로 검색되는 것은 `ContentBlock`의 출력 `z_content`(z_text ⊕ z_image
+   융합)인데, Stage 1의 대조 손실은 `z_text↔z_query`, `z_text↔z_image`, `z_image↔z_query`
+   세 쌍뿐이라 **`z_content`가 손실에 등장하지 않는다**. 재료는 정렬 학습하고 완성품은 안 한다.
+   그 융합을 학습하는 유일한 곳인 Stage 2의 손실이 잘못돼 있다:
+   ```python
+   teacher = log_softmax(normalize(z_query), dim=-1)   # 768개 임베딩 "차원"에 대한 분포
+   student = log_softmax(z_content,          dim=-1)
+   loss = KLDiv(student, teacher)
+   ```
+   증류는 **후보**에 대한 분포를 맞추는 기법인데 그 축 자리에 임베딩 차원을 넣었다. 게다가
+   L2 정규화된 768차원 벡터는 성분이 ±1/√768≈0.036 수준이라 softmax가 거의 균등해진다 —
+   실측상 **완전히 무관한 두 벡터의 KL도 0.00128**이고 학습 val loss는 0.00031이었다.
+   즉 기울기가 소멸해 융합 레이어가 사실상 학습되지 않는다. 실측 근거:
+     - 아이템 간 평균 코사인: 랜덤 초기화 0.352 → 15에폭 학습 후 0.441 (거의 안 움직임)
+     - 교사인 z_query는 0.0139로 잘 퍼져 있는데 학생이 따라가지 못했다
+     - best_stage1.pt(융합 미학습)로 검색하면 avg 0.231 / x율 77% — 사실상 무작위
+   **해법**: Stage 2를 배치 내 InfoNCE로 교체(`z_content ↔ z_query`, in-batch negatives,
+   양방향, temperature는 기존 0.07)하고, Stage 1의 손실에도 `z_content↔z_query`를 추가한다.
+   그러면 검색 대상이 처음부터 순위 신호를 받고, Stage 2는 미세조정 역할이 된다.
+   **이 결함은 6월 baseline에도 동일하게 있었다** — poet 실패의 상당 부분이 여기일 수 있고,
+   개선안 1·2를 적용해도 이 손실이 그대로면 효과가 반영될 통로가 없다. 따라서 **개선안
+   1·2·3보다 이것이 선행되어야 한다.**
 
 ---
 

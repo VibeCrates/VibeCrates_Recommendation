@@ -10,10 +10,12 @@ import pandas as pd
 import torch
 import torch.nn.functional as F
 
-from src.data.meta import build_meta_df
-from src.data.preprocessing import DOMAIN_CONFIG, prepare_domain_df
-from src.models.recommender import DualEncoderModel
 from .schemas import RecommendationItem
+
+# 무거운 것(DualEncoderModel → sentence-transformers/transformers/peft)은 여기서 import
+# 하지 않고 실제로 모델을 쓸 때 끌어온다. /api/v1/ping은 통신 경로만 확인하는 엔드포인트라
+# 모델 스택이 설치돼 있지 않아도 떠야 하는데, 모듈 최상단에서 import 하면 routes.py →
+# dependencies.py 체인을 타고 앱 자체가 뜨지 않는다.
 
 logger = logging.getLogger(__name__)
 
@@ -43,6 +45,8 @@ class ModelManager:
     # ------------------------------------------------------------------
 
     def load_model(self, model_path: str = MODEL_PATH) -> None:
+        from src.models.recommender import DualEncoderModel
+
         logger.info(f"Loading model from {model_path}")
         model = DualEncoderModel()
         state = torch.load(model_path, map_location=self.device)
@@ -80,6 +84,9 @@ class ModelManager:
         """
         if not self.is_model_ready():
             raise RuntimeError("모델을 먼저 로드하세요.")
+
+        from src.data.meta import build_meta_df
+        from src.data.preprocessing import DOMAIN_CONFIG, prepare_domain_df
 
         cfg = DOMAIN_CONFIG[domain]
         df = pd.read_csv(cfg["csv"], low_memory=False)
@@ -171,6 +178,15 @@ class ModelManager:
 
 @lru_cache(maxsize=1)
 def get_model_manager() -> ModelManager:
+    return _manager
+
+
+def get_manager_unchecked() -> ModelManager:
+    """모델 준비 여부와 무관하게 매니저를 돌려준다 (/ping 전용).
+
+    get_model_manager와 지금은 같지만, 나중에 전자에 "모델 없으면 503" 같은 검사를
+    붙이더라도 통신 확인 경로는 그 영향을 받지 않아야 하므로 분리해 둔다.
+    """
     return _manager
 
 

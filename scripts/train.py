@@ -40,7 +40,8 @@ def main(args):
         num_epochs_stage1=args.epochs_stage1,
         num_epochs_stage2=args.epochs_stage2,
         batch_size=args.batch_size,
-        learning_rate=args.learning_rate
+        learning_rate=args.learning_rate,
+        early_stopping_patience=args.early_stopping_patience,
     )
     logger.info(f"Training config: {config.to_dict()}")
     
@@ -65,6 +66,7 @@ def main(args):
         num_workers=args.num_workers,
         random_seed=config.random_seed,
         image_embeddings=image_embeddings,
+        sample_one_query=args.sample_one_query,
     )
     
     train_loader = dataloaders['train']
@@ -73,7 +75,7 @@ def main(args):
     
     # Initialize model
     logger.info("Initializing DualEncoderModel...")
-    model = DualEncoderModel()
+    model = DualEncoderModel(query_lora=args.query_lora)
     
     # Initialize trainer
     logger.info("Initializing trainer...")
@@ -100,13 +102,22 @@ def main(args):
     
     logger.info("Training completed!")
 
-    # Build item index from best model weights
+    if args.skip_index:
+        logger.info("Index build skipped (--skip-index).")
+        return
+
+    # Build item index from best model weights.
+    # image_embeddings를 반드시 넘긴다 — 넘기지 않으면 MultiModalDataset이 PIL 경로로
+    # 떨어져 학습과 다른 이미지를 쓰고(로컬 파일 없는 항목은 학습 시 0 벡터인데 여기서는
+    # http로 내려받는다), 다운로드 때문에 몇 시간이 걸린다. 8/14 실행에서 music 인덱스
+    # 하나가 2시간 넘게 돌다 중단됐다 — 임베딩을 넘기면 4분이다.
     logger.info("Building item index...")
     index_dir = args.index_dir
     domains = [args.domain] if args.domain else ["movie", "music", "book"]
     for domain in domains:
         try:
-            build_and_save(domain, model, device, batch_size=args.batch_size, index_dir=index_dir)
+            build_and_save(domain, model, device, batch_size=args.batch_size,
+                           index_dir=index_dir, image_embeddings=image_embeddings)
         except Exception as e:
             logger.warning(f"[{domain}] Index build failed: {e}")
     logger.info("Index build complete.")
@@ -166,6 +177,28 @@ if __name__ == '__main__':
         type=int,
         default=15,
         help='Number of epochs for stage 2 (distillation)'
+    )
+    parser.add_argument(
+        '--skip-index', action='store_true',
+        help='학습만 하고 인덱스는 만들지 않는다. 스크립트가 build_index.py로 따로 만들 때 쓴다.'
+    )
+    parser.add_argument(
+        '--query-lora', action='store_true',
+        help='개선안 1: QueryBlock의 CLIP 텍스트 인코더에 LoRA를 붙여 쿼리 쪽도 적응 가능하게 '
+             '한다(콘텐츠 TextBlock과 대칭). state_dict 키가 달라지므로 이 플래그로 만든 '
+             '체크포인트는 build_index/eval에서도 같은 플래그로 읽어야 한다.'
+    )
+    parser.add_argument(
+        '--sample-one-query', action='store_true',
+        help='개선안 2: 학습 시 아이템당 DSV 쿼리 3개 중 1개를 매 스텝 무작위로 뽑는다. '
+             '끄면 3개를 mean-pool 해 콘텐츠가 세 방향의 타협 centroid에 정렬된다.'
+    )
+    parser.add_argument(
+        '--early-stopping-patience',
+        type=int,
+        default=3,
+        help='개선 없는 에폭이 이만큼 연속되면 중단. 각 스테이지의 best 체크포인트는 '
+             'models/best_stage{1,2}.pt에 저장되고 스테이지 종료 시 되불러온다.'
     )
     
     # Device arguments

@@ -3,6 +3,11 @@
 최종 갱신: 2026-08-03 (세션 17) · 선행 문맥: `reports/report_session_16.txt`,
 `docs/design_poet_style_alignment.md`, `docs/design_audio_feature_integration.md`
 
+> **⚠ 이 문서는 세션 17 시점의 계획이다. 0~3단계는 실행이 끝났다(8/5~8/6).**
+> 현재 상태와 다음에 할 일은 **`reports/report_session_19.txt` 9~10절**을 볼 것.
+> 요약: description_synth 3도메인 100% 완료, 쿼리는 movie 85.8% / music 93.6% /
+> book 진행 중. 다음은 QA 리포트 판정 → prepare_dataset → 이미지 임베딩 → 3-only 학습.
+
 ## 배경 — 왜 이 작업을 하는가
 
 두 개의 진단이 하나의 작업으로 수렴했다.

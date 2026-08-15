@@ -40,6 +40,14 @@ OL_COVER = "https://covers.openlibrary.org/b/isbn/{isbn}-L.jpg?default=false"
 
 ISBN_PLACEHOLDER = "9999999999999"   # Goodreads 원본이 결측 ISBN에 쓰는 값
 
+# 블러브 최소 길이. 이보다 짧은 행은 mood 신호가 없어 description_synth 입력으로 쓰면
+# LLM이 제목·장르만 보고 환각한다. 실측된 세 유형 (전체의 0.48%):
+#   - 파싱 잔해: "Read more" 단독, "<제목> ... Read more" (Kindle 스크랩 실패분)
+#   - 블러브 아닌 메타: "Paperback available on Amazon.com",
+#     "For Ingest Only - Data needs to be cleaned up..." (Goodreads 내부 관리 문자열)
+#   - 앞부분 잘린 문장: "Herr Sommer.", "sins of New Orleans's oldest family." (BX 추출 오류)
+MIN_BLURB_CHARS = 80
+
 OUT_COLUMNS = [
     "asin", "title", "author", "category_name",
     "description", "description_clean", "imgUrl",
@@ -227,6 +235,10 @@ def merge(frames: list[pd.DataFrame]) -> pd.DataFrame:
         df["_k"] = dedup_key(df)
         # 정제 후 블러브가 비어버린 행 제거 (마케팅 문구만으로 이루어진 경우)
         df = df[~blank(df["description_clean"])]
+        # 너무 짧아 mood 신호가 없는 행 제거. 중복 제거보다 **먼저** 걸러야
+        # 같은 책을 상위 소스가 "Read more"로 선점하고 하위 소스의 온전한
+        # 블러브를 밀어내는 일이 없다.
+        df = df[df["description_clean"].str.len() >= MIN_BLURB_CHARS]
         after_clean = len(df)
 
         df = df.drop_duplicates(subset="asin", keep="first")

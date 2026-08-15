@@ -139,6 +139,7 @@ def get_dataloaders_from_df(
     num_workers: int = 0,
     random_seed: int = 42,
     image_embeddings=None,
+    sample_one_query: bool = False,
 ) -> dict:
     """
     Create DataLoaders directly from a DataFrame (already loaded / filtered).
@@ -155,6 +156,7 @@ def get_dataloaders_from_df(
         df["image_path"].tolist(),
         df["query"].tolist(),
         image_embeddings=image_embeddings,
+        sample_one_query=sample_one_query,
     )
 
     n = len(full_dataset)

@@ -1,0 +1,216 @@
+================================================================================
+VibeCrates Recommendation System — 세션 보고서 (18)
+작성일: 2026-08-05
+주제: GPU 서버 파이프라인 구축 — 3도메인 텍스트 타입 통일 실행 (진행 중 스냅샷)
+================================================================================
+
+
+## 1. 세션 배경
+
+  세션 17(2026-08-03)에서 도서 데이터셋을 3소스 병합으로 재구축(111,094권, 블러브
+  100%)했으나, 산출물이 파이프라인에 연결되지 않은 상태였다 — 모든 소비자 코드가
+  여전히 구 book_canonical.csv를 읽고 있었고, GPU 서버는 드라이버·스토리지 권한
+  제약으로 사용 불가였다.
+
+  이번 세션의 범위:
+    (1) 짧은 블러브 폐기 및 병합 재실행
+    (2) GPU 서버 가동 및 파이프라인 이관
+    (3) 이미지 수집 → description_synth 합성 → 쿼리 생성 → 학습 실행
+
+  본 보고서는 (3)의 GPU 단계가 진행 중인 시점의 스냅샷이다. 학습 결과는 미포함.
+
+
+================================================================================
+## 2. 짧은 블러브 529건 폐기
+================================================================================
+
+  세션 17 산출물에서 description_clean 80자 미만 529건을 실측·분류했다.
+
+    [파싱 잔해]      "Read more" 단독(9자), "<제목> ... Read more"  — Kindle 스크랩 실패분
+    [블러브 아닌 메타] "Paperback available on Amazon.com"
+                     "For Ingest Only - Data needs to be cleaned up..."  — Goodreads 내부 관리 문자열
+                     "40 pages of photos. National print ads..."          — 판촉 문구
+    [앞부분 잘림]     "Herr Sommer.", "sins of New Orleans's oldest family."  — BX 추출 오류
+
+  셋 다 mood 신호가 없어 description_synth 입력으로 쓰면 LLM이 제목·장르만 보고
+  환각할 재료다. merge_book_sources.py에 MIN_BLURB_CHARS=80 필터를 추가했다.
+
+  [설계 판단] 필터를 중복 제거보다 **먼저** 건다. 그래야 상위 소스가 "Read more"로
+  선점하고 하위 소스의 온전한 블러브를 밀어내는 일이 없다.
+  실제로 529건 중 순감은 500건이고, 29건은 하위 소스의 정상 블러브로 대체됐다.
+
+    이전 111,094권 → 이후 110,594권
+      goodreads 48,492 → 48,021
+      bx        42,831 → 42,823
+      kindle    19,771 → 19,750
+
+  검증: 정규화 키 unique 111,094→110,594 (잔여 중복 0), asin 중복 0,
+       description_clean 공백 0, 길이 중앙값 780자.
+
+
+================================================================================
+## 3. GPU 서버(beast) 가동 — 기존 제약 2가지 해소
+================================================================================
+
+  2026-08-03 시점의 미해결 제약이 대여 측에서 모두 처리됐다.
+
+    [해소 1] NVIDIA 드라이버 DKMS 커널 불일치 → nvidia-smi 정상.
+             RTX 5090 32GB, 드라이버 580.178.04, 커널 7.0.0-28-generic.
+    [해소 2] /mnt/data8tb 쓰기 권한 → /mnt/data8tb/friend 확보 (5.7T 여유).
+
+  환경 구축:
+    ssh 별칭 `beast` 등록 (~/.ssh/config)
+    /mnt/data8tb/friend/vibecrates/
+      env.sh       — venv PATH + HF_HOME/TORCH_HOME을 data8tb로 (홈은 OS 전용 규약)
+      venv/        — torch 2.11.0+cu128 (sm_120은 반드시 cu128 빌드)
+      venv_vllm/   — vllm 0.26.0 + torch 2.11.0+cu130 (학습 venv와 분리)
+      repo/ models/hf/ images/ checkpoints/ logs/
+
+  [함정] RTX 5090(sm_120)에서 vLLM 엔진 초기화가 실패한다:
+         "FlashInfer requires GPUs with sm75 or higher"
+         FlashInfer의 JIT arch 검사가 Blackwell을 오판하는 것으로,
+         VLLM_USE_FLASHINFER_SAMPLER=0 + TORCH_CUDA_ARCH_LIST=12.0 으로 우회.
+         env.sh에 고정했다.
+
+
+================================================================================
+## 4. 처리량 — HF batch=1 → vLLM 배치로 34배
+================================================================================
+
+  docs/TODO.md의 지시대로 --limit으로 실측 후 결정했다.
+
+    [baseline] HF model.generate, batch=1, greedy
+      movie 200건 = 4분 55초 → 1.48 s/it (0.68 it/s)
+      GPU util 91%지만 VRAM 16.8/32GB만 사용 — 배치 여지가 그대로 남음
+      전체 28만 회 환산 → 116시간 (4.8일)
+
+    [vLLM] continuous batching, 프롬프트·디코딩 설정 동일
+      movie 512건 순수 생성 22초 → 23.2 it/s
+      총 wall 80초 (나머지는 1회성 엔진 기동)
+      전체 28만 회 환산 → 약 4~5시간
+
+  구조: scripts/vllm_runner.py (공용 러너)를 두고
+        generate_item_descriptions.py / generate_queries.py에 --engine {hf,vllm} 추가.
+        캐시 계약이 동일해 두 경로를 섞어 돌려도 기존 결과가 재사용된다
+        (실제로 baseline으로 만든 400건이 그대로 이어졌다).
+
+  디코딩 설정은 HF 경로와 일치시켰다 (greedy, max_new_tokens=160,
+  repetition_penalty=1.2). 쿼리는 DSV 한 줄이라 max_new_tokens=64.
+  생성물 register도 동일함을 샘플로 확인.
+
+
+================================================================================
+## 5. 이미지 커버리지 — movie 포스터 404 대량 발견 및 복구
+================================================================================
+
+  이미지를 처음으로 로컬에 일괄 수집하면서(이전에는 학습·생성 시 URL 스트리밍)
+  도메인별 실제 확보율이 드러났다.
+
+    도메인   확보/전체            초기      원인
+    movie    28,776 / 40,109      71.8%    Amazon 포스터 URL 만료 → 404 (본문 9바이트)
+    music    26,746 / 40,036      66.8%    유효 URL 자체가 30,025건(75%)뿐
+    book     (진행 중)            ~97% 예상
+
+  [movie 복구] scripts/fetch_movie_posters.py 신규.
+    기존 fetch_movie_meta.py는 release_date/running_time/director/actor 4개만 캐시에
+    남기고 poster_path를 버려 재사용 불가 → 기존 캐시(39,516건)를 건드리지 않도록
+    별도 캐시(tmdb_poster_cache.json)에 쓴다.
+    대상 판정은 CSV의 URL이 아니라 **로컬 이미지 파일 존재 여부**로 한다
+    (download_images가 이미 404·1KB미만을 걸러낸 뒤이므로).
+
+    결과: 10,740건 조회 → poster_path 10,461 확보 → 10,431장 다운로드 (6분, 20 it/s)
+          movie 이미지 커버리지 71.8% → **99.3%** (39,830/40,109)
+
+  [부작용 처리] 합성이 동시 진행 중이어서, 포스터 도착 전에 처리된 6,299건은
+    이미지 없이(grounding_noimg 분기) 합성됐다. 해당 id를 스냅샷해두고
+    (movie_stale_noimg.json) 캐시 무효화 후 재생성하도록 stage2에 편성.
+
+  [미해결] music 이미지 66.8%. URL 자체가 없는 10,011건은 Spotify/MusicBrainz
+    재조회가 필요한 별건. 도메인 간 커버리지 불균형이 남는다.
+
+  [download_images.py 수정]
+    - book 소스를 v2로 전환
+    - 호스트별 동시요청 상한 추가: book은 Amazon/Goodreads CDN(30~50 req/s)과
+      Open Library(실측 4.8 req/s 한계)가 섞여 있어 --workers 30을 그대로 태우면
+      OL만 막힌다. covers.openlibrary.org에만 세마포어 6.
+    - movie CSV를 latin-1로 읽던 잔재 제거 (utf-8 정상 확인)
+
+
+================================================================================
+## 6. 라벨 오염(진단 D) 해소 — build_synopsis / _build_content_text 통일
+================================================================================
+
+  세션 16 진단 (D)의 실제 발원지를 코드에서 확인했다.
+
+    generate_queries.py build_synopsis()
+      movie: 원본 `text` 필드
+      music: **lyrics를 500자 잘라 그대로 주입** ← 1인칭 가사 원문이 라벨 생성 입력으로
+      book : description_clean
+
+    src/data/preprocessing.py _build_content_text()
+      music: 동일하게 raw lyrics 직접 주입
+
+  즉 content_text와 쿼리(라벨)가 같은 오염 원문에서 생성되어, 노이즈가 입력·라벨
+  양쪽을 동시에 오염시키고 있었다.
+
+  [수정] 두 함수 모두 3도메인에서 description_synth 우선으로 전환.
+    아직 합성 안 된 항목만 기존 원문으로 폴백한다(합성 100% 커버 시 미실행).
+    DOMAIN_CONFIG의 book csv도 v2로 전환.
+
+  이로써 세션 16 진단 (A) "텍스트 타입 불일치"와 (D) "라벨 오염"이 같은 수정으로
+  해소된다. poet 개선안 3(3도메인 vibe description 통일)의 구현부이기도 하다.
+
+
+================================================================================
+## 7. 실행 현황 (2026-08-05 08:10 기준)
+================================================================================
+
+  [완료]
+    - book 병합 재실행 → 110,594권
+    - GPU 서버 환경 구축, 코드·canonical CSV 이관
+    - vLLM 배치 경로 구현 및 검증
+    - movie 포스터 복구 (99.3%)
+    - build_synopsis / _build_content_text 3도메인 통일
+
+  [진행 중]
+    - movie description_synth 36,864/39,189
+    - book 이미지 81,513/110,257 (Open Library 구간)
+    - tmux stage2: 앞 단계 완료를 감지해 자동 진행
+        movie 재합성(6,299) → book 합성(110,594) → 쿼리 3도메인(190,739)
+
+  [남은 작업]
+    - prepare_dataset.py 재실행 (191,239건)
+    - extract_image_embeddings.py 실행 후 train.py --image-embeddings 로 학습
+      ※ 사전계산 인프라는 이미 존재했다(ImageBlock.forward가 텐서 입력을 분기 처리,
+        VibeDataset이 image_embeddings 인자 수용). 기능 부재가 아니라 미사용이었다.
+    - 6월 eval(experiments/eval_lang_20260618_report.txt) 대비 poet/atmosphere 비교
+
+  [결정 사항]
+    - 쿼리는 3도메인 전량 재생성한다(190,739건). book의 Kindle 승계 쿼리
+      18,147건도 새 description_synth 기반으로 다시 만들어 라벨 계약을 통일한다.
+
+  [미결 사항]
+    - music 이미지 커버리지 66.8% — URL 없는 10,011건 재조회 여부
+    - 라이선스 혼재: Goodreads CC BY-NC 4.0(비상업), BX Unknown.
+      연구·학습용은 무방하나 런칭 시점에 재검토 필요 (세션 17에서 이월)
+    - poet 개선안 1(QueryBlock 동결 해제)·2(쿼리 1개 확률 샘플링) 미착수
+
+
+================================================================================
+## 8. 신규/수정 파일
+================================================================================
+
+  [신규]
+    scripts/vllm_runner.py            — Qwen2.5-VL vLLM 배치 러너 (공용)
+    scripts/fetch_movie_posters.py    — TMDB 포스터 복구
+    reports/report_session_18.txt     — 본 보고서
+
+  [수정]
+    scripts/merge_book_sources.py     — MIN_BLURB_CHARS 필터 (dedup보다 선행)
+    scripts/download_images.py        — v2 전환, 호스트별 동시요청 상한, latin-1 제거
+    scripts/generate_item_descriptions.py — --engine vllm / --batch, run_vllm()
+    scripts/generate_queries.py       — --engine vllm, build_synopsis synth 우선, v2 전환
+    src/data/preprocessing.py         — _build_content_text synth 우선, v2 전환
+    data/canonical/book_canonical_v2.csv — 재생성 (110,594권)
+
+================================================================================

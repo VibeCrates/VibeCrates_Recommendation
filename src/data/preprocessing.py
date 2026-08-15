@@ -33,7 +33,10 @@ DOMAIN_CONFIG = {
         "image_col": "img",
     },
     "book": {
-        "csv": "data/canonical/book_canonical.csv",
+        # v2 = Kindle/Goodreads/BX 3소스 병합본 (110,594권, 블러브 100%).
+        # 기존 book_canonical.csv는 133,102권이지만 블러브 15.0%라 85%의 content_text가
+        # 제목·저자·카테고리뿐이었다 — poet 등 추상 쿼리가 매칭할 mood 표적이 없었다.
+        "csv": "data/canonical/book_canonical_v2.csv",
         "id_col": "asin",
         "image_col": "imgUrl",
     },
@@ -136,32 +139,42 @@ class DataPreprocessor:
 # Domain-specific standardization helpers
 # ---------------------------------------------------------------------------
 
+def _synth_text(row: pd.Series) -> str:
+    """LLM이 합성한 vibe description.
+
+    세션 16 진단 (A) "텍스트 타입 불일치"의 해소 지점이다. 이전에는 도메인마다 다른
+    *타입*의 텍스트가 이 슬롯에 들어갔다 — movie/book은 3인칭 설명, music은 약 60%가
+    1인칭 가사 원문. SBERT가 이를 서로 다른 의미공간 영역에 임베딩해 공유 텍스트 공간을
+    쓰는 크로스도메인 추천이 어긋났다. description_synth는 3도메인 모두 동일 계약
+    (2~3문장 3인칭 mood 설명, film-synopsis register)으로 생성된다.
+
+    아직 합성되지 않은 항목만 기존 원문으로 폴백한다(합성 100% 커버 시 미실행).
+    """
+    v = str(row.get("description_synth", "") or "").strip()
+    return "" if v in ("", "nan", "None") else v
+
+
 def _build_content_text(domain: str, row: pd.Series) -> str:
-    """Converts a domain CSV row into a content_text string. Mirrors build_synopsis logic in generate_queries.py."""
+    """Converts a domain CSV row into a content_text string.
+
+    generate_queries.py::build_synopsis 와 **출력이 같아야 한다** (세션 18 결정 A).
+    그쪽은 의사 라벨(query)을 만들 때 Qwen에게 주는 텍스트고, 이쪽은 학습 시 SBERT에
+    넣는 텍스트다. 학습은 이 둘을 가깝게 당기므로, 한쪽에만 있는 정보는 대응하는 정답이
+    없어 정렬에 기여하지 못한다. 실제로 두 군데가 갈라져 있었다:
+      - 커밋 4bcc809(7/15)가 여기에만 Director/Cast/Release Date를 추가 — 라벨을 만든
+        Qwen은 감독·배우를 본 적이 없다.
+      - build_synopsis만 description을 600자로 자름 — description_synth 평균 548자,
+        600자 초과가 movie 29.7% / music 17.6%로 그 꼬리가 입력에만 있었다.
+    라벨 쪽을 넓히는 반대 방향은 쿼리 전량 재생성이 필요해 다음 사이클로 미뤘다.
+    (근거 사실은 겹쳐야 하고 표현 형태는 갈라져야 한다 — 후자가 진단 D다.)
+    """
+    synth = _synth_text(row)
+
     if domain == "movie":
         text = f"Title: {row.get('Title', '')}\nGenre: {row.get('Genre', '')}"
-        overview = str(row.get("text", "")).strip()
+        overview = synth or str(row.get("text", "")).strip()
         if overview and overview != "nan":
-            text += f"\nOverview: {overview}"
-
-        try:
-            directors = json.loads(str(row.get("director", "[]")))
-        except Exception:
-            directors = []
-        if directors:
-            text += f"\nDirector: {', '.join(directors)}"
-
-        try:
-            actors = json.loads(str(row.get("actor", "[]")))
-        except Exception:
-            actors = []
-        if actors:
-            text += f"\nCast: {', '.join(actors)}"
-
-        release_date = str(row.get("release_date", "")).strip()
-        if release_date and release_date != "nan":
-            text += f"\nRelease Date: {release_date}"
-
+            text += f"\nOverview: {overview[:600]}"
         return text
 
     if domain == "music":
@@ -176,7 +189,11 @@ def _build_content_text(domain: str, row: pd.Series) -> str:
         )
         desc = row.get("description", "")
         lyrics = row.get("lyrics", "")
-        if pd.notna(lyrics) and str(lyrics).strip() not in ("", "nan"):
+        if synth:
+            # raw lyrics 직접 주입이 있던 자리. 가사는 "설명"이 아니라 콘텐츠 자체이므로
+            # 이 슬롯의 오용이었다 (세션 16 진단 A).
+            text += f"\nDescription: {synth[:600]}"
+        elif pd.notna(lyrics) and str(lyrics).strip() not in ("", "nan"):
             text += f"\nLyrics: {str(lyrics)[:500]}"
         elif pd.notna(desc) and str(desc).strip() not in ("", "nan"):
             text += f"\nDescription: {str(desc)[:500]}"
@@ -187,9 +204,9 @@ def _build_content_text(domain: str, row: pd.Series) -> str:
         f"Title: {row.get('title', '')}\nAuthor: {row.get('author', '')}\n"
         f"Category: {row.get('category_name', '')}"
     )
-    desc = str(row.get("description_clean", row.get("description", ""))).strip()
+    desc = synth or str(row.get("description_clean", row.get("description", ""))).strip()
     if desc and desc != "nan":
-        text += f"\nDescription: {desc}"
+        text += f"\nDescription: {desc[:600]}"
     return text
 
 
