@@ -102,13 +102,22 @@ def main(args):
     
     logger.info("Training completed!")
 
-    # Build item index from best model weights
+    if args.skip_index:
+        logger.info("Index build skipped (--skip-index).")
+        return
+
+    # Build item index from best model weights.
+    # image_embeddings를 반드시 넘긴다 — 넘기지 않으면 MultiModalDataset이 PIL 경로로
+    # 떨어져 학습과 다른 이미지를 쓰고(로컬 파일 없는 항목은 학습 시 0 벡터인데 여기서는
+    # http로 내려받는다), 다운로드 때문에 몇 시간이 걸린다. 8/14 실행에서 music 인덱스
+    # 하나가 2시간 넘게 돌다 중단됐다 — 임베딩을 넘기면 4분이다.
     logger.info("Building item index...")
     index_dir = args.index_dir
     domains = [args.domain] if args.domain else ["movie", "music", "book"]
     for domain in domains:
         try:
-            build_and_save(domain, model, device, batch_size=args.batch_size, index_dir=index_dir)
+            build_and_save(domain, model, device, batch_size=args.batch_size,
+                           index_dir=index_dir, image_embeddings=image_embeddings)
         except Exception as e:
             logger.warning(f"[{domain}] Index build failed: {e}")
     logger.info("Index build complete.")
@@ -168,6 +177,10 @@ if __name__ == '__main__':
         type=int,
         default=15,
         help='Number of epochs for stage 2 (distillation)'
+    )
+    parser.add_argument(
+        '--skip-index', action='store_true',
+        help='학습만 하고 인덱스는 만들지 않는다. 스크립트가 build_index.py로 따로 만들 때 쓴다.'
     )
     parser.add_argument(
         '--query-lora', action='store_true',
