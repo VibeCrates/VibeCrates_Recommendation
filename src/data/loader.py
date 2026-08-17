@@ -140,6 +140,8 @@ def get_dataloaders_from_df(
     random_seed: int = 42,
     image_embeddings=None,
     sample_one_query: bool = False,
+    title_dropout: float = 0.0,
+    label_dropout: float = 0.0,
 ) -> dict:
     """
     Create DataLoaders directly from a DataFrame (already loaded / filtered).
@@ -157,6 +159,8 @@ def get_dataloaders_from_df(
         df["query"].tolist(),
         image_embeddings=image_embeddings,
         sample_one_query=sample_one_query,
+        title_dropout=title_dropout,
+        label_dropout=label_dropout,
     )
 
     n = len(full_dataset)

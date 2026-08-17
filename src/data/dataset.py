@@ -30,6 +30,8 @@ class MultiModalDataset(Dataset):
         image_size: Tuple[int, int] = (224, 224),
         image_embeddings: Optional[Dict[str, np.ndarray]] = None,
         sample_one_query: bool = False,
+        title_dropout: float = 0.0,
+        label_dropout: float = 0.0,
     ):
         assert len(content_texts) == len(image_paths) == len(queries), \
             "All input lists must have the same length"
@@ -48,6 +50,27 @@ class MultiModalDataset(Dataset):
         # false negative가 되는 일도 없다(설계 노트의 "방법 B").
         # mean-pooling은 추론 경로(멀티 쿼리 입력)에만 남는다 — 이 플래그는 학습에서만 켠다.
         self.sample_one_query = sample_one_query
+
+        # content_text 증강 두 가지. 둘 다 에폭마다 다시 뽑으므로 같은 아이템이 여러 변형을
+        # 거치고, 모델이 특정 단서 하나에 의존하지 못하게 된다. 추론에는 적용하지 않는다.
+        #
+        # title_dropout — 제목 줄을 확률적으로 지운다.
+        #   추천 결과의 16.2%가 쿼리 단어를 제목에 그대로 담고 있었고, 판정 점수도 제목이
+        #   겹칠 때 1.062로 안 겹칠 때(0.752)보다 높았다. 즉 제목 매칭이 보상받고 있다.
+        #   "Warmth left in a room after the lights go out" 쿼리에 "Stay Or Leave"가 2위로
+        #   나온 것이 전형이다(left↔Leave, 뜻은 반대). 제목은 content_text 맨 앞의 짧고 강한
+        #   신호라 임베딩을 좌우하기 쉽다. 제목 없이도 맞히도록 강제한다.
+        #
+        # label_dropout — "Title:", "Track:", "Artist:" 같은 필드 이름을 확률적으로 지운다.
+        #   통합 검색에서 상위 10개가 한 도메인으로 쏠린다(40개 쿼리 중 28개는 한 도메인이
+        #   8개 이상, 12개는 10개 전부). 원인은 아이템 벡터가 도메인끼리 뭉쳐 있는 것이고
+        #   (같은 도메인 코사인 music +0.136 vs 다른 도메인 -0.024), 그 지문의 출처가
+        #   필드 이름이다 — movie는 Title/Genre/Overview, music은 Track/Artist/Album/Genre,
+        #   book은 Title/Author/Category로 시작해 형식만 봐도 도메인이 드러난다.
+        #   인덱스에서 도메인 중심 벡터를 빼는 방법(centering)은 8/15에 시험했으나 품질이
+        #   0.754 → 0.723으로 내려가 폐기했다. 학습 단계에서 끊는 것이 근본 처방이다.
+        self.title_dropout = title_dropout
+        self.label_dropout = label_dropout
         # 임베딩을 쓰는 경우 배치 전체가 텐서여야 한다 (collate_fn은 첫 항목 타입만 보고
         # torch.stack 한다 — 하나라도 PIL이 섞이면 거기서 터진다).
         self.embedding_dim = (
@@ -58,8 +81,27 @@ class MultiModalDataset(Dataset):
     def __len__(self) -> int:
         return len(self.content_texts)
 
+    # content_text는 "필드이름: 값" 줄이 이어진 형태다. 제목 줄은 도메인마다 이름이 달라
+    # (movie/book은 Title, music은 Track) 둘 다 잡는다.
+    TITLE_FIELDS = ("Title", "Track")
+
+    def _augment_content(self, text: str) -> str:
+        lines = str(text).split("\n")
+        out = []
+        for line in lines:
+            field, sep, value = line.partition(": ")
+            if not sep:                      # "필드: 값" 형태가 아니면 그대로 둔다
+                out.append(line)
+                continue
+            if field in self.TITLE_FIELDS and random.random() < self.title_dropout:
+                continue                     # 제목 줄 통째로 제거
+            out.append(value if random.random() < self.label_dropout else line)
+        return "\n".join(out)
+
     def __getitem__(self, idx: int) -> Dict[str, any]:
         content_text = self.content_texts[idx]
+        if self.title_dropout or self.label_dropout:
+            content_text = self._augment_content(content_text)
         image_path = self.image_paths[idx]
 
         if self.image_embeddings is not None:

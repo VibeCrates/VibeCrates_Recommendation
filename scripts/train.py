@@ -67,6 +67,8 @@ def main(args):
         random_seed=config.random_seed,
         image_embeddings=image_embeddings,
         sample_one_query=args.sample_one_query,
+        title_dropout=args.title_dropout,
+        label_dropout=args.label_dropout,
     )
     
     train_loader = dataloaders['train']
@@ -192,6 +194,16 @@ if __name__ == '__main__':
         '--sample-one-query', action='store_true',
         help='개선안 2: 학습 시 아이템당 DSV 쿼리 3개 중 1개를 매 스텝 무작위로 뽑는다. '
              '끄면 3개를 mean-pool 해 콘텐츠가 세 방향의 타협 centroid에 정렬된다.'
+    )
+    parser.add_argument(
+        '--title-dropout', type=float, default=0.0,
+        help='학습 시 content_text의 제목 줄을 이 확률로 지운다. 제목 매칭 의존을 끊기 위한 것 '
+             '(추천의 16.2%%가 쿼리 단어를 제목에 담고 있었고 그럴 때 판정 점수가 더 높았다).'
+    )
+    parser.add_argument(
+        '--label-dropout', type=float, default=0.0,
+        help='학습 시 "Title:", "Track:" 같은 필드 이름을 이 확률로 지운다. 필드 이름이 '
+             '도메인 지문이 되어 통합 검색이 한 도메인으로 쏠리는 것을 막기 위한 것.'
     )
     parser.add_argument(
         '--early-stopping-patience',
