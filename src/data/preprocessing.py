@@ -154,7 +154,20 @@ def _synth_text(row: pd.Series) -> str:
     return "" if v in ("", "nan", "None") else v
 
 
-def _build_content_text(domain: str, row: pd.Series) -> str:
+# 설명 본문을 자르는 한도. 세 도메인에 같은 값을 쓴다.
+#
+# 이 값이 존재하는 이유는 쿼리 생성 프롬프트의 토큰 예산이다 — 라벨을 만들 때 Qwen에게
+# 넘기는 텍스트가 길어지면 배치가 줄고 비용이 오른다. 학습 입력에는 그런 제약이 없지만,
+# 입력과 라벨이 같은 근거를 봐야 하므로(세션 18 결정 A) 같은 한도를 쓴다.
+#
+# 상향 여지: content_text는 SBERT 기준 평균 128토큰 / 최대 244토큰으로 한도(384)의
+# 3분의 1만 쓴다. 1,200자로 올려도 여유가 있으나, 올리려면 라벨(쿼리)도 같은 한도로
+# 다시 만들어야 짝이 맞는다. 백로그 A4 참조.
+DESC_MAX_CHARS = 600
+LYRICS_MAX_CHARS = 500
+
+
+def _build_content_text(domain: str, row: pd.Series, desc_max: int = DESC_MAX_CHARS) -> str:
     """Converts a domain CSV row into a content_text string.
 
     generate_queries.py::build_synopsis 와 **출력이 같아야 한다** (세션 18 결정 A).
@@ -174,7 +187,7 @@ def _build_content_text(domain: str, row: pd.Series) -> str:
         text = f"Title: {row.get('Title', '')}\nGenre: {row.get('Genre', '')}"
         overview = synth or str(row.get("text", "")).strip()
         if overview and overview != "nan":
-            text += f"\nOverview: {overview[:600]}"
+            text += f"\nOverview: {overview[:desc_max]}"
         return text
 
     if domain == "music":
@@ -192,11 +205,11 @@ def _build_content_text(domain: str, row: pd.Series) -> str:
         if synth:
             # raw lyrics 직접 주입이 있던 자리. 가사는 "설명"이 아니라 콘텐츠 자체이므로
             # 이 슬롯의 오용이었다 (세션 16 진단 A).
-            text += f"\nDescription: {synth[:600]}"
+            text += f"\nDescription: {synth[:desc_max]}"
         elif pd.notna(lyrics) and str(lyrics).strip() not in ("", "nan"):
-            text += f"\nLyrics: {str(lyrics)[:500]}"
+            text += f"\nLyrics: {str(lyrics)[:LYRICS_MAX_CHARS]}"
         elif pd.notna(desc) and str(desc).strip() not in ("", "nan"):
-            text += f"\nDescription: {str(desc)[:500]}"
+            text += f"\nDescription: {str(desc)[:LYRICS_MAX_CHARS]}"
         return text
 
     # book
@@ -206,7 +219,7 @@ def _build_content_text(domain: str, row: pd.Series) -> str:
     )
     desc = synth or str(row.get("description_clean", row.get("description", ""))).strip()
     if desc and desc != "nan":
-        text += f"\nDescription: {desc[:600]}"
+        text += f"\nDescription: {desc[:desc_max]}"
     return text
 
 

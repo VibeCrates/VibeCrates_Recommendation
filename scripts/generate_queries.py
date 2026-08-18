@@ -73,56 +73,21 @@ PROMPT_TEMPLATE = (
 )
 
 
-def synth_text(row: pd.Series) -> str:
-    """합성된 vibe description. 세션 16 진단 (D) 해소의 핵심 —
-    content_text와 쿼리(라벨)가 같은 오염된 원문에서 나오던 커플링을 끊는다.
-    3도메인 모두 이걸 우선 쓰고, 아직 합성 전인 항목만 기존 원문으로 폴백한다.
-    (합성이 100% 커버되면 폴백은 실행되지 않는다.)"""
-    v = str(row.get("description_synth", "") or "").strip()
-    return "" if v in ("", "nan", "None") else v
+# 쿼리(라벨) 생성 입력은 학습 입력과 **같은 함수**로 만든다.
+#
+# 이전에는 여기에 build_synopsis라는 복제본이 있었다. 두 함수는 같은 로직이었으나 한쪽만
+# 수정되며 갈라졌다 — 커밋 4bcc809(7/15)가 _build_content_text에만 Director/Cast/Release
+# Date를 추가해, 라벨을 만든 Qwen이 감독·배우를 본 적 없는 상태가 됐다. 자르기 한도도
+# 한쪽에만 있었다. 학습은 두 결과를 가깝게 당기므로 한쪽에만 있는 정보는 대응하는 정답이
+# 없어 정렬에 기여하지 못한다(세션 18 결정 A).
+#
+# 복제를 없애고 src의 정본을 부른다. 자르기 한도와 포함 필드는 그 함수의 파라미터·상수로
+# 명시돼 있어 다시 갈라지지 않는다.
+from src.data.preprocessing import _build_content_text
 
 
 def build_synopsis(domain: str, row: pd.Series) -> str:
-    synth = synth_text(row)
-
-    if domain == "movie":
-        text = f"Title: {row.get('Title', '')}\nGenre: {row.get('Genre', '')}"
-        overview = synth or str(row.get("text", "")).strip()
-        if overview and overview != "nan":
-            text += f"\nOverview: {overview[:600]}"
-        return text
-
-    elif domain == "music":
-        try:
-            artists = json.loads(str(row.get("artists", "[]")))
-            artist_str = ", ".join(artists)
-        except Exception:
-            artist_str = str(row.get("artists", ""))
-        text = (
-            f"Track: {row.get('name', '')}\nArtist: {artist_str}\n"
-            f"Album: {row.get('album_name', '')}\nGenre: {row.get('genre', '')}"
-        )
-        desc = row.get("description")
-        lyrics = row.get("lyrics")
-        if synth:
-            # 가사 원문(1인칭 콘텐츠 자체)이 라벨 생성 입력으로 들어가던 자리.
-            # 합성 description은 movie/book과 같은 3인칭 설명 타입이다.
-            text += f"\nDescription: {synth[:600]}"
-        elif pd.notna(lyrics) and str(lyrics).strip() not in ("", "nan"):
-            text += f"\nLyrics: {str(lyrics)[:500]}"
-        elif pd.notna(desc) and str(desc).strip() not in ("", "nan"):
-            text += f"\nDescription: {str(desc)[:500]}"
-        return text
-
-    else:  # book
-        text = (
-            f"Title: {row.get('title', '')}\nAuthor: {row.get('author', '')}\n"
-            f"Category: {row.get('category_name', '')}"
-        )
-        desc = synth or str(row.get("description_clean", row.get("description", ""))).strip()
-        if desc and desc != "nan":
-            text += f"\nDescription: {desc[:600]}"
-        return text
+    return _build_content_text(domain, row)
 
 
 LOCAL_IMAGE_DIRS = {
@@ -318,6 +283,10 @@ def main():
     parser.add_argument("--engine", default="hf", choices=["hf", "vllm"],
                         help="hf=batch1 참조 경로 / vllm=배치 추론 (venv_vllm에서 실행)")
     parser.add_argument("--batch", type=int, default=512)
+    parser.add_argument("--min-synth-coverage", type=float, default=0.95,
+                        help="description_synth 채움률이 이 값 미만이면 중단한다 (라벨 오염 방지)")
+    parser.add_argument("--allow-missing-synth", action="store_true",
+                        help="커버리지 가드를 무시하고 원문 폴백으로 진행한다")
     args = parser.parse_args()
 
     if args.model_id is None:
@@ -331,6 +300,30 @@ def main():
 
     df = pd.read_csv(cfg["csv"], engine="python")
     print(f"[{args.domain}] loaded {len(df):,} rows")
+
+    # description_synth 커버리지 가드.
+    #
+    # 8/5에 book 합성이 25,088건에서 죽어 write_output이 실행되지 않았고, CSV에
+    # description_synth 컬럼이 아예 없는 상태에서 이 스크립트가 돌았다. 그러면
+    # _build_content_text의 폴백이 작동해 원문 블러브로 쿼리를 만드는데, 그것이 바로
+    # 이 작업이 끊으려던 라벨 오염(세션 16 진단 D)이다. 예외도 로그도 없이 23,147건이
+    # 오염됐고 나중에 폐기해야 했다.
+    #
+    # 폴백 자체는 의도된 설계다("아직 합성 안 된 항목만 원문으로"). 문제는 그것이
+    # "합성했는데 CSV에 안 실림"과 구별되지 않는다는 점이다 — 코드에는 둘 다 빈 문자열로
+    # 보인다. 그래서 여기서 커버리지를 명시적으로 확인한다.
+    rate = df["description_synth"].notna().mean() if "description_synth" in df.columns else 0.0
+    print(f"[{args.domain}] description_synth 커버리지 {rate:.1%}")
+    if rate < args.min_synth_coverage:
+        reason = ("컬럼이 없다" if "description_synth" not in df.columns
+                  else f"임계 {args.min_synth_coverage:.0%} 미만이다")
+        if not args.allow_missing_synth:
+            raise SystemExit(
+                f"[{args.domain}] description_synth {reason}. 합성을 먼저 끝내야 한다"
+                f"(scripts/generate_item_descriptions.py). 이대로 두면 원문 기반 쿼리가"
+                f" 만들어져 라벨이 오염된다. 의도한 것이라면 --allow-missing-synth를 붙일 것."
+            )
+        print(f"[{args.domain}] [warn] 가드 무시 — 원문 폴백으로 진행한다")
 
     cache = json.load(open(cache_path)) if os.path.exists(cache_path) else {}
     print(f"checkpoint loaded: {len(cache):,} entries")

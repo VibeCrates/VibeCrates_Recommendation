@@ -121,7 +121,7 @@ def main():
     no_image = (combined["image_path"] == "").sum()
     no_query = (combined["query"].isna() | combined["query"].str.strip().eq("")).sum()
     if no_image:
-        print(f"\n  WARNING: {no_image:,} rows have no image (will use HTTP fallback during training)")
+        print(f"\n  NOTE: {no_image:,} rows have no local image → 학습·인덱싱에서 0 벡터로 처리된다 (dataset.py)")
     if no_query:
         print(f"  WARNING: {no_query:,} rows have no query")
 

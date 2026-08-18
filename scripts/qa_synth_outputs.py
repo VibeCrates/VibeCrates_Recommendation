@@ -60,6 +60,23 @@ SOURCE_COLS = {
 }
 
 # COMMON_RULES가 금지한 항목들. 프롬프트에 썼다고 지켜지는 게 아니라서 실제로 센다.
+# 규칙 검사 전에 제거할 것: 합성 설명은 작품 제목을 인용하며 시작하는 일이 흔하다
+# (music의 67.8%가 '"Best Friend," from his album...' 형태). 그 인용 부분을 그대로 두고
+# 정규식을 돌리면 오탐이 난다 — 실제로 "리뷰 인용"이 music 40.4%로 잡혔는데 전부 곡 제목
+# 인용이었고, "독자 호명"의 상당수도 제목 속 your였다(Put Your Records On).
+# 따옴표로 묶인 구간과 작품 제목을 지운 뒤 검사한다.
+QUOTED = re.compile(r"[\"“][^\"”]{1,80}[\"”]")
+
+
+def strip_titles(text: str, title: str = "") -> str:
+    """따옴표 인용 구간과 작품 제목을 제거한 나머지. 규칙 위반 검사는 이 위에서 한다."""
+    s = QUOTED.sub(" ", str(text))
+    t = str(title).strip()
+    if t and t.lower() != "nan":
+        s = re.sub(re.escape(t), " ", s, flags=re.I)
+    return s
+
+
 RULE_PATTERNS = {
     "발매/출간 정보": r"\b(released|release date|published in|publication|first aired)\b",
     "판매/수상 실적": r"\b(bestsell\w*|award[- ]winning|chart[- ]topping|prize[- ]winning|no\.? ?1\b)\b",
@@ -221,13 +238,19 @@ def check_coverage(domain: str, df: pd.DataFrame, id_col: str) -> dict:
     return out
 
 
-def check_rules(texts: list[str]) -> dict:
-    """④ 규칙 위반율 + 길이/문장 수 (2~3문장 계약)."""
+def check_rules(texts: list[str], titles: list[str] | None = None) -> dict:
+    """④ 규칙 위반율 + 길이/문장 수 (2~3문장 계약).
+
+    위반 검사는 제목 인용을 제거한 텍스트에서 한다(strip_titles 참조). 길이·문장 수는
+    실제 출력 그대로 재야 하므로 원문을 쓴다.
+    """
     out = {}
     n = max(len(texts), 1)
+    titles = titles if titles is not None else [""] * len(texts)
+    stripped = [strip_titles(t, ti) for t, ti in zip(texts, titles)]
     for label, pat in RULE_PATTERNS.items():
         rx = re.compile(pat, re.I)
-        out[label] = sum(1 for t in texts if rx.search(str(t))) / n
+        out[label] = sum(1 for t in stripped if rx.search(t)) / n
     lens = np.array([len(str(t)) for t in texts]) if texts else np.array([0])
     sents = np.array([len(re.findall(r"[.!?](?:\s|$)", str(t))) for t in texts]) if texts else np.array([0])
     out["평균길이"] = float(lens.mean())
@@ -362,7 +385,7 @@ def run_domain(domain: str, args, report: list[str]) -> None:
 
     # ④ 규칙 위반 + 제목 토큰 보존
     say("\n④ 규칙 위반율 / 형식")
-    for k, v in check_rules(synth).items():
+    for k, v in check_rules(synth, df.loc[df["description_synth"].notna(), title_col].astype(str).tolist()).items():
         say(f"    {k:16s} {v:.3f}")
     say(f"    {'제목토큰보존':16s} {check_title_retention(df, title_col):.3f}")
 
@@ -375,7 +398,7 @@ def run_domain(domain: str, args, report: list[str]) -> None:
         texts = grp["description_synth"].dropna().astype(str).tolist()
         if not texts:
             continue
-        r = check_rules(texts)
+        r = check_rules(texts, grp.loc[grp["description_synth"].notna(), title_col].astype(str).tolist())
         g = granularity_stats(texts, min(args.sample, len(texts)))
         claim = sum(1 for t in texts if narrative.search(t)) / len(texts)
         say(f"    {key:22s} {len(texts):>8,} {r['평균길이']:>8.0f} "
