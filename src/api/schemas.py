@@ -23,7 +23,10 @@ class RecommendationItem(BaseModel):
 
 class RecommendationResponse(BaseModel):
     query: str
-    domain: str
+    domain: Optional[str] = Field(
+        default=None,
+        description="요청에 실려 온 도메인 필터. 통합 검색(도메인 미지정)이면 null",
+    )
     results: List[RecommendationItem]
 
 
@@ -37,6 +40,11 @@ class HealthCheckResponse(BaseModel):
     status: str = Field(default="healthy")
     model_loaded: bool = Field(default=False)
     index_built: dict = Field(default_factory=dict, description="도메인별 인덱스 구축 여부")
+    errors: dict = Field(
+        default_factory=dict,
+        description="기동 시 실패한 것과 그 이유. 비어 있으면 정상. "
+                    "앱은 떠 있는데 추천만 503일 때 여기를 본다",
+    )
 
 
 class PingResponse(BaseModel):

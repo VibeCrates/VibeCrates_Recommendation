@@ -42,11 +42,12 @@ async def ping(
 
 
 @router.get("/health", response_model=HealthCheckResponse)
-async def health_check(manager=Depends(get_model_manager)) -> HealthCheckResponse:
+async def health_check(manager=Depends(get_manager_unchecked)) -> HealthCheckResponse:
     return HealthCheckResponse(
         status="healthy",
         model_loaded=manager.is_model_ready(),
         index_built={domain: (domain in manager.indexes) for domain in ("movie", "music", "book")},
+        errors=manager.load_errors,
     )
 
 
