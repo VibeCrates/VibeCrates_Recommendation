@@ -1,0 +1,641 @@
+﻿query_id,style,pair_id,lang,query,domain_filter,result_domain,item_id,title,extra,score,rank
+P1_KO,philosophical,1,ko,인간이란 무엇인가,movie,movie,457007,Jumeogi unda (2005),,0.4880751073360443,1
+P1_KO,philosophical,1,ko,인간이란 무엇인가,movie,movie,104267,Final Impact (1992),,0.4580391049385071,2
+P1_KO,philosophical,1,ko,인간이란 무엇인가,movie,movie,1082601,Fighting (2009),,0.4545072913169861,3
+P1_KO,philosophical,1,ko,인간이란 무엇인가,movie,movie,1937506,The Philly Kid (2012),,0.4506949782371521,4
+P1_KO,philosophical,1,ko,인간이란 무엇인가,movie,movie,1198189,The Boxer (2009),,0.44167494773864746,5
+P1_KO,philosophical,1,ko,인간이란 무엇인가,music,music,68LR4RQ7JLHwRodWxPOB0k,Hustle Hard Remix,,0.4035983681678772,1
+P1_KO,philosophical,1,ko,인간이란 무엇인가,music,music,0JhonNQL2ixH1JcsgEj4Hn,War,,0.3665929138660431,2
+P1_KO,philosophical,1,ko,인간이란 무엇인가,music,music,0HpKj1IlWhBBnRmaU4WQqR,Advanced Training,,0.3578540086746216,3
+P1_KO,philosophical,1,ko,인간이란 무엇인가,music,music,5wuXWTCiKIlNEXfwAuTY1G,Drop It Low,,0.3561283051967621,4
+P1_KO,philosophical,1,ko,인간이란 무엇인가,music,music,4LT5UhJwTShLfYzY98bcSt,List Of Demands (Reparations),,0.35421133041381836,5
+P1_KO,philosophical,1,ko,인간이란 무엇인가,book,book,gr_28313.The_Knockout_Artist,The Knockout Artist,,0.4215070605278015,1
+P1_KO,philosophical,1,ko,인간이란 무엇인가,book,book,gr_8144079-leverage,Leverage,,0.4174129068851471,2
+P1_KO,philosophical,1,ko,인간이란 무엇인가,book,book,gr_558626.The_16th_Round,The 16th Round: From Number 1 Contender to Number 45472,,0.41046249866485596,3
+P1_KO,philosophical,1,ko,인간이란 무엇인가,book,book,kdl_B0CB99C4LS,"Gladiator: A True Story of 'Roids, Rage, and Redemption",,0.40964436531066895,4
+P1_KO,philosophical,1,ko,인간이란 무엇인가,book,book,kdl_B003EWAQ5K,Unforgivable Blackness: The Rise and Fall of Jack Johnson,,0.39560413360595703,5
+P1_KO,philosophical,1,ko,인간이란 무엇인가,all,movie,457007,Jumeogi unda (2005),,0.4880751073360443,1
+P1_KO,philosophical,1,ko,인간이란 무엇인가,all,movie,104267,Final Impact (1992),,0.4580391049385071,2
+P1_KO,philosophical,1,ko,인간이란 무엇인가,all,movie,1082601,Fighting (2009),,0.4545072913169861,3
+P1_KO,philosophical,1,ko,인간이란 무엇인가,all,movie,1937506,The Philly Kid (2012),,0.4506949782371521,4
+P1_KO,philosophical,1,ko,인간이란 무엇인가,all,movie,1198189,The Boxer (2009),,0.44167494773864746,5
+P1_EN,philosophical,1,en,What is a human being,movie,movie,1817287,Is the Man Who Is Tall Happy? (2013),,0.5583186149597168,1
+P1_EN,philosophical,1,en,What is a human being,movie,movie,354575,De fem benspí_nd (2003),,0.5066978335380554,2
+P1_EN,philosophical,1,en,What is a human being,movie,movie,492499,An Unreasonable Man (2006),,0.49849897623062134,3
+P1_EN,philosophical,1,en,What is a human being,movie,movie,118662,Ayn Rand: A Sense of Life (1997),,0.4925861358642578,4
+P1_EN,philosophical,1,en,What is a human being,movie,movie,129758,Arguing the World (1998),,0.4811283051967621,5
+P1_EN,philosophical,1,en,What is a human being,music,music,6ghnKwHcGX1RLPWjJYKbGd,From God's Perspective,,0.45889124274253845,1
+P1_EN,philosophical,1,en,What is a human being,music,music,5tz69p7tJuGPeMGwNTxYuV,1-800-273-8255,,0.44107919931411743,2
+P1_EN,philosophical,1,en,What is a human being,music,music,7eRU0RltchvgOTSbX6vmdv,666 ʇ,,0.4240868091583252,3
+P1_EN,philosophical,1,en,What is a human being,music,music,2ZCwz8omYluRWa9QyznFAy,What?,,0.4225655794143677,4
+P1_EN,philosophical,1,en,What is a human being,music,music,3I0FBDc1c1BLNtXWKVjmFg,untitled 02 | 06.23.2014.,,0.41439926624298096,5
+P1_EN,philosophical,1,en,What is a human being,book,book,gr_67976.On_Being_Human,On Being Human,,0.6222212314605713,1
+P1_EN,philosophical,1,en,What is a human being,book,book,gr_1029232.The_Imaginary_Institution_of_Society,The Imaginary Institution of Society,,0.5840657949447632,2
+P1_EN,philosophical,1,en,What is a human being,book,book,gr_451565.Human_All_Too_Human,"Human, All Too Human: A Book for Free Spirits",,0.5625747442245483,3
+P1_EN,philosophical,1,en,What is a human being,book,book,gr_34473517-humanity-understanding-reality-and-inquiring-good,HUMANITY Understanding Reality and Inquiring Good,,0.562555193901062,4
+P1_EN,philosophical,1,en,What is a human being,book,book,bx_0385031386,Irrational Man : A Study in Existential Philosophy,,0.5581212639808655,5
+P1_EN,philosophical,1,en,What is a human being,all,book,gr_67976.On_Being_Human,On Being Human,,0.6222212314605713,1
+P1_EN,philosophical,1,en,What is a human being,all,book,gr_1029232.The_Imaginary_Institution_of_Society,The Imaginary Institution of Society,,0.5840657949447632,2
+P1_EN,philosophical,1,en,What is a human being,all,book,gr_451565.Human_All_Too_Human,"Human, All Too Human: A Book for Free Spirits",,0.5625747442245483,3
+P1_EN,philosophical,1,en,What is a human being,all,book,gr_34473517-humanity-understanding-reality-and-inquiring-good,HUMANITY Understanding Reality and Inquiring Good,,0.562555193901062,4
+P1_EN,philosophical,1,en,What is a human being,all,movie,1817287,Is the Man Who Is Tall Happy? (2013),,0.5583186149597168,5
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,movie,movie,2070649,Do-ga-ni (2011),,0.4357585310935974,1
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,movie,movie,63278,Marketa LazarovÌÁ (1967),,0.4330122470855713,2
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,movie,movie,63278,Marketa LazarovÌÁ (1967),,0.4330122470855713,3
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,movie,movie,60574,Young Torless (1966),,0.42167916893959045,4
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,movie,movie,22386,The Sin of Madelon Claudet (1931),,0.4141853451728821,5
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,music,music,2Hy81a71pPf5lPWTq1o8ub,Lip Gloss And Black,,0.2754843831062317,1
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,music,music,5auIGLFqH9CsgC7C9o3rOu,Mordred's Lullaby,,0.2706138491630554,2
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,music,music,46Y9yh2KxmtodypW4bCp6v,This Celluloid Dream,,0.26883500814437866,3
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,music,music,2GHxtccGrufkQXi3QpQk9z,Come Little Children,,0.26419326663017273,4
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,music,music,4O5GKVbnQ8U9BxYWu0hIug,Dancing Through Sunday,,0.2621668577194214,5
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,book,book,gr_23128464-het-hout,Het hout,,0.46066784858703613,1
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,book,book,bx_904500741X,De kinderen van Arthur,,0.44489073753356934,2
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,book,book,gr_942335.Kabale_und_Liebe,Kabale und Liebe,,0.44423508644104004,3
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,book,book,bx_3442429552,Die Puppenspieler,,0.44239604473114014,4
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,book,book,gr_6710247-the-white-disease,The White Disease,,0.4403280019760132,5
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,all,book,gr_23128464-het-hout,Het hout,,0.46066784858703613,1
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,all,book,bx_904500741X,De kinderen van Arthur,,0.44489073753356934,2
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,all,book,gr_942335.Kabale_und_Liebe,Kabale und Liebe,,0.44423508644104004,3
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,all,book,bx_3442429552,Die Puppenspieler,,0.44239604473114014,4
+P2_KO,philosophical,2,ko,삶의 의미를 찾는 여정,all,book,gr_6710247-the-white-disease,The White Disease,,0.4403280019760132,5
+P2_EN,philosophical,2,en,A journey to find the meaning of life,movie,movie,1172957,How to Live Forever (2009),,0.5368630886077881,1
+P2_EN,philosophical,2,en,A journey to find the meaning of life,movie,movie,1306972,Enlighten Up! (2008),,0.49601298570632935,2
+P2_EN,philosophical,2,en,A journey to find the meaning of life,movie,movie,1706542,The Ah of Life (2010),,0.48560822010040283,3
+P2_EN,philosophical,2,en,A journey to find the meaning of life,movie,movie,1506940,2012: Time for Change (2010),,0.48294758796691895,4
+P2_EN,philosophical,2,en,A journey to find the meaning of life,movie,movie,1741225,I Am (2010),,0.46579593420028687,5
+P2_EN,philosophical,2,en,A journey to find the meaning of life,music,music,0mGBA5vtFH58DucfqaW6oG,Unthought Known,,0.46738767623901367,1
+P2_EN,philosophical,2,en,A journey to find the meaning of life,music,music,1eQBEelI2NCy7AUTerX0KS,Ultralight Beam,,0.4076201319694519,2
+P2_EN,philosophical,2,en,A journey to find the meaning of life,music,music,6wpGqhRvJGNNXwWlPmkMyO,I Still Haven't Found What I'm Looking For,,0.40388888120651245,3
+P2_EN,philosophical,2,en,A journey to find the meaning of life,music,music,0dIipTYASaFwX1QxVrVFV7,Do the Evolution,,0.4022711515426636,4
+P2_EN,philosophical,2,en,A journey to find the meaning of life,music,music,4HjEsfSpWo8gvZMr9SA3a1,Library Magic,,0.3962148129940033,5
+P2_EN,philosophical,2,en,A journey to find the meaning of life,book,book,kdl_B0B5CZ6YM3,Life Worth Living: A Guide to What Matters Most,,0.6464521288871765,1
+P2_EN,philosophical,2,en,A journey to find the meaning of life,book,book,gr_43558838-the-seven-goals-of-life,The Seven Goals of Life,,0.6178442239761353,2
+P2_EN,philosophical,2,en,A journey to find the meaning of life,book,book,gr_76334.A_New_Earth,A New Earth: Awakening to Your Life's Purpose,,0.6098544597625732,3
+P2_EN,philosophical,2,en,A journey to find the meaning of life,book,book,gr_28268515-the-road-back-to-you,The Road Back to You: An Enneagram Journey to Self-Discovery,,0.6074820756912231,4
+P2_EN,philosophical,2,en,A journey to find the meaning of life,book,book,gr_28166256-how-to-get-the-best-out-of-life-book,How to get the best out of Life Book: Read this short Book and your life will never be the same,,0.606586217880249,5
+P2_EN,philosophical,2,en,A journey to find the meaning of life,all,book,kdl_B0B5CZ6YM3,Life Worth Living: A Guide to What Matters Most,,0.6464521288871765,1
+P2_EN,philosophical,2,en,A journey to find the meaning of life,all,book,gr_43558838-the-seven-goals-of-life,The Seven Goals of Life,,0.6178442239761353,2
+P2_EN,philosophical,2,en,A journey to find the meaning of life,all,book,gr_76334.A_New_Earth,A New Earth: Awakening to Your Life's Purpose,,0.6098544597625732,3
+P2_EN,philosophical,2,en,A journey to find the meaning of life,all,book,gr_28268515-the-road-back-to-you,The Road Back to You: An Enneagram Journey to Self-Discovery,,0.6074820756912231,4
+P2_EN,philosophical,2,en,A journey to find the meaning of life,all,book,gr_28166256-how-to-get-the-best-out-of-life-book,How to get the best out of Life Book: Read this short Book and your life will never be the same,,0.606586217880249,5
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,movie,movie,1376213,The Adventurer: The Curse of the Midas Box (2013),,0.4135851263999939,1
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,movie,movie,29440,The Prince and the Pauper (1937),,0.39605486392974854,2
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,movie,movie,765458,Hogfather (2006),,0.3935527503490448,3
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,movie,movie,159931,Wyrd Sisters,,0.38177019357681274,4
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,movie,movie,1592287,The Witches of Oz,,0.376593679189682,5
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,music,music,1woL1W9wp2tKz9cFyc4NUm,Double Trouble,,0.3111831545829773,1
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,music,music,2pYtUiFhiRH5ssLl7wBK4v,The Story Continues,,0.3092338442802429,2
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,music,music,08IA5pdUxV881M3pFBKepS,Neville's Waltz,,0.30667534470558167,3
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,music,music,38aLVNQCL1nWPLhQgVuj1V,Hogwarts' March,,0.306609570980072,4
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,music,music,0cm6cAtRu0C0sEZzDjZFsx,Discombobulate,,0.29701489210128784,5
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,book,book,bx_3551551677,Harry Potter und der Stein der Weisen,,0.4638231694698334,1
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,book,book,gr_8479967-zauberlehrling-voller-fehl-und-adel,Zauberlehrling voller Fehl und Adel,,0.4525705575942993,2
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,book,book,gr_668710.Magic_and_Other_Misdemeanors,Magic and Other Misdemeanors,,0.4502413868904114,3
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,book,book,gr_12862036-novels-by-robin-hobb-including,"Novels By Robin Hobb, including: Assassin's Apprentice, Royal Assassin, Assassin's Quest, Fool's Errand (novel), The Golden Fool, Shaman's Crossing, Fool's Fate, Ship Of Magic, Forest Mage, Renegade's Magic, Dragon Keeper (hobb Novel), Ship Of Destiny",,0.4456598162651062,4
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,book,book,bx_0380819023,The Gambler's Fortune : The Third Tale of Einarinn (Tale of Einarinn),,0.445598304271698,5
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,all,book,bx_3551551677,Harry Potter und der Stein der Weisen,,0.4638231694698334,1
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,all,book,gr_8479967-zauberlehrling-voller-fehl-und-adel,Zauberlehrling voller Fehl und Adel,,0.4525705575942993,2
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,all,book,gr_668710.Magic_and_Other_Misdemeanors,Magic and Other Misdemeanors,,0.4502413868904114,3
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,all,book,gr_12862036-novels-by-robin-hobb-including,"Novels By Robin Hobb, including: Assassin's Apprentice, Royal Assassin, Assassin's Quest, Fool's Errand (novel), The Golden Fool, Shaman's Crossing, Fool's Fate, Ship Of Magic, Forest Mage, Renegade's Magic, Dragon Keeper (hobb Novel), Ship Of Destiny",,0.4456598162651062,4
+P3_KO,philosophical,3,ko,자유와 책임 사이에서,all,book,bx_0380819023,The Gambler's Fortune : The Third Tale of Einarinn (Tale of Einarinn),,0.445598304271698,5
+P3_EN,philosophical,3,en,Between freedom and responsibility,movie,movie,2372678,2 States (2014),,0.47812601923942566,1
+P3_EN,philosophical,3,en,Between freedom and responsibility,movie,movie,1433819,Rules of Single Life (2011),,0.4686061441898346,2
+P3_EN,philosophical,3,en,Between freedom and responsibility,movie,movie,1791682,While We're Young (2014),,0.4649062156677246,3
+P3_EN,philosophical,3,en,Between freedom and responsibility,movie,movie,87482,Irreconcilable Differences (1984),,0.46275216341018677,4
+P3_EN,philosophical,3,en,Between freedom and responsibility,movie,movie,3518096,The Millennials (2015),,0.4591004252433777,5
+P3_EN,philosophical,3,en,Between freedom and responsibility,music,music,4gTwPFGhIIlYtlo59jbVUB,High,,0.40169259905815125,1
+P3_EN,philosophical,3,en,Between freedom and responsibility,music,music,0No5Hr1LxZjJHGsQSTy2bm,I Can't Dance - 2007 Remaster,,0.39879733324050903,2
+P3_EN,philosophical,3,en,Between freedom and responsibility,music,music,27bBjan9bD8rUESGYqK9a7,Not My Baby,,0.39784765243530273,3
+P3_EN,philosophical,3,en,Between freedom and responsibility,music,music,6SdAztAqklk1zAmUHhU4N7,Taken for a Fool,,0.3943541944026947,4
+P3_EN,philosophical,3,en,Between freedom and responsibility,music,music,5z0V8zBt6uI8dqc0ChROpg,Begin The Begin,,0.3906729519367218,5
+P3_EN,philosophical,3,en,Between freedom and responsibility,book,book,gr_16605795-2-states-revolution-2020-five-point-someone-the-3-mistakes-of-my-l,2 States / Revolution 2020 / Five Point Someone / The 3 Mistakes of My Life / One Night @ The Call Centre,,0.5157241225242615,1
+P3_EN,philosophical,3,en,Between freedom and responsibility,book,book,kdl_B000SEFLIY,Development as Freedom,,0.5062571167945862,2
+P3_EN,philosophical,3,en,Between freedom and responsibility,book,book,kdl_B009U9S6WG,Beyond (Straight and Gay) Marriage: Valuing All Families under the Law (Queer Ideas/Queer Action Book 3),,0.49889039993286133,3
+P3_EN,philosophical,3,en,Between freedom and responsibility,book,book,gr_15743828-what-young-india-wants,What Young India Wants,,0.4726419448852539,4
+P3_EN,philosophical,3,en,Between freedom and responsibility,book,book,kdl_B09KG9VDD1,Quarterlife: The Search for Self in Early Adulthood,,0.45903339982032776,5
+P3_EN,philosophical,3,en,Between freedom and responsibility,all,book,gr_16605795-2-states-revolution-2020-five-point-someone-the-3-mistakes-of-my-l,2 States / Revolution 2020 / Five Point Someone / The 3 Mistakes of My Life / One Night @ The Call Centre,,0.5157241225242615,1
+P3_EN,philosophical,3,en,Between freedom and responsibility,all,book,kdl_B000SEFLIY,Development as Freedom,,0.5062571167945862,2
+P3_EN,philosophical,3,en,Between freedom and responsibility,all,book,kdl_B009U9S6WG,Beyond (Straight and Gay) Marriage: Valuing All Families under the Law (Queer Ideas/Queer Action Book 3),,0.49889039993286133,3
+P3_EN,philosophical,3,en,Between freedom and responsibility,all,movie,2372678,2 States (2014),,0.47812601923942566,4
+P3_EN,philosophical,3,en,Between freedom and responsibility,all,book,gr_15743828-what-young-india-wants,What Young India Wants,,0.4726419448852539,5
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,movie,movie,428725,Kerd ma lui (2004),,0.4913383722305298,1
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,movie,movie,2165735,Du zhan (2012),,0.4872426390647888,2
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,movie,movie,399295,Lord of War (2005),,0.47123146057128906,3
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,movie,movie,135666,Takkar (1995),,0.46671876311302185,4
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,movie,movie,99812,Huo shao dao (1990),,0.4632411301136017,5
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,music,music,0JhonNQL2ixH1JcsgEj4Hn,War,,0.31986942887306213,1
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,music,music,6Q32Vkucx2qeuVyBd3NiFZ,Battle Without Honor Or Humanity,,0.29690077900886536,2
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,music,music,68LR4RQ7JLHwRodWxPOB0k,Hustle Hard Remix,,0.29483339190483093,3
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,music,music,3iG4WlH1GlZkiWDZi41M0C,Bloody Money,,0.29342028498649597,4
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,music,music,2b3gxK2X5nI7c0NSRFFDBm,The City,,0.2887304425239563,5
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,book,book,bx_0373642911,Blood Trade  (The Executioner #291),,0.4466225504875183,1
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,book,book,kdl_B01HFJ3YMO,Pablo Escobar: Beyond Narcos (War On Drugs Book 1),,0.43403905630111694,2
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,book,book,gr_9827.King_Rat,King Rat,,0.43345576524734497,3
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,book,book,kdl_B00LA9FD7A,Chasing the Dragon: One Woman's Struggle Against the Darkness of Hong Kong's Drug Dens,,0.42427730560302734,4
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,book,book,gr_48925302-the-slave-players,The Slave Players,,0.42157095670700073,5
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,all,movie,428725,Kerd ma lui (2004),,0.4913383722305298,1
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,all,movie,2165735,Du zhan (2012),,0.4872426390647888,2
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,all,movie,399295,Lord of War (2005),,0.47123146057128906,3
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,all,movie,135666,Takkar (1995),,0.46671876311302185,4
+P4_KO,philosophical,4,ko,고독과 존재에 대한 성찰,all,movie,99812,Huo shao dao (1990),,0.4632411301136017,5
+P4_EN,philosophical,4,en,Reflection on solitude and existence,movie,movie,808392,Neal Cassady (2007),,0.5514547824859619,1
+P4_EN,philosophical,4,en,Reflection on solitude and existence,movie,movie,2078648,It's Such a Beautiful Day (2011),,0.5497947931289673,2
+P4_EN,philosophical,4,en,Reflection on solitude and existence,movie,movie,139735,I Am My Films - A Portrait of Werner Herzog (1978),,0.5450842380523682,3
+P4_EN,philosophical,4,en,Reflection on solitude and existence,movie,movie,1466072,William S. Burroughs: A Man Within (2010),,0.541831374168396,4
+P4_EN,philosophical,4,en,Reflection on solitude and existence,movie,movie,345549,Ruang rak noi nid mahasan (2003),,0.5381950736045837,5
+P4_EN,philosophical,4,en,Reflection on solitude and existence,music,music,34dkZZNQJzEJRqPkywYmEY,A Quick One Before the Eternal Worm Devours Connecticut,,0.5986217856407166,1
+P4_EN,philosophical,4,en,Reflection on solitude and existence,music,music,4ZnQXH7WqUCbzffYaeSMRM,The Gift Of Mortality - Instrumental,,0.5408492684364319,2
+P4_EN,philosophical,4,en,Reflection on solitude and existence,music,music,5pHVAQ5LD3RgDG5m11r2Jt,Eyes of the World - 2013 Remaster,,0.5319337844848633,3
+P4_EN,philosophical,4,en,Reflection on solitude and existence,music,music,0oPnyCLqcn2ZNzwy5pLKDR,"Holy Fucking Shit: 40,000",,0.5318032503128052,4
+P4_EN,philosophical,4,en,Reflection on solitude and existence,music,music,35UT9ZB7UROy8W8JvMmzMD,My Shit's Fucked Up,,0.5308932065963745,5
+P4_EN,philosophical,4,en,Reflection on solitude and existence,book,book,gr_12539297-koniec-jest-moim-pocz-tkiem,Koniec jest moim początkiem,,0.6624073386192322,1
+P4_EN,philosophical,4,en,Reflection on solitude and existence,book,book,bx_2070327167,PoÃ©sies,,0.6025853753089905,2
+P4_EN,philosophical,4,en,Reflection on solitude and existence,book,book,gr_28767729,სანახევრო სამოთხე,,0.5998843908309937,3
+P4_EN,philosophical,4,en,Reflection on solitude and existence,book,book,gr_1495678.Tutte_le_poesie,Tutte le poesie,,0.5981278419494629,4
+P4_EN,philosophical,4,en,Reflection on solitude and existence,book,book,gr_25340989-samlade-dikter,Samlade dikter,,0.5958587527275085,5
+P4_EN,philosophical,4,en,Reflection on solitude and existence,all,book,gr_12539297-koniec-jest-moim-pocz-tkiem,Koniec jest moim początkiem,,0.6624073386192322,1
+P4_EN,philosophical,4,en,Reflection on solitude and existence,all,book,bx_2070327167,PoÃ©sies,,0.6025853753089905,2
+P4_EN,philosophical,4,en,Reflection on solitude and existence,all,book,gr_28767729,სანახევრო სამოთხე,,0.5998843908309937,3
+P4_EN,philosophical,4,en,Reflection on solitude and existence,all,music,34dkZZNQJzEJRqPkywYmEY,A Quick One Before the Eternal Worm Devours Connecticut,,0.5986217856407166,4
+P4_EN,philosophical,4,en,Reflection on solitude and existence,all,book,gr_1495678.Tutte_le_poesie,Tutte le poesie,,0.5981278419494629,5
+T1_KO,poet,1,ko,사랑의 이름으로,movie,movie,2088714,Call Me Kuchu (2012),,0.47910529375076294,1
+T1_KO,poet,1,ko,사랑의 이름으로,movie,movie,2611390,Difret (2014),,0.4557092785835266,2
+T1_KO,poet,1,ko,사랑의 이름으로,movie,movie,342804,My Flesh and Blood (2003),,0.454403817653656,3
+T1_KO,poet,1,ko,사랑의 이름으로,movie,movie,3268668,Captive (2015),,0.44934767484664917,4
+T1_KO,poet,1,ko,사랑의 이름으로,movie,movie,2265179,Blood Brother (2013),,0.44398337602615356,5
+T1_KO,poet,1,ko,사랑의 이름으로,music,music,72Hr8XLZckFo1Gie68XoMf,Grace Got You,,0.3013969361782074,1
+T1_KO,poet,1,ko,사랑의 이름으로,music,music,209SbubR5uKaVzj5SeN42w,So Much Trouble In The World,,0.28833675384521484,2
+T1_KO,poet,1,ko,사랑의 이름으로,music,music,0l2APxZVT09GOUnjwvlqTU,Remember Me,,0.2882562279701233,3
+T1_KO,poet,1,ko,사랑의 이름으로,music,music,4OSbctVD37ycS0H3rwRm72,Prayer Of The Refugee,,0.28508952260017395,4
+T1_KO,poet,1,ko,사랑의 이름으로,music,music,7ERRjAcL8i6vdKkaRGDdQc,Sinsemilla,,0.2762138843536377,5
+T1_KO,poet,1,ko,사랑의 이름으로,book,book,gr_10650073-li-es-da-senzala,Lições da Senzala,,0.47688037157058716,1
+T1_KO,poet,1,ko,사랑의 이름으로,book,book,gr_119729.There_Is_No_Me_Without_You,There Is No Me Without You: One Woman's Odyssey to Rescue Africa's Children,,0.45436885952949524,2
+T1_KO,poet,1,ko,사랑의 이름으로,book,book,kdl_0399544690,Amal Unbound,,0.4485154151916504,3
+T1_KO,poet,1,ko,사랑의 이름으로,book,book,gr_25716028-the-voice-of-jamaica,The Voice of Jamaica,,0.44188588857650757,4
+T1_KO,poet,1,ko,사랑의 이름으로,book,book,gr_5956070-jejak-kupu-kupu,Jejak Kupu-kupu,,0.44026491045951843,5
+T1_KO,poet,1,ko,사랑의 이름으로,all,movie,2088714,Call Me Kuchu (2012),,0.47910529375076294,1
+T1_KO,poet,1,ko,사랑의 이름으로,all,book,gr_10650073-li-es-da-senzala,Lições da Senzala,,0.47688037157058716,2
+T1_KO,poet,1,ko,사랑의 이름으로,all,movie,2611390,Difret (2014),,0.4557092785835266,3
+T1_KO,poet,1,ko,사랑의 이름으로,all,movie,342804,My Flesh and Blood (2003),,0.454403817653656,4
+T1_KO,poet,1,ko,사랑의 이름으로,all,book,gr_119729.There_Is_No_Me_Without_You,There Is No Me Without You: One Woman's Odyssey to Rescue Africa's Children,,0.45436885952949524,5
+T1_EN,poet,1,en,In the name of love,movie,movie,75520,Jesus of Nazareth,,0.5930870771408081,1
+T1_EN,poet,1,en,In the name of love,movie,movie,451069,The Gospel (2005),,0.5865484476089478,2
+T1_EN,poet,1,en,In the name of love,movie,movie,37536,The Bells of St. Mary's (1945),,0.5694451928138733,3
+T1_EN,poet,1,en,In the name of love,movie,movie,77977,The Nativity (1978),,0.5631667375564575,4
+T1_EN,poet,1,en,In the name of love,movie,movie,377992,The Visual Bible: The Gospel of John (2003),,0.5616315603256226,5
+T1_EN,poet,1,en,In the name of love,music,music,0zVxhpSAzYpS8enpN1W29u,God With Us,,0.6398262977600098,1
+T1_EN,poet,1,en,In the name of love,music,music,6WSFMa721PvfnspCRsGOMh,How He Loves,,0.6382091641426086,2
+T1_EN,poet,1,en,In the name of love,music,music,56ECskEyc7XqOCyRPruZ37,Pieces - Live,,0.6281017661094666,3
+T1_EN,poet,1,en,In the name of love,music,music,56ECskEyc7XqOCyRPruZ37,Pieces (Live),,0.6261611580848694,4
+T1_EN,poet,1,en,In the name of love,music,music,0qseZDVUDYcH0S7xxhNKlE,You Won't Relent - Live,,0.6223121285438538,5
+T1_EN,poet,1,en,In the name of love,book,book,bx_094383208X,Devotions to the Saints,,0.62669438123703,1
+T1_EN,poet,1,en,In the name of love,book,book,bx_0736903208,If You Love the Lord,,0.6208138465881348,2
+T1_EN,poet,1,en,In the name of love,book,book,bx_1576736881,A Violent Grace,,0.6172319650650024,3
+T1_EN,poet,1,en,In the name of love,book,book,bx_0764222856,Sweet Persecution: A 30-Day Devotional With Reflections from the Persecuted Church,,0.6112148761749268,4
+T1_EN,poet,1,en,In the name of love,book,book,gr_27594.Acts_of_Faith,Acts of Faith,,0.6103107929229736,5
+T1_EN,poet,1,en,In the name of love,all,music,0zVxhpSAzYpS8enpN1W29u,God With Us,,0.6398262977600098,1
+T1_EN,poet,1,en,In the name of love,all,music,6WSFMa721PvfnspCRsGOMh,How He Loves,,0.6382091641426086,2
+T1_EN,poet,1,en,In the name of love,all,music,56ECskEyc7XqOCyRPruZ37,Pieces - Live,,0.6281017661094666,3
+T1_EN,poet,1,en,In the name of love,all,book,bx_094383208X,Devotions to the Saints,,0.62669438123703,4
+T1_EN,poet,1,en,In the name of love,all,music,56ECskEyc7XqOCyRPruZ37,Pieces (Live),,0.6261611580848694,5
+T2_KO,poet,2,ko,봄날의 설레임처럼,movie,movie,1183252,Chocolate (2008),,0.47623759508132935,1
+T2_KO,poet,2,ko,봄날의 설레임처럼,movie,movie,378773,Siu nin a Fu (2003),,0.46049392223358154,2
+T2_KO,poet,2,ko,봄날의 설레임처럼,movie,movie,2020110,The Kick (2011),,0.45167168974876404,3
+T2_KO,poet,2,ko,봄날의 설레임처럼,movie,movie,342258,Unleashed (2005),,0.44835132360458374,4
+T2_KO,poet,2,ko,봄날의 설레임처럼,movie,movie,80166,Za jia xiao zi (1979),,0.44628381729125977,5
+T2_KO,poet,2,ko,봄날의 설레임처럼,music,music,6Q32Vkucx2qeuVyBd3NiFZ,Battle Without Honor Or Humanity,,0.3794822692871094,1
+T2_KO,poet,2,ko,봄날의 설레임처럼,music,music,4kxcVF4kEZTQZDlnNfDeur,Cold World,,0.36746031045913696,2
+T2_KO,poet,2,ko,봄날의 설레임처럼,music,music,1UTX5wGyy7IC6HeT5MmAJ1,Gold,,0.36682528257369995,3
+T2_KO,poet,2,ko,봄날의 설레임처럼,music,music,3zwJm9BHB4tGjxDerxTTRU,Swordsman,,0.3585592806339264,4
+T2_KO,poet,2,ko,봄날의 설레임처럼,music,music,0HpKj1IlWhBBnRmaU4WQqR,Advanced Training,,0.3534380793571472,5
+T2_KO,poet,2,ko,봄날의 설레임처럼,book,book,bx_0752836765,Samurai Boogie,,0.4028724431991577,1
+T2_KO,poet,2,ko,봄날의 설레임처럼,book,book,kdl_B00LA9FD7A,Chasing the Dragon: One Woman's Struggle Against the Darkness of Hong Kong's Drug Dens,,0.39449653029441833,2
+T2_KO,poet,2,ko,봄날의 설레임처럼,book,book,bx_0515111716,Dragon: The Bruce Lee Story,,0.38429024815559387,3
+T2_KO,poet,2,ko,봄날의 설레임처럼,book,book,kdl_B0B3S67XR4,Out of Play (Disgardium Book #11): LitRPG Series,,0.37537676095962524,4
+T2_KO,poet,2,ko,봄날의 설레임처럼,book,book,gr_23262621-raze,Raze,,0.3653925061225891,5
+T2_KO,poet,2,ko,봄날의 설레임처럼,all,movie,1183252,Chocolate (2008),,0.47623759508132935,1
+T2_KO,poet,2,ko,봄날의 설레임처럼,all,movie,378773,Siu nin a Fu (2003),,0.46049392223358154,2
+T2_KO,poet,2,ko,봄날의 설레임처럼,all,movie,2020110,The Kick (2011),,0.45167168974876404,3
+T2_KO,poet,2,ko,봄날의 설레임처럼,all,movie,342258,Unleashed (2005),,0.44835132360458374,4
+T2_KO,poet,2,ko,봄날의 설레임처럼,all,movie,80166,Za jia xiao zi (1979),,0.44628381729125977,5
+T2_EN,poet,2,en,Like the excitement of a spring day,movie,movie,38152,Tee for Two (1945),,0.5158656239509583,1
+T2_EN,poet,2,en,Like the excitement of a spring day,movie,movie,34841,Hen Hop (1942),,0.5107502937316895,2
+T2_EN,poet,2,en,Like the excitement of a spring day,movie,movie,84079,I Made a Splash (1980),,0.5041804313659668,3
+T2_EN,poet,2,en,Like the excitement of a spring day,movie,movie,43325,Bedtime for Bonzo (1951),,0.5035784840583801,4
+T2_EN,poet,2,en,Like the excitement of a spring day,movie,movie,98411,Summer Job (1989),,0.5020847916603088,5
+T2_EN,poet,2,en,Like the excitement of a spring day,music,music,5vCuawHQ8Poch1odz9JDpB,Ice Cream Cake,,0.5573980808258057,1
+T2_EN,poet,2,en,Like the excitement of a spring day,music,music,5EV4bGHxVN0kHpcAFvgnTt,"Dance, Baby!",,0.5457985401153564,2
+T2_EN,poet,2,en,Like the excitement of a spring day,music,music,3MfO2eMTwf5LLyMqjwGXLl,Rama Lama Ding Dong (Original version 1958),,0.5343412160873413,3
+T2_EN,poet,2,en,Like the excitement of a spring day,music,music,3yDhZq8f17SmumVmEyCaRN,Give It Up,,0.5337749719619751,4
+T2_EN,poet,2,en,Like the excitement of a spring day,music,music,42wFJFBEkSBfM74T9Eb6LZ,Little Girls,,0.5320461988449097,5
+T2_EN,poet,2,en,Like the excitement of a spring day,book,book,bx_0843174226,Mr. Tickle (Mr. Men and Little Miss),,0.5524579286575317,1
+T2_EN,poet,2,en,Like the excitement of a spring day,book,book,bx_0416196764,Tigger's Little Book of Bounce,,0.5241247415542603,2
+T2_EN,poet,2,en,Like the excitement of a spring day,book,book,bx_0486404021,Knock Knock Jokes (Dover Game and Puzzle Activity Books),,0.5210587382316589,3
+T2_EN,poet,2,en,Like the excitement of a spring day,book,book,bx_0307101843,Sesame Street Shake a Leg,,0.519819974899292,4
+T2_EN,poet,2,en,Like the excitement of a spring day,book,book,bx_0590425560,101 Silly Summertime Jokes,,0.5179880857467651,5
+T2_EN,poet,2,en,Like the excitement of a spring day,all,music,5vCuawHQ8Poch1odz9JDpB,Ice Cream Cake,,0.5573980808258057,1
+T2_EN,poet,2,en,Like the excitement of a spring day,all,book,bx_0843174226,Mr. Tickle (Mr. Men and Little Miss),,0.5524579286575317,2
+T2_EN,poet,2,en,Like the excitement of a spring day,all,music,5EV4bGHxVN0kHpcAFvgnTt,"Dance, Baby!",,0.5457985401153564,3
+T2_EN,poet,2,en,Like the excitement of a spring day,all,music,3MfO2eMTwf5LLyMqjwGXLl,Rama Lama Ding Dong (Original version 1958),,0.5343412160873413,4
+T2_EN,poet,2,en,Like the excitement of a spring day,all,music,3yDhZq8f17SmumVmEyCaRN,Give It Up,,0.5337749719619751,5
+T3_KO,poet,3,ko,이별 후에 남는 것들,movie,movie,457007,Jumeogi unda (2005),,0.49911338090896606,1
+T3_KO,poet,3,ko,이별 후에 남는 것들,movie,movie,2753048,Kick-Heart (2013),,0.4557933807373047,2
+T3_KO,poet,3,ko,이별 후에 남는 것들,movie,movie,104267,Final Impact (1992),,0.4420045018196106,3
+T3_KO,poet,3,ko,이별 후에 남는 것들,movie,movie,401248,Beautiful Boxer (2004),,0.4403783977031708,4
+T3_KO,poet,3,ko,이별 후에 남는 것들,movie,movie,110256,The Redemption: Kickboxer 5 (1995),,0.4400538206100464,5
+T3_KO,poet,3,ko,이별 후에 남는 것들,music,music,68LR4RQ7JLHwRodWxPOB0k,Hustle Hard Remix,,0.4058501720428467,1
+T3_KO,poet,3,ko,이별 후에 남는 것들,music,music,15uXtfbQoqeWzG82AJ27bl,House Of Suffering,,0.3971496820449829,2
+T3_KO,poet,3,ko,이별 후에 남는 것들,music,music,5uZm7EFtP5aoTJvx5gv9Xf,Jungle,,0.39408165216445923,3
+T3_KO,poet,3,ko,이별 후에 남는 것들,music,music,4CWUGKyUi4aJOq7tF6HAIF,Street Life,,0.39279860258102417,4
+T3_KO,poet,3,ko,이별 후에 남는 것들,music,music,7gQzzsppcAezKh0HFjrG3q,The Charade,,0.39261025190353394,5
+T3_KO,poet,3,ko,이별 후에 남는 것들,book,book,gr_28313.The_Knockout_Artist,The Knockout Artist,,0.4360470473766327,1
+T3_KO,poet,3,ko,이별 후에 남는 것들,book,book,kdl_B0CB99C4LS,"Gladiator: A True Story of 'Roids, Rage, and Redemption",,0.43041038513183594,2
+T3_KO,poet,3,ko,이별 후에 남는 것들,book,book,gr_824508.Smack,Smack,,0.42772242426872253,3
+T3_KO,poet,3,ko,이별 후에 남는 것들,book,book,gr_17617277-real,Real,,0.4260384142398834,4
+T3_KO,poet,3,ko,이별 후에 남는 것들,book,book,gr_22449786-tattoo,Tattoo,,0.42395180463790894,5
+T3_KO,poet,3,ko,이별 후에 남는 것들,all,movie,457007,Jumeogi unda (2005),,0.49911338090896606,1
+T3_KO,poet,3,ko,이별 후에 남는 것들,all,movie,2753048,Kick-Heart (2013),,0.4557933807373047,2
+T3_KO,poet,3,ko,이별 후에 남는 것들,all,movie,104267,Final Impact (1992),,0.4420045018196106,3
+T3_KO,poet,3,ko,이별 후에 남는 것들,all,movie,401248,Beautiful Boxer (2004),,0.4403783977031708,4
+T3_KO,poet,3,ko,이별 후에 남는 것들,all,movie,110256,The Redemption: Kickboxer 5 (1995),,0.4400538206100464,5
+T3_EN,poet,3,en,What remains after farewell,movie,movie,165078,After Life (1998),,0.40546518564224243,1
+T3_EN,poet,3,en,What remains after farewell,movie,movie,1843214,Mourir auprÌ¬s de toi (2011),,0.39253926277160645,2
+T3_EN,poet,3,en,What remains after farewell,movie,movie,2515214,They Are All Dead (2014),,0.38607659935951233,3
+T3_EN,poet,3,en,What remains after farewell,movie,movie,379269,Dying at Grace (2003),,0.3803824782371521,4
+T3_EN,poet,3,en,What remains after farewell,movie,movie,2474024,The Last Five Years (2014),,0.3725758194923401,5
+T3_EN,poet,3,en,What remains after farewell,music,music,6oMBDrzwGG1BzCoZyPyGuG,Neighborhood #4 (7 Kettles),,0.48154422640800476,1
+T3_EN,poet,3,en,What remains after farewell,music,music,3yxpqMbfUVMLL7Ap3W71W4,End Of Me,,0.4793805480003357,2
+T3_EN,poet,3,en,What remains after farewell,music,music,4zLOwx1yRJXWkHKt1XzF1p,Now & Forever,,0.47234049439430237,3
+T3_EN,poet,3,en,What remains after farewell,music,music,3kusLGvgYkZldKfoDoJklR,Crown of Love,,0.46143069863319397,4
+T3_EN,poet,3,en,What remains after farewell,music,music,19m3E0nMZobyA93AxMXC32,I'm Still,,0.44768276810646057,5
+T3_EN,poet,3,en,What remains after farewell,book,book,gr_45895148-romance-or-the-end,Romance or the End,,0.4923474192619324,1
+T3_EN,poet,3,en,What remains after farewell,book,book,bx_0806516674,What Happens When You Die: From Your Last Breath to the First Spadeful,,0.47931063175201416,2
+T3_EN,poet,3,en,What remains after farewell,book,book,gr_1010397.Last_Letters_of_Jacopo_Ortis,Last Letters of Jacopo Ortis,,0.47818219661712646,3
+T3_EN,poet,3,en,What remains after farewell,book,book,bx_2221078306,La mort intime: Ceux qui vont mourir nous apprennent Ã  vivre (Collection Aider la vie),,0.46809184551239014,4
+T3_EN,poet,3,en,What remains after farewell,book,book,gr_22742420-until-death-do-i-part,Until Death Do I Part,,0.46395519375801086,5
+T3_EN,poet,3,en,What remains after farewell,all,book,gr_45895148-romance-or-the-end,Romance or the End,,0.4923474192619324,1
+T3_EN,poet,3,en,What remains after farewell,all,music,6oMBDrzwGG1BzCoZyPyGuG,Neighborhood #4 (7 Kettles),,0.48154422640800476,2
+T3_EN,poet,3,en,What remains after farewell,all,music,3yxpqMbfUVMLL7Ap3W71W4,End Of Me,,0.4793805480003357,3
+T3_EN,poet,3,en,What remains after farewell,all,book,bx_0806516674,What Happens When You Die: From Your Last Breath to the First Spadeful,,0.47931063175201416,4
+T3_EN,poet,3,en,What remains after farewell,all,book,gr_1010397.Last_Letters_of_Jacopo_Ortis,Last Letters of Jacopo Ortis,,0.47818219661712646,5
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,movie,movie,2753048,Kick-Heart (2013),,0.4267100691795349,1
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,movie,movie,368909,Ong-Bak: The Thai Warrior (2003),,0.38865989446640015,2
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,movie,movie,108624,Kung Fu Cult Master (1993),,0.3839415907859802,3
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,movie,movie,106770,Dragon: The Bruce Lee Story (1993),,0.3837226629257202,4
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,movie,movie,1183252,Chocolate (2008),,0.38051605224609375,5
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,music,music,5Sl4762Gx7mbUV9R8Mrbut,Me And My Crazy World,,0.403126060962677,1
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,music,music,3FAJ6O0NOHQV8Mc5Ri6ENp,HEARTBREAK ANNIVERSARY,,0.37503165006637573,2
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,music,music,6AvtRMA6AzFNYZ3qEMYpch,Mystery Of Love,,0.3693884611129761,3
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,music,music,1PoJXULCvl03b1fiZmMxmd,On the Low,,0.35482871532440186,4
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,music,music,4OmwgrgrR8beLcmFu6kbdT,The Strain,,0.35402610898017883,5
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,book,book,gr_15715105-jiwo-j-ncuk,Jiwo J#ncuk,,0.3844635486602783,1
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,book,book,bx_0515111716,Dragon: The Bruce Lee Story,,0.3755176067352295,2
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,book,book,gr_26148083-rhythm-chord-malykhin,"Rhythm, Chord & Malykhin",,0.36311081051826477,3
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,book,book,bx_0446602604,Headcrash,,0.358005166053772,4
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,book,book,gr_2961799-loving-danny,Loving Danny,,0.352948933839798,5
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,all,movie,2753048,Kick-Heart (2013),,0.4267100691795349,1
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,all,music,5Sl4762Gx7mbUV9R8Mrbut,Me And My Crazy World,,0.403126060962677,2
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,all,movie,368909,Ong-Bak: The Thai Warrior (2003),,0.38865989446640015,3
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,all,book,gr_15715105-jiwo-j-ncuk,Jiwo J#ncuk,,0.3844635486602783,4
+T4_KO,poet,4,ko,달빛 아래 속삭이는 목소리,all,movie,108624,Kung Fu Cult Master (1993),,0.3839415907859802,5
+T4_EN,poet,4,en,A voice whispering under moonlight,movie,movie,2401223,Richard Pryor: Omit the Logic (2013),,0.5268980860710144,1
+T4_EN,poet,4,en,A voice whispering under moonlight,movie,movie,1747960,"Bo Burnham: Words, Words, Words (2010)",,0.5205507278442383,2
+T4_EN,poet,4,en,A voice whispering under moonlight,movie,movie,3216296,Imperfectly Yours (2013),,0.5147019624710083,3
+T4_EN,poet,4,en,A voice whispering under moonlight,movie,movie,2523852,Craig Ferguson: I'm Here to Help (2013),,0.4979403614997864,4
+T4_EN,poet,4,en,A voice whispering under moonlight,movie,movie,841115,Jimmy Carr: Stand Up (2005),,0.49786025285720825,5
+T4_EN,poet,4,en,A voice whispering under moonlight,music,music,6wZI4mdT8JwXgkGURnBQiq,Say,,0.5465799570083618,1
+T4_EN,poet,4,en,A voice whispering under moonlight,music,music,4j1Pc3I3CQTg4EAE6kCpNV,Yep,,0.5409283638000488,2
+T4_EN,poet,4,en,A voice whispering under moonlight,music,music,18ZRmY7kNZQQHpopsSVxwJ,Criticize,,0.5259228944778442,3
+T4_EN,poet,4,en,A voice whispering under moonlight,music,music,18ZRmY7kNZQQHpopsSVxwJ,Criticize,,0.5259227752685547,4
+T4_EN,poet,4,en,A voice whispering under moonlight,music,music,4vVIHxe9kdEsIrrTeHnHyG,People Watching,,0.5209770798683167,5
+T4_EN,poet,4,en,A voice whispering under moonlight,book,book,bx_0878300554,The Right to Speak: Working With the Voice,,0.5188265442848206,1
+T4_EN,poet,4,en,A voice whispering under moonlight,book,book,bx_0671400622,And A Voice to Sing With: A Memoir,,0.49502360820770264,2
+T4_EN,poet,4,en,A voice whispering under moonlight,book,book,bx_8401377013,Perdonen Las Tristezas,,0.49387407302856445,3
+T4_EN,poet,4,en,A voice whispering under moonlight,book,book,kdl_B081M8K2JT,I Have Something to Say: Mastering the Art of Public Speaking in an Age of Disconnection,,0.49125343561172485,4
+T4_EN,poet,4,en,A voice whispering under moonlight,book,book,kdl_B07SCRDFZN,Rachel Maddow: A Biography,,0.4895433783531189,5
+T4_EN,poet,4,en,A voice whispering under moonlight,all,music,6wZI4mdT8JwXgkGURnBQiq,Say,,0.5465799570083618,1
+T4_EN,poet,4,en,A voice whispering under moonlight,all,music,4j1Pc3I3CQTg4EAE6kCpNV,Yep,,0.5409283638000488,2
+T4_EN,poet,4,en,A voice whispering under moonlight,all,movie,2401223,Richard Pryor: Omit the Logic (2013),,0.5268980860710144,3
+T4_EN,poet,4,en,A voice whispering under moonlight,all,music,18ZRmY7kNZQQHpopsSVxwJ,Criticize,,0.5259228944778442,4
+T4_EN,poet,4,en,A voice whispering under moonlight,all,music,18ZRmY7kNZQQHpopsSVxwJ,Criticize,,0.5259227752685547,5
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,movie,movie,122082,Gadjo dilo (1997),,0.48199257254600525,1
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,movie,movie,23871,A CanÌ¤Ì£o de Lisboa (1933),,0.48050904273986816,2
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,movie,movie,15152,Mustalaishurmaaja (1929),,0.477262020111084,3
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,movie,movie,844742,Opera Jawa (2006),,0.44664084911346436,4
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,movie,movie,1056422,Fados (2007),,0.4346355199813843,5
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,music,music,7yMwkwxNCcsck1SOMgBFlm,"Mis Dos Pequeñas (feat. Angá Díaz, Amadito Valdés, Carlos González & Manuel Galbán)",,0.4206019937992096,1
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,music,music,414J8tKHbtF16XOiHGBEso,Tezeta (Nostalgia),,0.4154965877532959,2
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,music,music,7Deb4scGmEv4fY2CZcVnSb,Je ne t'aime plus,,0.41053274273872375,3
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,music,music,4cGYXOl7T3q7oLFj4loAUc,Yèkèrmo Sèw,,0.3982505202293396,4
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,music,music,2oLjhx7w8Hyd3gry9cCXr7,"Hungarian Dance No. 5 in G Minor, WoO 1 No. 5 (Orch. Schmeling)",,0.396464467048645,5
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,book,book,gr_3115360-bakaka,Bakakaï,,0.4768744707107544,1
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,book,book,gr_1530210.Fogo_Morto,Fogo Morto,,0.47251129150390625,2
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,book,book,bx_8433906801,Sostiene Pereira,,0.4711053967475891,3
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,book,book,gr_1512007.Morome_ii_I,Moromeții I,,0.4664781391620636,4
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,book,book,bx_2070370437,La Valse aux adieux,,0.45850032567977905,5
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,all,movie,122082,Gadjo dilo (1997),,0.48199257254600525,1
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,all,movie,23871,A CanÌ¤Ì£o de Lisboa (1933),,0.48050904273986816,2
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,all,movie,15152,Mustalaishurmaaja (1929),,0.477262020111084,3
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,all,book,gr_3115360-bakaka,Bakakaï,,0.4768744707107544,4
+A1_KO,atmosphere,1,ko,햇살이 드는 카페,all,book,gr_1530210.Fogo_Morto,Fogo Morto,,0.47251129150390625,5
+A1_EN,atmosphere,1,en,A sunlit cafe,movie,movie,1436572,CafÌ© (2011),,0.6020956039428711,1
+A1_EN,atmosphere,1,en,A sunlit cafe,movie,movie,1826753,Tasting Menu (2013),,0.5954242944717407,2
+A1_EN,atmosphere,1,en,A sunlit cafe,movie,movie,107642,Cafí© au lait (1993),,0.5845942497253418,3
+A1_EN,atmosphere,1,en,A sunlit cafe,movie,movie,164108,The Muse (1999),,0.5772788524627686,4
+A1_EN,atmosphere,1,en,A sunlit cafe,movie,movie,115678,Big Night (1996),,0.5769941806793213,5
+A1_EN,atmosphere,1,en,A sunlit cafe,music,music,3OIoLMnnWzAUORFQxRAhdF,You Matter to Me,,0.5036593675613403,1
+A1_EN,atmosphere,1,en,A sunlit cafe,music,music,7CBrUf50mf2IqcRZla38by,She Used to Be Mine,,0.484717458486557,2
+A1_EN,atmosphere,1,en,A sunlit cafe,music,music,0h77yfaXxrLMLz31uNDigN,What Baking Can Do,,0.48131638765335083,3
+A1_EN,atmosphere,1,en,A sunlit cafe,music,music,1CZgbcEZEhHH28HcBFvQIW,Never Ever Getting Rid of Me,,0.4591497778892517,4
+A1_EN,atmosphere,1,en,A sunlit cafe,music,music,4tG0cdbL7v4pQ8RWOqLDHx,When He Sees Me,,0.4556042551994324,5
+A1_EN,atmosphere,1,en,A sunlit cafe,book,book,gr_41950.Quentins,Quentins,,0.5725537538528442,1
+A1_EN,atmosphere,1,en,A sunlit cafe,book,book,kdl_B0BR4ZRNGV,Diner: Day for Night [A Cookbook],,0.5595128536224365,2
+A1_EN,atmosphere,1,en,A sunlit cafe,book,book,gr_2288199.Sweet_Caroline,Sweet Caroline,,0.550839900970459,3
+A1_EN,atmosphere,1,en,A sunlit cafe,book,book,gr_94944.In_the_Night_Cafe,In the Night Cafe,,0.5476230978965759,4
+A1_EN,atmosphere,1,en,A sunlit cafe,book,book,gr_11105002-angelina-s-bachelors,Angelina's Bachelors,,0.5399741530418396,5
+A1_EN,atmosphere,1,en,A sunlit cafe,all,movie,1436572,CafÌ© (2011),,0.6020956039428711,1
+A1_EN,atmosphere,1,en,A sunlit cafe,all,movie,1826753,Tasting Menu (2013),,0.5954242944717407,2
+A1_EN,atmosphere,1,en,A sunlit cafe,all,movie,107642,Cafí© au lait (1993),,0.5845942497253418,3
+A1_EN,atmosphere,1,en,A sunlit cafe,all,movie,164108,The Muse (1999),,0.5772788524627686,4
+A1_EN,atmosphere,1,en,A sunlit cafe,all,movie,115678,Big Night (1996),,0.5769941806793213,5
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,movie,movie,159784,Takedown (2000),,0.4856947064399719,1
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,movie,movie,112993,Evolver (1995),,0.4849182963371277,2
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,movie,movie,112763,Cyberjack (1995),,0.4777011573314667,3
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,movie,movie,2608732,TPB AFK: The Pirate Bay Away from Keyboard (2013),,0.4669032692909241,4
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,movie,movie,184925,Sukeban deka: Kazama sanshimai no gyakushÌÈ (1988),,0.4645901620388031,5
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,music,music,6SvuMwPea2zKEN03IWCElv,Computers (feat. Bobby Shmurda),,0.4696950912475586,1
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,music,music,6Q32Vkucx2qeuVyBd3NiFZ,Battle Without Honor Or Humanity,,0.44451904296875,2
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,music,music,38kcwx5znepLWCIBID0Bwm,Kyouran Hey Kids!!,,0.41536813974380493,3
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,music,music,0HiubqhlD4iuegPFy88CNK,Remote Control - Remastered,,0.4149158298969269,4
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,music,music,1L8H6AuK4TaMmolSL0N0mR,Boy From School,,0.40594449639320374,5
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,book,book,bx_0446602604,Headcrash,,0.47786593437194824,1
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,book,book,bx_3404148800,Panik. Thriller.,,0.460818886756897,2
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,book,book,gr_9319468-kingpin,Kingpin: How One Hacker Took Over the Billion-Dollar Cybercrime Underground,,0.45946019887924194,3
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,book,book,gr_954674.Little_Brother,Little Brother,,0.4585839509963989,4
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,book,book,gr_569674.Hack_Another_Birth_Volume_1,"Hack//Another Birth, Volume 1: Infection",,0.4577690362930298,5
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,all,movie,159784,Takedown (2000),,0.4856947064399719,1
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,all,movie,112993,Evolver (1995),,0.4849182963371277,2
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,all,book,bx_0446602604,Headcrash,,0.47786593437194824,3
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,all,movie,112763,Cyberjack (1995),,0.4777011573314667,4
+A2_KO,atmosphere,2,ko,빗소리 들리는 조용한 오후,all,music,6SvuMwPea2zKEN03IWCElv,Computers (feat. Bobby Shmurda),,0.4696950912475586,5
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,movie,movie,3293158,Wind (2013),,0.5479445457458496,1
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,movie,movie,2271401,Inori (2012),,0.478449285030365,2
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,movie,movie,1343394,Lunch Break (2008),,0.4735740125179291,3
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,movie,movie,373960,Kanojo to kanojo no neko (1999),,0.4622935652732849,4
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,movie,movie,1314291,Oto-na-ri (2009),,0.4389604330062866,5
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,music,music,7mil5nzqrkyw0Wl5QYzGu1,Rainfall,,0.6361594200134277,1
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,music,music,54uWRU1WbxnoduCVW2MTSa,"Quiet Rain(Loopable,No fade)",,0.6346532106399536,2
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,music,music,2XTFzpp94faiihcFaNWYR5,Calmness Rain Sound,,0.6325806379318237,3
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,music,music,44GD39aWKrygl7XS0vB38O,Rainsong - Fortune's Lullaby,,0.620621919631958,4
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,music,music,18aGDOpPblt4w29uE9NMbd,Under Shelter Rain,,0.6085038185119629,5
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,book,book,bx_082340952X,Weather Words and What They Mean,,0.5372267961502075,1
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,book,book,bx_0307116824,Just a Rainy Day (Golden Little Look-Look Book),,0.4878922700881958,2
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,book,book,bx_0752580582,Old MacDonald Had Some Ducks (Book and Audiocassette),,0.48490604758262634,3
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,book,book,gr_22822881-rain,Rain: A Natural and Cultural History,,0.4712745249271393,4
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,book,book,bx_0394830180,Richard Scarry's Best Rainy Day Book Ever: More Than 500 Things to Color and Make.,,0.46313220262527466,5
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,all,music,7mil5nzqrkyw0Wl5QYzGu1,Rainfall,,0.6361594200134277,1
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,all,music,54uWRU1WbxnoduCVW2MTSa,"Quiet Rain(Loopable,No fade)",,0.6346532106399536,2
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,all,music,2XTFzpp94faiihcFaNWYR5,Calmness Rain Sound,,0.6325806379318237,3
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,all,music,44GD39aWKrygl7XS0vB38O,Rainsong - Fortune's Lullaby,,0.620621919631958,4
+A2_EN,atmosphere,2,en,A quiet afternoon with the sound of rain,all,music,18aGDOpPblt4w29uE9NMbd,Under Shelter Rain,,0.6085038185119629,5
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,movie,movie,1135983,Sasori (2008),,0.4499337077140808,1
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,movie,movie,416499,Baramui paiteo (2004),,0.42903053760528564,2
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,movie,movie,363226,The Blind Swordsman: Zatoichi (2003),,0.42883002758026123,3
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,movie,movie,1155076,The Karate Kid (2010),,0.4247048497200012,4
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,movie,movie,199813,Shuang ma lian huan (1979),,0.42228198051452637,5
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,music,music,6Q32Vkucx2qeuVyBd3NiFZ,Battle Without Honor Or Humanity,,0.3563896417617798,1
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,music,music,0HpKj1IlWhBBnRmaU4WQqR,Advanced Training,,0.3484913110733032,2
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,music,music,3zwJm9BHB4tGjxDerxTTRU,Swordsman,,0.29953375458717346,3
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,music,music,66EIPOdC3UZZCJdiUSRo92,Sayuri's Theme,,0.2938748300075531,4
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,music,music,0lEHnMNNYusZtbon9XyA2W,Pacific Rim (feat. Tom Morello),,0.28974515199661255,5
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,book,book,gr_190372.The_Last_Samurai,The Last Samurai,,0.4018876254558563,1
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,book,book,gr_12319445-shogun-part-1,"Shogun, Part 1",,0.3989580273628235,2
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,book,book,kdl_B08L86T4FF,The Way of the Samurai (Arcturus Classics),,0.39678043127059937,3
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,book,book,gr_8144079-leverage,Leverage,,0.39565742015838623,4
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,book,book,kdl_B00KTWCO12,Paul Vunak's 45 Combat Secrets: Contemporary Jeet Kune Do,,0.39173293113708496,5
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,all,movie,1135983,Sasori (2008),,0.4499337077140808,1
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,all,movie,416499,Baramui paiteo (2004),,0.42903053760528564,2
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,all,movie,363226,The Blind Swordsman: Zatoichi (2003),,0.42883002758026123,3
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,all,movie,1155076,The Karate Kid (2010),,0.4247048497200012,4
+A3_KO,atmosphere,3,ko,한겨울 따뜻한 벽난로 앞에서,all,movie,199813,Shuang ma lian huan (1979),,0.42228198051452637,5
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,movie,movie,1322287,A Colbert Christmas: The Greatest Gift of All! (2008),,0.5060359239578247,1
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,movie,movie,1213897,Santa's Pocket Watch (1980),,0.48303359746932983,2
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,movie,movie,918511,A Dennis the Menace Christmas (2007),,0.4679039716720581,3
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,movie,movie,154263,Bugs Bunny's Looney Christmas Tales (1979),,0.4634997546672821,4
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,movie,movie,974662,The Velveteen Rabbit (2009),,0.45739611983299255,5
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,music,music,7v6XfSM2XpK6KEVyn4Ud73,Revolving Door,,0.4928518235683441,1
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,music,music,1NtMwloRp8OIVwWGipngkw,Brush Your Teeth,,0.4904857873916626,2
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,music,music,6XzpeMXDvLC86GvAfnUsIA,A Holly Jolly Christmas - Single Version,,0.4901517331600189,3
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,music,music,0ETaxoSdL6Cj5Ms32BX4jj,Day O,,0.4842678904533386,4
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,music,music,6eimz6jvlZaPwtflDWCTa0,Tell Me a Bedtime Story,,0.4837063252925873,5
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,book,book,bx_8478642161,Cenicienta,,0.5680105090141296,1
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,book,book,bx_0875421245,The Magical Household: Spells &amp; Rituals for the Home (Llewellyn's Practical Magick Series),,0.5672125220298767,2
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,book,book,bx_0875421857,Spell Crafts: Creating Magical Objects (Llewellyn's Practical Magic),,0.5460619926452637,3
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,book,book,gr_3551831-the-first-adventure,The First Adventure,,0.5399750471115112,4
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,book,book,kdl_B00BFH3UX6,The House That Cleans Itself: 8 Steps to Keep Your Home Twice as Neat in Half the Time,,0.5399681329727173,5
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,all,book,bx_8478642161,Cenicienta,,0.5680105090141296,1
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,all,book,bx_0875421245,The Magical Household: Spells &amp; Rituals for the Home (Llewellyn's Practical Magick Series),,0.5672125220298767,2
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,all,book,bx_0875421857,Spell Crafts: Creating Magical Objects (Llewellyn's Practical Magic),,0.5460619926452637,3
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,all,book,gr_3551831-the-first-adventure,The First Adventure,,0.5399750471115112,4
+A3_EN,atmosphere,3,en,In front of a warm fireplace in midwinter,all,book,kdl_B00BFH3UX6,The House That Cleans Itself: 8 Steps to Keep Your Home Twice as Neat in Half the Time,,0.5399681329727173,5
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,movie,movie,1663970,A Drummer's Dream (2010),,0.525607705116272,1
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,movie,movie,2078686,Musicwood (2012),,0.5182420015335083,2
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,movie,movie,79759,Orchestra Rehearsal (1978),,0.49861207604408264,3
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,movie,movie,1455209,Live Music (2009),,0.49581506848335266,4
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,movie,movie,410520,Rhythm Is It! (2004),,0.48259496688842773,5
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,music,music,4xxn8GDqs7RUwgZTNznXNp,Dueling Banjos,,0.5038259625434875,1
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,music,music,2oLjhx7w8Hyd3gry9cCXr7,"Hungarian Dance No. 5 in G Minor, WoO 1 No. 5 (Orch. Schmeling)",,0.4816717803478241,2
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,music,music,0w4LgJ5G1Xz5jLS3HX8oyq,Young Person's Guide To The Orchestra,,0.4714406132698059,3
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,music,music,2ZJhL2pkytU1udly94xV7j,Cosmos,,0.4671238958835602,4
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,music,music,1i8FJaKwn3OjZCqGMUnoKG,Hallelujah,,0.45484769344329834,5
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,book,book,kdl_B00EUMY7LC,"Essential Dictionary of Orchestration: The Most Practical and Comprehensive Resource for Composers, Arrangers and Orchestrators (Essential Dictionary Series)",,0.534050464630127,1
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,book,book,gr_160198.Noise,Noise: The Political Economy of Music,,0.5250468850135803,2
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,book,book,kdl_B09FP81XMQ,Musical Revolutions: How the Sounds of the Western World Changed,,0.5140101909637451,3
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,book,book,kdl_B08GZN4SQ7,The Ultimate Live Sound Operator's Handbook (Music Pro Guides),,0.5132719278335571,4
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,book,book,kdl_B073QPLPV8,"Audio Culture, Revised Edition: Readings in Modern Music",,0.5042285919189453,5
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,all,book,kdl_B00EUMY7LC,"Essential Dictionary of Orchestration: The Most Practical and Comprehensive Resource for Composers, Arrangers and Orchestrators (Essential Dictionary Series)",,0.534050464630127,1
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,all,movie,1663970,A Drummer's Dream (2010),,0.525607705116272,2
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,all,book,gr_160198.Noise,Noise: The Political Economy of Music,,0.5250468850135803,3
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,all,movie,2078686,Musicwood (2012),,0.5182420015335083,4
+A4_KO,atmosphere,4,ko,새벽 도심의 텅 빈 거리,all,book,kdl_B09FP81XMQ,Musical Revolutions: How the Sounds of the Western World Changed,,0.5140101909637451,5
+A4_EN,atmosphere,4,en,Empty city streets at dawn,movie,movie,2075247,Man Walking Around the Corner (1887),,0.5092615485191345,1
+A4_EN,atmosphere,4,en,Empty city streets at dawn,movie,movie,3645982,The Newburgh Sting (2014),,0.5048223733901978,2
+A4_EN,atmosphere,4,en,Empty city streets at dawn,movie,movie,316196,LÌ¦rdagen den 5.10 (1969),,0.504513144493103,3
+A4_EN,atmosphere,4,en,Empty city streets at dawn,movie,movie,464105,Man Push Cart (2005),,0.49361321330070496,4
+A4_EN,atmosphere,4,en,Empty city streets at dawn,movie,movie,4212378,Boj za (2014),,0.48439130187034607,5
+A4_EN,atmosphere,4,en,Empty city streets at dawn,music,music,0R8BZU49NtJrUn5K3Q8eyM,"In The City - Live On MTV, 1994",,0.49873220920562744,1
+A4_EN,atmosphere,4,en,Empty city streets at dawn,music,music,4TDLfAmx45EpSiQYG6hCzT,Dirty Blvd.,,0.47990405559539795,2
+A4_EN,atmosphere,4,en,Empty city streets at dawn,music,music,1xZv5HMOdnP1V4pfDFHdA1,Village Ghetto Land,,0.4773187041282654,3
+A4_EN,atmosphere,4,en,Empty city streets at dawn,music,music,3O85NMbjKkbcCi44UAwOx4,Sons of the Silent Age - 2017 Remaster,,0.47359299659729004,4
+A4_EN,atmosphere,4,en,Empty city streets at dawn,music,music,0gbLfFlEyVHiKzlZIb0gce,How Far We've Come,,0.4682037830352783,5
+A4_EN,atmosphere,4,en,Empty city streets at dawn,book,book,gr_9806531-tutto-scorre,Tutto scorre...,,0.5158563852310181,1
+A4_EN,atmosphere,4,en,Empty city streets at dawn,book,book,bx_081391289X,The Long Day: The Story of a New York Working Girl,,0.5080493688583374,2
+A4_EN,atmosphere,4,en,Empty city streets at dawn,book,book,gr_1490740.Ein_Mann_will_nach_oben,Ein Mann will nach oben: Die Frauen und der Träumer,,0.5021572113037109,3
+A4_EN,atmosphere,4,en,Empty city streets at dawn,book,book,kdl_B0B4VDN88Z,Poverty and Power: The Problem of Structural Inequality,,0.498830646276474,4
+A4_EN,atmosphere,4,en,Empty city streets at dawn,book,book,gr_11503.In_the_Beginning,In the Beginning,,0.49697065353393555,5
+A4_EN,atmosphere,4,en,Empty city streets at dawn,all,book,gr_9806531-tutto-scorre,Tutto scorre...,,0.5158563852310181,1
+A4_EN,atmosphere,4,en,Empty city streets at dawn,all,movie,2075247,Man Walking Around the Corner (1887),,0.5092615485191345,2
+A4_EN,atmosphere,4,en,Empty city streets at dawn,all,book,bx_081391289X,The Long Day: The Story of a New York Working Girl,,0.5080493688583374,3
+A4_EN,atmosphere,4,en,Empty city streets at dawn,all,movie,3645982,The Newburgh Sting (2014),,0.5048223733901978,4
+A4_EN,atmosphere,4,en,Empty city streets at dawn,all,movie,316196,LÌ¦rdagen den 5.10 (1969),,0.504513144493103,5
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,movie,movie,368909,Ong-Bak: The Thai Warrior (2003),,0.46193498373031616,1
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,movie,movie,457007,Jumeogi unda (2005),,0.4544821083545685,2
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,movie,movie,378773,Siu nin a Fu (2003),,0.44695720076560974,3
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,movie,movie,3003668,Ji zhan (2013),,0.44609764218330383,4
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,movie,movie,70017,Ding tian li di (1973),,0.43916457891464233,5
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,music,music,68LR4RQ7JLHwRodWxPOB0k,Hustle Hard Remix,,0.3826499879360199,1
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,music,music,15uXtfbQoqeWzG82AJ27bl,House Of Suffering,,0.36464229226112366,2
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,music,music,31LyiJGtzOgt8I1YoIASV2,Rebel In Me,,0.36393094062805176,3
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,music,music,4LT5UhJwTShLfYzY98bcSt,List Of Demands (Reparations),,0.35681408643722534,4
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,music,music,7BfW1eoDh27W69nxsmRicb,Buffalo Soldier,,0.3494543433189392,5
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,book,book,kdl_B00LA9FD7A,Chasing the Dragon: One Woman's Struggle Against the Darkness of Hong Kong's Drug Dens,,0.40186142921447754,1
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,book,book,gr_28313.The_Knockout_Artist,The Knockout Artist,,0.40176892280578613,2
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,book,book,bx_0515111716,Dragon: The Bruce Lee Story,,0.4005715548992157,3
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,book,book,bx_0060812508,Black Boy (American Hunger : a Record of Childhood and Youth),,0.39773762226104736,4
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,book,book,kdl_B0CB99C4LS,"Gladiator: A True Story of 'Roids, Rage, and Redemption",,0.3974546492099762,5
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,all,movie,368909,Ong-Bak: The Thai Warrior (2003),,0.46193498373031616,1
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,all,movie,457007,Jumeogi unda (2005),,0.4544821083545685,2
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,all,movie,378773,Siu nin a Fu (2003),,0.44695720076560974,3
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,all,movie,3003668,Ji zhan (2013),,0.44609764218330383,4
+D1_KO,direct,1,ko,우주를 배경으로 한 액션 영화,all,movie,70017,Ding tian li di (1973),,0.43916457891464233,5
+D1_EN,direct,1,en,Action movie set in space,movie,movie,79946,Starcrash (1978),,0.5704737901687622,1
+D1_EN,direct,1,en,Action movie set in space,movie,movie,131646,Wing Commander (1999),,0.5506309866905212,2
+D1_EN,direct,1,en,Action movie set in space,movie,movie,87597,The Last Starfighter (1984),,0.5436325669288635,3
+D1_EN,direct,1,en,Action movie set in space,movie,movie,30138,Flash Gordon's Trip to Mars (1938),,0.5401002764701843,4
+D1_EN,direct,1,en,Action movie set in space,movie,movie,86357,Starflight: The Plane That Couldn't Land (1983),,0.5354785323143005,5
+D1_EN,direct,1,en,Action movie set in space,music,music,5m9czFpeSzeSaw2kA6o9dW,It's Dangerous to Go Alone,,0.4861370921134949,1
+D1_EN,direct,1,en,Action movie set in space,music,music,5dulYd9AKIprMoF837OTDb,"Gonna Fly Now - Theme From ""Rocky"" / Remastered 2006",,0.4627383351325989,2
+D1_EN,direct,1,en,Action movie set in space,music,music,1UPyhGntpIx9jGJ5UVtKVS,Call Me A Spaceman - Radio Edit,,0.4557204842567444,3
+D1_EN,direct,1,en,Action movie set in space,music,music,09C7ULYG1WhWgngwkkvVxN,Rough Boy,,0.45537006855010986,4
+D1_EN,direct,1,en,Action movie set in space,music,music,6aF5JtQSrh7wNrkDE9B0My,When Worlds Collide,,0.44089049100875854,5
+D1_EN,direct,1,en,Action movie set in space,book,book,bx_0440507162,The Nitpickers Guide for Next Generation Trekkers,,0.603032112121582,1
+D1_EN,direct,1,en,Action movie set in space,book,book,bx_0671578790,TNT : Telzey &amp; Trigger,,0.5550398826599121,2
+D1_EN,direct,1,en,Action movie set in space,book,book,bx_0380763958,Take Back Plenty,,0.5484756231307983,3
+D1_EN,direct,1,en,Action movie set in space,book,book,bx_0061056502,Space: Above and Beyond - A Novel (Book 1),,0.5431820750236511,4
+D1_EN,direct,1,en,Action movie set in space,book,book,gr_2183274.Booster_Gold_Vol_1,"Booster Gold, Vol. 1: 52 Pick-Up",,0.5384987592697144,5
+D1_EN,direct,1,en,Action movie set in space,all,book,bx_0440507162,The Nitpickers Guide for Next Generation Trekkers,,0.603032112121582,1
+D1_EN,direct,1,en,Action movie set in space,all,movie,79946,Starcrash (1978),,0.5704737901687622,2
+D1_EN,direct,1,en,Action movie set in space,all,book,bx_0671578790,TNT : Telzey &amp; Trigger,,0.5550398826599121,3
+D1_EN,direct,1,en,Action movie set in space,all,movie,131646,Wing Commander (1999),,0.5506309866905212,4
+D1_EN,direct,1,en,Action movie set in space,all,book,bx_0380763958,Take Back Plenty,,0.5484756231307983,5
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,movie,movie,475331,The Magic Flute (2006),,0.4635556638240814,1
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,movie,movie,441674,Operetta tanuki goten (2005),,0.45566698908805847,2
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,movie,movie,1488591,Eiga Reiton-kyÌ«ju to eien no utahime (2009),,0.4435105323791504,3
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,movie,movie,459744,Ashura-jÌ« no hitomi (2005),,0.4407145380973816,4
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,movie,movie,3290882,Uzumasa raimuraito (2014),,0.43368393182754517,5
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,music,music,2oUX4i8ByoaDrHHz9z5Bga,"Tchaikovsky: The Nutcracker, Op. 71, Act 2: No. 14 Pas de deux",,0.38297736644744873,1
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,music,music,2djW6WBQHBeAfXLw63rMQz,"Haircut - From ""Mulan""/Score",,0.3681970536708832,2
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,music,music,06am46cX3Z6YlSsg0TyVHA,"Tchaikovsky: The Nutcracker - Ballet, Op. 71, Act 1: No. 2 March",,0.36418935656547546,3
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,music,music,08IA5pdUxV881M3pFBKepS,Neville's Waltz,,0.3535662591457367,4
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,music,music,3LpvO6PZRuQ0OeFL1LQwtB,Learn To Be Lonely,,0.3476141691207886,5
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,book,book,gr_28815414-aktoriai-re-isieriai-ir-studentai-ko-nemat-i-rovai,"Aktoriai, režisieriai ir studentai. Ko nematė žiūrovai (Knyga nr. 2)",,0.43114519119262695,1
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,book,book,gr_500463.Kodocha,"Kodocha: Sana's Stage, Vol. 01",,0.408773273229599,2
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,book,book,bx_1892213761,"Cardcaptor Sakura: Master of the Clow, Book 2",,0.3989206552505493,3
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,book,book,gr_33310533-mo-dao-zu-shi,魔道祖师 [Mo Dao Zu Shi],,0.39766329526901245,4
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,book,book,gr_4772110-nocturnes,Nocturnes: Five Stories of Music and Nightfall,,0.39699435234069824,5
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,all,movie,475331,The Magic Flute (2006),,0.4635556638240814,1
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,all,movie,441674,Operetta tanuki goten (2005),,0.45566698908805847,2
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,all,movie,1488591,Eiga Reiton-kyÌ«ju to eien no utahime (2009),,0.4435105323791504,3
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,all,movie,459744,Ashura-jÌ« no hitomi (2005),,0.4407145380973816,4
+D2_KO,direct,2,ko,재즈 피아노가 흐르는 감성적인 음악,all,movie,3290882,Uzumasa raimuraito (2014),,0.43368393182754517,5
+D2_EN,direct,2,en,Soulful music featuring jazz piano,movie,movie,221300,Jazz,,0.6582095623016357,1
+D2_EN,direct,2,en,Soulful music featuring jazz piano,movie,movie,479409,Herbie Hancock: Possibilities (2006),,0.6361091136932373,2
+D2_EN,direct,2,en,Soulful music featuring jazz piano,movie,movie,1331115,Pianomania (2009),,0.6337589621543884,3
+D2_EN,direct,2,en,Soulful music featuring jazz piano,movie,movie,1149400,Note by Note: The Making of Steinway L1037 (2007),,0.6240508556365967,4
+D2_EN,direct,2,en,Soulful music featuring jazz piano,movie,movie,80948,The Jazz Singer (1980),,0.6198205947875977,5
+D2_EN,direct,2,en,Soulful music featuring jazz piano,music,music,4qRJ7ZJyfzchEd2fjle7Bz,Search For Peace,,0.6638067960739136,1
+D2_EN,direct,2,en,Soulful music featuring jazz piano,music,music,2xm9ihELo6xwrRKrBbPql9,Body and Soul,,0.6592200994491577,2
+D2_EN,direct,2,en,Soulful music featuring jazz piano,music,music,0QM8IOYgFzvWcBYn0oi0Cs,Maputo,,0.651702880859375,3
+D2_EN,direct,2,en,Soulful music featuring jazz piano,music,music,0ADAFZE0bYIuaIyPNFl3LE,Blue Skies,,0.649667501449585,4
+D2_EN,direct,2,en,Soulful music featuring jazz piano,music,music,26zJinKqbORQyrDyMFLQhS,Blues My Naughty Sweetie Gives To Me,,0.6467911601066589,5
+D2_EN,direct,2,en,Soulful music featuring jazz piano,book,book,kdl_B09BJ1D3SN,Ode to a Tenor Titan: The Life and Times and Music of Michael Brecker,,0.6863476037979126,1
+D2_EN,direct,2,en,Soulful music featuring jazz piano,book,book,bx_0306810336,Jazz in the Bittersweet Blues of Life,,0.6774239540100098,2
+D2_EN,direct,2,en,Soulful music featuring jazz piano,book,book,kdl_B083JQNQSB,Cocktail Piano: Jazz Piano Solos Series Volume 31,,0.6712483167648315,3
+D2_EN,direct,2,en,Soulful music featuring jazz piano,book,book,kdl_B004Y4UT5Y,The History of Jazz,,0.6606544256210327,4
+D2_EN,direct,2,en,Soulful music featuring jazz piano,book,book,bx_0385314043,"Piano Lessons: Music, Love, &amp; True Adventures",,0.6552325487136841,5
+D2_EN,direct,2,en,Soulful music featuring jazz piano,all,book,kdl_B09BJ1D3SN,Ode to a Tenor Titan: The Life and Times and Music of Michael Brecker,,0.6863476037979126,1
+D2_EN,direct,2,en,Soulful music featuring jazz piano,all,book,bx_0306810336,Jazz in the Bittersweet Blues of Life,,0.6774239540100098,2
+D2_EN,direct,2,en,Soulful music featuring jazz piano,all,book,kdl_B083JQNQSB,Cocktail Piano: Jazz Piano Solos Series Volume 31,,0.6712483167648315,3
+D2_EN,direct,2,en,Soulful music featuring jazz piano,all,music,4qRJ7ZJyfzchEd2fjle7Bz,Search For Peace,,0.6638067960739136,4
+D2_EN,direct,2,en,Soulful music featuring jazz piano,all,book,kdl_B004Y4UT5Y,The History of Jazz,,0.6606544256210327,5
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,movie,movie,70244,Proxy War (1973),,0.45668497681617737,1
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,movie,movie,3576084,Efes beyahasei enosh (2014),,0.44849467277526855,2
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,movie,movie,71696,Police Tactics (1974),,0.43242698907852173,3
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,movie,movie,4616014,Jarhead 3: The Siege (2016),,0.42405784130096436,4
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,movie,movie,56800,55 Days at Peking (1963),,0.42165711522102356,5
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,music,music,69EN77bAhbLQ4ACzCrVk72,Extraction Point,,0.2801031470298767,1
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,music,music,4y0Lt1KOuyhKGkGKFZjSlS,Opening Titles,,0.27971696853637695,2
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,music,music,0lEHnMNNYusZtbon9XyA2W,Pacific Rim (feat. Tom Morello),,0.2605259418487549,3
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,music,music,1RKbysY9QCybkO8VsYn2np,Come to Me,,0.2567657232284546,4
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,music,music,1bgVqJqAruGBp7nQGOFxfU,Panzerkampf,,0.2508201599121094,5
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,book,book,gr_2221542.1511H_KOMBAT_,1511H [KOMBAT],,0.43466776609420776,1
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,book,book,gr_1059.Shibumi,Shibumi,,0.4310106337070465,2
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,book,book,bx_0679413065,The Secret Sun: A Novel of Japan,,0.42034077644348145,3
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,book,book,gr_1692479.TekWar,TekWar,,0.4107491970062256,4
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,book,book,gr_764073.When_the_Emperor_Was_Divine,When the Emperor Was Divine,,0.41064417362213135,5
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,all,movie,70244,Proxy War (1973),,0.45668497681617737,1
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,all,movie,3576084,Efes beyahasei enosh (2014),,0.44849467277526855,2
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,all,book,gr_2221542.1511H_KOMBAT_,1511H [KOMBAT],,0.43466776609420776,3
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,all,movie,71696,Police Tactics (1974),,0.43242698907852173,4
+D3_KO,direct,3,ko,반전이 있는 미스터리 스릴러 소설,all,book,gr_1059.Shibumi,Shibumi,,0.4310106337070465,5
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,movie,movie,106292,Another Stakeout (1993),,0.5373521447181702,1
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,movie,movie,409681,Lies & Alibis (2006),,0.5266731977462769,2
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,movie,movie,61447,Caprice (1967),,0.510238528251648,3
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,movie,movie,93539,Million Dollar Mystery (1987),,0.5062364935874939,4
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,movie,movie,2097307,Hit and Run (2012),,0.502597451210022,5
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,music,music,4ClnJdCaf6PLeLgStqb1e9,Hide and Seek,,0.3326222002506256,1
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,music,music,1syhTK7LlvpeWdZNsZARP0,Don't Talk to Strangers,,0.31591594219207764,2
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,music,music,28mv40MzspRZn0PBcO2itT,Act A Fool,,0.2837417721748352,3
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,music,music,5j3QqRGflS4o5jbsFSwKW1,Six Days - Remix,,0.27437689900398254,4
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,music,music,5FdEl2UUaCaN2cC70TbLbx,Sabotage - Remastered 2009,,0.27128076553344727,5
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,book,book,gr_147074.Janet_Evanovich_Three_and_Four_Two_Book_Set,Janet Evanovich Three and Four Two-Book Set,,0.5907021760940552,1
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,book,book,bx_0671019295,The NANCY DREW FILES COLLECTORS EDITION : 42 THE WRONG CHEMISTRY 45 OUT OF BOUNDS 47 FLIRTING WITH DANGER (Nancy Drew Files),,0.5823044776916504,2
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,book,book,gr_412285.Case_Closed_Vol_4,"Case Closed, Vol. 4",,0.5751442313194275,3
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,book,book,bx_0671647008,DANGER IN DISGUISE NANCY DREW # 33 (Nancy Drew Files Case 33),,0.5741738677024841,4
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,book,book,gr_6854.Three_to_Get_Deadly,Three to Get Deadly,,0.5723862648010254,5
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,all,book,gr_147074.Janet_Evanovich_Three_and_Four_Two_Book_Set,Janet Evanovich Three and Four Two-Book Set,,0.5907021760940552,1
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,all,book,bx_0671019295,The NANCY DREW FILES COLLECTORS EDITION : 42 THE WRONG CHEMISTRY 45 OUT OF BOUNDS 47 FLIRTING WITH DANGER (Nancy Drew Files),,0.5823044776916504,2
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,all,book,gr_412285.Case_Closed_Vol_4,"Case Closed, Vol. 4",,0.5751442313194275,3
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,all,book,bx_0671647008,DANGER IN DISGUISE NANCY DREW # 33 (Nancy Drew Files Case 33),,0.5741738677024841,4
+D3_EN,direct,3,en,Mystery thriller novel with a twist ending,all,book,gr_6854.Three_to_Get_Deadly,Three to Get Deadly,,0.5723862648010254,5
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,movie,movie,1183252,Chocolate (2008),,0.4826945960521698,1
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,movie,movie,2020110,The Kick (2011),,0.4769166111946106,2
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,movie,movie,378773,Siu nin a Fu (2003),,0.4755997657775879,3
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,movie,movie,813549,Hak kuen (2006),,0.4711701571941376,4
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,movie,movie,342258,Unleashed (2005),,0.45980238914489746,5
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,music,music,6Q32Vkucx2qeuVyBd3NiFZ,Battle Without Honor Or Humanity,,0.39212578535079956,1
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,music,music,0JhonNQL2ixH1JcsgEj4Hn,War,,0.37904393672943115,2
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,music,music,0HpKj1IlWhBBnRmaU4WQqR,Advanced Training,,0.3777480721473694,3
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,music,music,4kxcVF4kEZTQZDlnNfDeur,Cold World,,0.37521669268608093,4
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,music,music,1UTX5wGyy7IC6HeT5MmAJ1,Gold,,0.3713518977165222,5
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,book,book,kdl_B00LA9FD7A,Chasing the Dragon: One Woman's Struggle Against the Darkness of Hong Kong's Drug Dens,,0.40565407276153564,1
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,book,book,bx_0752836765,Samurai Boogie,,0.40285733342170715,2
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,book,book,kdl_B0B3S67XR4,Out of Play (Disgardium Book #11): LitRPG Series,,0.392880916595459,3
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,book,book,bx_0515111716,Dragon: The Bruce Lee Story,,0.3881986141204834,4
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,book,book,bx_0441652417,Passion Play,,0.3822198510169983,5
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,all,movie,1183252,Chocolate (2008),,0.4826945960521698,1
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,all,movie,2020110,The Kick (2011),,0.4769166111946106,2
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,all,movie,378773,Siu nin a Fu (2003),,0.4755997657775879,3
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,all,movie,813549,Hak kuen (2006),,0.4711701571941376,4
+D4_KO,direct,4,ko,두 사람의 로맨스를 다룬 영화,all,movie,342258,Unleashed (2005),,0.45980238914489746,5
+D4_EN,direct,4,en,A film about a romance between two people,movie,movie,82764,Modern Romance (1981),,0.5413185358047485,1
+D4_EN,direct,4,en,A film about a romance between two people,movie,movie,31602,Made for Each Other (1939),,0.5249465703964233,2
+D4_EN,direct,4,en,A film about a romance between two people,movie,movie,122906,Among Giants (1998),,0.5233604907989502,3
+D4_EN,direct,4,en,A film about a romance between two people,movie,movie,2186812,20 ans d'Ì©cart (2013),,0.49816006422042847,4
+D4_EN,direct,4,en,A film about a romance between two people,movie,movie,2203308,Aashiqui 2 (2013),,0.4957946836948395,5
+D4_EN,direct,4,en,A film about a romance between two people,music,music,1Vk4yRsz0iBzDiZEoFMQyv,Mia & Sebastian’s Theme,,0.4055629074573517,1
+D4_EN,direct,4,en,A film about a romance between two people,music,music,0ZWW07BD8W85lUbgx2sn7E,For Forever,,0.3930852711200714,2
+D4_EN,direct,4,en,A film about a romance between two people,music,music,5c9qm0bMYawSyRNUTmUMs5,Visions of Gideon,,0.39222273230552673,3
+D4_EN,direct,4,en,A film about a romance between two people,music,music,2LhA68Vm5k6lh0QenNFrDV,"Glasgow Love Theme - From ""Love Actually""",,0.3905578553676605,4
+D4_EN,direct,4,en,A film about a romance between two people,music,music,6YWisEUWb3KLhf0GAYI5Cx,Love Theme,,0.3759946823120117,5
+D4_EN,direct,4,en,A film about a romance between two people,book,book,gr_24448250-ella-and-micha,Ella and Micha: Infinitely and Always,,0.467265784740448,1
+D4_EN,direct,4,en,A film about a romance between two people,book,book,gr_18629238-discovering-us,Discovering Us,,0.4524836838245392,2
+D4_EN,direct,4,en,A film about a romance between two people,book,book,gr_18456078-the-gravity-between-us,The Gravity Between Us,,0.4409809708595276,3
+D4_EN,direct,4,en,A film about a romance between two people,book,book,gr_18369006-dengesiz-bir-a-k-n-anatomisi,Dengesiz Bir Aşkın Anatomisi,,0.4361878037452698,4
+D4_EN,direct,4,en,A film about a romance between two people,book,book,gr_21858914-finding-it---alles-ist-leichter-mit-dir,Finding it - Alles ist leichter mit dir,,0.42221465706825256,5
+D4_EN,direct,4,en,A film about a romance between two people,all,movie,82764,Modern Romance (1981),,0.5413185358047485,1
+D4_EN,direct,4,en,A film about a romance between two people,all,movie,31602,Made for Each Other (1939),,0.5249465703964233,2
+D4_EN,direct,4,en,A film about a romance between two people,all,movie,122906,Among Giants (1998),,0.5233604907989502,3
+D4_EN,direct,4,en,A film about a romance between two people,all,movie,2186812,20 ans d'Ì©cart (2013),,0.49816006422042847,4
+D4_EN,direct,4,en,A film about a romance between two people,all,movie,2203308,Aashiqui 2 (2013),,0.4957946836948395,5

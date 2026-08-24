@@ -1,0 +1,74 @@
+LLM 관련성 판정 리포트 (Qwen/Qwen2.5-VL-7B-Instruct)
+====================================================================
+
+## 0. 판정기 신뢰도 (6월 사람/Claude 라벨 대비)
+  완전일치 42.5% / 인접일치(±1등급) 92.5% / 대상 318행
+  ※ 완전일치가 낮으면 이하 절대값보다 실행 간 '차이'만 보아야 한다.
+
+## 1. 실행별 종합
+  실행                  행     avg    ±SE      o율      a율      x율
+  2026-06           318   0.698  0.031    4.4%   61.0%   34.6%
+  meanpool        1,600   0.626  0.014    4.8%   52.9%   42.2%
+  persona1        1,600   0.667  0.014    3.6%   59.6%   36.9%
+
+  [6월과 공통인 쿼리(pair_id 1~4)로 한정]
+  2026-06           318   0.698  0.031
+  meanpool          640   0.717  0.024
+  persona1          640   0.716  0.020
+
+## 2. 스타일별 avg_score (핵심 — poet이 6월 최하였다)
+  스타일                    2026-06      meanpool      persona1       변화    SE배수
+  atmosphere               0.675         0.502         0.635   +0.133     3.4
+  direct                   0.600         0.738         0.610   -0.128     2.8
+  philosophical            0.887         0.685         0.762   +0.077     2.2
+  poet                     0.628         0.578         0.660   +0.083     2.2
+  ※ SE배수 2 이상이면 유의, 1 미만이면 노이즈로 본다 (마지막 두 실행 기준)
+
+## 3. 도메인별 avg_score
+  도메인                2026-06  meanpool  persona1       변화
+  all                  0.722     0.693     0.665   -0.057
+  book                 0.671     0.480     0.550   -0.121
+  movie                0.787     0.657     0.757   -0.030
+  music                0.613     0.672     0.695   +0.082
+
+## 4. 쿼리별 (신규 실행 기준 오름차순 = 개선 우선순위)
+  poet                 -    0.38    0.17  The smell rising from an old letter
+  direct               -    0.42    0.20  A coming-of-age film set in the 1980s
+  poet              0.25    0.20    0.30  A voice whispering under moonlight
+  direct            0.50    1.45    0.33  A film about a romance between two people
+  direct               -    0.70    0.35  A novel about a family secret
+  atmosphere           -    0.60    0.40  Fluorescent glow of a late-night convenience sto
+  direct               -    0.57    0.50  A calm solo piano piece
+  atmosphere           -    0.28    0.53  A damp basement bookshop during the rainy season
+  atmosphere        0.30    0.38    0.53  Empty city streets at dawn
+  direct               -    0.70    0.55  A courtroom drama based on a true story
+  philosophical        -    0.55    0.55  How much of me is made of memory
+  atmosphere           -    0.55    0.57  A country train station on a snowy night
+  direct               -    0.17    0.57  Nonfiction about space exploration
+  philosophical        -    0.47    0.57  The limits of understanding another person
+  direct            0.05    0.82    0.57  Action movie set in space
+  atmosphere           -    0.55    0.57  A worn motel room by the sea
+  poet                 -    0.47    0.62  A season that passed without being spoken
+  atmosphere           -    0.42    0.65  A highway rest stop at sunset
+  philosophical        -    0.57    0.68  Meaning inside a repeating daily life
+  poet                 -    0.53    0.68  Warmth left in a room after the lights go out
+  atmosphere        0.75    0.62    0.70  A sunlit cafe
+  philosophical     0.90    0.70    0.72  Reflection on solitude and existence
+  direct            0.95    0.65    0.75  Mystery thriller novel with a twist ending
+  atmosphere        1.05    0.93    0.75  A quiet afternoon with the sound of rain
+  poet              0.95    0.65    0.75  In the name of love
+  poet                 -    0.88    0.75  Time slipping away like sand
+  philosophical     0.70    0.55    0.78  What is a human being
+  atmosphere           -    0.35    0.78  An open window on a summer night
+  philosophical        -    0.68    0.78  Choosing between being right and being kind
+  poet                 -    0.62    0.80  A heart cooling like forgotten coffee
+  poet              0.50    0.75    0.80  What remains after farewell
+  poet                 -    0.60    0.80  Winter breath fogging a windowpane
+  philosophical     1.00    0.80    0.82  Between freedom and responsibility
+  atmosphere        0.60    0.35    0.88  In front of a warm fireplace in midwinter
+  philosophical        -    0.60    0.90  The border between chance and fate
+  philosophical        -    0.93    0.90  The weight of a life facing its end
+  direct            0.90    0.93    0.93  Soulful music featuring jazz piano
+  philosophical     0.95    1.00    0.93  A journey to find the meaning of life
+  poet              0.83    0.70    0.93  Like the excitement of a spring day
+  direct               -    0.95    1.35  Rock music with a heavy guitar riff

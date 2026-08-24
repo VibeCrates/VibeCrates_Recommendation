@@ -1,0 +1,44 @@
+LLM 관련성 판정 리포트 (Qwen/Qwen2.5-VL-7B-Instruct)
+====================================================================
+
+## 0. 판정기 신뢰도 (6월 사람/Claude 라벨 대비)
+  완전일치 42.5% / 인접일치(±1등급) 92.5% / 대상 318행
+  ※ 완전일치가 낮으면 이하 절대값보다 실행 간 '차이'만 보아야 한다.
+
+## 1. 실행별 종합
+  실행              행     avg      o율      a율      x율
+  08-13_InfoNCE    320   0.753    8.8%   57.8%   33.4%
+  08-13_KLDiv    320   0.769   10.0%   56.9%   33.1%
+  2026-06       318   0.698    4.4%   61.0%   34.6%
+
+## 2. 스타일별 avg_score (핵심 — poet이 6월 최하였다)
+  스타일             08-13_InfoNCE08-13_KLDiv   2026-06       변화
+  atmosphere           0.613     0.688     0.675   +0.062
+  direct               0.950     1.025     0.600   -0.350
+  philosophical        0.800     0.850     0.887   +0.087
+  poet                 0.650     0.512     0.628   -0.022
+
+## 3. 도메인별 avg_score
+  도메인             08-13_InfoNCE08-13_KLDiv   2026-06       변화
+  all                  0.863     0.900     0.722   -0.141
+  book                 0.675     0.675     0.671   -0.004
+  movie                0.725     0.762     0.787   +0.062
+  music                0.750     0.738     0.613   -0.137
+
+## 4. 쿼리별 (신규 실행 기준 오름차순 = 개선 우선순위)
+  direct            0.85    1.10    0.05  Action movie set in space
+  poet              0.25    0.15    0.25  A voice whispering under moonlight
+  atmosphere        0.45    0.45    0.30  Empty city streets at dawn
+  direct            1.50    1.50    0.50  A film about a romance between two people
+  poet              0.80    0.65    0.50  What remains after farewell
+  atmosphere        0.35    0.50    0.60  In front of a warm fireplace in midwinter
+  philosophical     0.70    0.75    0.70  What is a human being
+  atmosphere        0.70    0.55    0.75  A sunlit cafe
+  poet              0.75    0.50    0.83  Like the excitement of a spring day
+  philosophical     0.70    0.75    0.90  Reflection on solitude and existence
+  direct            0.95    0.90    0.90  Soulful music featuring jazz piano
+  direct            0.50    0.60    0.95  Mystery thriller novel with a twist ending
+  poet              0.80    0.75    0.95  In the name of love
+  philosophical     1.00    1.00    0.95  A journey to find the meaning of life
+  philosophical     0.80    0.90    1.00  Between freedom and responsibility
+  atmosphere        0.95    1.25    1.05  A quiet afternoon with the sound of rain
