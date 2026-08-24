@@ -1,6 +1,7 @@
 """
 Dependency injection for FastAPI — 모델 로드 및 아이템 인덱스 관리.
 """
+import hashlib
 import logging
 import os
 from functools import lru_cache
@@ -23,6 +24,14 @@ MODEL_PATH  = os.getenv("MODEL_PATH",  "models/trained_model.pt")
 IMAGE_DIR   = os.getenv("IMAGE_DIR",   "data/images")
 INDEX_DIR   = os.getenv("INDEX_DIR",   "indexes")
 DEVICE      = os.getenv("DEVICE",      "cuda" if torch.cuda.is_available() else "cpu")
+
+# 백엔드 연동 시험용 가짜 벡터 모드.
+#   모델이 아직 이 컴퓨터에 없어도 백엔드가 **응답 모양**(차원·정규화·키 이름·JSON 직렬화)을
+#   미리 맞춰볼 수 있어야 한다. 통신 확인을 모델 적재와 분리한 /ping과 같은 취지다.
+#   진짜 벡터와 섞이면 조용히 틀린 검색 결과가 나오므로, model_version에 FAKE를 박아
+#   백엔드가 응답만 보고도 구별할 수 있게 한다.
+FAKE_VECTOR = os.getenv("FAKE_VECTOR", "0").lower() not in ("0", "", "false", "no")
+EMBED_DIM   = int(os.getenv("EMBED_DIM", "768"))
 
 
 class ModelManager:
@@ -156,6 +165,59 @@ class ModelManager:
                 extra=row.get("extra"),
             ))
         return results
+
+    # ------------------------------------------------------------------
+    # 쿼리 임베딩 (백엔드가 자기 쪽에서 검색하는 경로)
+    # ------------------------------------------------------------------
+
+    @torch.no_grad()
+    def encode_queries(self, queries: list[str], normalize: bool = True) -> torch.Tensor:
+        """자연어 쿼리 → z_query (B, 768).
+
+        search()가 내부에서 쓰는 것과 **같은 경로**를 타야 백엔드가 받은 벡터로
+        우리 아이템 임베딩을 검색했을 때 결과가 일치한다. 그래서 encode_query를
+        그대로 쓰고 정규화 여부만 파라미터로 연다. 기본값이 True인 이유는
+        search()가 L2 정규화 후 내적하기 때문이다 — 내적이 곧 코사인 유사도가 된다.
+        """
+        if FAKE_VECTOR and not self.is_model_ready():
+            return torch.stack([self._fake_vector(q, normalize) for q in queries])
+
+        self.model.eval()
+        z = self.model.encode_query(queries)
+        if normalize:
+            z = F.normalize(z, p=2, dim=1)
+        return z.cpu()
+
+    @staticmethod
+    def _fake_vector(keyword: str, normalize: bool = True) -> torch.Tensor:
+        """검색어로 시드를 고정한 난수 벡터. 의미는 전혀 없고 **모양만** 진짜와 같다.
+
+        시드를 고정하는 이유: 같은 검색어에 항상 같은 벡터가 나와야 백엔드가 캐싱이나
+        재현성을 시험할 수 있고, 매번 달라지면 "내가 뭘 잘못 보냈나"와 구별되지 않는다.
+        """
+        seed = int(hashlib.sha256(keyword.encode("utf-8")).hexdigest()[:16], 16) % (2**63)
+        g = torch.Generator().manual_seed(seed)
+        z = torch.randn(EMBED_DIM, generator=g)
+        if normalize:
+            z = F.normalize(z, p=2, dim=0)
+        return z
+
+    def can_embed(self) -> bool:
+        """임베딩 응답을 낼 수 있는가. 가짜 모드에서는 모델 없이도 낼 수 있다."""
+        return self.is_model_ready() or FAKE_VECTOR
+
+    def model_version(self) -> str:
+        """쿼리 벡터와 아이템 임베딩이 같은 체크포인트에서 나왔는지 대조하는 값.
+
+        둘이 어긋나면 검색은 오류 없이 성공하고 결과만 엉뚱해진다 — 조용히 틀리는
+        종류의 사고라 백엔드가 스스로 감지할 수단이 있어야 한다.
+        """
+        if not self.is_model_ready():
+            return "FAKE-no-model" if FAKE_VECTOR else "unknown"
+        try:
+            return f"{os.path.basename(MODEL_PATH)}@{int(os.path.getmtime(MODEL_PATH))}"
+        except OSError:
+            return "unknown"
 
     # ------------------------------------------------------------------
     # 아이템 메타 조회
