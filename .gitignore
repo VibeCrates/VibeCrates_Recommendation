@@ -79,3 +79,6 @@ htmlcov/
 
 # Docker
 docker-compose.override.yml
+
+# 6/19자 옛 인덱스 백업 — 확인 후 삭제 예정 (커밋 대상 아님)
+/indexes_20260619_stale/
