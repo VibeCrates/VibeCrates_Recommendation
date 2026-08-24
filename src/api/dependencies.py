@@ -34,6 +34,19 @@ FAKE_VECTOR = os.getenv("FAKE_VECTOR", "0").lower() not in ("0", "", "false", "n
 EMBED_DIM   = int(os.getenv("EMBED_DIM", "768"))
 
 
+def checkpoint_version(model_path: str = MODEL_PATH) -> str:
+    """체크포인트를 가리키는 문자열. 쿼리 벡터와 아이템 임베딩의 출처 대조에 쓴다.
+
+    API 응답과 백엔드에 넘기는 번들 manifest가 **같은 규칙**으로 만들어져야 대조가
+    성립한다. 그래서 한 곳에 두고 양쪽이 부른다 — 같은 로직의 복제본 두 개가 갈라진
+    전례가 있다(build_synopsis / _build_content_text, 커밋 59efd32).
+    """
+    try:
+        return f"{os.path.basename(model_path)}@{int(os.path.getmtime(model_path))}"
+    except OSError:
+        return "unknown"
+
+
 class ModelManager:
     """
     모델과 도메인별 아이템 임베딩 인덱스를 관리.
@@ -218,10 +231,7 @@ class ModelManager:
         """
         if not self.is_model_ready():
             return "FAKE-no-model" if FAKE_VECTOR else "unknown"
-        try:
-            return f"{os.path.basename(MODEL_PATH)}@{int(os.path.getmtime(MODEL_PATH))}"
-        except OSError:
-            return "unknown"
+        return checkpoint_version(MODEL_PATH)
 
     # ------------------------------------------------------------------
     # 아이템 메타 조회
