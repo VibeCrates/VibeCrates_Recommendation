@@ -5,7 +5,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from sentence_transformers import SentenceTransformer
-from transformers import CLIPProcessor, CLIPVisionModel, CLIPTextModel, CLIPConfig
+from transformers import CLIPImageProcessor, CLIPTokenizer, CLIPVisionModel, CLIPTextModel, CLIPConfig
 from peft import get_peft_model, LoraConfig, TaskType
 
 from .base import BaseRecommender
@@ -75,7 +75,11 @@ class ImageBlock(nn.Module):
     """
     def __init__(self, model_name: str = 'openai/clip-vit-large-patch14', output_dim: int = 768):
         super().__init__()
-        self.processor = CLIPProcessor.from_pretrained(model_name)
+        # 이미지 프로세서는 **원본 이미지가 실제로 들어올 때만** 만든다(아래 processor 속성).
+        # 서빙에서는 미리 뽑아 둔 CLIP 특징(B, 1024)만 들어오므로 이 경로를 아예 타지 않고,
+        # 그 환경에는 PIL이 없어도 된다. 미리 만들면 모델 생성 자체가 실패한다.
+        self._model_name = model_name
+        self._processor = None
         self.vision_encoder = CLIPVisionModel.from_pretrained(model_name)
         
         # Freeze CLIP parameters
@@ -83,6 +87,12 @@ class ImageBlock(nn.Module):
             param.requires_grad = False
 
         self.mlp = MLP(self.vision_encoder.config.hidden_size, output_dim)
+
+    @property
+    def processor(self):
+        if self._processor is None:
+            self._processor = CLIPImageProcessor.from_pretrained(self._model_name)
+        return self._processor
 
     def forward(self, images):
         if isinstance(images, torch.Tensor):
@@ -102,7 +112,11 @@ class QueryBlock(nn.Module):
     def __init__(self, model_name: str = 'openai/clip-vit-large-patch14', output_dim: int = 768,
                  use_lora: bool = False):
         super().__init__()
-        self.processor = CLIPProcessor.from_pretrained(model_name)
+        # 텍스트만 쓰는데도 CLIPProcessor를 쓰면 이미지 프로세서까지 함께 만들어진다.
+        # 현재 transformers 버전은 이 체크포인트의 image processor를 인식하지 못해
+        # ("Unrecognized image processor") **모델 객체 생성 자체가 실패한다**.
+        # CLIPTokenizer는 그 경로를 아예 거치지 않고, 토큰화 결과는 동일하다(대조 확인함).
+        self.tokenizer = CLIPTokenizer.from_pretrained(model_name)
         self.text_encoder = CLIPTextModel.from_pretrained(model_name)
 
         # Freeze CLIP parameters
@@ -134,7 +148,7 @@ class QueryBlock(nn.Module):
         self.mlp = MLP(self.text_encoder.config.hidden_size, output_dim)
 
     def forward(self, queries: list[str]):
-        inputs = self.processor(text=queries, return_tensors="pt", padding=True, truncation=True, max_length=77).to(self.text_encoder.device)
+        inputs = self.tokenizer(queries, return_tensors="pt", padding=True, truncation=True, max_length=77).to(self.text_encoder.device)
         text_features = self.text_encoder(**inputs).pooler_output
         z_query = self.mlp(text_features)
         return z_query

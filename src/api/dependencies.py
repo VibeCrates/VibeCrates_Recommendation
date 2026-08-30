@@ -1,6 +1,7 @@
 """
 Dependency injection for FastAPI — 모델 로드 및 아이템 인덱스 관리.
 """
+import hashlib
 import logging
 import os
 from functools import lru_cache
@@ -24,6 +25,27 @@ IMAGE_DIR   = os.getenv("IMAGE_DIR",   "data/images")
 INDEX_DIR   = os.getenv("INDEX_DIR",   "indexes")
 DEVICE      = os.getenv("DEVICE",      "cuda" if torch.cuda.is_available() else "cpu")
 
+# 백엔드 연동 시험용 가짜 벡터 모드.
+#   모델이 아직 이 컴퓨터에 없어도 백엔드가 **응답 모양**(차원·정규화·키 이름·JSON 직렬화)을
+#   미리 맞춰볼 수 있어야 한다. 통신 확인을 모델 적재와 분리한 /ping과 같은 취지다.
+#   진짜 벡터와 섞이면 조용히 틀린 검색 결과가 나오므로, model_version에 FAKE를 박아
+#   백엔드가 응답만 보고도 구별할 수 있게 한다.
+FAKE_VECTOR = os.getenv("FAKE_VECTOR", "0").lower() not in ("0", "", "false", "no")
+EMBED_DIM   = int(os.getenv("EMBED_DIM", "768"))
+
+
+def checkpoint_version(model_path: str = MODEL_PATH) -> str:
+    """체크포인트를 가리키는 문자열. 쿼리 벡터와 아이템 임베딩의 출처 대조에 쓴다.
+
+    API 응답과 백엔드에 넘기는 번들 manifest가 **같은 규칙**으로 만들어져야 대조가
+    성립한다. 그래서 한 곳에 두고 양쪽이 부른다 — 같은 로직의 복제본 두 개가 갈라진
+    전례가 있다(build_synopsis / _build_content_text, 커밋 59efd32).
+    """
+    try:
+        return f"{os.path.basename(model_path)}@{int(os.path.getmtime(model_path))}"
+    except OSError:
+        return "unknown"
+
 
 class ModelManager:
     """
@@ -39,6 +61,10 @@ class ModelManager:
         self.model: Optional[DualEncoderModel] = None
         self.device = torch.device(DEVICE)
         self.indexes: dict[str, tuple[torch.Tensor, pd.DataFrame]] = {}
+        # 기동 시 실패한 것과 그 이유. 앱은 실패해도 뜨기 때문에(/ping은 모델과 무관하게
+        # 응답해야 한다) 실패 사실이 어딘가 남아 있지 않으면 "떴는데 추천만 503"이라는
+        # 헷갈리는 상태가 된다. /api/v1/health가 이 값을 그대로 내보낸다.
+        self.load_errors: dict[str, str] = {}
 
     # ------------------------------------------------------------------
     # 모델
@@ -158,6 +184,56 @@ class ModelManager:
         return results
 
     # ------------------------------------------------------------------
+    # 쿼리 임베딩 (백엔드가 자기 쪽에서 검색하는 경로)
+    # ------------------------------------------------------------------
+
+    @torch.no_grad()
+    def encode_queries(self, queries: list[str], normalize: bool = True) -> torch.Tensor:
+        """자연어 쿼리 → z_query (B, 768).
+
+        search()가 내부에서 쓰는 것과 **같은 경로**를 타야 백엔드가 받은 벡터로
+        우리 아이템 임베딩을 검색했을 때 결과가 일치한다. 그래서 encode_query를
+        그대로 쓰고 정규화 여부만 파라미터로 연다. 기본값이 True인 이유는
+        search()가 L2 정규화 후 내적하기 때문이다 — 내적이 곧 코사인 유사도가 된다.
+        """
+        if FAKE_VECTOR and not self.is_model_ready():
+            return torch.stack([self._fake_vector(q, normalize) for q in queries])
+
+        self.model.eval()
+        z = self.model.encode_query(queries)
+        if normalize:
+            z = F.normalize(z, p=2, dim=1)
+        return z.cpu()
+
+    @staticmethod
+    def _fake_vector(keyword: str, normalize: bool = True) -> torch.Tensor:
+        """검색어로 시드를 고정한 난수 벡터. 의미는 전혀 없고 **모양만** 진짜와 같다.
+
+        시드를 고정하는 이유: 같은 검색어에 항상 같은 벡터가 나와야 백엔드가 캐싱이나
+        재현성을 시험할 수 있고, 매번 달라지면 "내가 뭘 잘못 보냈나"와 구별되지 않는다.
+        """
+        seed = int(hashlib.sha256(keyword.encode("utf-8")).hexdigest()[:16], 16) % (2**63)
+        g = torch.Generator().manual_seed(seed)
+        z = torch.randn(EMBED_DIM, generator=g)
+        if normalize:
+            z = F.normalize(z, p=2, dim=0)
+        return z
+
+    def can_embed(self) -> bool:
+        """임베딩 응답을 낼 수 있는가. 가짜 모드에서는 모델 없이도 낼 수 있다."""
+        return self.is_model_ready() or FAKE_VECTOR
+
+    def model_version(self) -> str:
+        """쿼리 벡터와 아이템 임베딩이 같은 체크포인트에서 나왔는지 대조하는 값.
+
+        둘이 어긋나면 검색은 오류 없이 성공하고 결과만 엉뚱해진다 — 조용히 틀리는
+        종류의 사고라 백엔드가 스스로 감지할 수단이 있어야 한다.
+        """
+        if not self.is_model_ready():
+            return "FAKE-no-model" if FAKE_VECTOR else "unknown"
+        return checkpoint_version(MODEL_PATH)
+
+    # ------------------------------------------------------------------
     # 아이템 메타 조회
     # ------------------------------------------------------------------
 
@@ -193,21 +269,67 @@ def get_manager_unchecked() -> ModelManager:
 _manager = ModelManager()
 
 
+def _hint_for(exc: Exception) -> str:
+    """자주 겪은 실패에 대해 다음에 할 일을 한 줄로 알려준다.
+
+    예외 메시지만으로는 무엇을 해야 하는지 알기 어려운 경우가 반복됐다. pyarrow 결손은
+    8/7 서버에서 같은 원인으로 3일을 멈췄고, venv 밖 파이썬 문제는 8/18에 겪었다.
+    """
+    text = f"{type(exc).__name__}: {exc}".lower()
+    if "pyarrow" in text or "fastparquet" in text:
+        return "→ parquet 엔진이 없습니다. `./venv/bin/pip install -r requirements-serve.txt`"
+    if "no module named" in text:
+        return "→ venv 밖의 파이썬으로 떴을 수 있습니다. `./scripts/serve.sh`로 실행하세요."
+    if "unrecognized image processor" in text:
+        return "→ 백로그 D11. QueryBlock의 CLIPProcessor를 CLIPTokenizer로 바꿔야 합니다."
+    if isinstance(exc, FileNotFoundError):
+        return f"→ 경로 확인: MODEL_PATH={MODEL_PATH} / INDEX_DIR={INDEX_DIR}"
+    return "→ 위 예외를 그대로 확인하세요."
+
+
+def _log_failure(what: str, exc: Exception, consequence: str) -> None:
+    """실패를 눈에 띄게 남긴다. 조용히 지나가면 원인을 찾는 데 며칠이 걸린다."""
+    logger.error("=" * 72)
+    logger.error(f"!! {what} 실패 — {consequence}")
+    logger.error(f"   {type(exc).__name__}: {exc}")
+    logger.error(f"   {_hint_for(exc)}")
+    logger.error("=" * 72)
+
+
 async def initialize_dependencies() -> None:
+    """모델과 인덱스를 적재한다. 실패해도 앱은 뜬다 — 다만 조용히 넘어가지는 않는다.
+
+    앱이 뜨는 것은 의도된 동작이다. /ping은 모델 스택과 무관하게 응답해야 통신 경로만
+    따로 확인할 수 있다. 문제는 예외를 삼키기만 하던 이전 구현이었다. 실패해도 앱이
+    뜨므로 백엔드 쪽에서는 "서버는 사는데 추천만 503"으로 보였고, 원인이 로그 한 줄로만
+    남아 묻혔다. 이제 실패를 배너로 찍고 manager.load_errors에 남겨 /health로 내보낸다.
+    """
     logger.info("Initializing dependencies...")
+    _manager.load_errors.clear()
+
     try:
         _manager.load_model()
-        for domain in ("movie", "music", "book"):
-            try:
-                if not _manager.load_index(domain):
-                    logger.warning(
-                        f"[{domain}] Pre-built index not found in '{INDEX_DIR}/'. "
-                        "Run `python scripts/build_index.py` after training."
-                    )
-            except Exception as e:
-                logger.warning(f"[{domain}] Index load failed: {e}")
     except Exception as e:
-        logger.error(f"Model load failed: {e}")
+        _manager.load_errors["model"] = f"{type(e).__name__}: {e}"
+        _log_failure("모델 적재", e, "추천·임베딩이 모두 503이 됩니다")
+
+    for domain in ("movie", "music", "book"):
+        try:
+            if not _manager.load_index(domain):
+                msg = f"인덱스 파일 없음 ({INDEX_DIR}/{domain}_embeddings.pt, _meta.parquet)"
+                _manager.load_errors[domain] = msg
+                logger.warning(f"[{domain}] {msg} — `python scripts/build_index.py` 후 다시 띄우세요.")
+        except Exception as e:
+            _manager.load_errors[domain] = f"{type(e).__name__}: {e}"
+            _log_failure(f"[{domain}] 인덱스 적재", e, "이 도메인 추천이 503이 됩니다")
+
+    if _manager.load_errors:
+        logger.error(
+            "기동은 됐지만 실패한 것이 있습니다: %s. 자세한 내용은 GET /api/v1/health 의 errors.",
+            ", ".join(_manager.load_errors),
+        )
+    else:
+        logger.info("모델·인덱스 적재 완료.")
 
 
 async def cleanup_dependencies() -> None:

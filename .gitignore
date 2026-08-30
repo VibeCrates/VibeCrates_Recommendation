@@ -16,7 +16,6 @@
 *.h5
 *.pt
 *.pth
-!indexes/*.pt
 *.joblib
 
 # Python
@@ -79,3 +78,13 @@ htmlcov/
 
 # Docker
 docker-compose.override.yml
+
+# 6/19자 옛 인덱스 백업 — 확인 후 삭제 예정 (커밋 대상 아님)
+/indexes_20260619_stale/
+
+# 백엔드 전달 번들 (재생성 가능, 569MB)
+/dist/
+
+# 아이템 인덱스 — 체크포인트만 있으면 scripts/build_index.py로 다시 만든다.
+# 추적하면 재학습마다 히스토리가 600MB씩 불어나고, 백엔드 전달은 dist/ 번들로 한다(D9=B).
+/indexes/

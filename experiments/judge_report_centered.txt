@@ -1,0 +1,68 @@
+LLM 관련성 판정 리포트 (Qwen/Qwen2.5-VL-7B-Instruct)
+====================================================================
+
+## 1. 실행별 종합
+  실행                  행     avg    ±SE      o율      a율      x율
+  base            1,600   0.754  0.014    5.8%   63.7%   30.4%
+  centered        1,600   0.723  0.013    4.3%   63.7%   32.0%
+
+  [6월과 공통인 쿼리(pair_id 1~4)로 한정]
+  base              640   0.847  0.021
+  centered          640   0.809  0.020
+
+## 2. 스타일별 avg_score (핵심 — poet이 6월 최하였다)
+  스타일                       base      centered       변화    SE배수
+  atmosphere               0.635         0.578   -0.057     1.5
+  direct                   0.875         0.838   -0.037     0.9
+  philosophical            0.795         0.800   +0.005     0.2
+  poet                     0.710         0.677   -0.032     1.0
+  ※ SE배수 2 이상이면 유의, 1 미만이면 노이즈로 본다 (마지막 두 실행 기준)
+
+## 3. 도메인별 avg_score
+  도메인                   base  centered       변화
+  all                  0.802     0.728   -0.075
+  book                 0.632     0.640   +0.008
+  movie                0.828     0.823   -0.005
+  music                0.752     0.703   -0.050
+
+## 4. 쿼리별 (신규 실행 기준 오름차순 = 개선 우선순위)
+  atmosphere        0.33    0.28  Fluorescent glow of a late-night convenience sto
+  atmosphere        0.53    0.33  An open window on a summer night
+  atmosphere        0.45    0.35  A worn motel room by the sea
+  direct            0.45    0.47  A calm solo piano piece
+  poet              0.60    0.47  Winter breath fogging a windowpane
+  atmosphere        0.53    0.50  A country train station on a snowy night
+  poet              0.55    0.50  Warmth left in a room after the lights go out
+  philosophical     0.50    0.50  What is a human being
+  atmosphere        0.62    0.53  Empty city streets at dawn
+  poet              0.60    0.55  A voice whispering under moonlight
+  atmosphere        0.50    0.57  A damp basement bookshop during the rainy season
+  poet              0.65    0.60  A heart cooling like forgotten coffee
+  poet              0.57    0.60  A season that passed without being spoken
+  atmosphere        0.62    0.62  A highway rest stop at sunset
+  poet              0.70    0.65  The smell rising from an old letter
+  direct            0.60    0.68  Mystery thriller novel with a twist ending
+  direct            0.62    0.68  Nonfiction about space exploration
+  direct            0.65    0.70  A courtroom drama based on a true story
+  atmosphere        0.68    0.70  A sunlit cafe
+  poet              0.72    0.70  What remains after farewell
+  philosophical     0.70    0.72  The limits of understanding another person
+  philosophical     0.72    0.75  Meaning inside a repeating daily life
+  direct            0.80    0.75  A coming-of-age film set in the 1980s
+  philosophical     0.75    0.78  The border between chance and fate
+  philosophical     0.75    0.78  How much of me is made of memory
+  philosophical     0.88    0.82  Between freedom and responsibility
+  poet              0.90    0.85  Time slipping away like sand
+  atmosphere        0.90    0.88  In front of a warm fireplace in midwinter
+  philosophical     0.88    0.88  Reflection on solitude and existence
+  philosophical     0.88    0.88  Choosing between being right and being kind
+  poet              0.90    0.90  In the name of love
+  direct            1.05    0.93  Action movie set in space
+  philosophical     0.97    0.95  A journey to find the meaning of life
+  philosophical     0.93    0.95  The weight of a life facing its end
+  poet              0.90    0.95  Like the excitement of a spring day
+  direct            1.02    0.97  A novel about a family secret
+  direct            0.97    0.97  Soulful music featuring jazz piano
+  direct            1.18    1.00  A film about a romance between two people
+  atmosphere        1.20    1.02  A quiet afternoon with the sound of rain
+  direct            1.40    1.23  Rock music with a heavy guitar riff

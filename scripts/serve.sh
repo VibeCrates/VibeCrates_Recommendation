@@ -31,4 +31,21 @@ if command -v tailscale >/dev/null 2>&1; then
 fi
 echo
 
-exec uvicorn src.api.main:app --host "$HOST" --port "$PORT"
+# venv의 uvicorn을 쓴다.
+#   PATH의 uvicorn을 그대로 부르면 아나콘다 등 다른 파이썬이 잡히고, 그 환경에는
+#   sentence-transformers가 없어 모델 적재만 조용히 실패한다(8/18에 실제로 겪었다).
+#   앱은 뜨기 때문에 "떴는데 추천만 503"이라는 헷갈리는 상태가 된다.
+UVICORN="./venv/bin/uvicorn"
+if [ ! -x "$UVICORN" ]; then
+  UVICORN="$(command -v uvicorn || true)"
+  if [ -z "$UVICORN" ]; then
+    echo "✖ uvicorn을 찾을 수 없습니다. ./venv/bin/pip install -r requirements-serve.txt" >&2
+    exit 1
+  fi
+  echo "⚠ ./venv/bin/uvicorn이 없어 PATH의 것을 씁니다: $UVICORN"
+  echo "  이 파이썬에 sentence-transformers가 없으면 모델 적재만 실패합니다."
+fi
+echo "  실행: $UVICORN  ($("$UVICORN" --version 2>/dev/null || echo 'version 확인 불가'))"
+echo
+
+exec "$UVICORN" src.api.main:app --host "$HOST" --port "$PORT"
