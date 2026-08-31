@@ -70,7 +70,7 @@ async def recommend(
     results = manager.search(used[0], request.top_k, domain=request.domain)
     return RecommendationResponse(
         query=request.query,
-        encoded_query=used[0] if translated else None,
+        translated_query=used[0] if translated else None,
         domain=request.domain,
         results=results,
     )
@@ -115,7 +115,7 @@ async def embeddings(
         dim=z.shape[1],
         normalized=request.normalize,
         model_version=manager.model_version(),
-        encoded_queries=used if translated else None,
+        translated_queries=used if translated else None,
         vectors=z.tolist(),
     )
 
@@ -138,7 +138,7 @@ async def search_vector(
     z = manager.encode_queries(used, normalize=normalize)
     return VectorSearchResponse(
         keyword=keyword,
-        encoded_text=used[0] if translated else None,
+        translated_text=used[0] if translated else None,
         dim=z.shape[1],
         normalized=normalize,
         model_version=manager.model_version(),
@@ -167,7 +167,7 @@ async def search_vector_post(
     z = manager.encode_queries(used, normalize=request.normalize)
     return TextVectorResponse(
         text=text,
-        encoded_text=used[0] if translated else None,
+        translated_text=used[0] if translated else None,
         dim=z.shape[1],
         normalized=request.normalize,
         model_version=manager.model_version(),

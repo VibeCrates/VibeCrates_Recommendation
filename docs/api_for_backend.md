@@ -111,12 +111,14 @@ DB에 미리 적재해야 한다. 벡터와 메타데이터와 대조용 manifes
 | 번역 후 | 29.0% | 0.645 |
 | (영어 원문) | 100% | 0.659 |
 
-응답의 `encoded_query`(또는 `encoded_text`)에 **실제로 인코딩된 문자열**이 실려 온다.
-번역되지 않았으면 `null`이다. 결과가 이상할 때 번역 탓인지 검색 탓인지 여기서 갈린다.
+응답에 `translated_query`(벡터 경로는 `translated_text`, 배치는 `translated_queries`)가
+한 줄 더 실려 온다. **번역이 일어났을 때만 채워지고, 아니면 `null`이다** — `null`은
+"보낸 문장 그대로 인코딩했다"는 뜻이지 값이 빠진 것이 아니다. 결과가 이상할 때 번역
+탓인지 검색 탓인지 여기서 갈린다.
 
 ```json
 { "query": "비 오는 오후의 조용한 시간",
-  "encoded_query": "It's raining, quiet time in the afternoon.",
+  "translated_query": "It's raining, quiet time in the afternoon.",
   "results": [ ... ] }
 ```
 
