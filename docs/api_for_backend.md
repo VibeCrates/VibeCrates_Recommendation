@@ -339,11 +339,20 @@ Open Library, kindle 출처면 Amazon.
 대조 방법은 하나다. `manifest.json`의 `model_version`과 `/search/vector` 응답의
 `model_version`이 **같은지 매 배포마다 확인**한다. 현재 값은 `trained_model.pt@1786697109`.
 
-### 표지 이미지 (8.2GB)
+### 표지 이미지 (9.9GB)
 
 `images/{domain}/{id}.jpg`로 `items.parquet`의 `image` 값과 그대로 대응한다.
-movie 39,237장 / music 36,674장 / book 107,254장 (합계 183,165장, 8.6GB). 백엔드가 복사해 가서 자기 정적 경로나
-CDN에서 제공하기로 했다. 전달 방법은 협의한다.
+백엔드가 복사해 가서 자기 정적 경로나 CDN에서 제공하기로 했다. 전달 방법은 협의한다.
+
+| 도메인 | 장수 | 용량 |
+|---|---:|---:|
+| movie | 39,237 | 1.3GB |
+| music | 36,674 | 5.0GB |
+| book | 107,254 | 3.7GB |
+| 합계 | 183,165 | 9.9GB |
+
+music이 장수에 비해 무거운 것은 8/31에 Deezer에서 받은 원본이 1000×1000(장당 약 140KB)
+이기 때문이다. 전송량이 문제가 되면 줄여서 보낼 수 있으니 말해 주세요.
 
 ### 아직 정할 것
 
@@ -352,21 +361,7 @@ CDN에서 제공하기로 했다. 전달 방법은 협의한다.
 3. **인증** — 사설망 안이라 없다. 정책상 필요하면 헤더 방식으로 넣는다
 4. **에러 형식** — 현재 FastAPI 기본(`{"detail": "..."}`)
 
----
-
-## 6. 추천팀용 — 서버 실행
-
-```bash
-FAKE_VECTOR=1 ./scripts/serve.sh     # 가짜 벡터 모드 (모델 없이 연동 시험)
-./scripts/serve.sh                   # 평상시 (모델 없으면 임베딩도 503)
-PORT=9000 ./scripts/serve.sh         # 포트 변경
-```
-
-실행하면 LAN·Tailscale 주소를 함께 출력한다.
-
-```bash
-python scripts/check_api.py --host 100.77.133.40   # 밖에서 보이는지 자체 점검
-```
+## 6. 문제가 생겼을 때
 
 ### 서버가 살아 있는데 추천만 503일 때
 
@@ -389,3 +384,24 @@ python scripts/check_api.py --host 100.77.133.40   # 밖에서 보이는지 자�
   돌려주고, 응답의 `domain`은 `null`이다.
 - `serve.sh`가 venv의 `uvicorn`을 쓰도록 고쳤다. 그전에는 아나콘다 파이썬이 잡히면
   `No module named 'sentence_transformers'`로 모델 적재만 조용히 실패했다.
+
+---
+
+# 부록 — 추천팀 내부용
+
+> 여기부터는 **백엔드가 보지 않아도 되는 내용**이다. 추천 서버를 직접 띄우고 점검하는
+> 사람을 위한 메모다.
+
+## A. 서버 실행
+
+```bash
+FAKE_VECTOR=1 ./scripts/serve.sh     # 가짜 벡터 모드 (모델 없이 연동 시험)
+./scripts/serve.sh                   # 평상시 (모델 없으면 임베딩도 503)
+PORT=9000 ./scripts/serve.sh         # 포트 변경
+```
+
+실행하면 LAN·Tailscale 주소를 함께 출력한다.
+
+```bash
+python scripts/check_api.py --host 100.77.133.40   # 밖에서 보이는지 자체 점검
+```
