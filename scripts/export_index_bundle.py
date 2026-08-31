@@ -52,6 +52,13 @@ ID_PATTERNS = {
 # 계약의 여섯 필드. 순서까지 계약대로 맞춘다.
 CONTRACT_COLUMNS = ["id", "title", "domain", "year", "image", "url"]
 
+# 계약에는 없지만 번들에만 넣는 컬럼. vectors.npy의 몇 번째 행인지를 명시한다.
+#   왜: 벡터 파일에는 id가 없고, 벡터와 아이템은 행 순서로만 이어져 있다. 그 순서가
+#   파일 어디에도 적혀 있지 않으면 암묵적 약속으로만 남는다. 특히 Qdrant(정수·UUID만
+#   허용)나 FAISS(int64만 허용)처럼 문자열 키를 못 쓰는 DB에서는 이 행 번호가 곧 DB의
+#   기본키가 되므로, parquet을 재정렬하는 순간 매칭이 통째로 어긋난다.
+ROW_COLUMN = "row"
+
 
 def _year(value) -> int | None:
     """'1995-11-22' / '1995' / 1995.0 → 1995. 못 읽으면 None(계약: 결측은 null)."""
@@ -153,7 +160,7 @@ def build_items(domain: str, meta: pd.DataFrame, canonical: pd.DataFrame,
                            for i in merged["id"]]
 
     merged["domain"] = domain
-    return merged[CONTRACT_COLUMNS]
+    return merged[CONTRACT_COLUMNS]  # row는 필터링이 모두 끝난 뒤에 붙인다
 
 
 def sha256(path: str) -> str:
@@ -188,7 +195,8 @@ def main() -> None:
         "dim": None,
         "metric": "inner_product",
         "normalized": True,
-        "note": "vectors[i] 와 items[i] 는 같은 아이템이다. "
+        "note": "items의 row 컬럼이 vectors.npy의 행 번호다(vectors[row] ↔ 그 행). "
+                "문자열 키를 못 쓰는 벡터 DB에서는 row를 기본키로, id는 payload에 넣는다. "
                 "쿼리 벡터는 POST /api/v1/search/vector 로 받고, 응답의 model_version이 "
                 "이 값과 다르면 검색 결과가 무의미하다.",
         "domains": {},
@@ -241,6 +249,11 @@ def main() -> None:
         if join_rate < args.min_join_rate:
             raise SystemExit(f"[{domain}] canonical 조인 성공률 {join_rate:.1%} — "
                              f"하한 {args.min_join_rate:.0%} 미만이라 중단한다")
+
+        # 제거가 모두 끝난 뒤에 번호를 매긴다. 거르기 전에 매기면 중간에 구멍이 뚫려
+        # vectors.npy의 실제 행 번호와 어긋난다.
+        items = items.reset_index(drop=True)
+        items[ROW_COLUMN] = np.arange(len(items), dtype=np.int64)
 
         vec_path  = os.path.join(args.out, f"{domain}_vectors.npy")
         item_path = os.path.join(args.out, f"{domain}_items.parquet")

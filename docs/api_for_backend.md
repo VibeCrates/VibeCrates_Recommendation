@@ -182,11 +182,39 @@ GET http://100.77.133.40:8000/api/v1/ping?n=42
 | 파일 | 내용 |
 |---|---|
 | `{domain}_vectors.npy` | float32 (N, 768), L2 정규화 완료 |
-| `{domain}_items.parquet` | `id, title, domain, year, image, url` — 프론트 계약과 같은 평면 구조 |
+| `{domain}_items.parquet` | `id, title, domain, year, image, url` — 프론트 계약과 같은 평면 구조. 여기에 `row` 한 컬럼이 더 있다 |
 | `manifest.json` | model_version · 건수 · sha256 · 필드 채움률 |
 
 **`vectors[i]`와 `items[i]`는 같은 아이템이다.** 정규화돼 있으므로 벡터 DB의 거리 함수는
 내적(inner product)으로 설정하면 그대로 코사인 유사도가 된다.
+
+### 벡터와 아이템을 잇는 방법
+
+`.npy`에는 id가 없다. 벡터 파일은 숫자만 담은 행렬이고, **어느 아이템인지는 행 번호로만
+이어진다.** items의 `row` 컬럼이 그 행 번호다 — `vectors[row]`가 그 아이템의 벡터다.
+
+그러므로 짝을 짓는 것은 검색할 때가 아니라 **적재할 때 한 번**이다. 넣고 나면 DB 안에
+id와 벡터가 한 덩어리로 저장되고, 검색은 id(또는 row)를 돌려준다.
+
+```python
+vectors = np.load("movie_vectors.npy")             # (39515, 768)
+items   = pd.read_parquet("movie_items.parquet")   # 39515행
+
+# (가) 문자열 키를 쓸 수 있는 DB — pgvector, Milvus(VARCHAR PK), Elasticsearch
+for r in items.itertuples():
+    db.insert(id=r.id, vector=vectors[r.row], payload={"title": r.title, ...})
+
+# (나) 정수·UUID 키만 받는 DB — Qdrant(uint/UUID), FAISS(int64)
+for r in items.itertuples():
+    db.insert(id=int(r.row), vector=vectors[r.row], payload={"id": r.id, ...})
+```
+
+(나)를 택하면 **DB의 기본키가 곧 이 파일의 행 번호**가 된다. 그러면 items를 재정렬하거나
+일부만 다시 적재할 때 대응이 통째로 어긋나므로, 우리 `id`를 반드시 payload에 함께 넣어
+두고 최종 조회는 그것으로 하는 편이 안전하다.
+
+적재 직전에 `len(vectors) == len(items) == manifest.count`를 확인할 것. 세 값이 다르면
+행 순서가 이미 어긋난 것이다.
 
 | 도메인 | 건수 | year | image | url |
 |---|---:|---:|---:|---:|
