@@ -216,7 +216,7 @@ GET http://100.77.133.40:8000/api/v1/ping?n=42
 
 ### 전달 번들
 
-`dist/bundle_YYYYMMDD/` 한 폴더로 넘긴다(569MB). 생성은
+`dist/bundle_20260831/` 한 폴더로 넘긴다(570MB). 생성은
 `python scripts/export_index_bundle.py --out dist/bundle_YYYYMMDD`.
 
 | 파일 | 내용 |
@@ -259,10 +259,11 @@ for r in items.itertuples():
 | 도메인 | 건수 | year | image | url |
 |---|---:|---:|---:|---:|
 | movie | 39,515 | 99.2% | 99.3% | 100% |
-| music | 39,682 | 89.8% | 67.4% | 100% |
+| music | 39,682 | 89.8% | 92.4% | 100% |
 | book | 110,594 | 91.7% | 97.0% | 93.1% |
 
-채워지지 않는 것은 `null`이다. music의 표지 67.4%는 원본 수집이 거기까지였고, book의
+채워지지 않는 것은 `null`이다. music 표지는 8/31에 Deezer로 9,902곡을 보강해 67.4% →
+92.4%가 됐다. 남은 3,008곡은 Deezer에도 없다. book의
 url 6.9%는 isbn도 asin도 없는 goodreads 책이다. `image`가 null이면 **그 파일은 존재하지
 않는다** — 경로를 만들어 두고 404를 맞는 일이 없도록 파일 목록과 대조해 채웠다.
 
@@ -281,7 +282,7 @@ Open Library, kindle 출처면 Amazon.
 ### 표지 이미지 (8.2GB)
 
 `images/{domain}/{id}.jpg`로 `items.parquet`의 `image` 값과 그대로 대응한다.
-movie 39,237장 / music 26,746장 / book 107,254장. 백엔드가 복사해 가서 자기 정적 경로나
+movie 39,237장 / music 36,674장 / book 107,254장 (합계 183,165장, 8.6GB). 백엔드가 복사해 가서 자기 정적 경로나
 CDN에서 제공하기로 했다. 전달 방법은 협의한다.
 
 ### 아직 정할 것
