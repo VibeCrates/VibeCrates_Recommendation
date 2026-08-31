@@ -222,11 +222,71 @@ GET http://100.77.133.40:8000/api/v1/ping?n=42
 | 파일 | 내용 |
 |---|---|
 | `{domain}_vectors.npy` | float32 (N, 768), L2 정규화 완료 |
-| `{domain}_items.parquet` | `id, title, domain, year, image, url` — 프론트 계약과 같은 평면 구조. 여기에 `row` 한 컬럼이 더 있다 |
+| `{domain}_items.parquet` | `id, title, domain, year, image, url` — 프론트 계약과 같은 평면 구조. 여기에 `row`(벡터 파일의 행 번호)와 `point_id`(벡터 DB 기본키용 전역 고유 정수)가 더 있다 |
 | `manifest.json` | model_version · 건수 · sha256 · 필드 채움률 |
 
 **`vectors[i]`와 `items[i]`는 같은 아이템이다.** 정규화돼 있으므로 벡터 DB의 거리 함수는
 내적(inner product)으로 설정하면 그대로 코사인 유사도가 된다.
+
+### Qdrant에 넣는 법 (2026-08-31, 백엔드가 Qdrant로 확정)
+
+Qdrant의 point id는 **부호 없는 정수나 UUID만** 받는다. 우리 `id`는 문자열이라
+(`kdl_B00TZE87S4`, `3tjFYV6RSFtuktYl3ZtYcq`) 그대로 쓸 수 없다. 그래서 번들에
+`point_id` 컬럼을 넣었다 — 세 도메인을 통틀어 고유한 정수다.
+
+> **`row`를 point id로 쓰면 안 된다.** `row`는 도메인 안에서만 0부터 매겨져서, 한
+> 컬렉션에 세 도메인을 넣으면 movie의 0번과 music의 0번이 같은 point가 되어 서로
+> 덮어쓴다(실측: movie 39,515개 전부가 music·book과 겹친다). `row`는 벡터 파일에서
+> 몇 번째 행인지를 가리키는 용도이고, 기본키는 `point_id`다.
+> movie는 1,000,000,000번대 / music은 2,000,000,000번대 / book은 3,000,000,000번대다.
+
+```python
+from qdrant_client import QdrantClient, models
+import numpy as np, pandas as pd
+
+client = QdrantClient(url="http://localhost:6333")
+client.create_collection(
+    "vibecrates",
+    vectors_config=models.VectorParams(size=768, distance=models.Distance.DOT),
+)
+
+for domain in ("movie", "music", "book"):
+    vectors = np.load(f"{domain}_vectors.npy")          # (N, 768) float32
+    items   = pd.read_parquet(f"{domain}_items.parquet")
+    for start in range(0, len(items), 1000):
+        chunk = items.iloc[start:start + 1000]
+        client.upsert("vibecrates", points=[
+            models.PointStruct(
+                id=int(r.point_id),                      # ← 기본키
+                vector=vectors[r.row].tolist(),          # ← row로 벡터를 찾는다
+                payload={"id": r.id, "title": r.title, "domain": r.domain,
+                         "year": None if pd.isna(r.year) else int(r.year),
+                         "image": r.image, "url": r.url},
+            ) for r in chunk.itertuples()
+        ])
+
+# 도메인 필터를 쓸 거라면 인덱스를 만들어 둔다
+client.create_payload_index("vibecrates", "domain",
+                            field_schema=models.PayloadSchemaType.KEYWORD)
+```
+
+`distance=DOT`인 이유는 양쪽 벡터가 이미 L2 정규화돼 있어서 내적이 그대로 코사인
+유사도이기 때문이다(실측: 내적과 코사인의 차이 5.96e-08, 상위 100위 순위 동일).
+`COSINE`을 골라도 순위는 같고 나눗셈만 한 번 더 한다.
+
+검색은 우리 API에서 받은 벡터를 그대로 넣으면 된다.
+
+```python
+hits = client.query_points("vibecrates", query=vector, limit=10).points
+for h in hits:
+    h.payload["title"], h.payload["image"], h.payload["url"], h.score
+```
+
+(구버전 클라이언트는 `client.search(collection_name=..., query_vector=...)`다.)
+
+> **payload의 `id`를 꼭 넣을 것.** 저장된 보드처럼 오래 남아야 하는 데이터는 반드시
+> 이 문자열 `id`로 저장한다. `point_id`와 `row`는 인덱스를 다시 만들면 번호가 밀리므로,
+> 그것으로 저장해 두면 재학습 후 **다른 작품을 가리키게 된다**.
 
 ### 벡터와 아이템을 잇는 방법
 

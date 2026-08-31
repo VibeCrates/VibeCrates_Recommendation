@@ -59,6 +59,15 @@ CONTRACT_COLUMNS = ["id", "title", "domain", "year", "image", "url"]
 #   기본키가 되므로, parquet을 재정렬하는 순간 매칭이 통째로 어긋난다.
 ROW_COLUMN = "row"
 
+# 벡터 DB의 기본키로 쓸 전역 고유 정수. row는 도메인 안에서만 0부터 매겨지므로
+# 세 도메인을 한 컬렉션에 넣으면 movie의 0번과 music의 0번이 충돌해 서로 덮어쓴다
+# (실측: movie 39,515개가 music·book과 전부 겹친다). 도메인 코드를 앞에 붙여 가른다.
+#   movie 1_000_000_000+row / music 2_000_000_000+row / book 3_000_000_000+row
+# Qdrant의 point id는 부호 없는 64비트 정수라 이 범위를 넉넉히 담는다.
+POINT_ID_COLUMN = "point_id"
+DOMAIN_CODE = {"movie": 1, "music": 2, "book": 3}
+DOMAIN_STRIDE = 1_000_000_000
+
 
 def _year(value) -> int | None:
     """'1995-11-22' / '1995' / 1995.0 → 1995. 못 읽으면 None(계약: 결측은 null)."""
@@ -196,7 +205,9 @@ def main() -> None:
         "metric": "inner_product",
         "normalized": True,
         "note": "items의 row 컬럼이 vectors.npy의 행 번호다(vectors[row] ↔ 그 행). "
-                "문자열 키를 못 쓰는 벡터 DB에서는 row를 기본키로, id는 payload에 넣는다. "
+                "문자열 키를 못 쓰는 벡터 DB(Qdrant 등)에서는 point_id를 기본키로, "
+                "id는 payload에 넣는다. row는 도메인 안에서만 고유하므로 한 컬렉션에 "
+                "세 도메인을 넣을 때 기본키로 쓰면 충돌한다. "
                 "쿼리 벡터는 POST /api/v1/search/vector 로 받고, 응답의 model_version이 "
                 "이 값과 다르면 검색 결과가 무의미하다.",
         "domains": {},
@@ -254,6 +265,8 @@ def main() -> None:
         # vectors.npy의 실제 행 번호와 어긋난다.
         items = items.reset_index(drop=True)
         items[ROW_COLUMN] = np.arange(len(items), dtype=np.int64)
+        items[POINT_ID_COLUMN] = (DOMAIN_CODE[domain] * DOMAIN_STRIDE
+                                  + items[ROW_COLUMN]).astype(np.int64)
 
         vec_path  = os.path.join(args.out, f"{domain}_vectors.npy")
         item_path = os.path.join(args.out, f"{domain}_items.parquet")
