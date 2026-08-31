@@ -40,6 +40,15 @@ from src.api.dependencies import checkpoint_version   # noqa: E402
 
 DOMAINS = ("movie", "music", "book")
 
+# 도메인별 id 형태. canonical CSV에 따옴표·줄바꿈이 깨져 컬럼이 밀린 행이 섞여 있고
+# (movie 1건 실측, 2026-08-31), 그런 행은 id 자리에 줄거리 문장이 들어앉는다. 제목도
+# 본문도 없으니 벡터도 의미가 없다. 넘기면 백엔드 DB에 쓰레기 키가 한 건 박힌다.
+ID_PATTERNS = {
+    "movie": r"\d+",                  # imdbId
+    "music": r"[0-9A-Za-z]+",         # Spotify 트랙 id (base62)
+    "book":  r"(kdl_|gr_|bx_).+",     # 출처 접두사 + 원본 키
+}
+
 # 계약의 여섯 필드. 순서까지 계약대로 맞춘다.
 CONTRACT_COLUMNS = ["id", "title", "domain", "year", "image", "url"]
 
@@ -210,6 +219,14 @@ def main() -> None:
         # 인덱스 자체에 같은 아이템이 두 행으로 들어 있다(백로그 A6). 그대로 넘기면
         # 백엔드 검색 결과에 같은 것이 두 번 뜬다 — 화면에서 바로 보이는 종류의 문제다.
         # 행 순서 불변식을 지키기 위해 items와 vectors를 **같은 마스크로** 함께 거른다.
+        # 형식이 깨진 id를 벡터와 함께 걸러낸다. dedupe와 같은 이유로 마스크를 함께 쓴다.
+        valid = items["id"].str.fullmatch(ID_PATTERNS[domain]).fillna(False)
+        if not valid.all():
+            print(f"[{domain}] id 형식이 깨진 행 {int((~valid).sum())}건 제거 "
+                  f"(예: {items.loc[~valid, 'id'].iloc[0][:50]!r})")
+            vectors = vectors[torch.as_tensor(valid.to_numpy().copy())]
+            items = items[valid].reset_index(drop=True)
+
         if args.dedupe_ids:
             keep = ~items["id"].duplicated(keep="first")
             dropped = int((~keep).sum())
