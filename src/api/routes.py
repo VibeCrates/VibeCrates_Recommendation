@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from fastapi import APIRouter, Depends, HTTPException, Query
 
 from .dependencies import get_model_manager, get_manager_unchecked
+from .translation import prepare as prepare_queries
 from .schemas import (
     EmbeddingRequest,
     EmbeddingResponse,
@@ -64,8 +65,15 @@ async def recommend(
     if not manager.indexes:
         raise HTTPException(status_code=503, detail="아직 준비된 인덱스가 없습니다.")
 
-    results = manager.search(request.query, request.top_k, domain=request.domain)
-    return RecommendationResponse(query=request.query, domain=request.domain, results=results)
+    # 한국어 검색어는 영어로 번역해서 인코더에 넣는다(src/api/translation.py의 실측 참조).
+    used, translated = prepare_queries([request.query])
+    results = manager.search(used[0], request.top_k, domain=request.domain)
+    return RecommendationResponse(
+        query=request.query,
+        encoded_query=used[0] if translated else None,
+        domain=request.domain,
+        results=results,
+    )
 
 
 @router.get("/item/{domain}/{item_id}", response_model=ItemInfoResponse)
@@ -101,11 +109,13 @@ async def embeddings(
     if not queries:
         raise HTTPException(status_code=422, detail="query(또는 text)가 비어 있습니다.")
 
-    z = manager.encode_queries(queries, normalize=request.normalize)
+    used, translated = prepare_queries(queries)
+    z = manager.encode_queries(used, normalize=request.normalize)
     return EmbeddingResponse(
         dim=z.shape[1],
         normalized=request.normalize,
         model_version=manager.model_version(),
+        encoded_queries=used if translated else None,
         vectors=z.tolist(),
     )
 
@@ -124,9 +134,11 @@ async def search_vector(
     if not manager.can_embed():
         raise HTTPException(status_code=503, detail="모델이 로드되지 않았습니다.")
 
-    z = manager.encode_queries([keyword], normalize=normalize)
+    used, translated = prepare_queries([keyword])
+    z = manager.encode_queries(used, normalize=normalize)
     return VectorSearchResponse(
         keyword=keyword,
+        encoded_text=used[0] if translated else None,
         dim=z.shape[1],
         normalized=normalize,
         model_version=manager.model_version(),
@@ -151,9 +163,11 @@ async def search_vector_post(
     if not text:
         raise HTTPException(status_code=422, detail="text가 비어 있습니다.")
 
-    z = manager.encode_queries([text], normalize=request.normalize)
+    used, translated = prepare_queries([text])
+    z = manager.encode_queries(used, normalize=request.normalize)
     return TextVectorResponse(
         text=text,
+        encoded_text=used[0] if translated else None,
         dim=z.shape[1],
         normalized=request.normalize,
         model_version=manager.model_version(),

@@ -35,3 +35,7 @@ pyarrow>=14.0.0   # meta.parquet 읽기. 없으면 인덱스가 조용히 로드
 #   matplotlib, seaborn, jupyter, ipython
 #   pytest, pytest-cov, black, flake8, mypy
 #   scipy, joblib
+
+# 한국어 검색어 번역(src/api/translation.py). Marian 토크나이저가 요구한다.
+sentencepiece>=0.2.0
+sacremoses>=0.1.0

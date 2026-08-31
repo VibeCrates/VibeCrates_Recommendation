@@ -23,6 +23,11 @@ class RecommendationItem(BaseModel):
 
 class RecommendationResponse(BaseModel):
     query: str
+    encoded_query: Optional[str] = Field(
+        default=None,
+        description="실제로 인코더에 들어간 문자열. 한국어 검색어는 영어로 번역해서 넣으므로 "
+                    "query와 다를 수 있다. 결과가 이상할 때 번역 탓인지 검색 탓인지 가르는 단서다",
+    )
     domain: Optional[str] = Field(
         default=None,
         description="요청에 실려 온 도메인 필터. 통합 검색(도메인 미지정)이면 null",
@@ -87,6 +92,9 @@ class EmbeddingResponse(BaseModel):
     model_version: str = Field(
         description="아이템 임베딩과 같은 체크포인트에서 나왔는지 대조용. 다르면 검색 결과가 무의미하다"
     )
+    encoded_queries: Optional[List[str]] = Field(
+        default=None, description="실제로 인코딩된 문자열들(한국어는 영어로 번역됨)"
+    )
     vectors: List[List[float]] = Field(description="입력과 같은 순서의 float 배열")
 
 
@@ -96,6 +104,9 @@ class VectorSearchResponse(BaseModel):
     배치가 필요하면 POST /embeddings 쪽을 쓴다(그쪽은 `vectors` 복수).
     """
     keyword: str = Field(description="요청에 실려 온 검색어. 인코딩 확인용으로 그대로 돌려준다")
+    encoded_text: Optional[str] = Field(
+        default=None, description="실제로 인코딩된 문자열(한국어는 영어로 번역됨)"
+    )
     dim: int = Field(description="벡터 차원 (768)")
     normalized: bool = Field(description="L2 정규화된 벡터인지")
     model_version: str = Field(description="아이템 임베딩과 같은 체크포인트인지 대조용")
@@ -126,6 +137,9 @@ class TextVectorRequest(BaseModel):
 class TextVectorResponse(BaseModel):
     """POST /search/vector 응답. 벡터 한 줄."""
     text: str = Field(description="요청에 실려 온 검색어. 인코딩 확인용으로 그대로 돌려준다")
+    encoded_text: Optional[str] = Field(
+        default=None, description="실제로 인코딩된 문자열(한국어는 영어로 번역됨)"
+    )
     dim: int = Field(description="벡터 차원 (768)")
     normalized: bool = Field(description="L2 정규화된 벡터인지")
     model_version: str = Field(description="FAKE-no-model이면 가짜, trained_model.pt@…이면 진짜")
