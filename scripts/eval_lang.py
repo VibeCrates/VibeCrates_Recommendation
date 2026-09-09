@@ -180,7 +180,15 @@ def load_indexes(index_dir: str) -> dict:
 
 
 @torch.no_grad()
-def search(model, indexes, query: str, domain_filter: str | None, top_k: int) -> list[dict]:
+def search(model, indexes, query: str, domain_filter: str | None, top_k: int,
+           domain_cap: int | None = None) -> list[dict]:
+    """domain_cap을 주면 합치기 전에 도메인별 상위 cap개만 남긴다 (3-1 도메인 쿼터).
+
+    기본값 None이면 예전과 바이트 단위로 같은 결과를 낸다 — 확장 평가 6벌의 재현이
+    이 함수에 걸려 있으므로 기본 경로는 건드리지 않는다. 상한 방식을 고정 비율보다
+    먼저 시험하는 이유는, 그 쿼리에 정말 한 도메인만 어울릴 때 억지로 다른 도메인을
+    끼워 넣는 손해가 상한 쪽이 작기 때문이다.
+    """
     z_q = model.encode_query([query])
     z_q_n = F.normalize(z_q, p=2, dim=1).cpu()
 
@@ -189,6 +197,13 @@ def search(model, indexes, query: str, domain_filter: str | None, top_k: int) ->
     all_scores, all_metas = [], []
     for d, (z_n, meta) in target.items():
         scores = (z_q_n @ z_n.T).squeeze(0)
+        if domain_cap is not None and len(scores) > domain_cap:
+            # 도메인 안에서 상위 cap개만 남기고 나머지는 후보에서 뺀다. 자르지 않고
+            # -inf로 눌러야 아래의 merged_meta 행 번호와 어긋나지 않는다.
+            keep = scores.topk(domain_cap).indices
+            masked = torch.full_like(scores, float("-inf"))
+            masked[keep] = scores[keep]
+            scores = masked
         all_scores.append(scores)
         all_metas.append(meta)
 
