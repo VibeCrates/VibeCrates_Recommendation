@@ -908,11 +908,36 @@ GPU 16분. **바뀐 것은 학습 입력뿐이고 서빙 체크포인트·인덱
 (`trained_model.pt` + `indexes/`)으로 돌리면 조용히 다른 모델을 재게 된다 — 처음에 그렇게
 돌려 ko_raw가 0.271로 나왔고, 짝을 맞추자 0.197로 9/8 대조 실험과 정확히 일치했다.
 
-> **확인이 필요한 것** — `models/trained_model.pt`와 `indexes/`는 **8/7자**이고 CLIP 동결
-> 수정은 **8/14**다. 2-4가 "현재 채택 · 서빙 중"을 `models/trained_model.pt`라고 적었는데,
-> 그것이 사실이라면 **서빙과 전달 번들이 동결 수정 이전 세대**라는 뜻이 된다. 동결 수정은
-> 이 프로젝트에서 가장 큰 개선이었다(+0.131, 4.5 SE). 서빙이 실제로 무엇을 올리고 있는지
-> 확인해야 한다.
+#### 서빙은 무엇을 올리고 있나 — 확인함 (9/9), 문제 없다
+
+beast의 `models/trained_model.pt`와 `indexes/`가 8/7자여서 서빙이 CLIP 동결 수정(8/14)
+이전 세대일 가능성을 의심했다. **아니었다.** 해시로 확인했다.
+
+| 파일 | md5 |
+|---|---|
+| 맥북(서빙) `models/trained_model.pt` | `1cfd118b…` |
+| beast `models/best_stage2_qlora_off.pt` | **`1cfd118b…` (동일)** |
+| beast `models/trained_model.pt` | `17d11d64…` (다름) |
+| 맥북 `indexes/movie_embeddings.pt` | `3e25d8e7…` |
+| beast `indexes_qlora_off/movie_embeddings.pt` | **`3e25d8e7…` (동일)** |
+
+전달 번들 두 벌(`dist/bundle_20260824`, `dist/bundle_20260831`)의 `manifest.json`도
+`model_version: trained_model.pt@1786697109` = **2026-08-14 17:45:09**으로, 맥북
+체크포인트의 mtime과 정확히 같다.
+
+즉 **맥북의 `trained_model.pt`는 `best_stage2_qlora_off.pt`를 이름만 바꿔 가져온 것**이고
+`indexes/`는 `indexes_qlora_off`와 바이트 단위로 같다. 2-4의 "현재 채택 · 서빙 중" 서술이
+맞다. 서빙·번들 모두 동결 수정 후 세대다.
+
+**남는 위험은 beast 쪽 이름 충돌이다.** beast의 `trained_model.pt`(8/7)와 `indexes/`(8/7)는
+동결 수정 이전의 잔재인데, `eval_lang.py`·`build_index.py`·`dependencies.py`의 **기본값이
+바로 그 잔재를 가리킨다.** 9/9에 3-2를 처음 돌렸을 때 실제로 그것을 집어 ko_raw가 0.271로
+나왔다 — 에러 없이, 다른 모델을 재고 있었다. `run_*.sh`는 전부 태그별 경로를 쓰므로
+자동화된 참조는 없고, 위험은 사람이 기본값으로 돌릴 때만 생긴다.
+
+**처리**: beast의 잔재 두 개를 `*.pre20260814_stale`로 이름만 바꿔 기본값 실행이 조용한
+오답 대신 즉시 실패하게 한다. 심링크로 기본값을 올바른 쪽에 걸지 않는 이유는
+`build_index.py`를 기본값으로 돌리면 참조 인덱스(`indexes_qlora_off`)를 덮어쓰기 때문이다.
 
 ### 4-A-3. 한국어 — 번역기 교체 (3-2)
 
