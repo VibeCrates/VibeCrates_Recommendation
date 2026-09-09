@@ -147,7 +147,9 @@ def build_item_units(a: pd.DataFrame, b: pd.DataFrame, lookup: dict, topk: int,
     물으면 잡음만 만든다. 실행 차이는 어차피 서로 다르게 뽑은 부분에서만 나온다.
     """
     units = []
-    keys = ["query_id", "domain_filter"]
+    # query_id로 짝지으면 안 된다 — 실행마다 접미사가 붙는 경우가 있다(P1_KO_opus vs
+    # P1_KO_qwen). (스타일, 쿼리번호, 도메인필터)는 실행이 달라도 같은 쿼리를 가리킨다.
+    keys = ["style", "pair_id", "domain_filter"]
     bi = {k: g for k, g in b.groupby(keys)}
     for k, ga in a.groupby(keys):
         gb = bi.get(k)
@@ -169,8 +171,8 @@ def build_item_units(a: pd.DataFrame, b: pd.DataFrame, lookup: dict, topk: int,
             noun = (NOUNS[ra.result_domain][0]
                     if ra.result_domain == rb.result_domain else "item")
             units.append({
-                "uid": f"{k[0]}|{k[1]}|{ra.item_id}|{rb.item_id}",
-                "query_id": k[0], "domain_filter": k[1],
+                "uid": f"{k[0]}|{k[1]}|{k[2]}|{ra.item_id}|{rb.item_id}",
+                "query_id": f"{k[0]}{k[1]}", "domain_filter": k[2],
                 "style": ra.style, "query": ra.query, "noun": noun,
                 "a": [ta], "b": [tb],
             })
@@ -180,7 +182,7 @@ def build_item_units(a: pd.DataFrame, b: pd.DataFrame, lookup: dict, topk: int,
 def build_units(a: pd.DataFrame, b: pd.DataFrame, lookup: dict, topk: int) -> list[dict]:
     """(query_id, domain_filter)마다 두 실행의 top-k 리스트 한 쌍."""
     units = []
-    keys = ["query_id", "domain_filter"]
+    keys = ["style", "pair_id", "domain_filter"]
     bi = {k: g for k, g in b.groupby(keys)}
     for k, ga in a.groupby(keys):
         gb = bi.get(k)
@@ -200,8 +202,8 @@ def build_units(a: pd.DataFrame, b: pd.DataFrame, lookup: dict, topk: int) -> li
         doms = set(ga["result_domain"]) | set(gb["result_domain"])
         noun = NOUNS[doms.pop()][0] if len(doms) == 1 else "item"
         units.append({
-            "uid": f"{k[0]}|{k[1]}",
-            "query_id": k[0], "domain_filter": k[1],
+            "uid": f"{k[0]}|{k[1]}|{k[2]}",
+            "query_id": f"{k[0]}{k[1]}", "domain_filter": k[2],
             "style": ga.iloc[0]["style"], "query": ga.iloc[0]["query"],
             "noun": noun, "a": ta, "b": tb,
         })
