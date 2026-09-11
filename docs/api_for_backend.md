@@ -11,7 +11,7 @@
 | 통신 (`/ping`) | ✅ 확인 완료 |
 | 쿼리 벡터 (`/search/vector`) | ✅ **진짜 벡터** |
 | 추천 (`/recommend`) | ✅ 동작 — 단 **대조용**, 계약 아님 |
-| 아이템 벡터 번들 | ✅ 준비됨 (569MB, 전달 방법 협의) |
+| 아이템 벡터 번들 | ✅ 준비됨 (**543MB, npz 형식 — 2026-09-11 변경**, 전달 방법 협의) |
 | 접속 주소 | `http://100.77.133.40:8000` (Tailscale) |
 
 **8/18에 받아 둔 벡터는 버릴 것.** 그때 나간 것은 검색어를 시드로 한 난수였다. 응답의
@@ -214,35 +214,75 @@ GET http://100.77.133.40:8000/api/v1/ping?n=42
 추천 서버는 검색어를 벡터로 바꾸는 일만 한다. 따라서 아이템 벡터와 그 메타데이터를
 백엔드가 들고 있어야 하고, 그것이 아래 **전달 번들**이다.
 
-### 전달 번들
+### 전달 번들 (2026-09-11 형식 변경)
 
-`dist/bundle_20260831/` 한 폴더로 넘긴다(570MB). 생성은
-`python scripts/export_index_bundle.py --out dist/bundle_YYYYMMDD`.
+`dist/bundle_20260911_npz/` 한 폴더로 넘긴다(543MB).
 
 | 파일 | 내용 |
 |---|---|
-| `{domain}_vectors.npy` | float32 (N, 768), L2 정규화 완료 |
-| `{domain}_items.parquet` | `id, title, domain, year, image, url` — 프론트 계약과 같은 평면 구조. 여기에 `row`(벡터 파일의 행 번호)와 `point_id`(벡터 DB 기본키용 전역 고유 정수)가 더 있다 |
-| `manifest.json` | model_version · 건수 · sha256 · 필드 채움률 |
+| `{domain}_vectors.npz` | 배열 세 개 — `ids`, `vectors`, `model_version` |
+| `manifest.json` | model_version · 건수 · sha256 · L2 노름 범위 · 필드 채움률 |
 
-**`vectors[i]`와 `items[i]`는 같은 아이템이다.** 정규화돼 있으므로 벡터 DB의 거리 함수는
+```python
+d = np.load("book_vectors.npz")          # allow_pickle 불필요
+d["ids"]            # (110594,) 바이트 문자열. np.char.decode(d["ids"])로 문자열 변환
+d["vectors"]        # (110594, 768) float32, L2 정규화 완료
+d["model_version"]  # b'trained_model.pt@1786697109'  (.item().decode())
+```
+
+**`ids[i]`가 `vectors[i]`의 주인이다.** 정규화돼 있으므로 벡터 DB의 거리 함수는
 내적(inner product)으로 설정하면 그대로 코사인 유사도가 된다.
+
+#### 이전 형식에서 바뀐 것
+
+- **`{domain}_items.parquet`을 더 넘기지 않는다.** 백엔드가 저장소의 canonical CSV를
+  목적에 맞게 가공해 쓰기로 했으므로(2026-09-11), 우리가 줘야 하는 것은 *어느 벡터가 어느
+  아이템인지*뿐이다. 제목·연도 등은 CSV에서 `id`로 조인하면 된다 — 번들의 id 집합과
+  canonical의 id 집합은 세 도메인 모두 1:1로 일치한다(중복 0, 누락 0).
+- **`row`를 넘기지 않는다.** npz를 순서대로 읽으면 나오는 값이다.
+- **`point_id`를 넘기지 않는다.** 아래 참조.
+- `model_version`이 벡터 파일 안에 함께 들어갔다. manifest는 옮기다 떨어질 수 있는데,
+  그러면 벡터가 어느 체크포인트에서 나왔는지 알 방법이 사라진다.
+
+> **주의 — CSV의 이미지 URL 열을 쓰지 말 것.** `Poster`/`img`/`imgUrl`은 원본 데이터셋이
+> 갖고 있던 URL이고 우리 보유 현황과 다르다. music은 **7,205곡이 파일은 있는데 URL이 비어
+> 있고**(Deezer로 따로 받은 것이라 CSV에 반영되지 않았다), 반대로 book은 3,003건이 URL은
+> 있는데 파일이 없다. **이미지 유무는 파일 존재로 판단한다** — 파일명이 곧 id다
+> (`{domain}/{id}.jpg`, 매칭률 100%, 고아 파일 0개).
 
 ### Qdrant에 넣는 법 (2026-08-31, 백엔드가 Qdrant로 확정)
 
-Qdrant의 point id는 **부호 없는 정수나 UUID만** 받는다. 우리 `id`는 문자열이라
-(`kdl_B00TZE87S4`, `3tjFYV6RSFtuktYl3ZtYcq`) 그대로 쓸 수 없다. 그래서 번들에
-`point_id` 컬럼을 넣었다 — 세 도메인을 통틀어 고유한 정수다.
+Qdrant의 point id는 **부호 없는 정수나 UUID만** 받는다. 우리 `id`는 임의의 문자열이라
+(`kdl_B00TZE87S4`, `3tjFYV6RSFtuktYl3ZtYcq`) 그대로는 못 쓴다. 그러나 **UUID는 받으므로
+id에서 결정론적으로 만들면 된다.**
 
-> **`row`를 point id로 쓰면 안 된다.** `row`는 도메인 안에서만 0부터 매겨져서, 한
-> 컬렉션에 세 도메인을 넣으면 movie의 0번과 music의 0번이 같은 point가 되어 서로
-> 덮어쓴다(실측: movie 39,515개 전부가 music·book과 겹친다). `row`는 벡터 파일에서
-> 몇 번째 행인지를 가리키는 용도이고, 기본키는 `point_id`다.
-> movie는 1,000,000,000번대 / music은 2,000,000,000번대 / book은 3,000,000,000번대다.
+```python
+POINT_NS = uuid.UUID("6f9b4a2c-0000-4000-8000-000000000001")   # 아무 고정 UUID
+point_id = str(uuid.uuid5(POINT_NS, f"{domain}:{item_id}"))
+```
+
+**point id는 백엔드가 정한다.** 어떤 방식이든 상관없지만 **id에서 파생시키기를 권한다** —
+그러면 우리가 재학습해 벡터를 다시 넘겨도 같은 아이템이 같은 point를 유지해 upsert로
+갱신된다.
+
+> **2026-09-11 폐기** — 8/31 번들이 담고 있던 `point_id`(`10억 × 도메인 + row`)는 쓰지
+> 말 것. `row`는 인덱스에서 몇 번째냐일 뿐이라 아이템이 추가·삭제되면 뒤가 전부 밀리고,
+> **같은 아이템의 기본키가 재학습마다 바뀐다.** 우리 내보내기 순서가 그쪽 DB의 기본키에
+> 박히는 구조였다. 다음 재학습에서 실제로 행 수가 바뀐다.
+>
+> 같은 이유로 `row`(벡터 배열의 행 번호)도 기본키로 쓰면 안 된다. 도메인 안에서만 0부터
+> 매겨지므로 한 컬렉션에 세 도메인을 넣으면 movie의 0번과 music의 0번이 충돌한다.
 
 ```python
 from qdrant_client import QdrantClient, models
-import numpy as np, pandas as pd
+import numpy as np, uuid, requests
+
+POINT_NS = uuid.UUID("6f9b4a2c-0000-4000-8000-000000000001")
+
+# 적재 전에 체크포인트를 대조한다. 쿼리 벡터와 아이템 벡터가 다른 체크포인트에서 나오면
+# 검색은 오류 없이 성공하고 결과만 엉뚱해진다 — 넣기 전에 잡는 편이 싸다.
+live = requests.post("http://<추천서버>/api/v1/search/vector",
+                     json={"text": "ping"}).json()["model_version"]
 
 client = QdrantClient(url="http://localhost:6333")
 client.create_collection(
@@ -251,18 +291,19 @@ client.create_collection(
 )
 
 for domain in ("movie", "music", "book"):
-    vectors = np.load(f"{domain}_vectors.npy")          # (N, 768) float32
-    items   = pd.read_parquet(f"{domain}_items.parquet")
-    for start in range(0, len(items), 1000):
-        chunk = items.iloc[start:start + 1000]
+    d = np.load(f"{domain}_vectors.npz")
+    bundle_version = d["model_version"].item().decode()
+    assert bundle_version == live, f"{domain}: 번들 {bundle_version} != 서버 {live}"
+
+    ids, vectors = np.char.decode(d["ids"]), d["vectors"]
+    for start in range(0, len(ids), 1000):
+        sl = slice(start, start + 1000)
         client.upsert("vibecrates", points=[
             models.PointStruct(
-                id=int(r.point_id),                      # ← 기본키
-                vector=vectors[r.row].tolist(),          # ← row로 벡터를 찾는다
-                payload={"id": r.id, "title": r.title, "domain": r.domain,
-                         "year": None if pd.isna(r.year) else int(r.year),
-                         "image": r.image, "url": r.url},
-            ) for r in chunk.itertuples()
+                id=str(uuid.uuid5(POINT_NS, f"{domain}:{i}")),   # ← id에서 파생
+                vector=v.tolist(),
+                payload={"id": i, "domain": domain},             # 나머지는 CSV에서
+            ) for i, v in zip(ids[sl], vectors[sl])
         ])
 
 # 도메인 필터를 쓸 거라면 인덱스를 만들어 둔다
