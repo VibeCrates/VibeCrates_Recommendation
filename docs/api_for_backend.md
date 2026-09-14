@@ -1,6 +1,6 @@
 # 추천 서버 API — 백엔드 연동 안내
 
-최종 갱신: 2026-08-24 · 대상: 백엔드 담당자
+최종 갱신: 2026-09-14 · 대상: 백엔드 담당자
 8/18 버전은 쿼리 벡터를 열되 가짜를 내보내던 상태였다. 8/24에 모델과 인덱스를 GPU
 서버에서 가져와 **진짜 벡터로 바뀌었다.**
 
@@ -11,7 +11,7 @@
 | 통신 (`/ping`) | ✅ 확인 완료 |
 | 쿼리 벡터 (`/search/vector`) | ✅ **진짜 벡터** |
 | 추천 (`/recommend`) | ✅ 동작 — 단 **대조용**, 계약 아님 |
-| 아이템 벡터 번들 | ✅ 준비됨 (**543MB, npz 형식 — 2026-09-11 변경**, 전달 방법 협의) |
+| 아이템 벡터 번들 | ✅ 준비됨 (**786.4MB, CSV 형식 — 2026-09-14 변경**, 전달 방법 협의) |
 | 접속 주소 | `http://100.77.133.40:8000` (Tailscale) |
 
 **8/18에 받아 둔 벡터는 버릴 것.** 그때 나간 것은 검색어를 시드로 한 난수였다. 응답의
@@ -214,32 +214,55 @@ GET http://100.77.133.40:8000/api/v1/ping?n=42
 추천 서버는 검색어를 벡터로 바꾸는 일만 한다. 따라서 아이템 벡터와 그 메타데이터를
 백엔드가 들고 있어야 하고, 그것이 아래 **전달 번들**이다.
 
-### 전달 번들 (2026-09-11 형식 변경)
+### 전달 번들 (2026-09-14 형식 변경 — CSV)
 
-`dist/bundle_20260911_npz/` 한 폴더로 넘긴다(543MB).
+`dist/bundle_20260914_csv/` 한 폴더로 넘긴다(786.4MB). 백엔드가 벡터도 CSV 열로 받는 편이
+편하다고 요청해(2026-09-14) npz에서 바꿨다.
 
-| 파일 | 내용 |
-|---|---|
-| `{domain}_vectors.npz` | 배열 세 개 — `ids`, `vectors`, `model_version` |
-| `manifest.json` | model_version · 건수 · sha256 · L2 노름 범위 · 필드 채움률 |
+| 파일 | 내용 | 크기 |
+|---|---|---:|
+| `movie_vectors.csv` | 39,515행 — `id`, `vector_b64`, `model_version` | 163.3MB |
+| `music_vectors.csv` | 39,682행 — 〃 | 164.6MB |
+| `book_vectors.csv` | 110,594행 — 〃 | 458.5MB |
+| `manifest.json` | model_version · 건수 · sha256 · L2 노름 범위 · 필드 채움률 | — |
 
 ```python
-d = np.load("book_vectors.npz")          # allow_pickle 불필요
-d["ids"]            # (110594,) 바이트 문자열. np.char.decode(d["ids"])로 문자열 변환
-d["vectors"]        # (110594, 768) float32, L2 정규화 완료
-d["model_version"]  # b'trained_model.pt@1786697109'  (.item().decode())
+import base64
+import numpy as np
+import pandas as pd
+
+df = pd.read_csv("book_vectors.csv", dtype={"id": str})
+v = np.frombuffer(base64.b64decode(df.loc[0, "vector_b64"]), dtype="<f4")  # (768,) float32
 ```
 
-**`ids[i]`가 `vectors[i]`의 주인이다.** 정규화돼 있으므로 벡터 DB의 거리 함수는
-내적(inner product)으로 설정하면 그대로 코사인 유사도가 된다.
+`vector_b64`는 (768,) float32(L2 정규화 완료, 내적 = 코사인 유사도)를 바이트 그대로 base64로
+감싼 것이다 — 무손실이고, 행당 정확히 4,096바이트로 고정된다. 10진수 텍스트로 풀면 행당
+8.8KB(전체 1.68GB, 지금 파일의 2배)이고, JSON 배열 문자열은 더 크다(행당 17KB, 전체 3.2GB —
+`json.dumps`가 float를 더 긴 자릿수로 풀어쓰기 때문). 정밀도와 크기를 함께 잡는 선택이
+base64다.
 
-#### 이전 형식에서 바뀐 것
+**id와 vector가 같은 행에 있다.** npz 때는 "i번째 ids가 i번째 vectors의 주인"이라는 위치
+기반 약속에 기대야 했지만(그래서 `assert len(items) == len(vectors)`가 필요했다), CSV는
+그 약속 자체가 필요 없다 — 순서가 밀리는 사고가 구조적으로 불가능하다.
+
+`model_version`은 매 행에 반복해서 들어 있다. **적재 시점에 `/search/vector` 응답의
+`model_version`과 이 열이 같은지 확인할 것** — 다르면 쿼리 벡터와 아이템 벡터가 다른
+체크포인트에서 나온 것이고, 그때 검색은 오류 없이 성공하고 결과만 엉뚱해진다.
+
+#### 이전 형식(9/11, npz)에서 바뀐 것
+
+- 파일 형식만 CSV로 바뀌었다. **무엇을 담는지, 무엇을 담지 않는지는 9/11과 같다** — `row`와
+  `point_id`를 넘기지 않는 이유는 아래에 그대로 있다.
+- 벡터가 이진 배열이 아니라 문자열 열(`vector_b64`)이 됐다. 적재 전에 base64 디코드가
+  한 단계 더 필요하다.
+
+#### 이전 형식(9/11 이전, parquet+npy)에서 바뀐 것
 
 - **`{domain}_items.parquet`을 더 넘기지 않는다.** 백엔드가 저장소의 canonical CSV를
   목적에 맞게 가공해 쓰기로 했으므로(2026-09-11), 우리가 줘야 하는 것은 *어느 벡터가 어느
   아이템인지*뿐이다. 제목·연도 등은 CSV에서 `id`로 조인하면 된다 — 번들의 id 집합과
   canonical의 id 집합은 세 도메인 모두 1:1로 일치한다(중복 0, 누락 0).
-- **`row`를 넘기지 않는다.** npz를 순서대로 읽으면 나오는 값이다.
+- **`row`를 넘기지 않는다.** 예전 형식을 순서대로 읽으면 나오는 값이다.
 - **`point_id`를 넘기지 않는다.** 아래 참조.
 - `model_version`이 벡터 파일 안에 함께 들어갔다. manifest는 옮기다 떨어질 수 있는데,
   그러면 벡터가 어느 체크포인트에서 나왔는지 알 방법이 사라진다.
@@ -275,7 +298,7 @@ point_id = str(uuid.uuid5(POINT_NS, f"{domain}:{item_id}"))
 
 ```python
 from qdrant_client import QdrantClient, models
-import numpy as np, uuid, requests
+import base64, numpy as np, pandas as pd, uuid, requests
 
 POINT_NS = uuid.UUID("6f9b4a2c-0000-4000-8000-000000000001")
 
@@ -291,19 +314,18 @@ client.create_collection(
 )
 
 for domain in ("movie", "music", "book"):
-    d = np.load(f"{domain}_vectors.npz")
-    bundle_version = d["model_version"].item().decode()
+    df = pd.read_csv(f"{domain}_vectors.csv", dtype={"id": str})
+    bundle_version = df["model_version"].iloc[0]
     assert bundle_version == live, f"{domain}: 번들 {bundle_version} != 서버 {live}"
 
-    ids, vectors = np.char.decode(d["ids"]), d["vectors"]
-    for start in range(0, len(ids), 1000):
-        sl = slice(start, start + 1000)
+    for start in range(0, len(df), 1000):
+        chunk = df.iloc[start:start + 1000]
         client.upsert("vibecrates", points=[
             models.PointStruct(
-                id=str(uuid.uuid5(POINT_NS, f"{domain}:{i}")),   # ← id에서 파생
-                vector=v.tolist(),
-                payload={"id": i, "domain": domain},             # 나머지는 CSV에서
-            ) for i, v in zip(ids[sl], vectors[sl])
+                id=str(uuid.uuid5(POINT_NS, f"{domain}:{r.id}")),   # ← id에서 파생
+                vector=np.frombuffer(base64.b64decode(r.vector_b64), dtype="<f4").tolist(),
+                payload={"id": r.id, "domain": domain},              # 나머지는 canonical CSV에서
+            ) for r in chunk.itertuples()
         ])
 
 # 도메인 필터를 쓸 거라면 인덱스를 만들어 둔다
@@ -329,33 +351,11 @@ for h in hits:
 > 이 문자열 `id`로 저장한다. `point_id`와 `row`는 인덱스를 다시 만들면 번호가 밀리므로,
 > 그것으로 저장해 두면 재학습 후 **다른 작품을 가리키게 된다**.
 
-### 벡터와 아이템을 잇는 방법
+### 아이템 메타데이터 필드 채움률
 
-`.npy`에는 id가 없다. 벡터 파일은 숫자만 담은 행렬이고, **어느 아이템인지는 행 번호로만
-이어진다.** items의 `row` 컬럼이 그 행 번호다 — `vectors[row]`가 그 아이템의 벡터다.
-
-그러므로 짝을 짓는 것은 검색할 때가 아니라 **적재할 때 한 번**이다. 넣고 나면 DB 안에
-id와 벡터가 한 덩어리로 저장되고, 검색은 id(또는 row)를 돌려준다.
-
-```python
-vectors = np.load("movie_vectors.npy")             # (39515, 768)
-items   = pd.read_parquet("movie_items.parquet")   # 39515행
-
-# (가) 문자열 키를 쓸 수 있는 DB — pgvector, Milvus(VARCHAR PK), Elasticsearch
-for r in items.itertuples():
-    db.insert(id=r.id, vector=vectors[r.row], payload={"title": r.title, ...})
-
-# (나) 정수·UUID 키만 받는 DB — Qdrant(uint/UUID), FAISS(int64)
-for r in items.itertuples():
-    db.insert(id=int(r.row), vector=vectors[r.row], payload={"id": r.id, ...})
-```
-
-(나)를 택하면 **DB의 기본키가 곧 이 파일의 행 번호**가 된다. 그러면 items를 재정렬하거나
-일부만 다시 적재할 때 대응이 통째로 어긋나므로, 우리 `id`를 반드시 payload에 함께 넣어
-두고 최종 조회는 그것으로 하는 편이 안전하다.
-
-적재 직전에 `len(vectors) == len(items) == manifest.count`를 확인할 것. 세 값이 다르면
-행 순서가 이미 어긋난 것이다.
+제목·연도·이미지·url 같은 메타데이터는 벡터 CSV가 아니라 canonical CSV에서 `id`로
+조인해서 가져온다(위 "이전 형식에서 바뀐 것" 참조). 적재 직전에 벡터 CSV의 행 수와
+`manifest.json`의 `count`가 같은지 확인할 것 — 다르면 행이 빠진 것이다.
 
 | 도메인 | 건수 | year | image | url |
 |---|---:|---:|---:|---:|
