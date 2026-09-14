@@ -1274,3 +1274,38 @@ movie 39,515 / music 39,682 / book 110,594.
   토큰화 방식. 영어 코퍼스로 만든 사전에는 한글 조각이 없어 바이트 단위로 부서진다.
 - **InfoNCE** — 대조학습 손실. 같은 배치 안의 다른 항목들을 오답(negative)으로 삼아 정답과의
   유사도를 상대적으로 높인다. 배치가 클수록 오답이 많아진다.
+
+---
+
+## 10. 9/14 — beast 정리 및 배치 128 재측정
+
+라벨 60쌍(9/11)을 채우는 동안 GPU가 필요 없는 두 항목과 GPU가 필요한 항목 하나를 병행했다.
+
+### 10-1. beast 8/7 잔재 이름 변경
+
+`report_session_2026-09-09.md` 5절의 열린 항목이었다. `models/trained_model.pt`(8/7,
+CLIP 동결 수정 이전)와 `indexes/`(8/10, 동일)가 기본 파일명을 그대로 쓰고 있어 스크립트를
+인자 없이 돌리면 이 옛 것을 조용히 집어 쓸 위험이 있었다. 둘 다 `*.pre20260814_stale`로
+이름을 바꿨다 — 이제 기본값으로 돌리면 파일이 없어 그냥 에러가 난다(조용히 틀리는 대신
+시끄럽게 실패하도록).
+
+### 10-2. 배치 128 재측정 (worklist 2-2) — 여전히 OOM, 원인 확정
+
+`--batch-size 128 --epochs-stage1 1`로 Stage 1을 걸어 첫 스텝에서 바로 OOM을 재현했다.
+
+```
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 480.00 MiB.
+GPU 0 has a total capacity of 31.35 GiB of which 195.69 MiB is free.
+```
+
+스택트레이스가 정확히 worklist의 "정정" 예측을 확인해준다 — **mpnet의 어텐션 계산
+(`modeling_mpnet.py`의 `self.attn`)에서 터진다.** CLIP 동결 수정(8/14)은 QueryBlock
+얘기였고, 배치 상한을 정하는 것은 처음부터 TextBlock의 mpnet이었다. 256은 128보다
+항상 나쁘므로 따로 걸지 않았다.
+
+SDPA 경로도 확인했다 — 설치된 transformers 5.14.1의 `modeling_mpnet.py`에 `sdpa`
+관련 코드가 없다. 이 라이브러리 버전에서 MPNet은 SDPA를 구현하지 않는다. **막힌 작업이
+없으므로 지금 더 파지 않는다.** 배치를 키울 이유가 생기면 gradient checkpointing,
+LoRA rank 축소, transformers 업그레이드 순으로 시도할 것.
+
+**결론: 배치는 32로 유지.**
