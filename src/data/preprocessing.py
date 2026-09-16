@@ -180,6 +180,16 @@ def _build_content_text(domain: str, row: pd.Series, desc_max: int = DESC_MAX_CH
         600자 초과가 movie 29.7% / music 17.6%로 그 꼬리가 입력에만 있었다.
     라벨 쪽을 넓히는 반대 방향은 쿼리 전량 재생성이 필요해 다음 사이클로 미뤘다.
     (근거 사실은 겹쳐야 하고 표현 형태는 갈라져야 한다 — 후자가 진단 D다.)
+
+    필드 이름은 3도메인이 같은 스키마를 쓴다 (4-3, 2026-09-17 — worklist 4-3).
+    이전에는 movie가 Title/Genre/Overview, music이 Track/Artist/Album/Genre, book이
+    Title/Author/Category로 시작해 필드 이름 자체가 도메인 지문이었다(형식만 보고도
+    도메인이 드러남 — music 도메인 중심 벡터 길이 0.369가 그 증거). 확률적 제거
+    (title_dropout/label_dropout)는 어중간해서 대조 실험이 되지 못했다는 것이 확인돼
+    이번엔 아예 통일한다: Title/Creator/Genre/Description 넉 줄로 모든 도메인을 쓴다.
+    음악의 Album만 예외로 남긴다 — 다른 도메인에 대응 개념이 없어 통일해도 지문이 지워지지
+    않고, 지워버리면 정보만 없어진다. 실제 값(어떤 컬럼에서 가져오는지)은 바뀌지 않았고
+    라벨(줄) 이름만 바뀌었으므로 build_synopsis와의 사실 일치는 그대로 유지된다.
     """
     synth = _synth_text(row)
 
@@ -187,7 +197,7 @@ def _build_content_text(domain: str, row: pd.Series, desc_max: int = DESC_MAX_CH
         text = f"Title: {row.get('Title', '')}\nGenre: {row.get('Genre', '')}"
         overview = synth or str(row.get("text", "")).strip()
         if overview and overview != "nan":
-            text += f"\nOverview: {overview[:desc_max]}"
+            text += f"\nDescription: {overview[:desc_max]}"
         return text
 
     if domain == "music":
@@ -197,7 +207,7 @@ def _build_content_text(domain: str, row: pd.Series, desc_max: int = DESC_MAX_CH
         except Exception:
             artist_str = str(row.get("artists", ""))
         text = (
-            f"Track: {row.get('name', '')}\nArtist: {artist_str}\n"
+            f"Title: {row.get('name', '')}\nCreator: {artist_str}\n"
             f"Album: {row.get('album_name', '')}\nGenre: {row.get('genre', '')}"
         )
         desc = row.get("description", "")
@@ -207,15 +217,15 @@ def _build_content_text(domain: str, row: pd.Series, desc_max: int = DESC_MAX_CH
             # 이 슬롯의 오용이었다 (세션 16 진단 A).
             text += f"\nDescription: {synth[:desc_max]}"
         elif pd.notna(lyrics) and str(lyrics).strip() not in ("", "nan"):
-            text += f"\nLyrics: {str(lyrics)[:LYRICS_MAX_CHARS]}"
+            text += f"\nDescription: {str(lyrics)[:LYRICS_MAX_CHARS]}"
         elif pd.notna(desc) and str(desc).strip() not in ("", "nan"):
             text += f"\nDescription: {str(desc)[:LYRICS_MAX_CHARS]}"
         return text
 
     # book
     text = (
-        f"Title: {row.get('title', '')}\nAuthor: {row.get('author', '')}\n"
-        f"Category: {row.get('category_name', '')}"
+        f"Title: {row.get('title', '')}\nCreator: {row.get('author', '')}\n"
+        f"Genre: {row.get('category_name', '')}"
     )
     desc = synth or str(row.get("description_clean", row.get("description", ""))).strip()
     if desc and desc != "nan":

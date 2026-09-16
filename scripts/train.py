@@ -69,6 +69,7 @@ def main(args):
         sample_one_query=args.sample_one_query,
         title_dropout=args.title_dropout,
         label_dropout=args.label_dropout,
+        domain_balanced_batches=args.domain_balanced_batches,
     )
     
     train_loader = dataloaders['train']
@@ -204,6 +205,13 @@ if __name__ == '__main__':
         '--label-dropout', type=float, default=0.0,
         help='학습 시 "Title:", "Track:" 같은 필드 이름을 이 확률로 지운다. 필드 이름이 '
              '도메인 지문이 되어 통합 검색이 한 도메인으로 쏠리는 것을 막기 위한 것.'
+    )
+    parser.add_argument(
+        '--domain-balanced-batches', action='store_true',
+        help='4-2: 매 배치를 세 도메인이 (거의) 동수로 구성되게 뽑는다. book이 훈련셋의 '
+             '58%%라 무작위 셔플에서는 in-batch negative가 대부분 book끼리라 InfoNCE가 '
+             '도메인 경계를 거의 학습하지 못한다 - centering(사후 보정, 폐기됨)의 대안으로 '
+             '학습 단계에서 원인을 끊는다. --data-path의 df에 "domain" 컬럼이 있어야 한다.'
     )
     parser.add_argument(
         '--early-stopping-patience',

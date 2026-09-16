@@ -81,8 +81,8 @@ class MultiModalDataset(Dataset):
     def __len__(self) -> int:
         return len(self.content_texts)
 
-    # content_text는 "필드이름: 값" 줄이 이어진 형태다. 제목 줄은 도메인마다 이름이 달라
-    # (movie/book은 Title, music은 Track) 둘 다 잡는다.
+    # content_text는 "필드이름: 값" 줄이 이어진 형태다. 4-3(필드 이름 통일)부터 제목 줄은
+    # 3도메인 모두 "Title"이다. "Track"은 통일 이전 데이터셋과의 호환을 위해 남겨 둔다.
     TITLE_FIELDS = ("Title", "Track")
 
     def _augment_content(self, text: str) -> str:
