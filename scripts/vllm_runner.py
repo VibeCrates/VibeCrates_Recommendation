@@ -52,8 +52,23 @@ class VLLMRunner:
     ):
         self.max_model_len = max_model_len
         self.max_new_tokens = max_new_tokens
+        import torch
         from vllm import LLM, SamplingParams
         from transformers import AutoProcessor
+
+        # beast는 공유 대여 서버다 - 다른 세입자의 프로세스가 GPU 메모리를 들고 있을 때
+        # gpu_memory_utilization=0.9(총량의 90%)를 그대로 요청하면 "지금 여유(free)가
+        # 목표보다 작다"며 vLLM이 시작조차 안 한다(2026-09-17 실측: free 26.16GiB인데
+        # 목표 28.21GiB). 매번 값을 손으로 낮추는 대신 기동 시점 free 메모리를 재서 목표를
+        # 자동으로 깎는다 - 보이는 free의 90%만 요청해 다른 세입자가 그 사이 더 할당해도
+        # 여유를 남긴다.
+        free_bytes, total_bytes = torch.cuda.mem_get_info()
+        free_frac = free_bytes / total_bytes
+        effective_util = min(gpu_memory_utilization, free_frac * 0.9)
+        if effective_util < gpu_memory_utilization:
+            print(f"[vllm_runner] GPU 여유 {free_frac:.1%}뿐이라 "
+                  f"gpu_memory_utilization {gpu_memory_utilization:.2f} → {effective_util:.2f}로 낮춤 "
+                  f"(다른 프로세스가 {1-free_frac:.1%} 사용 중)")
 
         # 프롬프트를 chat template로 펴는 데만 쓴다 (토크나이즈는 vLLM이 한다).
         self.processor = AutoProcessor.from_pretrained(model_id)
@@ -61,7 +76,7 @@ class VLLMRunner:
             model=model_id,
             dtype="bfloat16",
             max_model_len=max_model_len,
-            gpu_memory_utilization=gpu_memory_utilization,
+            gpu_memory_utilization=effective_util,
             limit_mm_per_prompt={"image": 1},
         )
         # temperature=0 = greedy. HF 경로의 do_sample=False와 같은 결정론적 디코딩.
