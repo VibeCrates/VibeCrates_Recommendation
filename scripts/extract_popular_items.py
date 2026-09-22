@@ -78,6 +78,16 @@ def main():
     print(f"book(goodreads만): numRatings 상위 {len(book)}권 → {args.out_prefix}_book_goodreads.csv")
     print(book.head(10)[["title", "author", "numRatings", "rating"]].to_string(index=False))
 
+    # id + 이름만 남긴 요약본. 세 도메인 합쳐 한 파일로 - id는 도메인마다 원래
+    # id 컬럼 그대로다(movie=imdbId, music=id, book=asin).
+    ids = pd.concat([
+        movie.rename(columns={"imdbId": "id", "Title": "name"})[["id", "name"]].assign(domain="movie"),
+        music.rename(columns={"name": "name"})[["id", "name"]].assign(domain="music"),
+        book.rename(columns={"asin": "id", "title": "name"})[["id", "name"]].assign(domain="book"),
+    ], ignore_index=True)[["domain", "id", "name"]]
+    ids.to_csv(f"{args.out_prefix}_top{args.top}_ids.csv", index=False)
+    print(f"\nid+이름 요약본({len(ids)}행) → {args.out_prefix}_top{args.top}_ids.csv")
+
 
 if __name__ == "__main__":
     main()
