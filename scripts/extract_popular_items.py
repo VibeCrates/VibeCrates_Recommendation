@@ -7,8 +7,10 @@
   남아 있어서, `asin`의 `gr_` 접두어를 뗀 값(원본 `bookId`)으로 다시 조인해
   복구할 수 있다. BX(42,823권)·Kindle(19,750권) 출처는 원본에도 이 신호가 없어
   이번엔 뺀다.
-- movie: canonical에 있는 `IMDB Score`는 평점이지 인기도가 아니다(평가 참여 수가
-  없어 소수 평가로 받은 고득점과 구분이 안 됨) — 이번 작업에서 제외한다.
+- movie: canonical의 `IMDB Score`는 평점이지 인기도가 아니었다(평가 참여 수가
+  없어 소수 평가로 받은 고득점과 구분이 안 됨). 2026-09-18~19에 TMDB API로
+  `vote_count`·`popularity`를 추가 수집해 해소했다(`scripts/fetch_movie_meta.py`,
+  커버리지 98.3%) — `vote_count`(평가 참여 수)로 뽑는다.
 
 사용:
   python scripts/extract_popular_items.py --top 200
@@ -16,6 +18,14 @@
 import argparse
 
 import pandas as pd
+
+
+def extract_movie(top: int) -> pd.DataFrame:
+    df = pd.read_csv("data/canonical/movie_canonical.csv", low_memory=False)
+    df = df[df["vote_count"].notna()].copy()
+    df = df.sort_values("vote_count", ascending=False)
+    cols = ["imdbId", "Title", "Genre", "vote_count", "popularity", "IMDB Score"]
+    return df[cols].head(top)
 
 
 def extract_music(top: int) -> pd.DataFrame:
@@ -51,6 +61,12 @@ def main():
     ap.add_argument("--out-prefix", default="experiments/popular")
     args = ap.parse_args()
 
+    movie = extract_movie(args.top)
+    movie.to_csv(f"{args.out_prefix}_movie.csv", index=False)
+    print(f"movie: vote_count 상위 {len(movie)}편 → {args.out_prefix}_movie.csv")
+    print(movie.head(10)[["Title", "vote_count", "popularity"]].to_string(index=False))
+
+    print()
     music = extract_music(args.top)
     music.to_csv(f"{args.out_prefix}_music.csv", index=False)
     print(f"music: popularity 상위 {len(music)}곡 → {args.out_prefix}_music.csv")

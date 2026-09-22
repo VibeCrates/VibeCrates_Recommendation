@@ -1,0 +1,201 @@
+imdbId,Title,Genre,vote_count,popularity,IMDB Score
+816692,Interstellar (2014),Adventure|Drama|Sci-Fi,41178.0,69.4556,8.6
+1375666,Inception (2010),Action|Adventure|Sci-Fi,40190.0,55.813,8.8
+848228,The Avengers (2012),Action|Sci-Fi,39741.0,64.1,8.1
+468569,The Dark Knight (2008),Action|Crime|Drama,36715.0,61.1577,9.0
+499549,Avatar (2009),Action|Adventure|Fantasy,34669.0,67.6611,7.8
+1431045,Deadpool (2016),Action|Adventure|Comedy,33291.0,27.4683,8.0
+137523,Fight Club (1999),Drama,32863.0,43.1524,8.8
+111161,The Shawshank Redemption (1994),Crime|Drama,31336.0,79.2011,9.3
+110912,Pulp Fiction (1994),Crime|Drama,30866.0,43.0806,8.9
+109830,Forrest Gump (1994),Comedy|Drama|Romance,30455.0,37.3725,8.8
+2015381,Guardians of the Galaxy (2014),Action|Adventure|Sci-Fi,30306.0,15.9002,8.1
+241527,Harry Potter and the Sorcerer's Stone (2001),Adventure|Family|Fantasy,30233.0,55.9592,7.5
+371746,Iron Man (2008),Action|Adventure|Sci-Fi,28817.0,41.6718,7.9
+133093,The Matrix (1999),Action|Sci-Fi,28724.0,49.6285,8.7
+1853728,Django Unchained (2012),Drama|Western,28594.0,34.9204,8.4
+120737,The Lord of the Rings: The Fellowship of the Ring (2001),Adventure|Drama|Fantasy,28346.0,40.6793,8.8
+120338,Titanic (1997),Drama|Romance,27735.0,38.1509,7.7
+167260,The Lord of the Rings: The Return of the King (2003),Adventure|Drama|Fantasy,27349.0,47.1563,8.9
+993846,The Wolf of Wall Street (2013),Biography|Comedy|Crime,26524.0,33.1151,8.2
+1130884,Shutter Island (2010),Mystery|Thriller,26421.0,30.0696,8.1
+2395427,Avengers: Age of Ultron (2015),Action|Adventure|Sci-Fi,25028.0,36.6366,7.4
+1345836,The Dark Knight Rises (2012),Action|Thriller,24946.0,51.0679,8.5
+361748,Inglourious Basterds (2009),Adventure|Drama|War,24759.0,34.3582,8.3
+1392190,Mad Max: Fury Road (2015),Action|Adventure|Sci-Fi,24611.0,66.9116,8.1
+3498820,Captain America: Civil War (2016),Action|Adventure|Sci-Fi,24574.0,32.9469,7.9
+167261,The Lord of the Rings: The Two Towers (2002),Adventure|Drama|Fantasy,24564.0,33.3771,8.7
+295297,Harry Potter and the Chamber of Secrets (2002),Adventure|Family|Fantasy,24071.0,38.3959,7.4
+2096673,Inside Out (2015),Animation|Adventure|Comedy,23889.0,29.9232,8.2
+1300854,Iron Man Three (2013),Action|Adventure|Sci-Fi,23872.0,28.3825,7.2
+114369,Se7en (1995),Crime|Drama|Mystery,23774.0,37.2265,8.6
+1392170,The Hunger Games (2012),Action|Adventure|Sci-Fi,23708.0,15.4353,7.2
+304141,Harry Potter and the Prisoner of Azkaban (2004),Adventure|Family|Fantasy,23640.0,40.6044,7.8
+68646,The Godfather (1972),Crime|Drama,23571.0,59.5732,9.2
+458339,Captain America: The First Avenger (2011),Action|Adventure|Sci-Fi,23238.0,19.5766,6.9
+372784,Batman Begins (2005),Action|Adventure,23174.0,26.1244,8.3
+1228705,Iron Man 2 (2010),Action|Adventure|Sci-Fi,22912.0,35.1977,7.0
+76759,Star Wars: Episode IV - A New Hope (1977),Action|Adventure|Fantasy,22862.0,34.948,8.7
+800369,Thor (2011),Action|Adventure|Fantasy,22796.0,24.5438,7.0
+325980,Pirates of the Caribbean: The Curse of the Black Pearl (2003),Action|Adventure|Fantasy,22763.0,33.8988,8.0
+330373,Harry Potter and the Goblet of Fire (2005),Adventure|Family|Fantasy,22634.0,40.1092,7.7
+1201607,Harry Potter and the Deathly Hallows: Part 2 (2011),Adventure|Drama|Fantasy,22439.0,39.6114,8.1
+1386697,Suicide Squad (2016),Action|Adventure|Fantasy,22421.0,16.8329,6.3
+88763,Back to the Future (1985),Adventure|Comedy|Sci-Fi,22385.0,35.8172,8.5
+1049413,Up (2009),Animation|Adventure|Comedy,22122.0,32.9248,8.3
+369610,Jurassic World (2015),Action|Adventure|Sci-Fi,21906.0,23.182,7.0
+3659388,The Martian (2015),Adventure|Drama|Sci-Fi,21813.0,29.8349,8.0
+172495,Gladiator (2000),Action|Adventure|Drama,21484.0,34.7275,8.5
+145487,Spider-Man (2002),Action|Adventure,21423.0,47.1083,7.3
+2911666,John Wick (2014),Action|Crime|Thriller,21331.0,20.9494,7.2
+478970,Ant-Man (2015),Action|Adventure|Comedy,21243.0,24.0968,7.3
+417741,Harry Potter and the Half-Blood Prince (2009),Adventure|Family|Fantasy,21190.0,34.205,7.5
+266543,Finding Nemo (2003),Animation|Adventure|Comedy,20971.0,35.7863,8.1
+2488496,Star Wars: Episode VII - The Force Awakens (2015),Action|Adventure|Fantasy,20909.0,21.2333,8.1
+910970,WALLåáE (2008),Animation|Adventure|Family,20858.0,31.9257,8.4
+120382,The Truman Show (1998),Comedy|Drama|Sci-Fi,20843.0,27.6039,8.1
+926084,Harry Potter and the Deathly Hallows: Part 1 (2010),Adventure|Family|Fantasy,20796.0,35.4458,7.7
+114709,Toy Story (1995),Animation|Adventure|Comedy,20518.0,38.3394,8.3
+1843866,Captain America: The Winter Soldier (2014),Action|Adventure|Sci-Fi,20463.0,17.8457,7.8
+2267998,Gone Girl (2014),Crime|Drama|Mystery,20398.0,28.8455,8.1
+198781,"Monsters, Inc. (2001)",Animation|Adventure|Comedy,20244.0,38.5047,8.1
+110357,The Lion King (1994),Animation|Adventure|Drama,20133.0,38.1161,8.5
+903624,The Hobbit: An Unexpected Journey (2012),Adventure|Fantasy,20067.0,28.8907,7.9
+120689,The Green Mile (1999),Crime|Drama|Fantasy,19804.0,32.805,8.5
+1663202,The Revenant (2015),Adventure|Drama|Thriller,19699.0,25.9886,8.0
+266697,Kill Bill: Vol. 1 (2003),Action|Crime|Thriller,19404.0,25.3713,8.1
+81505,The Shining (1980),Drama|Horror,19366.0,27.4725,8.4
+2975590,Batman v Superman: Dawn of Justice (2016),Action|Adventure|Sci-Fi,19364.0,27.7434,6.7
+126029,Shrek (2001),Animation|Adventure|Comedy,19302.0,34.8885,7.9
+317705,The Incredibles (2004),Animation|Action|Adventure,19295.0,29.4684,8.0
+948470,The Amazing Spider-Man (2012),Action|Adventure,19100.0,34.2825,7.0
+382932,Ratatouille (2007),Animation|Comedy|Family,18931.0,27.4089,8.0
+245429,Spirited Away (2001),Animation|Adventure|Family,18902.0,41.8593,8.6
+80684,Star Wars: Episode V - The Empire Strikes Back (1980),Action|Adventure|Fantasy,18844.0,18.1227,8.8
+1675434,The Intouchables (2011),Biography|Comedy|Drama,18814.0,24.5195,8.6
+1951264,The Hunger Games: Catching Fire (2013),Action|Adventure|Mystery,18774.0,23.7867,7.6
+1981115,Thor: The Dark World (2013),Action|Adventure|Fantasy,18724.0,22.8897,7.0
+2948356,Zootopia (2016),Animation|Adventure|Comedy,18524.0,34.0212,8.1
+1119646,The Hangover (2009),Comedy,18506.0,25.4381,7.8
+102926,The Silence of the Lambs (1991),Crime|Drama|Thriller,18497.0,6.7959,8.6
+1790864,The Maze Runner (2014),Action|Mystery|Sci-Fi,18462.0,39.9865,6.8
+2084970,The Imitation Game (2014),Biography|Drama|Thriller,18413.0,27.6902,8.1
+107290,Jurassic Park (1993),Adventure|Sci-Fi|Thriller,18336.0,15.0218,8.1
+2802144,Kingsman: The Secret Service (2014),Action|Adventure|Comedy,18151.0,24.944,7.7
+482571,The Prestige (2006),Drama|Mystery|Sci-Fi,18116.0,24.199,8.5
+108052,Schindler's List (1993),Biography|Drama|History,17907.0,31.5678,8.9
+2294629,Frozen (2013),Animation|Adventure|Comedy,17881.0,24.896,7.5
+120815,Saving Private Ryan (1998),Drama|War,17768.0,30.0995,8.6
+383574,Pirates of the Caribbean: Dead Man's Chest (2006),Action|Adventure|Fantasy,17581.0,40.0864,7.3
+264464,Catch Me If You Can (2002),Biography|Crime|Drama,17552.0,24.169,8.1
+2872732,Lucy (2014),Action|Sci-Fi|Thriller,17376.0,19.0733,6.4
+1677720,Ready Player One (2018),Action|Sci-Fi|Thriller,17357.0,23.4731,
+480249,I Am Legend (2007),Drama|Horror|Sci-Fi,17301.0,18.4299,7.2
+86190,Star Wars: Episode VI - Return of the Jedi (1983),Action|Adventure|Fantasy,17300.0,15.8131,8.4
+1670345,Now You See Me (2013),Crime|Mystery|Thriller,17119.0,21.0563,7.3
+2582802,Whiplash (2014),Drama|Music,17080.0,29.4523,8.5
+816711,World War Z (2013),Action|Adventure|Horror,17037.0,22.479,7.0
+1951265,The Hunger Games: Mockingjay - Part 1 (2014),Adventure|Sci-Fi|Thriller,17003.0,29.9911,6.7
+2245084,Big Hero 6 (2014),Animation|Action|Adventure,16918.0,40.0968,7.8
+316654,Spider-Man 2 (2004),Action|Adventure,16913.0,14.3456,7.3
+78748,Alien (1979),Horror|Sci-Fi,16835.0,31.9549,8.5
+209144,Memento (2000),Mystery|Thriller,16752.0,17.8926,8.5
+338013,Eternal Sunshine of the Spotless Mind (2004),Drama|Romance|Sci-Fi,16726.0,20.6486,8.3
+1454468,Gravity (2013),Adventure|Drama|Sci-Fi,16661.0,14.2579,7.8
+1877832,X-Men: Days of Future Past (2014),Action|Adventure|Sci-Fi,16660.0,29.8821,8.0
+407887,The Departed (2006),Crime|Drama|Thriller,16631.0,26.8165,8.5
+770828,Man of Steel (2013),Action|Adventure|Fantasy,16595.0,25.9214,7.1
+110413,Lí©on: The Professional (1994),Crime|Drama|Thriller,16512.0,28.7338,8.6
+2278388,The Grand Budapest Hotel (2014),Adventure|Comedy|Drama,16496.0,21.9504,8.1
+1074638,Skyfall (2012),Action|Adventure|Thriller,16404.0,16.7686,7.8
+367594,Charlie and the Chocolate Factory (2005),Adventure|Comedy|Family,16381.0,23.696,6.7
+1323594,Despicable Me (2010),Animation|Adventure|Comedy,16374.0,30.9576,7.7
+435761,Toy Story 3 (2010),Animation|Adventure|Comedy,16222.0,31.4887,8.3
+120915,Star Wars: Episode I - The Phantom Menace (1999),Action|Adventure|Fantasy,16206.0,17.0733,6.5
+434409,V for Vendetta (2005),Action|Drama|Thriller,15933.0,20.7053,8.2
+947798,Black Swan (2010),Drama|Thriller,15871.0,20.9059,8.0
+449088,Pirates of the Caribbean: At World's End (2007),Action|Adventure|Fantasy,15822.0,29.5452,7.1
+105236,Reservoir Dogs (1992),Crime|Drama|Thriller,15813.0,21.3087,8.3
+413300,Spider-Man 3 (2007),Action|Adventure,15771.0,34.5636,6.2
+2310332,The Hobbit: The Battle of the Five Armies (2014),Adventure|Fantasy,15753.0,34.5341,7.4
+1798709,Her (2013),Drama|Romance|Sci-Fi,15626.0,16.9516,8.0
+3460252,The Hateful Eight (2015),Crime|Drama|Mystery,15604.0,23.5036,7.8
+317219,Cars (2006),Animation|Adventure|Comedy,15507.0,32.3147,7.1
+1631867,Edge of Tomorrow (2014),Action|Adventure|Sci-Fi,15500.0,19.7233,7.9
+378194,Kill Bill: Vol. 2 (2004),Action|Crime|Drama,15435.0,19.8172,8.0
+83658,Blade Runner (1982),Sci-Fi|Thriller,15398.0,26.6872,8.2
+120363,Toy Story 2 (1999),Animation|Adventure|Comedy,15357.0,32.7997,7.9
+121766,Star Wars: Episode III - Revenge of the Sith (2005),Action|Adventure|Fantasy,15296.0,12.8421,7.6
+1298650,Pirates of the Caribbean: On Stranger Tides (2011),Action|Adventure|Fantasy,15241.0,25.8218,6.7
+119654,Men in Black (1997),Adventure|Comedy|Family,15180.0,19.3023,7.3
+88247,The Terminator (1984),Action|Sci-Fi,15119.0,81.2225,8.0
+416449,300 (2006),Action|Fantasy,15089.0,16.8242,7.7
+1014759,Alice in Wonderland (2010),Adventure|Family|Fantasy,15050.0,21.4401,6.5
+988045,Sherlock Holmes (2009),Action|Adventure|Crime,15033.0,14.8824,7.6
+103064,Terminator 2: Judgment Day (1991),Action|Sci-Fi|Thriller,14840.0,32.4134,8.5
+99685,Goodfellas (1990),Biography|Crime|Drama,14750.0,24.3997,8.7
+1872181,The Amazing Spider-Man 2 (2014),Action|Adventure|Sci-Fi,14737.0,28.3773,6.7
+892769,How to Train Your Dragon (2010),Animation|Action|Adventure,14721.0,21.3528,8.2
+121765,Star Wars: Episode II - Attack of the Clones (2002),Action|Adventure|Fantasy,14684.0,13.2731,6.7
+1099212,Twilight (2008),Drama|Fantasy|Romance,14673.0,23.6007,5.2
+1630029,Avatar 2,Action|Adventure|Fantasy,14628.0,43.826,
+268380,Ice Age (2002),Animation|Adventure|Comedy,14620.0,26.3902,7.6
+470752,Ex Machina (2014),Drama|Mystery|Sci-Fi,14583.0,15.2392,7.7
+1170358,The Hobbit: The Desolation of Smaug (2013),Adventure|Fantasy,14573.0,22.1826,7.9
+1217209,Brave (2012),Animation|Adventure|Comedy,14438.0,23.3914,7.2
+71562,The Godfather: Part II (1974),Crime|Drama,14328.0,32.0463,9.0
+119217,Good Will Hunting (1997),Drama,14301.0,23.3526,8.3
+96874,Back to the Future Part II (1989),Adventure|Comedy|Sci-Fi,14274.0,15.5348,7.8
+118799,Life Is Beautiful (1997),Comedy|Drama|War,14243.0,21.1272,8.6
+458352,The Devil Wears Prada (2006),Comedy|Drama,14233.0,34.1694,6.8
+66921,A Clockwork Orange (1971),Crime|Drama|Sci-Fi,14119.0,19.9067,8.3
+3385516,X-Men: Apocalypse (2016),Action|Adventure|Sci-Fi,14106.0,21.8066,7.1
+99487,Edward Scissorhands (1990),Drama|Fantasy|Romance,14032.0,17.5214,7.9
+421715,The Curious Case of Benjamin Button (2008),Drama|Fantasy|Romance,14025.0,13.6072,7.8
+454876,Life of Pi (2012),Adventure|Drama|Fantasy,14008.0,19.2154,7.9
+780504,Drive (2011),Crime|Drama,13997.0,15.3259,7.8
+82971,Raiders of the Lost Ark (1981),Action|Adventure,13981.0,20.0802,8.5
+1587310,Maleficent (2014),Action|Adventure|Family,13935.0,18.9245,7.0
+2179136,American Sniper (2014),Action|Biography|Drama,13880.0,14.1868,7.3
+1270798,X: First Class (2011),Action|Adventure|Sci-Fi,13857.0,1.2864,7.8
+2562232,Birdman or (The Unexpected Virtue of Ignorance) (2014),Comedy|Drama|Romance,13829.0,14.777,7.8
+1663662,Pacific Rim (2013),Action|Adventure|Sci-Fi,13801.0,21.2531,7.0
+75314,Taxi Driver (1976),Crime|Drama,13785.0,22.006,8.3
+477348,No Country for Old Men (2007),Crime|Drama|Thriller,13764.0,21.5387,8.1
+298148,Shrek 2 (2004),Animation|Adventure|Comedy,13761.0,20.2185,7.2
+246578,Donnie Darko (2001),Drama|Sci-Fi|Thriller,13747.0,14.4023,8.1
+1840309,Divergent (2014),Adventure|Mystery|Sci-Fi,13719.0,18.3264,6.7
+1446714,Prometheus (2012),Adventure|Mystery|Sci-Fi,13627.0,17.1761,7.0
+1951266,The Hunger Games: Mockingjay - Part 2 (2015),Action|Adventure|Sci-Fi,13583.0,21.1212,6.6
+2674426,Me Before You (2016),Drama|Romance,13573.0,19.7919,7.4
+1285016,The Social Network (2010),Biography|Drama,13504.0,17.2467,7.7
+1392214,Prisoners (2013),Crime|Drama|Mystery,13494.0,23.0273,8.1
+1156398,Zombieland (2009),Adventure|Comedy|Horror,13472.0,13.5573,7.7
+1637725,Ted (2012),Comedy|Fantasy,13458.0,19.3353,7.0
+86250,Scarface (1983),Crime|Drama,13418.0,28.288,8.3
+169547,American Beauty (1999),Drama|Romance,13343.0,16.9023,8.4
+1772341,Wreck-It Ralph (2012),Animation|Adventure|Comedy,13318.0,21.5937,7.8
+167404,The Sixth Sense (1999),Drama|Mystery|Thriller,13295.0,25.0934,8.1
+2713180,Fury (2014),Action|Drama|War,13229.0,35.8025,7.6
+1343092,The Great Gatsby (2013),Drama|Romance,13162.0,14.3495,7.3
+800080,The Incredible Hulk (2008),Action|Adventure|Sci-Fi,13132.0,31.0911,6.8
+1318514,Rise of the Planet of the Apes (2011),Action|Drama|Sci-Fi,13070.0,22.8071,7.6
+1457767,The Conjuring (2013),Horror|Mystery|Thriller,13059.0,37.0925,7.5
+1190080,2012 (2009),Action|Adventure|Sci-Fi,13021.0,17.1496,5.8
+5311514,Kimi no na wa (2016),Animation|Drama|Fantasy,12997.0,27.4304,8.6
+441773,Kung Fu Panda (2008),Animation|Action|Adventure,12986.0,24.6084,7.6
+343818,"I, Robot (2004)",Action|Mystery|Sci-Fi,12985.0,20.5614,7.1
+97165,Dead Poets Society (1989),Comedy|Drama,12958.0,26.8826,8.0
+62622,2001: A Space Odyssey (1968),Adventure|Sci-Fi,12931.0,28.6641,8.3
+120586,American History X (1998),Crime|Drama,12907.0,19.3027,8.6
+240772,Ocean's Eleven (2001),Crime|Thriller,12886.0,22.5765,7.8
+332280,The Notebook (2004),Drama|Romance,12864.0,24.6774,7.9
+2277860,Finding Dory (2016),Animation|Adventure|Comedy,12847.0,16.7622,7.4
+1045658,Silver Linings Playbook (2012),Comedy|Drama|Romance,12842.0,11.1488,7.8
+99785,Home Alone (1990),Comedy|Family,12840.0,1.7285,7.5
+144084,American Psycho (2000),Crime|Drama,12721.0,18.8857,7.6
+398286,Tangled (2010),Animation|Adventure|Comedy,12700.0,24.8419,7.8
+211915,Amí©lie (2001),Comedy|Romance,12653.0,18.9815,8.4
+95016,Die Hard (1988),Action|Thriller,12633.0,21.3495,8.2
+1250777,Kick-Ass (2010),Action|Comedy,12633.0,15.1798,7.7
+2322441,Fifty Shades of Grey (2015),Drama|Romance|Thriller,12548.0,22.6502,4.1

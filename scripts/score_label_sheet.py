@@ -38,7 +38,18 @@ def main():
     sheet = pd.read_csv(args.sheet)
     key = pd.read_csv(args.key or args.sheet.replace(".csv", "_key.csv"))
     d = sheet.merge(key, on="pair_id", suffixes=("", "_k"))
-    d["선택"] = d["선택"].astype(str).str.strip()
+    # Numbers/Excel로 편집하면 '선택' 열이 숫자로 저장돼 1/2가 1.0/2.0으로 나온다.
+    # astype(str)만 하면 "1.0" != "1"라 전부 무응답으로 잡힌다 - 1.0/2.0도 인식한다.
+    def _norm_choice(v):
+        s = str(v).strip()
+        try:
+            f = float(s)
+            if f in (1.0, 2.0):
+                return str(int(f))
+        except ValueError:
+            pass
+        return s
+    d["선택"] = d["선택"].map(_norm_choice)
     done = d[d["선택"].isin(["1", "2"])]
     print(f"쌍 {len(d)}개 중 라벨된 것 {len(done)}개 (무응답·비슷함 {len(d)-len(done)})")
     if not len(done):
@@ -57,12 +68,14 @@ def main():
     cache = json.load(open(cache_path)) if os.path.exists(cache_path) else {}
 
     # 판정기에게 같은 두 후보를 양방향으로 묻는다. a=후보1, b=후보2 (시트 그대로).
+    # iterrows()를 쓴다 - itertuples()는 "_"로 시작하는 열 이름(_ov_item 등)을
+    # namedtuple 필드로 못 써서 위치 기반 이름으로 바꿔버린다(AttributeError).
     units = []
-    for r in done.itertuples():
-        doms = {r._ov_item.split(":")[0], r._zero_item.split(":")[0]}
-        units.append({"uid": f"labelsheet|{r.pair_id}", "query": r.query,
+    for _, r in done.iterrows():
+        doms = {r["_ov_item"].split(":")[0], r["_zero_item"].split(":")[0]}
+        units.append({"uid": f"labelsheet|{r['pair_id']}", "query": r["query"],
                       "noun": doms.pop() if len(doms) == 1 else "item",
-                      "a": [str(r.후보1)], "b": [str(r.후보2)]})
+                      "a": [str(r["후보1"])], "b": [str(r["후보2"])]})
 
     todo = [(u, f) for u in units for f in ("a", "b")
             if f"{sig}|후보1|후보2|{u['uid']}|{f}" not in cache]

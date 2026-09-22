@@ -1,12 +1,20 @@
 """
 TMDB API로 movie_canonical.csv 각 영화의 메타데이터 수집.
 
-수집 항목: release_date, running_time, director (list), actor (list, top 5)
+수집 항목: release_date, running_time, director (list), actor (list, top 5),
+          vote_count, popularity
 IMDB ID → TMDB /find → /movie?append_to_response=credits (2 req/movie)
 체크포인트: data/cache/tmdb_meta_cache.json (500건마다)
-출력: movie_canonical.csv에 4컬럼을 덧붙여 그 자리에 덮어씀 (기존 8컬럼은
+출력: movie_canonical.csv에 6컬럼을 덧붙여 그 자리에 덮어씀 (나머지 컬럼은
       건드리지 않음 — Title/text/query에 latin-1 오독으로 인한 mojibake를
       만들었던 과거 버그가 있었으므로 CSV는 반드시 UTF-8로 읽는다)
+
+2026-09-18: vote_count·popularity 추가 (인기도 신호 — "유명한 아이템" 추출용,
+`scripts/extract_popular_items.py` 참조). release_date 등을 모으던 7/15 실행이
+이미 39,516건을 캐시했지만 그때는 detail_data에서 이 두 필드를 그냥 버렸다 —
+API는 이미 반환하고 있었으므로 재수집이 필요하다. 그래서 "remaining" 판정을
+"vote_count가 캐시에 없으면 다시 부른다"로 바꿨다 — 기존 캐시를 지우지 않고도
+누락분만 채우고, 중간에 죽어도 재실행하면 이어서 한다.
 
 실행 예:
   TMDB_API_KEY="..." python3 scripts/fetch_movie_meta.py
@@ -62,10 +70,11 @@ EMPTY_RESULT_BACKOFF = 1.5  # seconds, multiplied by attempt number
 def fetch_meta(imdb_id: str) -> dict:
     """
     IMDB ID → TMDB find → movie+credits.
-    Returns dict with release_date, running_time, director, actor.
+    Returns dict with release_date, running_time, director, actor, vote_count, popularity.
     Empty values on failure.
     """
-    empty = {"release_date": "", "running_time": None, "director": [], "actor": []}
+    empty = {"release_date": "", "running_time": None, "director": [], "actor": [],
+             "vote_count": None, "popularity": None}
 
     # Step 1: IMDB ID → TMDB movie_id.
     # _get() already retries network errors/429s, but a 200 response with an
@@ -114,6 +123,8 @@ def fetch_meta(imdb_id: str) -> dict:
         "running_time": detail_data.get("runtime"),
         "director": directors,
         "actor": actors,
+        "vote_count": detail_data.get("vote_count"),
+        "popularity": detail_data.get("popularity"),
     }
 
 
@@ -138,9 +149,14 @@ def main():
             del cache[k]
         print(f"미매칭 {len(unmatched):,}건 캐시에서 제거 — 재시도 대상\n")
 
-    print(f"전체: {len(df):,}개 | 캐시: {len(cache):,}개 | 남은 처리: {len(df) - len(cache):,}개\n")
+    # vote_count가 없는 항목은 캐시에 있어도 다시 부른다(2026-09-18 추가 필드 소급 수집).
+    need_refetch = lambda imdb_id: imdb_id not in cache or "vote_count" not in cache[imdb_id]
+    already_have_new_fields = sum(1 for v in cache.values() if "vote_count" in v)
+    print(f"전체: {len(df):,}개 | 캐시: {len(cache):,}개 "
+          f"(vote_count 있음 {already_have_new_fields:,}개) | "
+          f"남은 처리: {sum(1 for _, r in df.iterrows() if need_refetch(str(r['imdbId']))):,}개\n")
 
-    remaining = [row for _, row in df.iterrows() if str(row["imdbId"]) not in cache]
+    remaining = [row for _, row in df.iterrows() if need_refetch(str(row["imdbId"]))]
 
     success = sum(1 for v in cache.values() if v.get("release_date") or v.get("director"))
 
@@ -177,6 +193,8 @@ def main():
     df["running_time"]  = df["imdbId"].map(lambda x: _get_field(x, "running_time"))
     df["director"]      = df["imdbId"].map(lambda x: _get_field(x, "director"))
     df["actor"]         = df["imdbId"].map(lambda x: _get_field(x, "actor"))
+    df["vote_count"]    = df["imdbId"].map(lambda x: _get_field(x, "vote_count"))
+    df["popularity"]    = df["imdbId"].map(lambda x: _get_field(x, "popularity"))
 
     df.to_csv(CSV_PATH, index=False, encoding="utf-8")
 
@@ -185,6 +203,8 @@ def main():
     print(f"  running_time 수집: {df['running_time'].notna().sum():,} / {len(df):,}")
     print(f"  director 수집    : {(df['director'].fillna('[]') != '[]').sum():,} / {len(df):,}")
     print(f"  actor 수집       : {(df['actor'].fillna('[]') != '[]').sum():,} / {len(df):,}")
+    print(f"  vote_count 수집  : {df['vote_count'].notna().sum():,} / {len(df):,}")
+    print(f"  popularity 수집  : {df['popularity'].notna().sum():,} / {len(df):,}")
     print(f"\n출력 저장 → {CSV_PATH}")
 
 
