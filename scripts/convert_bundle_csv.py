@@ -20,6 +20,12 @@ model_version을 매 행에 반복해서 넣는 이유:
 
 사용:
   python scripts/convert_bundle_csv.py --src dist/bundle_20260831 --out dist/bundle_20260914_csv
+  python scripts/convert_bundle_csv.py --src dist/bundle_20260831 --out dist/bundle_20260923_csv --require-image
+
+--require-image: 로컬 이미지 파일이 없는 아이템(items.parquet의 `image`가 null)을
+  뺀다. 벡터 자체는 이미 계산돼 있다(이미지 없는 아이템은 학습 때 이미지 branch가
+  0벡터로 들어간 콘텐츠 벡터다) — 빼는 이유는 벡터 품질이 아니라, 이미지가 없는
+  아이템을 백엔드가 그대로 카드에 노출하면 깨진 이미지가 뜨기 때문이다.
 """
 import argparse
 import base64
@@ -45,6 +51,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", default="dist/bundle_20260831")
     ap.add_argument("--out", required=True)
+    ap.add_argument("--require-image", action="store_true",
+                    help="로컬 이미지 파일이 없는 아이템을 뺀다")
     args = ap.parse_args()
 
     os.makedirs(args.out, exist_ok=True)
@@ -67,6 +75,14 @@ def main():
         items = pd.read_parquet(os.path.join(args.src, f"{dom}_items.parquet"))
         vectors = np.load(os.path.join(args.src, f"{dom}_vectors.npy")).astype("<f4")
         assert len(items) == len(vectors), f"{dom}: 행 수 불일치"
+
+        if args.require_image:
+            before = len(items)
+            keep = items["image"].notna().to_numpy()
+            items, vectors = items[keep].reset_index(drop=True), vectors[keep]
+            dropped = before - len(items)
+            print(f"[{dom}] --require-image: {dropped:,}개 제외 ({before:,} → {len(items):,})")
+
         ids = items["id"].astype(str).tolist()
 
         vector_b64 = [base64.b64encode(v.tobytes()).decode("ascii") for v in vectors]
@@ -79,6 +95,14 @@ def main():
         out_df.to_csv(path, index=False)
 
         norms = np.linalg.norm(vectors, axis=1)
+        coverage = src_manifest["domains"][dom]["coverage"]
+        if args.require_image:
+            # 필터 후 실측으로 다시 잰다 - image는 필터링 기준이라 이제 항상 1.0.
+            coverage = {
+                "year": round(float(items["year"].notna().mean()), 4),
+                "image": 1.0,
+                "url": round(float(items["url"].notna().mean()), 4),
+            }
         manifest["domains"][dom] = {
             "count": int(len(ids)),
             "file": f"{dom}_vectors.csv",
@@ -87,7 +111,7 @@ def main():
             "id_max_len": int(max(len(i) for i in ids)),
             "l2_norm_min": round(float(norms.min()), 6),
             "l2_norm_max": round(float(norms.max()), 6),
-            "coverage": src_manifest["domains"][dom]["coverage"],
+            "coverage": coverage,
         }
         print(f"[{dom}] {len(ids):,}개 → {path} ({os.path.getsize(path)/1e6:.1f}MB)")
 
