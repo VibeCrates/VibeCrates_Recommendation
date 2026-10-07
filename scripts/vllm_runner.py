@@ -49,6 +49,8 @@ class VLLMRunner:
         repetition_penalty: float = DEFAULT_REPETITION_PENALTY,
         max_model_len: int = 8192,
         gpu_memory_utilization: float = 0.90,
+        dtype: str = "bfloat16",   # AWQ 등 양자화 모델은 "float16"이 필요할 수 있다
+        allow_images: bool = True,
     ):
         self.max_model_len = max_model_len
         self.max_new_tokens = max_new_tokens
@@ -71,13 +73,21 @@ class VLLMRunner:
                   f"(다른 프로세스가 {1-free_frac:.1%} 사용 중)")
 
         # 프롬프트를 chat template로 펴는 데만 쓴다 (토크나이즈는 vLLM이 한다).
+        # 텍스트 전용 모델(판정기 후보)이면 AutoProcessor가 토크나이저를 돌려준다 —
+        # 이미지 처리기가 있는지로 갈라, 이미지 슬롯과 메시지 형식을 거기에 맞춘다.
         self.processor = AutoProcessor.from_pretrained(model_id)
+        self.multimodal = hasattr(self.processor, "image_processor")
+        self.tokenizer = getattr(self.processor, "tokenizer", self.processor)
         self.llm = LLM(
             model=model_id,
-            dtype="bfloat16",
+            dtype=dtype,
             max_model_len=max_model_len,
             gpu_memory_utilization=effective_util,
-            limit_mm_per_prompt={"image": 1},
+            # 판정처럼 텍스트만 쓰는 작업은 이미지 슬롯을 0으로 둔다. vLLM은 기동 시
+            # 이미지 경로를 미리 시험하는데, Mistral 3.1(PixtralProcessor)은 그 시험이
+            # transformers 5.14에서 깨진다(2026-10-08). 슬롯 0이면 시험 자체를 건너뛴다.
+            **({"limit_mm_per_prompt": {"image": 1 if allow_images else 0}}
+               if self.multimodal else {}),
         )
         # temperature=0 = greedy. HF 경로의 do_sample=False와 같은 결정론적 디코딩.
         self.params = SamplingParams(
@@ -87,6 +97,13 @@ class VLLMRunner:
         )
 
     def _chat_text(self, prompt: str, has_image: bool) -> str:
+        if not self.multimodal:
+            # 텍스트 전용 모델의 chat template는 content를 문자열로 기대한다.
+            return self.tokenizer.apply_chat_template(
+                [{"role": "user", "content": prompt}],
+                tokenize=False,
+                add_generation_prompt=True,
+            )
         content: list[dict] = []
         if has_image:
             content.append({"type": "image"})
@@ -128,7 +145,7 @@ class VLLMRunner:
         """남은 예산을 넘는 프롬프트는 가운데를 들어낸다.
         머리(Task·Rules)와 꼬리(Output 지시)는 지시문이라 자르면 출력 형식이 깨진다."""
         budget = self.max_model_len - self.max_new_tokens - image_tokens - TEMPLATE_RESERVE
-        tok = self.processor.tokenizer
+        tok = self.tokenizer
         ids = tok.encode(prompt, add_special_tokens=False)
         if len(ids) <= budget or budget <= 0:
             return prompt

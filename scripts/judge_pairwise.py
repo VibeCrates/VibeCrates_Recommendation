@@ -44,6 +44,7 @@ import json
 import math
 import os
 import random
+import re
 
 import pandas as pd
 
@@ -109,6 +110,17 @@ def prompt_signature() -> str:
         inspect.getsource(_title_pattern),
     ])
     return hashlib.sha1(src.encode()).hexdigest()[:8]
+
+
+DEFAULT_JUDGE = "Qwen/Qwen2.5-VL-7B-Instruct"
+
+
+def pair_cache_path(sig: str, model_id: str) -> str:
+    """판정 캐시 파일. 판정기 모델도 키에 넣는다 — 안 넣으면 판정기를 바꿔 돌릴 때
+    옛 판정기의 답이 캐시에서 그대로 나와 새 판정기 점수에 조용히 섞인다.
+    기존 Qwen-7B 캐시는 이름을 그대로 둬 이미 쌓인 판정을 버리지 않는다."""
+    tag = "" if model_id == DEFAULT_JUDGE else "_" + re.sub(r"[^A-Za-z0-9.-]+", "-", model_id)
+    return os.path.join(CACHE_DIR, f"judge_cache_pair_{sig}{tag}.json")
 
 
 def parse_choice(raw: str) -> str | None:
@@ -335,7 +347,7 @@ def main():
             print(make_prompt(u, "a", item_mode))
         return
 
-    cache_path = os.path.join(CACHE_DIR, f"judge_cache_pair_{sig}.json")
+    cache_path = pair_cache_path(sig, args.model_id)
     cache = json.load(open(cache_path)) if os.path.exists(cache_path) else {}
     todo = [(u, first) for u in units for first in ("a", "b")
             if f"{sig}|{label_a}|{label_b}|{u['uid']}|{first}" not in cache]

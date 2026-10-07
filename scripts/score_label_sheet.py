@@ -23,7 +23,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import pandas as pd
 
 from scripts.judge_eval_relevance import CACHE_DIR
-from scripts.judge_pairwise import make_prompt, parse_choice, prompt_signature, verdict
+from scripts.judge_pairwise import (make_prompt, pair_cache_path, parse_choice,
+                                    prompt_signature, verdict)
 
 
 def main():
@@ -32,6 +33,9 @@ def main():
     ap.add_argument("--key", help="기본값: <sheet>_key.csv")
     ap.add_argument("--model-id", default="Qwen/Qwen2.5-VL-7B-Instruct")
     ap.add_argument("--batch", type=int, default=128)
+    ap.add_argument("--gpu-util", type=float, default=0.9,
+                    help="공유 서버에서는 낮춘다. 판정 결과에는 영향 없음(동시 처리량만 줄어듦)")
+    ap.add_argument("--dtype", default="bfloat16", help="AWQ 양자화 모델은 float16")
     ap.add_argument("--out", default="experiments/label_sheet_score.txt")
     args = ap.parse_args()
 
@@ -64,7 +68,7 @@ def main():
           f"안 겹침 쪽 선택 {n_rev}  ← 역방향 쌍")
 
     sig = prompt_signature()
-    cache_path = os.path.join(CACHE_DIR, f"judge_cache_pair_{sig}.json")
+    cache_path = pair_cache_path(sig, args.model_id)
     cache = json.load(open(cache_path)) if os.path.exists(cache_path) else {}
 
     # 판정기에게 같은 두 후보를 양방향으로 묻는다. a=후보1, b=후보2 (시트 그대로).
@@ -82,7 +86,9 @@ def main():
     print(f"판정 대상 {len(todo)}건 (캐시 {len(cache):,}건)")
     if todo:
         from scripts.vllm_runner import VLLMRunner, chunks
-        runner = VLLMRunner(args.model_id, max_new_tokens=4)
+        runner = VLLMRunner(args.model_id, max_new_tokens=4,
+                            gpu_memory_utilization=args.gpu_util, dtype=args.dtype,
+                            allow_images=False)   # 라벨 시트는 텍스트 판정뿐
         os.makedirs(CACHE_DIR, exist_ok=True)
         for batch in chunks(todo, args.batch):
             items = [(make_prompt(u, f, True), None) for u, f in batch]
@@ -109,7 +115,7 @@ def main():
                      "reverse": not r.human_picked_overlap, "consistent": agree_dir})
     res = pd.DataFrame(rows)
 
-    L = ["라벨 시트 채점", "=" * 60, "",
+    L = [f"라벨 시트 채점 ({args.model_id})", "=" * 60, "",
          f"라벨 {len(done)}개 / 양방향 일관 {int(res.consistent.sum())} "
          f"({res.consistent.mean():.1%})", ""]
     L += ["  %-28s %5s %6s %6s %9s" % ("구분", "쌍수", "일치", "불일치", "정확도")]
