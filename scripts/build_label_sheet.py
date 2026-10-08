@@ -15,8 +15,20 @@
 시트에는 제목을 가린 본문만 들어간다 — 판정기가 보는 것과 같아야 비교가 성립한다.
 좌우는 무작위로 섞고 어느 쪽이 어휘 겹침인지는 **정답지 파일에만** 남긴다.
 
+2차 시트(2026-10-08): 첫 시트는 역방향 쌍이 52쌍 중 11개뿐이라 합격 판정을 못 했다.
+  - 검색 결과 6개 실행을 모두 써서 후보를 늘리고(겹치지 않는 새 쌍 최대 835개),
+  - 이전 시트에 나온 아이템은 뺀다(--exclude-key) — 독립된 시험이어야 하고, 본 적 있는
+    아이템은 지난 판단이 기억에 남는다.
+  - 겹침 1개짜리를 우선한다(--prefer-ov1). 첫 시트에서 역방향 비율이 겹침 1개 33%(27쌍),
+    2개 0%(18쌍)였다. 근거가 얇아 1개짜리만 고르지 않고 비중만 높인다.
+  쌍 선택에는 여전히 판정기를 쓰지 않는다.
+
 사용:
   python scripts/build_label_sheet.py --n 60
+  python scripts/build_label_sheet.py --runs experiments/eval_lang_ext_*.csv \
+      --n 150 --per-query 4 --prefer-ov1 0.7 \
+      --exclude-key experiments/label_sheet_20260911_key.csv \
+      --out-prefix experiments/label_sheet_v2_20261008
 """
 import argparse
 import os
@@ -40,6 +52,10 @@ def main():
     ap.add_argument("--per-query", type=int, default=2)
     ap.add_argument("--seed", type=int, default=20260911)
     ap.add_argument("--out-prefix", default="experiments/label_sheet_20260911")
+    ap.add_argument("--exclude-key", nargs="*", default=[],
+                    help="이전 시트의 _key.csv — 거기 나온 아이템은 다시 쓰지 않는다")
+    ap.add_argument("--prefer-ov1", type=float, default=0.0,
+                    help="겹침 쪽 아이템을 겹침 1개짜리에서 뽑을 확률 (0이면 예전 방식: 겹침 많은 순)")
     args = ap.parse_args()
 
     df = pd.concat([pd.read_csv(p) for p in args.runs], ignore_index=True)
@@ -55,12 +71,29 @@ def main():
                 for q, t in zip(df["query"], df["text"])]
     # 정보가 한 줄뿐인 아이템은 뺀다 — 사람도 판정기도 판단할 근거가 없다.
     df = df[(df.text != "") & (~df.thin)]
+    used = set()
+    for kp in args.exclude_key:
+        k = pd.read_csv(kp)
+        used |= set(k._ov_item) | set(k._zero_item)
+    df["key_id"] = df.result_domain.astype(str) + ":" + df.item_id.astype(str)
+    df = df[~df.key_id.isin(used)]
 
     rng = random.Random(args.seed)
     pairs = []
     for q, g in df.groupby("query"):
-        g = g.drop_duplicates("item_id")
-        hi = g[g.ov >= 1].sort_values(["ov", "rank"], ascending=[False, True])
+        # 여러 실행에 같은 아이템이 나오면 가장 높은 순위 하나만 남긴다
+        g = g.sort_values("rank").drop_duplicates("key_id")
+        if args.prefer_ov1 > 0:
+            hi1 = list(g[g.ov == 1].sort_values("rank").itertuples(index=False))
+            hi2 = list(g[g.ov >= 2].sort_values(["ov", "rank"], ascending=[False, True])
+                       .itertuples(index=False))
+            hi = []
+            while hi1 or hi2:
+                take1 = hi1 and (not hi2 or rng.random() < args.prefer_ov1)
+                hi.append((hi1 if take1 else hi2).pop(0))
+            hi = pd.DataFrame(hi, columns=g.columns)
+        else:
+            hi = g[g.ov >= 1].sort_values(["ov", "rank"], ascending=[False, True])
         lo = g[g.ov == 0].sort_values("rank")
         for k in range(min(args.per_query, len(hi), len(lo))):
             a, b = hi.iloc[k], lo.iloc[k]

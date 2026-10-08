@@ -36,6 +36,9 @@ def main():
     ap.add_argument("--gpu-util", type=float, default=0.9,
                     help="공유 서버에서는 낮춘다. 판정 결과에는 영향 없음(동시 처리량만 줄어듦)")
     ap.add_argument("--dtype", default="bfloat16", help="AWQ 양자화 모델은 float16")
+    ap.add_argument("--text-only", action="store_true",
+                    help="vLLM 이미지 슬롯을 0으로 둔다. 이미지 처리기가 깨지는 모델(Mistral 3.1)용 — "
+                         "Gemma 3는 반대로 이 모드에서 기동이 실패하므로 기본은 끈다")
     ap.add_argument("--out", default="experiments/label_sheet_score.txt")
     args = ap.parse_args()
 
@@ -88,7 +91,7 @@ def main():
         from scripts.vllm_runner import VLLMRunner, chunks
         runner = VLLMRunner(args.model_id, max_new_tokens=4,
                             gpu_memory_utilization=args.gpu_util, dtype=args.dtype,
-                            allow_images=False)   # 라벨 시트는 텍스트 판정뿐
+                            allow_images=not args.text_only)
         os.makedirs(CACHE_DIR, exist_ok=True)
         for batch in chunks(todo, args.batch):
             items = [(make_prompt(u, f, True), None) for u, f in batch]
