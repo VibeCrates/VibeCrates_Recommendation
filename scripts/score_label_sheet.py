@@ -23,7 +23,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import pandas as pd
 
 from scripts.judge_eval_relevance import CACHE_DIR
-from scripts.judge_pairwise import (make_prompt, pair_cache_path, parse_choice,
+from scripts.judge_pairwise import (VARIANTS, make_prompt, pair_cache_path, parse_answer,
                                     prompt_signature, verdict)
 
 
@@ -36,6 +36,8 @@ def main():
     ap.add_argument("--gpu-util", type=float, default=0.9,
                     help="공유 서버에서는 낮춘다. 판정 결과에는 영향 없음(동시 처리량만 줄어듦)")
     ap.add_argument("--dtype", default="bfloat16", help="AWQ 양자화 모델은 float16")
+    ap.add_argument("--variant", default="base", choices=VARIANTS,
+                    help="판정 프롬프트 변형 (judge_pairwise.VARIANTS 참고)")
     ap.add_argument("--text-only", action="store_true",
                     help="vLLM 이미지 슬롯을 0으로 둔다. 이미지 처리기가 깨지는 모델(Mistral 3.1)용 — "
                          "Gemma 3는 반대로 이 모드에서 기동이 실패하므로 기본은 끈다")
@@ -70,7 +72,7 @@ def main():
     print(f"  사람이 어휘 겹침 쪽 선택 {int(done.human_picked_overlap.sum())} / "
           f"안 겹침 쪽 선택 {n_rev}  ← 역방향 쌍")
 
-    sig = prompt_signature()
+    sig = prompt_signature(args.variant)
     cache_path = pair_cache_path(sig, args.model_id)
     cache = json.load(open(cache_path)) if os.path.exists(cache_path) else {}
 
@@ -89,17 +91,27 @@ def main():
     print(f"판정 대상 {len(todo)}건 (캐시 {len(cache):,}건)")
     if todo:
         from scripts.vllm_runner import VLLMRunner, chunks
-        runner = VLLMRunner(args.model_id, max_new_tokens=4,
+        cot = "cot" in args.variant
+        # cot는 근거 문장을 쓰므로 길이를 주고, 반복 억제(기본 1.2)는 끈다 — 짧은 근거에서
+        # 같은 단어를 다시 쓰는 것까지 벌줘 문장이 비틀린다.
+        runner = VLLMRunner(args.model_id, max_new_tokens=200 if cot else 4,
+                            repetition_penalty=1.0 if cot else 1.2,
                             gpu_memory_utilization=args.gpu_util, dtype=args.dtype,
                             allow_images=not args.text_only)
         os.makedirs(CACHE_DIR, exist_ok=True)
+        unparsed = []
         for batch in chunks(todo, args.batch):
-            items = [(make_prompt(u, f, True), None) for u, f in batch]
+            items = [(make_prompt(u, f, True, args.variant), None) for u, f in batch]
             for (u, f), raw in zip(batch, runner.generate(items)):
-                c = parse_choice(raw)
+                c = parse_answer(raw, args.variant)
+                if c is None:
+                    unparsed.append(raw)
                 if c:
                     cache[f"{sig}|후보1|후보2|{u['uid']}|{f}"] = c
             json.dump(cache, open(cache_path, "w"))
+        print(f"답을 읽지 못한 출력 {len(unparsed)}건 / {len(todo)}건")
+        for raw in unparsed[:3]:
+            print("  예:", repr(raw[:200]))
 
     rows = []
     for u, (_, r) in zip(units, done.iterrows()):
@@ -118,7 +130,7 @@ def main():
                      "reverse": not r.human_picked_overlap, "consistent": agree_dir})
     res = pd.DataFrame(rows)
 
-    L = [f"라벨 시트 채점 ({args.model_id})", "=" * 60, "",
+    L = [f"라벨 시트 채점 ({args.model_id}, variant={args.variant})", "=" * 60, "",
          f"라벨 {len(done)}개 / 양방향 일관 {int(res.consistent.sum())} "
          f"({res.consistent.mean():.1%})", ""]
     L += ["  %-28s %5s %6s %6s %9s" % ("구분", "쌍수", "일치", "불일치", "정확도")]

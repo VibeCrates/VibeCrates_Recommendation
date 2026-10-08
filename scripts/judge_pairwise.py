@@ -38,6 +38,7 @@
 from __future__ import annotations
 
 import argparse
+import functools
 import hashlib
 import inspect
 import json
@@ -99,8 +100,61 @@ ITEM_PROMPT = (
     "[Output]\nExactly one character: 1 or 2. No explanation."
 )
 
+# ── 프롬프트 변형 (2026-10-09) ────────────────────────────────────────────────
+# 사람 라벨에서 두 판정기 모두 "단어는 안 겹치지만 정답인 쪽"(역방향 쌍)을 잘 못 골랐다
+# (2차 시트 역방향: Qwen-7B 54.5%, Gemma-27B 36.0%, 합격선 75%). 모델을 키워도 안 나아져
+# 판정 방식을 바꿔 본다.
+#   cot     — 근거를 한두 문장 쓴 뒤 답한다. 바로 답하면 단어 겹침에 끌려가기 쉽다.
+#   fewshot — 첫 라벨 시트의 정답 예시를 보여 준다. 첫 시트와 2차 시트는 아이템이 하나도
+#             겹치지 않아(build_label_sheet --exclude-key) 2차 시트로 공정하게 잴 수 있다.
+#             역방향 예시만 넣으면 "안 겹치는 쪽을 고르라"는 반대 지름길을 배우므로
+#             순방향 2개를 섞고, 정답 위치도 1·2번을 반반으로 맞춘다.
+VARIANTS = ("base", "cot", "fewshot", "cot_fewshot")
 
-def prompt_signature() -> str:
+BASE_OUTPUT = "[Output]\nExactly one character: 1 or 2. No explanation."
+COT_OUTPUT = (
+    "[Output]\nFirst write one or two sentences on how each candidate relates to what the "
+    "query means (not to the words it uses). Then write the final line exactly as "
+    "`Answer: 1` or `Answer: 2`."
+)
+
+# (pair_id, 후보를 바꿔 보여 줄지, 정답 근거) — 정답 위치: 1, 2, 2, 1
+FEWSHOT_PAIRS = [
+    ("L007", False, "The query asks for a film about growing up in the 1980s; candidate 1 is "
+                    "such a film, while candidate 2 only shares the phrase 'coming-of-age' and "
+                    "is a memoir."),
+    ("L015", True,  "Candidate 2 is a reflection on choosing kindness; candidate 1 merely "
+                    "mentions kindness as a health topic."),
+    ("L003", True,  "Candidate 2 is a documentary about the Apollo 11 moon mission, which is "
+                    "exactly space exploration; candidate 1 is about amateur filmmakers."),
+    ("L002", True,  "The query asks for a romance film; candidate 1 is one, candidate 2 is a "
+                    "non-fiction book about marriage."),
+]
+FEWSHOT_SHEET = "experiments/label_sheet_20261008_hyun.csv"
+FEWSHOT_CHARS = 240
+
+
+@functools.lru_cache(maxsize=None)
+def fewshot_block(with_reason: bool) -> str:
+    sheet = pd.read_csv(FEWSHOT_SHEET).set_index("pair_id")
+    out = ["[Examples of correct judgments]"]
+    for i, (pid, swap, reason) in enumerate(FEWSHOT_PAIRS, 1):
+        r = sheet.loc[pid]
+        c1, c2 = (r["후보2"], r["후보1"]) if swap else (r["후보1"], r["후보2"])
+        ans = 3 - int(r["선택"]) if swap else int(r["선택"])
+        line = f"Correct: {ans}" + (f" — {reason}" if with_reason else "")
+        out.append(f"Example {i}\nQuery: {r['query']}\n"
+                   f"Candidate 1: {str(c1)[:FEWSHOT_CHARS]}\n"
+                   f"Candidate 2: {str(c2)[:FEWSHOT_CHARS]}\n{line}")
+    return "\n\n".join(out) + "\n\n"
+
+
+def item_template(variant: str) -> str:
+    assert variant in VARIANTS, variant
+    return ITEM_PROMPT.replace(BASE_OUTPUT, COT_OUTPUT) if "cot" in variant else ITEM_PROMPT
+
+
+def prompt_signature(variant: str = "base") -> str:
     """프롬프트와 렌더 방식의 해시. 절대 판정과 같은 이유로 캐시 키에 넣는다 —
     프롬프트를 고치고 캐시를 그대로 쓰면 옛 답이 새 조건의 결과인 척 집계된다."""
     src = "".join([
@@ -109,6 +163,11 @@ def prompt_signature() -> str:
         inspect.getsource(scrub_title),
         inspect.getsource(_title_pattern),
     ])
+    # base는 예전 서명을 그대로 둔다 — 이미 쌓인 판정 캐시를 버리지 않으려고.
+    if variant != "base":
+        src += variant + item_template(variant)
+        if "fewshot" in variant:
+            src += fewshot_block("cot" in variant)
     return hashlib.sha1(src.encode()).hexdigest()[:8]
 
 
@@ -121,6 +180,15 @@ def pair_cache_path(sig: str, model_id: str) -> str:
     기존 Qwen-7B 캐시는 이름을 그대로 둬 이미 쌓인 판정을 버리지 않는다."""
     tag = "" if model_id == DEFAULT_JUDGE else "_" + re.sub(r"[^A-Za-z0-9.-]+", "-", model_id)
     return os.path.join(CACHE_DIR, f"judge_cache_pair_{sig}{tag}.json")
+
+
+def parse_answer(raw: str, variant: str) -> str | None:
+    """cot 변형은 마지막 'Answer: N' 줄을 읽는다. 근거 문장 속의 '1', '2'를 답으로
+    오인하지 않으려고 parse_choice(앞 6글자)를 쓰지 않는다."""
+    if "cot" not in variant:
+        return parse_choice(raw)
+    m = re.findall(r"Answer:\s*\**\s*([12])", str(raw))
+    return m[-1] if m else None
 
 
 def parse_choice(raw: str) -> str | None:
@@ -258,13 +326,15 @@ def build_june_pairs(lookup: dict, limit: int, seed: int, require_body: bool = T
 
 # ── 판정 ─────────────────────────────────────────────────────────────────────
 
-def make_prompt(unit: dict, first: str, item_mode: bool) -> str:
+def make_prompt(unit: dict, first: str, item_mode: bool, variant: str = "base") -> str:
     """first가 'a'면 A를 1번 자리에 놓는다."""
     x, y = (unit["a"], unit["b"]) if first == "a" else (unit["b"], unit["a"])
     if item_mode:
-        return ITEM_PROMPT.format(noun=unit["noun"], query=unit["query"],
-                                  item1=x[0][:ITEM_CHARS * 2].replace("\n", " / "),
-                                  item2=y[0][:ITEM_CHARS * 2].replace("\n", " / "))
+        body = item_template(variant).format(
+            noun=unit["noun"], query=unit["query"],
+            item1=x[0][:ITEM_CHARS * 2].replace("\n", " / "),
+            item2=y[0][:ITEM_CHARS * 2].replace("\n", " / "))
+        return (fewshot_block("cot" in variant) + body) if "fewshot" in variant else body
     return LIST_PROMPT.format(noun=unit["noun"], query=unit["query"],
                               list1=_fmt_list(x), list2=_fmt_list(y))
 
