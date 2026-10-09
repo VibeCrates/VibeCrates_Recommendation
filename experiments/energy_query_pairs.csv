@@ -1,0 +1,21 @@
+pair,style,low,high
+E01,direct,A calm piano piece,An intense piano piece
+E02,direct,A slow and gentle rock ballad,A fast and aggressive rock anthem
+E03,direct,Soft acoustic guitar music,Loud distorted guitar music
+E04,direct,A quiet jazz tune for late at night,A wild jazz tune for late at night
+E05,direct,Mellow electronic music,Hard-hitting electronic music
+E06,direct,A soothing violin melody,A fiery violin melody
+E07,direct,Relaxed hip-hop with a laid-back beat,Hype hip-hop with a pounding beat
+E08,direct,A tender love song,A powerful love song
+E09,atmosphere,A quiet song for a rainy afternoon,A loud song for a rainy afternoon
+E10,atmosphere,Music for a slow drive at dawn,Music for a fast drive at dawn
+E11,atmosphere,A sleepy summer evening by the sea,A wild summer night by the sea
+E12,atmosphere,Lying still in a dim room at midnight,Dancing wildly in a dim room at midnight
+E13,atmosphere,A peaceful walk through an empty city,A frantic run through an empty city
+E14,atmosphere,Winding down after a long day,Getting pumped up after a long day
+E15,poet,A heart beating slowly like a distant drum,A heart pounding like a war drum
+E16,poet,Whispers drifting across a still lake,Thunder crashing across a stormy lake
+E17,poet,A candle flickering softly in the dark,A fire roaring fiercely in the dark
+E18,philosophical,Finding calm acceptance after a loss,Raging against the world after a loss
+E19,philosophical,Quiet reflection on the passing of time,Restless urgency about the passing of time
+E20,philosophical,The stillness of letting go,The thrill of breaking free
