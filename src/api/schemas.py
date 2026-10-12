@@ -110,6 +110,11 @@ class VectorSearchResponse(BaseModel):
     dim: int = Field(description="벡터 차원 (768)")
     normalized: bool = Field(description="L2 정규화된 벡터인지")
     model_version: str = Field(description="아이템 임베딩과 같은 체크포인트인지 대조용")
+    domain: Literal["all", "movie", "music", "book"] = Field(
+        default="all",
+        description="검색어가 명시한 도메인. 영화·노래·책 같은 작품 종류 명사가 있을 때만 그 도메인, "
+                    "아니면 all. 장르(재즈·발라드)는 단서로 보지 않는다 (src/api/domain_intent.py)",
+    )
     vector: List[float] = Field(description="쿼리 임베딩 float 배열")
 
 
@@ -143,4 +148,9 @@ class TextVectorResponse(BaseModel):
     dim: int = Field(description="벡터 차원 (768)")
     normalized: bool = Field(description="L2 정규화된 벡터인지")
     model_version: str = Field(description="FAKE-no-model이면 가짜, trained_model.pt@…이면 진짜")
+    domain: Literal["all", "movie", "music", "book"] = Field(
+        default="all",
+        description="검색어가 명시한 도메인. 영화·노래·책 같은 작품 종류 명사가 있을 때만 그 도메인, "
+                    "아니면 all. 장르(재즈·발라드)는 단서로 보지 않는다 (src/api/domain_intent.py)",
+    )
     vector: List[float] = Field(description="쿼리 임베딩 float 배열")

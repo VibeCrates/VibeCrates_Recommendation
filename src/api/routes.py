@@ -7,6 +7,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 
 from .dependencies import get_model_manager, get_manager_unchecked
 from .translation import prepare as prepare_queries
+from .domain_intent import detect_domain
 from .schemas import (
     EmbeddingRequest,
     EmbeddingResponse,
@@ -142,6 +143,7 @@ async def search_vector(
         dim=z.shape[1],
         normalized=normalize,
         model_version=manager.model_version(),
+        domain=detect_domain(keyword),
         vector=z[0].tolist(),
     )
 
@@ -171,5 +173,6 @@ async def search_vector_post(
         dim=z.shape[1],
         normalized=request.normalize,
         model_version=manager.model_version(),
+        domain=detect_domain(text),
         vector=z[0].tolist(),
     )
