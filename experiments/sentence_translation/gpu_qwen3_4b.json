@@ -1,0 +1,853 @@
+{
+ "model": "Qwen/Qwen3-4B-Instruct-2507",
+ "prompt": "Translate this Korean search query from a book/movie/music recommendation app into natural English.\n\nRules:\n- Keep the meaning, imagery and mood. Do not turn a metaphor into a literal or religious term.\n- Do not add anything the Korean does not say, and do not drop anything it does say.\n- Slang and internet abbreviations (ㅊㅊ = recommend, ㄱㄱ = go) become plain English.\n- Titles and names use their usual English form.\n\nKorean: {ko}\n\nOutput the English translation only. No quotes, no explanation.",
+ "latency": {
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "single_p50": 0.06691642198711634,
+  "single_p90": 0.09070703899487853,
+  "single_max": 0.12087277800310403,
+  "burst20_p50": 0.1297230359632522
+ },
+ "items": [
+  {
+   "type": "request",
+   "ko": "비 오는 날 혼자 듣기 좋은 잔잔한 노래 추천해줘",
+   "en": "Recommend calm songs to listen to alone on a rainy day",
+   "translation": "Recommend some calm songs to listen to when it's raining alone."
+  },
+  {
+   "type": "request",
+   "ko": "인생에 대해 생각하게 만드는 영화 추천해줘",
+   "en": "Recommend a movie that makes me think about life",
+   "translation": "Recommend a movie that makes you think about life."
+  },
+  {
+   "type": "request",
+   "ko": "잠 안 올 때 읽기 좋은 책 있어?",
+   "en": "Is there a good book to read when I can't sleep?",
+   "translation": "What books are good to read when you can't fall asleep?"
+  },
+  {
+   "type": "request",
+   "ko": "헤어지고 나서 듣기 좋은 노래 알려줘",
+   "en": "Tell me some good songs to listen to after a breakup",
+   "translation": "Recommend some good songs to listen to after a breakup"
+  },
+  {
+   "type": "request",
+   "ko": "주말에 가족이랑 같이 볼 만한 영화 추천 좀",
+   "en": "Recommend a movie to watch with family on the weekend",
+   "translation": "Recommend a movie suitable to watch with family on the weekend"
+  },
+  {
+   "type": "request",
+   "ko": "출근길에 기분 좋아지는 신나는 음악 틀어줘",
+   "en": "Play upbeat music that lifts my mood on the way to work",
+   "translation": "Play some exciting music that boosts my mood during my commute."
+  },
+  {
+   "type": "request",
+   "ko": "요즘 너무 지쳤는데 위로가 되는 책 추천해줘",
+   "en": "I'm so worn out lately, recommend a comforting book",
+   "translation": "I'm so tired these days, recommend a book that brings comfort."
+  },
+  {
+   "type": "request",
+   "ko": "공부할 때 집중 잘 되는 가사 없는 음악",
+   "en": "Music without lyrics that helps me focus while studying",
+   "translation": "Music without lyrics that helps focus while studying"
+  },
+  {
+   "type": "request",
+   "ko": "혼자 여행 갈 때 들고 가기 좋은 소설",
+   "en": "A novel to bring along when traveling alone",
+   "translation": "Novels to take on a solo trip"
+  },
+  {
+   "type": "request",
+   "ko": "밤새도록 몰아볼 수 있는 긴장감 넘치는 영화",
+   "en": "A suspenseful movie I can binge all night",
+   "translation": "A movie filled with tension you can't put down, one that keeps you up all night"
+  },
+  {
+   "type": "request",
+   "ko": "마음이 따뜻해지는 가족 영화 보고 싶어",
+   "en": "I want to watch a heartwarming family movie",
+   "translation": "I want to watch a family movie that warms the heart."
+  },
+  {
+   "type": "request",
+   "ko": "운동할 때 텐션 올려주는 노래 모음",
+   "en": "A collection of songs that pump me up while working out",
+   "translation": "A collection of songs that boost tension during workouts"
+  },
+  {
+   "type": "request",
+   "ko": "첫사랑이 생각나는 풋풋한 로맨스 소설",
+   "en": "A fresh, innocent romance novel that reminds me of first love",
+   "translation": "A fresh romance novel that makes you think of first love"
+  },
+  {
+   "type": "request",
+   "ko": "드라이브하면서 듣기 좋은 시티팝",
+   "en": "City pop that is good for driving",
+   "translation": "Good city pop to listen to while driving"
+  },
+  {
+   "type": "request",
+   "ko": "아무 생각 없이 웃을 수 있는 코미디 영화",
+   "en": "A comedy movie I can laugh at without thinking",
+   "translation": "A comedy movie you can laugh at without thinking too much"
+  },
+  {
+   "type": "request",
+   "ko": "우울할 때 기분 전환되는 밝은 노래",
+   "en": "Bright songs that cheer me up when I feel down",
+   "translation": "Bright songs that lift your mood when you're feeling sad"
+  },
+  {
+   "type": "request",
+   "ko": "생각이 많아지는 새벽에 읽을 에세이",
+   "en": "An essay to read at dawn when my mind is full of thoughts",
+   "translation": "Essays to read when your mind is buzzing at dawn"
+  },
+  {
+   "type": "request",
+   "ko": "아이랑 같이 볼 수 있는 애니메이션 추천해줘",
+   "en": "Recommend an animation I can watch with my kid",
+   "translation": "Recommend some anime that I can watch with my partner"
+  },
+  {
+   "type": "request",
+   "ko": "카페에서 틀어놓기 좋은 잔잔한 재즈",
+   "en": "Calm jazz to play in a cafe",
+   "translation": "Nice jazz to play at a cafe"
+  },
+  {
+   "type": "request",
+   "ko": "반전이 충격적인 스릴러 영화 알려줘",
+   "en": "Tell me a thriller movie with a shocking twist",
+   "translation": "Recommend a thriller movie with a shocking twist"
+  },
+  {
+   "type": "request",
+   "ko": "읽고 나면 여운이 오래 남는 소설",
+   "en": "A novel whose afterglow lingers long after reading",
+   "translation": "Novels that leave a lasting aftertaste after reading"
+  },
+  {
+   "type": "request",
+   "ko": "비 오는 밤에 보기 좋은 무서운 영화",
+   "en": "A scary movie to watch on a rainy night",
+   "translation": "A good scary movie to watch during a rainy night"
+  },
+  {
+   "type": "request",
+   "ko": "잠들기 전에 듣는 편안한 피아노 음악",
+   "en": "Relaxing piano music to listen to before falling asleep",
+   "translation": "Piano music to listen to before going to bed"
+  },
+  {
+   "type": "request",
+   "ko": "퇴근하고 맥주 한 잔 하면서 볼 영화",
+   "en": "A movie to watch with a beer after work",
+   "translation": "Watch a movie after work while having a beer."
+  },
+  {
+   "type": "request",
+   "ko": "자존감이 낮아졌을 때 읽으면 좋은 책",
+   "en": "A good book to read when my self-esteem is low",
+   "translation": "Books to read when self-esteem is low"
+  },
+  {
+   "type": "mood",
+   "ko": "마음이 텅 빈 것 같은 날",
+   "en": "A day when my heart feels empty",
+   "translation": "The day my heart feels empty"
+  },
+  {
+   "type": "mood",
+   "ko": "아무도 나를 이해해주지 않는 것 같을 때",
+   "en": "When it feels like no one understands me",
+   "translation": "When it feels like no one understands me"
+  },
+  {
+   "type": "mood",
+   "ko": "시험 끝나고 해방감 느끼고 싶어",
+   "en": "I want to feel free after finishing my exams",
+   "translation": "I want to feel the sense of liberation after the exam is over."
+  },
+  {
+   "type": "mood",
+   "ko": "오랜만에 옛날 친구들이 그리워지는 밤",
+   "en": "A night when I suddenly miss old friends",
+   "translation": "A night when I miss my old friends after a long time"
+  },
+  {
+   "type": "mood",
+   "ko": "괜히 설레는 봄날 오후",
+   "en": "A spring afternoon when I feel fluttery for no reason",
+   "translation": "A strangely excited spring afternoon"
+  },
+  {
+   "type": "mood",
+   "ko": "누군가에게 위로받고 싶은 저녁",
+   "en": "An evening when I want someone to comfort me",
+   "translation": "Evening when I want to be comforted by someone"
+  },
+  {
+   "type": "mood",
+   "ko": "지친 하루 끝에 나를 다독여주는 느낌",
+   "en": "A feeling of being soothed at the end of an exhausting day",
+   "translation": "Feeling like someone's comforting me at the end of a tired day"
+  },
+  {
+   "type": "mood",
+   "ko": "이유 없이 눈물이 날 것 같은 날",
+   "en": "A day when I feel like crying for no reason",
+   "translation": "A day when tears feel like they're about to fall without any reason"
+  },
+  {
+   "type": "mood",
+   "ko": "혼자인 게 편하면서도 외로운 밤",
+   "en": "A night when being alone feels comfortable yet lonely",
+   "translation": "It's comfortable being alone, yet lonely nights"
+  },
+  {
+   "type": "mood",
+   "ko": "새로운 시작을 앞두고 두근거리는 마음",
+   "en": "A heart pounding before a new beginning",
+   "translation": "A racing heart ahead of a new beginning"
+  },
+  {
+   "type": "mood",
+   "ko": "다 포기하고 싶을 때 힘이 되는 이야기",
+   "en": "A story that gives me strength when I want to give up on everything",
+   "translation": "Stories that give you strength when you want to give up entirely"
+  },
+  {
+   "type": "mood",
+   "ko": "어린 시절 여름방학으로 돌아간 기분",
+   "en": "Feeling like I'm back in a childhood summer vacation",
+   "translation": "Feeling like going back to summer vacation during my childhood"
+  },
+  {
+   "type": "mood",
+   "ko": "짝사랑하는 사람 생각에 잠 못 드는 밤",
+   "en": "A sleepless night thinking about my secret crush",
+   "translation": "Night when I can't fall asleep thinking about someone I have a crush on"
+  },
+  {
+   "type": "mood",
+   "ko": "가을이 되면 괜히 쓸쓸해지는 마음",
+   "en": "The loneliness that comes for no reason when autumn arrives",
+   "translation": "When autumn comes, the mind unexpectedly feels lonely."
+  },
+  {
+   "type": "mood",
+   "ko": "모든 게 잘 될 것 같은 희망찬 아침",
+   "en": "A hopeful morning when everything seems like it will be fine",
+   "translation": "A hopeful morning where everything seems to work out"
+  },
+  {
+   "type": "scene",
+   "ko": "눈 오는 날 창밖을 보며 마시는 따뜻한 차",
+   "en": "Warm tea while watching the snow fall outside the window",
+   "translation": "On a day it's snowing, drinking a warm tea while looking out the window"
+  },
+  {
+   "type": "scene",
+   "ko": "한적한 시골 마을에서 보내는 느린 하루",
+   "en": "A slow day spent in a quiet country village",
+   "translation": "A slow day spent in a quiet rural village"
+  },
+  {
+   "type": "scene",
+   "ko": "비 내리는 도시의 네온사인 거리",
+   "en": "Neon-lit city streets in the rain",
+   "translation": "Neon sign streets in a city raining rain"
+  },
+  {
+   "type": "scene",
+   "ko": "노을 지는 바닷가를 혼자 걷는 저녁",
+   "en": "An evening walking alone on a beach at sunset",
+   "translation": "Walking alone by the seaside as the sunset fades."
+  },
+  {
+   "type": "scene",
+   "ko": "오래된 도서관의 먼지 냄새",
+   "en": "The dusty smell of an old library",
+   "translation": "The dust smell of an old library"
+  },
+  {
+   "type": "scene",
+   "ko": "캠핑장에서 모닥불을 바라보는 밤",
+   "en": "A night watching the campfire at a campsite",
+   "translation": "Night watching a campfire at a campsite"
+  },
+  {
+   "type": "scene",
+   "ko": "사람 없는 새벽 지하철",
+   "en": "An empty subway at dawn",
+   "translation": "Subway at midnight with no people"
+  },
+  {
+   "type": "scene",
+   "ko": "햇살 가득한 일요일 아침 부엌",
+   "en": "A sunny Sunday morning kitchen",
+   "translation": "A sunny Sunday morning in the kitchen"
+  },
+  {
+   "type": "scene",
+   "ko": "안개 낀 숲속을 걷는 느낌",
+   "en": "The feeling of walking through a foggy forest",
+   "translation": "The feeling of walking through a forest shrouded in mist"
+  },
+  {
+   "type": "scene",
+   "ko": "한여름 밤 옥상에서 별 보기",
+   "en": "Stargazing on a rooftop on a midsummer night",
+   "translation": "Stargazing on the roof on a hot summer night"
+  },
+  {
+   "type": "scene",
+   "ko": "크리스마스 이브의 북적이는 거리",
+   "en": "Bustling streets on Christmas Eve",
+   "translation": "The bustling streets on Christmas Eve"
+  },
+  {
+   "type": "scene",
+   "ko": "파도 소리만 들리는 조용한 해변",
+   "en": "A quiet beach where only the sound of waves can be heard",
+   "translation": "A quiet beach with only the sound of waves"
+  },
+  {
+   "type": "scene",
+   "ko": "낡은 LP판이 돌아가는 작은 바",
+   "en": "A small bar with an old vinyl record spinning",
+   "translation": "A small shop with an old record player spinning"
+  },
+  {
+   "type": "scene",
+   "ko": "벚꽃이 흩날리는 강변 산책로",
+   "en": "A riverside walkway with cherry blossoms drifting",
+   "translation": "A stroll along the riverbank where cherry blossoms are drifting."
+  },
+  {
+   "type": "scene",
+   "ko": "늦은 밤 혼자 남은 사무실",
+   "en": "An office late at night where I'm the only one left",
+   "translation": "The office, left alone in the late night"
+  },
+  {
+   "type": "content",
+   "ko": "시간을 되돌릴 수 있게 된 남자의 이야기",
+   "en": "The story of a man who becomes able to turn back time",
+   "translation": "The story of a man who can go back in time"
+  },
+  {
+   "type": "content",
+   "ko": "인공지능과 사랑에 빠지는 영화",
+   "en": "A movie about falling in love with an artificial intelligence",
+   "translation": "A movie about falling in love with artificial intelligence"
+  },
+  {
+   "type": "content",
+   "ko": "조선시대를 배경으로 한 미스터리 소설",
+   "en": "A mystery novel set in the Joseon dynasty",
+   "translation": "Mystery novel set in the Joseon era"
+  },
+  {
+   "type": "content",
+   "ko": "좀비가 나오는데 무섭지 않은 영화",
+   "en": "A zombie movie that isn't scary",
+   "translation": "Movies where zombies appear but aren't scary"
+  },
+  {
+   "type": "content",
+   "ko": "평범한 회사원이 주인공인 성장 이야기",
+   "en": "A coming-of-age story about an ordinary office worker",
+   "translation": "A story of growth with a ordinary office worker as the protagonist"
+  },
+  {
+   "type": "content",
+   "ko": "우주에서 혼자 살아남는 이야기",
+   "en": "A story about surviving alone in space",
+   "translation": "A story about surviving alone in space"
+  },
+  {
+   "type": "content",
+   "ko": "엄마와 딸의 관계를 다룬 따뜻한 소설",
+   "en": "A warm novel about the relationship between a mother and daughter",
+   "translation": "A warm novel about the relationship between mother and daughter"
+  },
+  {
+   "type": "content",
+   "ko": "실화를 바탕으로 한 감동적인 스포츠 영화",
+   "en": "A moving sports movie based on a true story",
+   "translation": "A touching sports movie based on true events"
+  },
+  {
+   "type": "content",
+   "ko": "마법 학교에 입학한 아이의 모험",
+   "en": "The adventure of a child who enters a magic school",
+   "translation": "The adventures of a child who enrolls in a magic school"
+  },
+  {
+   "type": "content",
+   "ko": "범인이 누군지 끝까지 모르는 추리 소설",
+   "en": "A detective novel where you don't know the culprit until the end",
+   "translation": "A detective story where you never figure out who the criminal is."
+  },
+  {
+   "type": "content",
+   "ko": "음악을 꿈꾸는 청춘들의 이야기",
+   "en": "A story about young people who dream of music",
+   "translation": "The story of young people who dream of music"
+  },
+  {
+   "type": "content",
+   "ko": "전쟁 속에서 피어난 사랑 이야기",
+   "en": "A love story that blossoms during war",
+   "translation": "A love story that blossomed amidst war"
+  },
+  {
+   "type": "content",
+   "ko": "고양이가 주인공인 힐링 만화",
+   "en": "A healing comic with a cat as the main character",
+   "translation": "Cat-themed healing comics"
+  },
+  {
+   "type": "content",
+   "ko": "뉴욕을 배경으로 한 로맨틱 코미디",
+   "en": "A romantic comedy set in New York",
+   "translation": "Romantic comedy set in New York"
+  },
+  {
+   "type": "content",
+   "ko": "인간의 욕망을 파헤치는 어두운 드라마",
+   "en": "A dark drama that digs into human desire",
+   "translation": "A dark drama exploring human desires"
+  },
+  {
+   "type": "content",
+   "ko": "요리로 사람들을 위로하는 식당 이야기",
+   "en": "A story about a restaurant that comforts people with food",
+   "translation": "A restaurant story about comforting people through cooking"
+  },
+  {
+   "type": "content",
+   "ko": "디스토피아 미래 사회를 그린 소설",
+   "en": "A novel depicting a dystopian future society",
+   "translation": "Novel depicting a dystopian future society"
+  },
+  {
+   "type": "content",
+   "ko": "가족의 비밀이 하나씩 드러나는 영화",
+   "en": "A movie where family secrets are revealed one by one",
+   "translation": "A movie where family secrets are revealed one by one"
+  },
+  {
+   "type": "content",
+   "ko": "락 밴드의 흥망성쇠를 다룬 다큐멘터리",
+   "en": "A documentary about the rise and fall of a rock band",
+   "translation": "Documentary on the rise and fall of a rock band"
+  },
+  {
+   "type": "content",
+   "ko": "여자 혼자 세계를 여행하는 에세이",
+   "en": "An essay about a woman traveling the world alone",
+   "translation": "An essay about a woman traveling alone around the world"
+  },
+  {
+   "type": "music",
+   "ko": "몽환적인 분위기의 여성 보컬 노래",
+   "en": "Dreamy songs with female vocals",
+   "translation": "Women's vocal songs with a dreamy atmosphere"
+  },
+  {
+   "type": "music",
+   "ko": "90년대 감성의 R&B",
+   "en": "R&B with a 90s feel",
+   "translation": "The 90s vibe of R&B"
+  },
+  {
+   "type": "music",
+   "ko": "어쿠스틱 기타 하나로 부르는 담담한 노래",
+   "en": "Understated songs sung with just an acoustic guitar",
+   "translation": "A calm song played on a single acoustic guitar"
+  },
+  {
+   "type": "music",
+   "ko": "가사가 시 같은 인디 음악",
+   "en": "Indie music with poetic lyrics",
+   "translation": "Lyrics as poetic as a poem, indie music"
+  },
+  {
+   "type": "music",
+   "ko": "웅장한 오케스트라 영화 음악",
+   "en": "Grand orchestral film scores",
+   "translation": "Epic orchestra film music"
+  },
+  {
+   "type": "music",
+   "ko": "비트가 묵직한 힙합",
+   "en": "Hip hop with heavy beats",
+   "translation": "Hip-hop with a solid beat"
+  },
+  {
+   "type": "music",
+   "ko": "파티에서 다 같이 떼창할 수 있는 노래",
+   "en": "Songs everyone can sing along to at a party",
+   "translation": "Songs we can sing along to at a party"
+  },
+  {
+   "type": "music",
+   "ko": "듣기만 해도 여름이 느껴지는 청량한 노래",
+   "en": "Refreshing songs that feel like summer just by listening",
+   "translation": "Songs that make you feel like summer just by listening to them, refreshing and cool."
+  },
+  {
+   "type": "music",
+   "ko": "새벽 감성 가득한 로파이 비트",
+   "en": "Lo-fi beats full of late-night feelings",
+   "translation": "Full of early-morning vibes, Lopai beat"
+  },
+  {
+   "type": "music",
+   "ko": "사랑 고백할 때 틀면 좋은 노래",
+   "en": "A song to play when confessing love",
+   "translation": "Good songs to play when making a love confession"
+  },
+  {
+   "type": "colloquial",
+   "ko": "심심한데 볼 거 없나",
+   "en": "I'm bored, anything to watch?",
+   "translation": "I'm bored, do you have anything to recommend?"
+  },
+  {
+   "type": "colloquial",
+   "ko": "요즘 핫한 노래 뭐 있어",
+   "en": "What songs are hot these days?",
+   "translation": "What's currently popular music?"
+  },
+  {
+   "type": "colloquial",
+   "ko": "개웃긴 영화 추천 ㄱㄱ",
+   "en": "Recommend a hilarious movie, go",
+   "translation": "Recommend a funny movie, go"
+  },
+  {
+   "type": "colloquial",
+   "ko": "머리 식히고 싶어",
+   "en": "I want to clear my head",
+   "translation": "I want to calm my head."
+  },
+  {
+   "type": "colloquial",
+   "ko": "뭔가 몽글몽글한 거",
+   "en": "Something soft and fuzzy-feeling",
+   "translation": "Something weirdly fuzzy or off-putting"
+  },
+  {
+   "type": "colloquial",
+   "ko": "감성 터지는 노래 없나요",
+   "en": "Any songs that are overflowing with emotion?",
+   "translation": "Do you have any songs that touch the soul?"
+  },
+  {
+   "type": "colloquial",
+   "ko": "킬링타임용 영화 ㅊㅊ",
+   "en": "Recommend a movie for killing time",
+   "translation": "Movies for killing time 🚀"
+  },
+  {
+   "type": "colloquial",
+   "ko": "찐으로 소름 돋는 스릴러",
+   "en": "A thriller that genuinely gives me chills",
+   "translation": "A thriller that makes your spine tingle"
+  },
+  {
+   "type": "colloquial",
+   "ko": "잔잔하게 보기 좋은 거 없을까요",
+   "en": "Is there something calm and easy to watch?",
+   "translation": "Is there something calm and relaxing to watch?"
+  },
+  {
+   "type": "colloquial",
+   "ko": "울고 싶은데 울려줄 영화",
+   "en": "A movie that will make me cry because I want to cry",
+   "translation": "A movie to cry with"
+  },
+  {
+   "type": "reference",
+   "ko": "인터스텔라 같은 우주 영화",
+   "en": "A space movie like Interstellar",
+   "translation": "Movies like Interstellar about space"
+  },
+  {
+   "type": "reference",
+   "ko": "해리포터 같은 판타지 소설",
+   "en": "A fantasy novel like Harry Potter",
+   "translation": "Fantasy novels like Harry Potter"
+  },
+  {
+   "type": "reference",
+   "ko": "아이유 노래 같은 잔잔한 발라드",
+   "en": "Calm ballads like IU's songs",
+   "translation": "Bballads as gentle as IU's songs"
+  },
+  {
+   "type": "reference",
+   "ko": "지브리 감성의 애니메이션",
+   "en": "Animation with a Ghibli feel",
+   "translation": "Anime with Studio Ghibli's feeling"
+  },
+  {
+   "type": "reference",
+   "ko": "비포 선라이즈처럼 대화가 많은 로맨스",
+   "en": "A dialogue-heavy romance like Before Sunrise",
+   "translation": "A romance filled with lots of conversation, like before sunrise"
+  },
+  {
+   "type": "eval_P",
+   "ko": "인간이란 무엇인가",
+   "en": "What is a human being",
+   "translation": "What is a human?"
+  },
+  {
+   "type": "eval_P",
+   "ko": "삶의 의미를 찾는 여정",
+   "en": "A journey to find the meaning of life",
+   "translation": "The journey of finding meaning in life"
+  },
+  {
+   "type": "eval_P",
+   "ko": "자유와 책임 사이에서",
+   "en": "Between freedom and responsibility",
+   "translation": "Between freedom and responsibility"
+  },
+  {
+   "type": "eval_P",
+   "ko": "고독과 존재에 대한 성찰",
+   "en": "Reflection on solitude and existence",
+   "translation": "Reflections on solitude and existence"
+  },
+  {
+   "type": "eval_T",
+   "ko": "사랑의 이름으로",
+   "en": "In the name of love",
+   "translation": "By the name of love"
+  },
+  {
+   "type": "eval_T",
+   "ko": "봄날의 설레임처럼",
+   "en": "Like the excitement of a spring day",
+   "translation": "Like the excitement of spring days"
+  },
+  {
+   "type": "eval_T",
+   "ko": "이별 후에 남는 것들",
+   "en": "What remains after farewell",
+   "translation": "Things left behind after a breakup"
+  },
+  {
+   "type": "eval_T",
+   "ko": "달빛 아래 속삭이는 목소리",
+   "en": "A voice whispering under moonlight",
+   "translation": "A voice whispering beneath the moonlight"
+  },
+  {
+   "type": "eval_A",
+   "ko": "햇살이 드는 카페",
+   "en": "A sunlit cafe",
+   "translation": "Cafe in the sunlight"
+  },
+  {
+   "type": "eval_A",
+   "ko": "빗소리 들리는 조용한 오후",
+   "en": "A quiet afternoon with the sound of rain",
+   "translation": "A quiet afternoon with the sound of rain."
+  },
+  {
+   "type": "eval_A",
+   "ko": "한겨울 따뜻한 벽난로 앞에서",
+   "en": "In front of a warm fireplace in midwinter",
+   "translation": "By a warm fireplace in a cold winter"
+  },
+  {
+   "type": "eval_A",
+   "ko": "새벽 도심의 텅 빈 거리",
+   "en": "Empty city streets at dawn",
+   "translation": "The empty streets of the city at dawn"
+  },
+  {
+   "type": "eval_D",
+   "ko": "우주를 배경으로 한 액션 영화",
+   "en": "Action movie set in space",
+   "translation": "An action movie set in space"
+  },
+  {
+   "type": "eval_D",
+   "ko": "재즈 피아노가 흐르는 감성적인 음악",
+   "en": "Soulful music featuring jazz piano",
+   "translation": "Music with a sensual vibe, featuring jazz piano"
+  },
+  {
+   "type": "eval_D",
+   "ko": "반전이 있는 미스터리 스릴러 소설",
+   "en": "Mystery thriller novel with a twist ending",
+   "translation": "Mystery thriller novel with a twist"
+  },
+  {
+   "type": "eval_D",
+   "ko": "두 사람의 로맨스를 다룬 영화",
+   "en": "A film about a romance between two people",
+   "translation": "A movie about a romance between two people"
+  },
+  {
+   "type": "eval_P",
+   "ko": "기억은 나를 얼마나 만드는가",
+   "en": "How much of me is made of memory",
+   "translation": "How much does memory shape me?"
+  },
+  {
+   "type": "eval_P",
+   "ko": "우연과 운명의 경계",
+   "en": "The border between chance and fate",
+   "translation": "The boundary between chance and fate"
+  },
+  {
+   "type": "eval_P",
+   "ko": "타인을 이해한다는 것의 한계",
+   "en": "The limits of understanding another person",
+   "translation": "The limitations of understanding others"
+  },
+  {
+   "type": "eval_P",
+   "ko": "죽음을 앞에 둔 삶의 무게",
+   "en": "The weight of a life facing its end",
+   "translation": "The weight of life with death looming ahead"
+  },
+  {
+   "type": "eval_P",
+   "ko": "옳음과 다정함 중 무엇을 택할까",
+   "en": "Choosing between being right and being kind",
+   "translation": "Which one to choose: truth or tenderness?"
+  },
+  {
+   "type": "eval_P",
+   "ko": "반복되는 일상 속의 의미",
+   "en": "Meaning inside a repeating daily life",
+   "translation": "Meaning within the repetitive everyday routine"
+  },
+  {
+   "type": "eval_T",
+   "ko": "식어가는 커피처럼 멀어지는 마음",
+   "en": "A heart cooling like forgotten coffee",
+   "translation": "Like coffee growing cold as the heart grows distant"
+  },
+  {
+   "type": "eval_T",
+   "ko": "오래된 편지에서 나는 냄새",
+   "en": "The smell rising from an old letter",
+   "translation": "From an old letter, I smell"
+  },
+  {
+   "type": "eval_T",
+   "ko": "유리창에 맺힌 겨울 숨결",
+   "en": "Winter breath fogging a windowpane",
+   "translation": "The winter breath condensed on the glass window"
+  },
+  {
+   "type": "eval_T",
+   "ko": "말하지 못한 채 지나간 계절",
+   "en": "A season that passed without being spoken",
+   "translation": "The season I didn't have the words to say goodbye to"
+  },
+  {
+   "type": "eval_T",
+   "ko": "모래처럼 빠져나가는 시간",
+   "en": "Time slipping away like sand",
+   "translation": "Time slipping away like sand"
+  },
+  {
+   "type": "eval_T",
+   "ko": "불 꺼진 방에 남은 온기",
+   "en": "Warmth left in a room after the lights go out",
+   "translation": "The warmth left behind in a room where the light has gone out"
+  },
+  {
+   "type": "eval_A",
+   "ko": "여름밤 열어둔 창가",
+   "en": "An open window on a summer night",
+   "translation": "The summer night, the window left open"
+  },
+  {
+   "type": "eval_A",
+   "ko": "눈 내리는 밤의 시골 기차역",
+   "en": "A country train station on a snowy night",
+   "translation": "A rural train station on a snowy night"
+  },
+  {
+   "type": "eval_A",
+   "ko": "늦은 밤 편의점의 형광등 불빛",
+   "en": "Fluorescent glow of a late-night convenience store",
+   "translation": "The fluorescent light of a convenience store in the late night"
+  },
+  {
+   "type": "eval_A",
+   "ko": "바닷가 낡은 모텔 방",
+   "en": "A worn motel room by the sea",
+   "translation": "A run-down motel room by the seaside"
+  },
+  {
+   "type": "eval_A",
+   "ko": "장마철 눅눅한 지하 서점",
+   "en": "A damp basement bookshop during the rainy season",
+   "translation": "The humid underground bookstore during the rainy season"
+  },
+  {
+   "type": "eval_A",
+   "ko": "해질녘 고속도로 휴게소",
+   "en": "A highway rest stop at sunset",
+   "translation": "At dusk, highway rest area"
+  },
+  {
+   "type": "eval_D",
+   "ko": "실화를 바탕으로 한 법정 드라마",
+   "en": "A courtroom drama based on a true story",
+   "translation": "A courtroom drama based on true events"
+  },
+  {
+   "type": "eval_D",
+   "ko": "기타 리프가 강렬한 록 음악",
+   "en": "Rock music with a heavy guitar riff",
+   "translation": "Rock music with intense guitar riffs"
+  },
+  {
+   "type": "eval_D",
+   "ko": "가족의 비밀을 다룬 소설",
+   "en": "A novel about a family secret",
+   "translation": "A novel about family secrets"
+  },
+  {
+   "type": "eval_D",
+   "ko": "1980년대를 배경으로 한 청춘 영화",
+   "en": "A coming-of-age film set in the 1980s",
+   "translation": "A coming-of-age movie set in the 1980s"
+  },
+  {
+   "type": "eval_D",
+   "ko": "차분한 피아노 연주곡",
+   "en": "A calm solo piano piece",
+   "translation": "Calm piano music"
+  },
+  {
+   "type": "eval_D",
+   "ko": "우주 탐사를 다룬 논픽션",
+   "en": "Nonfiction about space exploration",
+   "translation": "Nonfiction about space exploration"
+  }
+ ]
+}

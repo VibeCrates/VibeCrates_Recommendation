@@ -1,0 +1,101 @@
+type	ko	en
+request	비 오는 날 혼자 듣기 좋은 잔잔한 노래 추천해줘	Recommend calm songs to listen to alone on a rainy day
+request	인생에 대해 생각하게 만드는 영화 추천해줘	Recommend a movie that makes me think about life
+request	잠 안 올 때 읽기 좋은 책 있어?	Is there a good book to read when I can't sleep?
+request	헤어지고 나서 듣기 좋은 노래 알려줘	Tell me some good songs to listen to after a breakup
+request	주말에 가족이랑 같이 볼 만한 영화 추천 좀	Recommend a movie to watch with family on the weekend
+request	출근길에 기분 좋아지는 신나는 음악 틀어줘	Play upbeat music that lifts my mood on the way to work
+request	요즘 너무 지쳤는데 위로가 되는 책 추천해줘	I'm so worn out lately, recommend a comforting book
+request	공부할 때 집중 잘 되는 가사 없는 음악	Music without lyrics that helps me focus while studying
+request	혼자 여행 갈 때 들고 가기 좋은 소설	A novel to bring along when traveling alone
+request	밤새도록 몰아볼 수 있는 긴장감 넘치는 영화	A suspenseful movie I can binge all night
+request	마음이 따뜻해지는 가족 영화 보고 싶어	I want to watch a heartwarming family movie
+request	운동할 때 텐션 올려주는 노래 모음	A collection of songs that pump me up while working out
+request	첫사랑이 생각나는 풋풋한 로맨스 소설	A fresh, innocent romance novel that reminds me of first love
+request	드라이브하면서 듣기 좋은 시티팝	City pop that is good for driving
+request	아무 생각 없이 웃을 수 있는 코미디 영화	A comedy movie I can laugh at without thinking
+request	우울할 때 기분 전환되는 밝은 노래	Bright songs that cheer me up when I feel down
+request	생각이 많아지는 새벽에 읽을 에세이	An essay to read at dawn when my mind is full of thoughts
+request	아이랑 같이 볼 수 있는 애니메이션 추천해줘	Recommend an animation I can watch with my kid
+request	카페에서 틀어놓기 좋은 잔잔한 재즈	Calm jazz to play in a cafe
+request	반전이 충격적인 스릴러 영화 알려줘	Tell me a thriller movie with a shocking twist
+request	읽고 나면 여운이 오래 남는 소설	A novel whose afterglow lingers long after reading
+request	비 오는 밤에 보기 좋은 무서운 영화	A scary movie to watch on a rainy night
+request	잠들기 전에 듣는 편안한 피아노 음악	Relaxing piano music to listen to before falling asleep
+request	퇴근하고 맥주 한 잔 하면서 볼 영화	A movie to watch with a beer after work
+request	자존감이 낮아졌을 때 읽으면 좋은 책	A good book to read when my self-esteem is low
+mood	마음이 텅 빈 것 같은 날	A day when my heart feels empty
+mood	아무도 나를 이해해주지 않는 것 같을 때	When it feels like no one understands me
+mood	시험 끝나고 해방감 느끼고 싶어	I want to feel free after finishing my exams
+mood	오랜만에 옛날 친구들이 그리워지는 밤	A night when I suddenly miss old friends
+mood	괜히 설레는 봄날 오후	A spring afternoon when I feel fluttery for no reason
+mood	누군가에게 위로받고 싶은 저녁	An evening when I want someone to comfort me
+mood	지친 하루 끝에 나를 다독여주는 느낌	A feeling of being soothed at the end of an exhausting day
+mood	이유 없이 눈물이 날 것 같은 날	A day when I feel like crying for no reason
+mood	혼자인 게 편하면서도 외로운 밤	A night when being alone feels comfortable yet lonely
+mood	새로운 시작을 앞두고 두근거리는 마음	A heart pounding before a new beginning
+mood	다 포기하고 싶을 때 힘이 되는 이야기	A story that gives me strength when I want to give up on everything
+mood	어린 시절 여름방학으로 돌아간 기분	Feeling like I'm back in a childhood summer vacation
+mood	짝사랑하는 사람 생각에 잠 못 드는 밤	A sleepless night thinking about my secret crush
+mood	가을이 되면 괜히 쓸쓸해지는 마음	The loneliness that comes for no reason when autumn arrives
+mood	모든 게 잘 될 것 같은 희망찬 아침	A hopeful morning when everything seems like it will be fine
+scene	눈 오는 날 창밖을 보며 마시는 따뜻한 차	Warm tea while watching the snow fall outside the window
+scene	한적한 시골 마을에서 보내는 느린 하루	A slow day spent in a quiet country village
+scene	비 내리는 도시의 네온사인 거리	Neon-lit city streets in the rain
+scene	노을 지는 바닷가를 혼자 걷는 저녁	An evening walking alone on a beach at sunset
+scene	오래된 도서관의 먼지 냄새	The dusty smell of an old library
+scene	캠핑장에서 모닥불을 바라보는 밤	A night watching the campfire at a campsite
+scene	사람 없는 새벽 지하철	An empty subway at dawn
+scene	햇살 가득한 일요일 아침 부엌	A sunny Sunday morning kitchen
+scene	안개 낀 숲속을 걷는 느낌	The feeling of walking through a foggy forest
+scene	한여름 밤 옥상에서 별 보기	Stargazing on a rooftop on a midsummer night
+scene	크리스마스 이브의 북적이는 거리	Bustling streets on Christmas Eve
+scene	파도 소리만 들리는 조용한 해변	A quiet beach where only the sound of waves can be heard
+scene	낡은 LP판이 돌아가는 작은 바	A small bar with an old vinyl record spinning
+scene	벚꽃이 흩날리는 강변 산책로	A riverside walkway with cherry blossoms drifting
+scene	늦은 밤 혼자 남은 사무실	An office late at night where I'm the only one left
+content	시간을 되돌릴 수 있게 된 남자의 이야기	The story of a man who becomes able to turn back time
+content	인공지능과 사랑에 빠지는 영화	A movie about falling in love with an artificial intelligence
+content	조선시대를 배경으로 한 미스터리 소설	A mystery novel set in the Joseon dynasty
+content	좀비가 나오는데 무섭지 않은 영화	A zombie movie that isn't scary
+content	평범한 회사원이 주인공인 성장 이야기	A coming-of-age story about an ordinary office worker
+content	우주에서 혼자 살아남는 이야기	A story about surviving alone in space
+content	엄마와 딸의 관계를 다룬 따뜻한 소설	A warm novel about the relationship between a mother and daughter
+content	실화를 바탕으로 한 감동적인 스포츠 영화	A moving sports movie based on a true story
+content	마법 학교에 입학한 아이의 모험	The adventure of a child who enters a magic school
+content	범인이 누군지 끝까지 모르는 추리 소설	A detective novel where you don't know the culprit until the end
+content	음악을 꿈꾸는 청춘들의 이야기	A story about young people who dream of music
+content	전쟁 속에서 피어난 사랑 이야기	A love story that blossoms during war
+content	고양이가 주인공인 힐링 만화	A healing comic with a cat as the main character
+content	뉴욕을 배경으로 한 로맨틱 코미디	A romantic comedy set in New York
+content	인간의 욕망을 파헤치는 어두운 드라마	A dark drama that digs into human desire
+content	요리로 사람들을 위로하는 식당 이야기	A story about a restaurant that comforts people with food
+content	디스토피아 미래 사회를 그린 소설	A novel depicting a dystopian future society
+content	가족의 비밀이 하나씩 드러나는 영화	A movie where family secrets are revealed one by one
+content	락 밴드의 흥망성쇠를 다룬 다큐멘터리	A documentary about the rise and fall of a rock band
+content	여자 혼자 세계를 여행하는 에세이	An essay about a woman traveling the world alone
+music	몽환적인 분위기의 여성 보컬 노래	Dreamy songs with female vocals
+music	90년대 감성의 R&B	R&B with a 90s feel
+music	어쿠스틱 기타 하나로 부르는 담담한 노래	Understated songs sung with just an acoustic guitar
+music	가사가 시 같은 인디 음악	Indie music with poetic lyrics
+music	웅장한 오케스트라 영화 음악	Grand orchestral film scores
+music	비트가 묵직한 힙합	Hip hop with heavy beats
+music	파티에서 다 같이 떼창할 수 있는 노래	Songs everyone can sing along to at a party
+music	듣기만 해도 여름이 느껴지는 청량한 노래	Refreshing songs that feel like summer just by listening
+music	새벽 감성 가득한 로파이 비트	Lo-fi beats full of late-night feelings
+music	사랑 고백할 때 틀면 좋은 노래	A song to play when confessing love
+colloquial	심심한데 볼 거 없나	I'm bored, anything to watch?
+colloquial	요즘 핫한 노래 뭐 있어	What songs are hot these days?
+colloquial	개웃긴 영화 추천 ㄱㄱ	Recommend a hilarious movie, go
+colloquial	머리 식히고 싶어	I want to clear my head
+colloquial	뭔가 몽글몽글한 거	Something soft and fuzzy-feeling
+colloquial	감성 터지는 노래 없나요	Any songs that are overflowing with emotion?
+colloquial	킬링타임용 영화 ㅊㅊ	Recommend a movie for killing time
+colloquial	찐으로 소름 돋는 스릴러	A thriller that genuinely gives me chills
+colloquial	잔잔하게 보기 좋은 거 없을까요	Is there something calm and easy to watch?
+colloquial	울고 싶은데 울려줄 영화	A movie that will make me cry because I want to cry
+reference	인터스텔라 같은 우주 영화	A space movie like Interstellar
+reference	해리포터 같은 판타지 소설	A fantasy novel like Harry Potter
+reference	아이유 노래 같은 잔잔한 발라드	Calm ballads like IU's songs
+reference	지브리 감성의 애니메이션	Animation with a Ghibli feel
+reference	비포 선라이즈처럼 대화가 많은 로맨스	A dialogue-heavy romance like Before Sunrise
