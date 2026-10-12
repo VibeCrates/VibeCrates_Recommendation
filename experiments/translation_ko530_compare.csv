@@ -1,0 +1,531 @@
+query,n,opus,gemma,dict,served
+주말 오후,1312,It's a weekend afternoon.,weekend afternoon,weekend afternoon,weekend afternoon
+숲,1299,Forest,forest,forest,forest
+심리학,1298,Psychology,psychology,psychology,psychology
+재즈,1291,jazz,jazz,jazz,jazz
+보사노바,1290,Bosanoba,bossa nova,bossa nova,bossa nova
+공부할 때,1287,"When I was studying,",studying music,for studying,for studying
+판타지,1286,Fantasy,fantasy,fantasy,fantasy
+겨울 아침,1282,Winter morning.,winter morning,winter morning,winter morning
+우정,1280,Friendship.,friendship,friendship,friendship
+코미디,1279,Comedy.,comedy,comedy,comedy
+잠들기 전,1275,Before you go to sleep.,Before bed,before bed,before bed
+강아지,1264,Puppy,puppy,puppy,puppy
+복수,1260,Vengeance.,revenge,revenge,revenge
+바다,1259,Sea,sea,sea,sea
+첫사랑,1253,First Love,first love,first love,first love
+시집,1252,Indulgent,poetry collections,poetry collection,poetry collection
+여행,1252,Travel,travel,travel,travel
+생존,1252,Survival,survival,survival,survival
+스릴러,1247,Thriller,thriller,thriller,thriller
+전쟁,1247,WAR,war,war,war
+시간여행,1246,Time travel,time travel,time travel,time travel
+다큐멘터리,1242,documentary,documentary,documentary,documentary
+클래식,1242,Classical,classical,classical,classical
+시티팝,1241,Citipop,city pop,city pop,city pop
+로맨스,1241,Romance,romance,romance,romance
+인디,1240,Indy.,indie,indie,indie
+경제,1240,Economics,economics,economics,economics
+운동할 때,1239,"When you're in the sport,",workout music,for working out,for working out
+기차,1236,Train,train,train,train
+힙합,1235,Hip-hop,hip hop,hip hop,hip hop
+로파이,1235,Lofai,lofi,lo-fi,lo-fi
+이별,1233,DIVORCE,breakup,breakup,breakup
+자기계발,1232,Self - help,self-improvement,self-help,self-help
+발라드,1227,Valad,ballad,ballad,ballad
+마법,1226,Magic.,magic,magic,magic
+새벽 감성,1226,Dawn Sensitivity,dawn feelings,late-night sentimental mood,late-night sentimental mood
+비 오는 날,1226,It's raining.,rainy days,rainy day,rainy day
+고양이,1224,Cat.,cats,cats,cats
+철학,1221,Philosophy.,philosophy,philosophy,philosophy
+범죄,1217,Crime,crime,crime,crime
+성장,1216,Growth,coming-of-age,coming-of-age,coming-of-age
+역사,1215,History,history,history,history
+여름 밤,1214,Summer Night,summer night,summer night,summer night
+가족,1213,Family,family,family,family
+록,1212,Rock,rock,rock,rock
+에세이,1212,Essei,essays,essays,essays
+도시,1209,City,city,city,city
+공포,1207,Fear.,horror,horror,horror
+드라이브,1204,Drive,driving,driving,driving
+퇴근길,1203,Getting Out of the Way,evening commute,commute home,commute home
+로봇,1202,Robot,robots,robots,robots
+추리소설,1192,The Story of Reason,mystery novels,mystery novels,mystery novels
+요리,1192,Cooking,cooking,cooking,cooking
+사막,1187,Desert,desert,desert,desert
+피아노,1187,Piano,piano,piano,piano
+모험,1172,EVOLUTION,adventure,adventure,adventure
+애니메이션,1172,Animation,animation,animation,animation
+인공지능,1166,AI,artificial intelligence,artificial intelligence,artificial intelligence
+우주,1164,Space,space,space,space
+사랑,31,Love.,love,love,love
+재미,18,Fun.,fun,fun,fun
+화가,18,An artist.,anger,painter,painter
+비 오는 날 듣기 좋은 노래,17,It's a good song to hear on the rainy day.,songs for rainy days,rainy day songs,rainy day songs
+잠 안 오는 밤,17,The night you're not sleeping.,sleepless nights,sleepless nights,sleepless nights
+드라이브 드라이브,10,Drive,driving music,driving driving,driving driving
+재즈 비 오는 날,9,"On the day of jazz rain,",jazz rainy days,jazz rainy day,jazz rainy day
+비 오는 날 공포,9,Fear the rainy day.,rainy day horror,rainy day horror,rainy day horror
+비 오는 날 새벽 감성,8,Dawn emotion on rainy day,rainy day late-night mood,rainy day late-night sentimental mood,rainy day late-night sentimental mood
+시간여행 시간여행,8,Time travel time travel,time travel,time travel time travel,time travel time travel
+여름 밤 비 오는 날,8,"On the rainy day of the summer night,",summer night rainy day,summer night rainy day,summer night rainy day
+새벽 감성 첫사랑,7,First love of dawn,dawn feelings first love,late-night sentimental mood first love,late-night sentimental mood first love
+자기계발 여름 밤,7,A summer night of self-help.,self-improvement summer night,self-help summer night,self-help summer night
+새벽 감성 자기계발,7,"In the morning, self-awareness.",dawn feelings self-improvement,late-night sentimental mood self-help,late-night sentimental mood self-help
+공포 첫사랑,7,First love of horror.,horror first love,horror first love,horror first love
+새벽 감성 재즈,7,Morning mood jazz.,dawn mood jazz,late-night sentimental mood jazz,late-night sentimental mood jazz
+드라이브 공포,7,Drive fear.,driving horror,driving horror,driving horror
+새벽 감성 드라이브,7,Dawn-Sympathic Drive,dawn mood drive,late-night sentimental mood driving,late-night sentimental mood driving
+자기계발 새벽 감성,6,Self-sensitivity.,self-improvement morning mood,self-help late-night sentimental mood,self-help late-night sentimental mood
+새벽 감성 공포,6,"In the morning, the fear of emotion.",dawn emotional horror,late-night sentimental mood horror,late-night sentimental mood horror
+비 오는 날 고양이,6,Cat on a rainy day.,rainy day cats,rainy day cats,rainy day cats
+첫사랑 첫사랑,6,First Love and First Love,first love first love,first love first love,first love first love
+새벽 감성 시간여행,6,Dawn Stunning Time Travels,dawn emotional time travel,late-night sentimental mood time travel,late-night sentimental mood time travel
+시간여행 공포,6,Time travel. Fear.,time travel horror,time travel horror,time travel horror
+공포 새벽 감성,6,Fear dawns and moods.,horror dawn mood,horror late-night sentimental mood,horror late-night sentimental mood
+공포 자기계발,6,Fear of Self-Self.,horror self-improvement,horror self-help,horror self-help
+재즈 1,6,jazz 1,jazz 1,jazz 1,jazz 1
+공포 여름 밤,6,"Fear, summer night.",horror summer night,horror summer night,horror summer night
+자기계발 공포,6,Self-respecting fear.,self-help horror,self-help horror,self-help horror
+재즈 4,6,jazz 4,jazz 4,jazz 4,jazz 4
+재즈 2,6,jazz 2,jazz 2,jazz 2,jazz 2
+재즈 0,6,jazz 0,jazz 0,jazz 0,jazz 0
+비 오는 날 첫사랑,6,First love on the rainy day,rainy day first love,rainy day first love,rainy day first love
+재즈 3,6,jazz 3,jazz 3,jazz 3,jazz 3
+자기계발 고양이,5,A self-respecting cat.,self-help cats,self-help cats,self-help cats
+고양이 비 오는 날,5,"On the day of the cat's rain,",cats rainy day,cats rainy day,cats rainy day
+시간여행 드라이브,5,Time travel drive,time travel drive,time travel driving,time travel driving
+재즈 첫사랑,5,It's jazz first love.,jazz first love,jazz first love,jazz first love
+비 오는 날 자기계발,5,Self-help on the rainy day.,rainy day self-improvement,rainy day self-help,rainy day self-help
+공포 공포,5,Fear. Fear.,horror horror,horror horror,horror horror
+드라이브 시간여행,5,Drive Time Travel,driving time travel,driving time travel,driving time travel
+재즈 자기계발,5,jazz self-help.,jazz self-improvement,jazz self-help,jazz self-help
+재즈 재즈,5,jazz jazz,jazz jazz,jazz jazz,jazz jazz
+새벽 감성 새벽 감성,5,Dawn Emotion,dawn mood,late-night sentimental mood late-night sentimental mood,late-night sentimental mood late-night sentimental mood
+자기계발 재즈,5,Self-respected jazz.,self-help jazz,self-help jazz,self-help jazz
+자기계발 첫사랑,5,You're my first love.,self-improvement first love,self-help first love,self-help first love
+자기계발 드라이브,5,Self-singing Drives,self-improvement drive,self-help driving,self-help driving
+자기계발 비 오는 날,5,The day it rains.,self-improvement rainy days,self-help rainy day,self-help rainy day
+첫사랑 공포,4,First love and fear.,first love horror,first love horror,first love horror
+재즈 공포,4,jazz fear.,jazz horror,jazz horror,jazz horror
+공포 재즈,4,Fear jazz.,horror jazz,horror jazz,horror jazz
+비 오는 날 재즈,4,jazz on rainy days,rainy day jazz,rainy day jazz,rainy day jazz
+첫사랑 드라이브,4,First Love Drive,first love drive,first love driving,first love driving
+시간여행 비 오는 날,4,The day it rains.,time travel rainy day,time travel rainy day,time travel rainy day
+드라이브 여름 밤,4,Drive summer night,drive summer night,driving summer night,driving summer night
+첫사랑 시간여행,4,First Love Travel,first love time travel,first love time travel,first love time travel
+새벽 감성 여름 밤,4,"The dawn of the morning, the summer of the night.",dawn feelings summer night,late-night sentimental mood summer night,late-night sentimental mood summer night
+재즈 여름 밤,4,jazz summer night.,jazz summer night,jazz summer night,jazz summer night
+재즈 9,4,jazz 9,jazz 9,jazz 9,jazz 9
+첫사랑 비 오는 날,4,The day it rains with my first love,first love rainy day,first love rainy day,first love rainy day
+공포 시간여행,4,Fear-time travel.,horror time travel,horror time travel,horror time travel
+첫사랑 여름 밤,4,"First love, summer night.",first love summer night,first love summer night,first love summer night
+재즈 8,4,jazz 8,jazz 8,jazz 8,jazz 8
+비 오는 날 드라이브,4,Drive on a rainy day,rainy day drive,rainy day driving,rainy day driving
+재즈 5,4,jazz 5,jazz 5,jazz 5,jazz 5
+재즈 6,4,jazz 6,jazz 6,jazz 6,jazz 6
+공포 비 오는 날,4,"On the day of the horror,",horror rainy days,horror rainy day,horror rainy day
+시간여행 여름 밤,4,"Time travel, summer night.",time travel summer night,time travel summer night,time travel summer night
+재즈 7,4,jazz 7,jazz 7,jazz 7,jazz 7
+새벽 감성 고양이,4,Morning mood cat.,dawn feelings cat,late-night sentimental mood cats,late-night sentimental mood cats
+공포 드라이브,3,Fear drive.,horror drive,horror driving,horror driving
+여름 밤 여름 밤,3,Summer night. Summer night.,summer night,summer night summer night,summer night summer night
+공포 고양이,3,Fearcat.,horror cats,horror cats,horror cats
+여름 밤 시간여행,3,Summer Night Travel,summer night time travel,summer night time travel,summer night time travel
+고양이 드라이브,3,Cat Drive,cat drive,cats driving,cats driving
+드라이브 재즈,3,Drive jazz,driving jazz,driving jazz,driving jazz
+첫사랑 고양이,3,First love and cat.,first love cats,first love cats,first love cats
+재즈 고양이,3,The jazz cat.,jazz cats,jazz cats,jazz cats
+시간여행 첫사랑,3,First Love of Time Travel,time travel first love,time travel first love,time travel first love
+여름 밤 첫사랑,3,First love of summer night,summer night first love,summer night first love,summer night first love
+비 오는 오후의 조용한 시간,3,"It's raining, quiet time in the afternoon.",quiet time on a rainy afternoon,rainy afternoon quiet time,rainy afternoon quiet time
+시간여행 고양이,3,Time travel cat.,time travel cat,time travel cats,time travel cats
+고양이 재즈,3,Cat jazz.,cat jazz,cats jazz,cats jazz
+시간여행 재즈,3,"Time travel, jazz.",time travel jazz,time travel jazz,time travel jazz
+드라이브 자기계발,3,Drive Self-Singing,driving self-improvement,driving self-help,driving self-help
+드라이브 고양이,3,Drive Cat,driving cats,driving cats,driving cats
+비 오는 날 듣기 좋은 음악,3,Good music to hear on the rainy day.,music for rainy days,rainy day music,rainy day music
+이유,3,Reasons,reason,reason,reason
+비 오는 날 시간여행,3,Time travel on rainy days,rainy day time travel,rainy day time travel,rainy day time travel
+고양이 공포,3,Cat fear.,cat horror,cats horror,cats horror
+첫사랑 재즈,3,"First love, jazz.",first love jazz,first love jazz,first love jazz
+드라이브 첫사랑,3,Drive's first love,driving first love,driving first love,driving first love
+여름 밤 재즈,3,It's a summer night jazz.,summer night jazz,summer night jazz,summer night jazz
+시간여행 자기계발,3,Time travel. Self-awareness.,time travel self-improvement,time travel self-help,time travel self-help
+재즈 15,2,jazz 15,jazz 15,jazz 15,jazz 15
+재즈 17,2,jazz 17,jazz 17,jazz 17,jazz 17
+재즈 13,2,jazz 13,jazz 13,jazz 13,jazz 13
+여름 밤 자기계발,2,Summer night self-help.,summer night self-improvement,summer night self-help,summer night self-help
+이별 생존,2,Survival of the House,breakup survival,breakup survival,breakup survival
+재즈 12,2,jazz 12,jazz 12,jazz 12,jazz 12
+재즈 11,2,jazz 11,jazz 11,jazz 11,jazz 11
+재즈 10,2,jazz 10,jazz 10,jazz 10,jazz 10
+재즈 새벽 감성,2,jazz Dawn Sensitivity,jazz morning mood,jazz late-night sentimental mood,jazz late-night sentimental mood
+심리학 운동할 때,2,"When you're in psychology,",psychology for exercise,psychology for working out,psychology for working out
+보사노바 첫사랑,2,Bosanoba's first love.,bossa nova first love,bossa nova first love,bossa nova first love
+첫사랑 자기계발,2,"First Love, Self-Assistance",first love self-improvement,first love self-help,first love self-help
+여름 밤 공포,2,Summer night fear.,summer night horror,summer night horror,summer night horror
+인디 클래식,2,Indy Classic,indie classic,indie classical,indie classical
+테스트,2,Test,test,test,test
+자기계발 자기계발,2,Self-sensitivity.,self-improvement,self-help self-help,self-help self-help
+겨울 밤 기차역,2,Winter night train station.,winter night train station,winter night train station,winter night train station
+록 스릴러,2,Rock Thriller,rock thriller,rock thriller,rock thriller
+전쟁 로맨스,2,The Romance of War,war romance,war romance,war romance
+재즈 16,2,jazz 16,jazz 16,jazz 16,jazz 16
+드라이브 비 오는 날,2,"On the day of the drive's rain,",driving rainy day,driving rainy day,driving rainy day
+재즈 18,2,jazz 18,jazz 18,jazz 18,jazz 18
+자기계발 우정,2,Self-involved friendships.,self-improvement friendship,self-help friendship,self-help friendship
+드라이브 새벽 감성,2,Drive Dawn Sensitivity,"drive, early morning mood",driving late-night sentimental mood,driving late-night sentimental mood
+새벽 감성 비 오는 날,2,"On the day of dawn when the feeling of emotion arrives,",dawn feelings rainy day,late-night sentimental mood rainy day,late-night sentimental mood rainy day
+애니메이션 시간여행,2,Animation Time Travel,animation time travel,animation time travel,animation time travel
+로봇 기차,2,Robot Trains,robot train,robots train,robots train
+여름 밤 고양이,2,The cat on the summer night.,summer night cats,summer night cats,summer night cats
+고양이 첫사랑,2,Cat's first love.,cat first love,cats first love,cats first love
+재즈 시간여행,2,The jazz time travel.,jazz time travel,jazz time travel,jazz time travel
+재즈 19,2,jazz 19,jazz 19,jazz 19,jazz 19
+고양이 자기계발,2,Cat Self-Single,cat self-improvement,cats self-help,cats self-help
+고양이 고양이,2,Cat.,cat cat,cats cats,cats cats
+재즈 드라이브,2,jazz Drive,jazz drive,jazz driving,jazz driving
+고양이 시간여행,2,Cat Time Travel,cat time travel,cats time travel,cats time travel
+첫사랑 새벽 감성,2,"First Love, Dawn Emotion","first love, dawn feeling",first love late-night sentimental mood,first love late-night sentimental mood
+역사 시집,2,History Time and Time,historical poetry collections,history poetry collection,history poetry collection
+비 오는 날 여름 밤,2,"Summer night, rainy day.",rainy summer night,rainy day summer night,rainy day summer night
+고양이 범죄,2,Cat crime.,cat crime,cats crime,cats crime
+로맨스 가족,2,Romance.,romance family,romance family,romance family
+발라드 주말 오후,2,The weekend afternoon of Ballard.,ballad weekend afternoon,ballad weekend afternoon,ballad weekend afternoon
+비 오는 날 비 오는 날,2,The day it rains,rainy days,rainy day rainy day,rainy day rainy day
+재즈 14,2,jazz 14,jazz 14,jazz 14,jazz 14
+고양이 여름 밤,2,Cat's summer night.,cat summer night,cats summer night,cats summer night
+범죄 기차,2,Crime Trains,crime train,crime train,crime train
+시간여행 경제,1,Time travel economy,time travel economics,time travel economics,time travel economics
+도시 범죄,1,Urban crime.,urban crime,city crime,city crime
+여름 밤 드라이브,1,Summer Night Drive,summer night drive,summer night driving,summer night driving
+발라드 인디,1,Valad Indy.,ballad indie,ballad indie,ballad indie
+기차 겨울 아침,1,Train winter morning.,train winter morning,train winter morning,train winter morning
+여행 성장,1,Travel Growth,travel growth,travel coming-of-age,travel coming-of-age
+경제 생존,1,Economic Survival,economic survival,economics survival,economics survival
+새벽 감성 퇴근길,1,I'm going home at dawn.,late-night feelings after work,late-night sentimental mood commute home,late-night sentimental mood commute home
+마법 요리,1,Magic cook.,magical cooking,magic cooking,magic cooking
+범죄 강아지,1,Criminal Puppy,crime puppy,crime puppy,crime puppy
+겨울 아침 요리,1,Winter breakfast.,winter morning cooking,winter morning cooking,winter morning cooking
+로파이 요리,1,Ropai.,lofi cooking,lo-fi cooking,lo-fi cooking
+다큐멘터리 바다,1,The documentary sea.,documentary ocean,documentary sea,documentary sea
+전쟁 겨울 아침,1,War winter morning.,war winter morning,war winter morning,war winter morning
+보사노바 시간여행,1,Bosanoba Time Travel,bossa nova time travel,bossa nova time travel,bossa nova time travel
+스릴러 이별,1,Thriller Family,thriller breakups,thriller breakup,thriller breakup
+발라드 에세이,1,Valard Esei,ballad essays,ballad essays,ballad essays
+숲 고양이,1,Forest cat.,forest cat,forest cats,forest cats
+주말 오후 여름 밤,1,It's a weekend afternoon summer night.,weekend summer night,weekend afternoon summer night,weekend afternoon summer night
+강아지 보사노바,1,Puppy Bosanoba,puppy bossa nova,puppy bossa nova,puppy bossa nova
+코미디 마법,1,Comedy Magic,comedy magic,comedy magic,comedy magic
+애니메이션 애니메이션,1,Animations,animation animation,animation animation,animation animation
+철학 도시,1,Philosophy City,philosophical city,philosophy city,philosophy city
+잠들기 전 시티팝,1,"Before you go to sleep, Citipop.",city pop before bed,before bed city pop,before bed city pop
+주말 오후 마법,1,The magic of the weekend afternoon.,magical weekend afternoon,weekend afternoon magic,weekend afternoon magic
+역사 강아지,1,History Puppy,historical dogs,history puppy,history puppy
+인공지능 주말 오후,1,AI weekend afternoon.,AI weekend afternoon,artificial intelligence weekend afternoon,artificial intelligence weekend afternoon
+자기계발 판타지,1,Self-generated fantasy.,self-improvement fantasy,self-help fantasy,self-help fantasy
+마법 고양이,1,Magic cats.,magical cats,magic cats,magic cats
+애니메이션 우주,1,Animation Universe,animation space,animation space,animation space
+강아지 철학,1,Puppy philosophy.,dog philosophy,puppy philosophy,puppy philosophy
+로파이 시간여행,1,Lopei Time Travel,lofi time travel,lo-fi time travel,lo-fi time travel
+피아노 우주,1,The piano universe.,piano space,piano space,piano space
+도시 여행,1,City travel.,city travel,city travel,city travel
+여름 밤 생존,1,Survival on a summer night.,summer night survival,summer night survival,summer night survival
+판타지 공포,1,Pantanic fear.,fantasy horror,fantasy horror,fantasy horror
+첫사랑 스릴러,1,First Love Thriller,first love thriller,first love thriller,first love thriller
+록 보사노바,1,Rock Bosanoba,rock bossa nova,rock bossa nova,rock bossa nova
+재즈 성장,1,jazz Growth,jazz coming-of-age,jazz coming-of-age,jazz coming-of-age
+보사노바 복수,1,Bosanoba's revenge.,bossa nova revenge,bossa nova revenge,bossa nova revenge
+고양이 마법,1,Cat magic.,cat magic,cats magic,cats magic
+가족 강아지,1,Family Puppy,family dog,family puppy,family puppy
+자기계발 강아지,1,A self - help puppy.,self-help dogs,self-help puppy,self-help puppy
+범죄 공포,1,Crime fear.,crime horror,crime horror,crime horror
+복수 보사노바,1,Avenge bosanoba,revenge bossa nova,revenge bossa nova,revenge bossa nova
+철학 코미디,1,Philosophy Comedy.,philosophical comedy,philosophy comedy,philosophy comedy
+다큐멘터리 전쟁,1,The documentary war.,documentary war,documentary war,documentary war
+역사 잠들기 전,1,"Before history goes to sleep,",history before sleep,history before bed,history before bed
+숲 여행,1,Traveling the Forest,forest trip,forest travel,forest travel
+이별 역사,1,A DIVORCE HISTORY,breakup history,breakup history,breakup history
+주말 오후 가족,1,It's a weekend afternoon family.,weekend family afternoon,weekend afternoon family,weekend afternoon family
+비 오는 날 공부할 때,1,"When I was studying on the rainy day,",rainy day study,rainy day for studying,rainy day for studying
+숲 시간여행,1,The Forest Time Travel,forest time travel,forest time travel,forest time travel
+철학 애니메이션,1,Philosophy Animation,philosophical animation,philosophy animation,philosophy animation
+마법 모험,1,Magic adventures.,magical adventure,magic adventure,magic adventure
+여름 밤 모험,1,A summer night adventure.,summer night adventure,summer night adventure,summer night adventure
+시티팝 첫사랑,1,City Pop's First Love,city pop first love,city pop first love,city pop first love
+판타지 로봇,1,Fantasy Robots,fantasy robots,fantasy robots,fantasy robots
+잠들기 전 모험,1,An adventure before you go to sleep.,adventure before bed,before bed adventure,before bed adventure
+우주 성장,1,Space Growth,space growth,space coming-of-age,space coming-of-age
+시간여행 새벽 감성,1,Time travel early in the morning.,"time travel, dawn feeling",time travel late-night sentimental mood,time travel late-night sentimental mood
+발라드 고양이,1,The Valad Cat.,ballad cats,ballad cats,ballad cats
+여름 밤 여행,1,A summer night trip.,summer night trip,summer night travel,summer night travel
+인공지능 이별,1,AI DIVIDE DIVORCE,AI breakup,artificial intelligence breakup,artificial intelligence breakup
+드라이브 이별,1,Drives Separation,driving breakup,driving breakup,driving breakup
+도시 역사,1,City History,city history,city history,city history
+코미디 로봇,1,Comedy Robot,comedy robots,comedy robots,comedy robots
+시집 성장,1,Indulgent Growth,poetry of growth,poetry collection coming-of-age,poetry collection coming-of-age
+바다 다큐멘터리,1,Sea documentary,sea documentaries,sea documentary,sea documentary
+공부할 때 고양이,1,"When I was studying, I was a cat.",cats for studying,for studying cats,for studying cats
+발라드 록,1,Ballad Rock,ballad rock,ballad rock,ballad rock
+발라드 발라드,1,Valad Ballad,ballad ballad,ballad ballad,ballad ballad
+애니메이션 모험,1,An animation adventure.,animation adventure,animation adventure,animation adventure
+비 오는 날 겨울 아침,1,"Winter morning, rainy day.",rainy winter morning,rainy day winter morning,rainy day winter morning
+록 우정,1,Rock friendship.,rock friendship,rock friendship,rock friendship
+도시 인디,1,Indy City,city indie,city indie,city indie
+운동할 때 피아노,1,The piano when you're playing.,piano for exercise,for working out piano,for working out piano
+록 시티팝,1,Rock City Pop.,rock city pop,rock city pop,rock city pop
+애니메이션 로파이,1,The Animation of the Fai,animation lo-fi,animation lo-fi,animation lo-fi
+힙합 로맨스,1,The Romance of hip - hop,hip-hop romance,hip hop romance,hip hop romance
+인디 시집,1,Indy.,indie poetry collections,indie poetry collection,indie poetry collection
+범죄 전쟁,1,Crime War,crime war,crime war,crime war
+로봇 로맨스,1,Robot romances,robot romance,robots romance,robots romance
+퇴근길 시간여행,1,Time to Go Home,commute time travel,commute home time travel,commute home time travel
+역사 로맨스,1,The Romance of History,historical romance,history romance,history romance
+재즈 주말 오후,1,It's jazz weekend afternoon.,jazz weekend afternoon,jazz weekend afternoon,jazz weekend afternoon
+고양이 새벽 감성,1,Cat dawns emotion,cat 새벽 feeling,cats late-night sentimental mood,cats late-night sentimental mood
+여름 밤 새벽 감성,1,Summer Night Dawn Emotion,summer night late-night mood,summer night late-night sentimental mood,summer night late-night sentimental mood
+심리학 새벽 감성,1,Psychology Dawn Sensitivity,psychology late-night mood,psychology late-night sentimental mood,psychology late-night sentimental mood
+경제 우정,1,Economic friendship.,economic friendship,economics friendship,economics friendship
+여행 숲,1,Travel Forests,travel forest,travel forest,travel forest
+경제 로맨스,1,Economic Romance,economic romance,economics romance,economics romance
+강아지 시간여행,1,Puppy Time Travels,dog time travel,puppy time travel,puppy time travel
+시집 역사,1,Indulgent History,poetry history,poetry collection history,poetry collection history
+발라드 재즈,1,Balad jazz.,ballad jazz,ballad jazz,ballad jazz
+보사노바 성장,1,Bosanoba Growth,bossa nova growth,bossa nova coming-of-age,bossa nova coming-of-age
+겨울 아침 발라드,1,"Winter Morning, Ballard.",winter morning ballad,winter morning ballad,winter morning ballad
+발라드 여행,1,Travel by Valad.,ballad trip,ballad travel,ballad travel
+에세이 성장,1,Essei Growth,coming-of-age essays,essays coming-of-age,essays coming-of-age
+다큐멘터리 첫사랑,1,The documentary's first love.,documentary first love,documentary first love,documentary first love
+숲 가족,1,The forest family.,forest family,forest family,forest family
+기차 퇴근길,1,Getting Out of the Train,train ride home,train commute home,train commute home
+범죄 비 오는 날,1,"On the day of the crime crisis,",crime on a rainy day,crime rainy day,crime rainy day
+여름 밤 마법,1,The magic of the summer night.,summer night magic,summer night magic,summer night magic
+주말 오후 인디,1,It's a weekend afternoon in Indy.,weekend afternoon indie,weekend afternoon indie,weekend afternoon indie
+성장 코미디,1,Growing Comedy,coming-of-age comedy,coming-of-age comedy,coming-of-age comedy
+클래식 보사노바,1,Classic Bosanoba,classic bossa nova,classical bossa nova,classical bossa nova
+우주 비 오는 날,1,"On the day of the rain in space,",rainy space day,space rainy day,space rainy day
+자기계발 퇴근길,1,You're on your way home from work.,self-improvement commute home,self-help commute home,self-help commute home
+요리 보사노바,1,Cooking Bosanoba,cooking bossa nova,cooking bossa nova,cooking bossa nova
+복수 범죄,1,Revenge Crime,revenge crime,revenge crime,revenge crime
+우정 판타지,1,Friendship fantasy.,friendship fantasy,friendship fantasy,friendship fantasy
+겨울 아침 로파이,1,Rai in the Winter Morning,winter morning lo-fi,winter morning lo-fi,winter morning lo-fi
+로파이 여름 밤,1,Lofai summer night.,lofi summer night,lo-fi summer night,lo-fi summer night
+잠들기 전 로파이,1,Lopei before you go to sleep.,lofi before sleep,before bed lo-fi,before bed lo-fi
+새벽 감성 시집,1,The Morning Emotion Concealed,dawn mood poetry collections,late-night sentimental mood poetry collection,late-night sentimental mood poetry collection
+로맨스 도시,1,Romantic City,romance city,romance city,romance city
+힙합 인공지능,1,hip-hop AI,hip-hop AI,hip hop artificial intelligence,hip hop artificial intelligence
+겨울 아침 생존,1,Winter morning survival.,winter morning survival,winter morning survival,winter morning survival
+심리학 클래식,1,Psychology Classics,psychology classics,psychology classical,psychology classical
+로파이 코미디,1,Lofay Comedy.,lofi comedy,lo-fi comedy,lo-fi comedy
+바다 로맨스,1,The Romance of the Sea,sea romance,sea romance,sea romance
+고양이 시티팝,1,Cat City Pop.,cat city pop,cats city pop,cats city pop
+추리소설 로맨스,1,The Romance of Reason Stories,mystery romance novels,mystery novels romance,mystery novels romance
+범죄 여행,1,Crime Travel,crime journey,crime travel,crime travel
+가족 바다,1,Family water.,family beach,family sea,family sea
+보사노바 인공지능,1,Bosanoba AI,bossa nova AI,bossa nova artificial intelligence,bossa nova artificial intelligence
+여행 전쟁,1,Travel War,travel war,travel war,travel war
+도시 퇴근길,1,Getting out of the city.,city commute home,city commute home,city commute home
+시집 강아지,1,Indulgent Puppy,poetry dogs,poetry collection puppy,poetry collection puppy
+시간여행 복수,1,"Time travel, revenge.",time travel revenge,time travel revenge,time travel revenge
+도시 복수,1,The city's revenge.,urban revenge,city revenge,city revenge
+힙합 성장,1,Hip-hop growth,hip-hop coming-of-age,hip hop coming-of-age,hip hop coming-of-age
+공부할 때 공포,1,Fear when you're studying.,horror for studying,for studying horror,for studying horror
+모험 심리학,1,EVOLUTION MORALITY,adventure psychology,adventure psychology,adventure psychology
+클래식 이별,1,Classical Separation,classic breakup,classical breakup,classical breakup
+추리소설 생존,1,The Story of Reason Survives,mystery survival novels,mystery novels survival,mystery novels survival
+요리 이별,1,Cooking a Good Time,cooking breakup,cooking breakup,cooking breakup
+운동할 때 첫사랑,1,First love in sports.,first love workout,for working out first love,for working out first love
+로봇 요리,1,It's a robot dish.,robot cooking,robots cooking,robots cooking
+드라이브 로봇,1,Drive Robot,drive robot,driving robots,driving robots
+마법 스릴러,1,Magic thriller.,magical thriller,magic thriller,magic thriller
+범죄 마법,1,Crime Magic,crime magic,crime magic,crime magic
+역사 가족,1,History family.,historical family,history family,history family
+주말 오후 우정,1,It's a weekend afternoon friendship.,weekend afternoon friendship,weekend afternoon friendship,weekend afternoon friendship
+역사 퇴근길,1,The End of History,history commute home,history commute home,history commute home
+록 힙합,1,Rock hip-hop,rock hip hop,rock hip hop,rock hip hop
+애니메이션 다큐멘터리,1,Animation document,animation documentary,animation documentary,animation documentary
+요리 스릴러,1,Cooking Thriller,cooking thriller,cooking thriller,cooking thriller
+이별 사막,1,A House - to - House Desert,breakup desert,breakup desert,breakup desert
+강아지 우정,1,Puppy friendship.,puppy friendship,puppy friendship,puppy friendship
+우정 생존,1,Friendships survive.,friendship survival,friendship survival,friendship survival
+우정 시집,1,Friendship and Accompany,friendship poetry collections,friendship poetry collection,friendship poetry collection
+록 공포,1,Rock fear.,rock horror,rock horror,rock horror
+로파이 자기계발,1,Lofay Self-Sphere.,lofi self-improvement,lo-fi self-help,lo-fi self-help
+여름 밤 스릴러,1,Summer Night Thriller,summer night thriller,summer night thriller,summer night thriller
+강아지 재즈,1,Puppy jazz.,puppy jazz,puppy jazz,puppy jazz
+로맨스 겨울 아침,1,Romance winter morning.,romance winter morning,romance winter morning,romance winter morning
+로맨스 힙합,1,Romantic hip-hop.,romance hip hop,romance hip hop,romance hip hop
+우정 새벽 감성,1,Friendship dawns with emotion.,"friendship, dawn feeling",friendship late-night sentimental mood,friendship late-night sentimental mood
+성장 가족,1,A growing family.,coming-of-age family,coming-of-age family,coming-of-age family
+생존 코미디,1,Survival Comedy,survival comedy,survival comedy,survival comedy
+로파이 숲,1,Lofai Forest,lofi forest,lo-fi forest,lo-fi forest
+추리소설 공부할 때,1,"You know, when I was studying the judiciary novel,",mystery novels for studying,mystery novels for studying,mystery novels for studying
+다큐멘터리 드라이브,1,documentary drive,documentary drive,documentary driving,documentary driving
+추리소설 경제,1,The Fairy Story Economy,mystery economic novels,mystery novels economics,mystery novels economics
+판타지 운동할 때,1,"When you're playing fantasy,",fantasy workout,fantasy for working out,fantasy for working out
+록 로봇,1,Rock robot.,rock robots,rock robots,rock robots
+사막 시간여행,1,Desert Time Travels,desert time travel,desert time travel,desert time travel
+다큐멘터리 고양이,1,A documentary cat.,documentary cats,documentary cats,documentary cats
+강아지 주말 오후,1,Puppy weekend afternoon.,puppy weekend afternoon,puppy weekend afternoon,puppy weekend afternoon
+발라드 시간여행,1,Balad time travel,ballad time travel,ballad time travel,ballad time travel
+판타지 비 오는 날,1,The day it rains.,fantasy rainy days,fantasy rainy day,fantasy rainy day
+고양이 역사,1,Cat History,cat history,cats history,cats history
+마법 보사노바,1,Magic Bosanoba,magical bossa nova,magic bossa nova,magic bossa nova
+로파이 역사,1,Lofai History,lofi history,lo-fi history,lo-fi history
+우정 애니메이션,1,Friendship Animations,friendship animation,friendship animation,friendship animation
+추리소설 새벽 감성,1,The Dawn Emotion of the Logic novel,"mystery novels, dawn mood",mystery novels late-night sentimental mood,mystery novels late-night sentimental mood
+애니메이션 전쟁,1,Animation War,animation war,animation war,animation war
+주말 오후 퇴근길,1,I'm going home on a weekend afternoon.,weekend afternoon commute,weekend afternoon commute home,weekend afternoon commute home
+클래식 범죄,1,Classic crime.,classic crime,classical crime,classical crime
+힙합 도시,1,Hip-hop City,hip hop city,hip hop city,hip hop city
+로파이 록,1,Lofay Rock.,lofi rock,lo-fi rock,lo-fi rock
+운동할 때 코미디,1,"Comedy, when you're exercising.",comedy for working out,for working out comedy,for working out comedy
+애니메이션 겨울 아침,1,Animation winter morning,animated winter morning,animation winter morning,animation winter morning
+우주 첫사랑,1,First Love in the Universe,first love in space,space first love,space first love
+경제 코미디,1,Economic Comedy,economic comedy,economics comedy,economics comedy
+비 오는 날 듣기 좋은 재즈,1,Good jazz to hear on the rainy day.,jazz for rainy days,rainy day jazz,rainy day jazz
+잔잔한 재즈,1,Quiet jazz.,mellow jazz,calm jazz,calm jazz
+살ㅇ,1,Yeah.,life,,Yeah.
+ทน의 극한에서 인간 존재,1,Human beings at their limit.,"the limits of pain, human existence",,Human beings at their limit.
+잔잔한 영화 6,1,Squash Movie 6,calm movies 6,calm movie 6,calm movie 6
+잔잔한 영화 5,1,A calm movie 5,calm movies 5,calm movie 5,calm movie 5
+잔잔한 영화 4,1,A calm movie 4,calm movies 4,calm movie 4,calm movie 4
+잔잔한 영화 3,1,A calm movie 3,calm movies 3,calm movie 3,calm movie 3
+잔잔한 영화 2,1,Quiet movie two.,calm movies 2,calm movie 2,calm movie 2
+잔잔한 영화 1,1,Quiet movie one.,calm movies 1,calm movie 1,calm movie 1
+매정,1,Sacrificing.,coldheartedness,heartlessness,heartlessness
+하늘,1,Heaven,sky,sky,sky
+성장 록,1,Growing Rock,coming-of-age rock,coming-of-age rock,coming-of-age rock
+시간여행 스릴러,1,Time travel thriller,time travel thriller,time travel thriller,time travel thriller
+가족 로파이,1,Family Parties,family lo-fi,family lo-fi,family lo-fi
+잠들기 전 보사노바,1,"Before you go to sleep, Bosanoba.",Bossa nova before bed,before bed bossa nova,before bed bossa nova
+주말 오후 추리소설,1,weekend afternoon — The Story of Reason,weekend afternoon mystery novels,weekend afternoon mystery novels,weekend afternoon mystery novels
+마법 애니메이션,1,Magic animation,magical animation,magic animation,magic animation
+시티팝 가족,1,The Citipops.,city pop family,city pop family,city pop family
+퇴근길 이별,1,Getting Out of Home,evening commute breakup,commute home breakup,commute home breakup
+다큐멘터리 강아지,1,A documentary puppy.,documentary dogs,documentary puppy,documentary puppy
+록 심리학,1,Rock Psychology,rock psychology,rock psychology,rock psychology
+마법 비 오는 날,1,It's a magic day.,magical rainy day,magic rainy day,magic rainy day
+생존 에세이,1,Survival essay,survival essays,survival essays,survival essays
+다큐멘터리 마법,1,The documentary magic.,documentary magic,documentary magic,documentary magic
+인디 전쟁,1,Indy War,indie war,indie war,indie war
+인공지능 복수,1,AI. Avenge.,AI revenge,artificial intelligence revenge,artificial intelligence revenge
+바다 퇴근길,1,Get out of the ocean.,seaside commute home,sea commute home,sea commute home
+보사노바 모험,1,A Bosanoba adventure.,bossa nova adventure,bossa nova adventure,bossa nova adventure
+도시 클래식,1,City Classic,city classic,city classical,city classical
+도시 가족,1,City family.,city family,city family,city family
+클래식 여행,1,Classic travel.,classical trip,classical travel,classical travel
+인디 로맨스,1,Indie’s Romance,indie romance,indie romance,indie romance
+겨울 아침 가족,1,Winter morning family.,winter morning family,winter morning family,winter morning family
+시티팝 시티팝,1,Citipop.,city pop city pop,city pop city pop,city pop city pop
+새벽 감성 이별,1,The Morning Emotion Dwells,dawn heartbreak feelings,late-night sentimental mood breakup,late-night sentimental mood breakup
+강아지 클래식,1,Puppy Classics,puppy classical,puppy classical,puppy classical
+추리소설 피아노,1,Reasoning fiction piano,detective novels piano,mystery novels piano,mystery novels piano
+고양이 성장,1,Cats grow.,cat coming-of-age,cats coming-of-age,cats coming-of-age
+비 오는 날 우정,1,Friendship on rainy days.,rainy day friendship,rainy day friendship,rainy day friendship
+여름 밤 록,1,"Rock, summer night.",summer night rock,summer night rock,summer night rock
+판타지 전쟁,1,The Fantasy War,fantasy war,fantasy war,fantasy war
+심리학 경제,1,The Psychology Economy,psychology economics,psychology economics,psychology economics
+사막 사막,1,Desert Desert,desert desert,desert desert,desert desert
+인디 생존,1,Indy survive.,indie survival,indie survival,indie survival
+힙합 에세이,1,As told by hip - hop,hip hop essays,hip hop essays,hip hop essays
+재즈 발라드,1,jazz Ballad,jazz ballads,jazz ballad,jazz ballad
+스릴러 강아지,1,Thriller Puppy,thriller dogs,thriller puppy,thriller puppy
+전쟁 인디,1,The War in D,war indie,war indie,war indie
+겨울 아침 자기계발,1,"Winter morning, self-help.",winter morning self-improvement,winter morning self-help,winter morning self-help
+겨울 아침 인공지능,1,"Winter morning, artificial intelligence.",winter morning artificial intelligence,winter morning artificial intelligence,winter morning artificial intelligence
+공부할 때 자기계발,1,"When you're studying, you're self-respecting.",self-improvement for studying,for studying self-help,for studying self-help
+범죄 여름 밤,1,Crime summer night.,crime summer night,crime summer night,crime summer night
+피아노 클래식,1,Piano Classics,piano classical,piano classical,piano classical
+코미디 인디,1,Comedy Indi,comedy indie,comedy indie,comedy indie
+추리소설 첫사랑,1,The First Love in Reasoning Stories,mystery novels first love,mystery novels first love,mystery novels first love
+우정 역사,1,Friendship History,friendship history,friendship history,friendship history
+추리소설 에세이,1,"See the book “The Bible’s Viewpoint, ” published by Jehovah’s Witnesses, published by the Watchtower Bible and Tract Society of New York, Inc.",mystery novels essays,mystery novels essays,mystery novels essays
+모험 여행,1,Travel.,adventure travel,adventure travel,adventure travel
+겨울 아침 역사,1,Winter Morning History,winter morning history,winter morning history,winter morning history
+드라이브 우정,1,Drive Friendship,driving friendship,driving friendship,driving friendship
+비 오는 날 록,1,It's raining.,rainy day rock,rainy day rock,rainy day rock
+인공지능 겨울 아침,1,AI winter morning.,artificial intelligence winter morning,artificial intelligence winter morning,artificial intelligence winter morning
+경제 여름 밤,1,Economic Summer Night,economic summer night,economics summer night,economics summer night
+경제 인공지능,1,Economic AI,economic artificial intelligence,economics artificial intelligence,economics artificial intelligence
+여름 밤 숲,1,Summer Night Forest,summer night forest,summer night forest,summer night forest
+애니메이션 스릴러,1,Animation Thriller,animated thriller,animation thriller,animation thriller
+겨울 아침 판타지,1,Winter Morning Fantasy.,winter morning fantasy,winter morning fantasy,winter morning fantasy
+코미디 철학,1,Comedy philosophy.,comedy philosophy,comedy philosophy,comedy philosophy
+생존 도시,1,Survival City,survival city,survival city,survival city
+추리소설 발라드,1,The Logic novel ballad,mystery novels ballad,mystery novels ballad,mystery novels ballad
+드라이브 에세이,1,Drive essay,driving essays,driving essays,driving essays
+발라드 강아지,1,Balad Puppy,ballad puppies,ballad puppy,ballad puppy
+재즈 록,1,jazz Rock,jazz rock,jazz rock,jazz rock
+인공지능 첫사랑,1,AI's First Love,AI first love,artificial intelligence first love,artificial intelligence first love
+로봇 로봇,1,Robot.,robot robot,robots robots,robots robots
+드라이브 코미디,1,Drive Comedy,road trip comedy,driving comedy,driving comedy
+로파이 복수,1,Lofai's revenge.,lofi revenge,lo-fi revenge,lo-fi revenge
+고양이 여행,1,A trip to the cat.,cat travel,cats travel,cats travel
+퇴근길 사막,1,The Desert to Go Home,evening commute desert,commute home desert,commute home desert
+주말 오후 스릴러,1,It's a weekend afternoon thriller.,weekend afternoon thriller,weekend afternoon thriller,weekend afternoon thriller
+코미디 공포,1,Comedy fear.,comedy horror,comedy horror,comedy horror
+재즈 클래식,1,jazz Classics,jazz classics,jazz classical,jazz classical
+우주 도시,1,Space City,space city,space city,space city
+시집 클래식,1,Mother-in-law Classics,poetry collections classic,poetry collection classical,poetry collection classical
+기차 추리소설,1,Train Reasoning Stories,train mystery novels,train mystery novels,train mystery novels
+첫사랑 여행,1,First Love Travel,first love travel,first love travel,first love travel
+가족 인디,1,A Family Indi,family indie,family indie,family indie
+다큐멘터리 추리소설,1,A documentary reasoning novel,documentary mystery novels,documentary mystery novels,documentary mystery novels
+시티팝 에세이,1,Citipop essay,city pop essays,city pop essays,city pop essays
+애니메이션 사막,1,Animation Desert,animation desert,animation desert,animation desert
+바다 경제,1,Ocean Economy,sea economy,sea economics,sea economics
+클래식 고양이,1,Classic cat.,classic cats,classical cats,classical cats
+클래식 복수,1,Classic plural.,classic revenge,classical revenge,classical revenge
+모험 록,1,Rock of adventure,adventure rock,adventure rock,adventure rock
+요리 재즈,1,Cooking jazz,cooking jazz,cooking jazz,cooking jazz
+발라드 새벽 감성,1,Ballad dawn mood,ballad late-night mood,ballad late-night sentimental mood,ballad late-night sentimental mood
+시티팝 추리소설,1,Citipop Reasoning fiction,city pop mystery novels,city pop mystery novels,city pop mystery novels
+시집 퇴근길,1,Getting Home From Home,poetry collection for the commute home,poetry collection commute home,poetry collection commute home
+록 범죄,1,Rock crime.,rock crime,rock crime,rock crime
+에세이 고양이,1,Essei Cat.,cat essays,essays cats,essays cats
+사막 시집,1,Desert Residents,desert poetry collections,desert poetry collection,desert poetry collection
+드라이브 판타지,1,Drive Fantasy,driving fantasy,driving fantasy,driving fantasy
+역사 스릴러,1,History Thriller,historical thriller,history thriller,history thriller
+다큐멘터리 에세이,1,documentary essay,documentary essays,documentary essays,documentary essays
+주말 오후 시티팝,1,"It's a weekend afternoon, City Pop.",weekend afternoon city pop,weekend afternoon city pop,weekend afternoon city pop
+드라이브 철학,1,Drive philosophy.,driving philosophy,driving philosophy,driving philosophy
+판타지 피아노,1,Fantasy Piano,fantasy piano,fantasy piano,fantasy piano
+새벽 감성 인공지능,1,"In the morning, mood-sensitivity AI.",dawn feelings AI,late-night sentimental mood artificial intelligence,late-night sentimental mood artificial intelligence
+로파이 전쟁,1,The Ropai War,lofi war,lo-fi war,lo-fi war
+공부할 때 드라이브,1,Drive when studying,driving while studying,for studying driving,for studying driving
+시집 마법,1,The magic of getting married.,poetry magic,poetry collection magic,poetry collection magic
+도시 요리,1,City cooking.,city cooking,city cooking,city cooking
+시티팝 마법,1,Citipop Magic,city pop magic,city pop magic,city pop magic
+퇴근길 공포,1,Fear to go home.,commute horror,commute home horror,commute home horror
+철학 추리소설,1,philosophy Stories,philosophical mystery novels,philosophy mystery novels,philosophy mystery novels
+복수 추리소설,1,Avenge - Reason Stories,revenge mystery novels,revenge mystery novels,revenge mystery novels
+시티팝 바다,1,Citipop Sea,city pop ocean,city pop sea,city pop sea
+로파이 비 오는 날,1,The day it rains on Lofay.,lofi rainy days,lo-fi rainy day,lo-fi rainy day
+역사 로파이,1,History of Fai,historical lo-fi,history lo-fi,history lo-fi
+여름 밤 로맨스,1,Summer Night Romance,summer night romance,summer night romance,summer night romance
+로맨스 비 오는 날,1,The day of romance.,romance rainy days,romance rainy day,romance rainy day
+첫사랑 강아지,1,First Love and Puppy,first love puppy,first love puppy,first love puppy
+록 역사,1,Rock History,rock history,rock history,rock history
+기차 발라드,1,Train Ballad,train ballads,train ballad,train ballad
+겨울 아침 록,1,Winter Morning Rock,winter morning rock,winter morning rock,winter morning rock
+공포 겨울 아침,1,Fear winter morning.,horror winter morning,horror winter morning,horror winter morning
+비 오는 날 보사노바,1,Bosanoba on the rainy day,rainy day bossa nova,rainy day bossa nova,rainy day bossa nova
+시티팝 인디,1,Citipop Indy,city pop indie,city pop indie,city pop indie
+마법 로맨스,1,Magic romances,magical romance,magic romance,magic romance
+모험 로봇,1,Roboty.,adventure robot,adventure robots,adventure robots
+시간여행 잠들기 전,1,Before you go to sleep.,time travel before sleep,time travel before bed,time travel before bed
+전쟁 힙합,1,War hip-hop.,war hip hop,war hip hop,war hip hop
+인디 새벽 감성,1,Indy Dawn Sensation,indie late-night mood,indie late-night sentimental mood,indie late-night sentimental mood
+우정 공부할 때,1,"When I was studying for friendship,",studying friendship,friendship for studying,friendship for studying
+성장 우정,1,Growing friendship.,coming-of-age friendship,coming-of-age friendship,coming-of-age friendship
+다큐멘터리 이별,1,The documentary divides,documentary farewells,documentary breakup,documentary breakup
+여행 요리,1,Travel cooking.,travel cooking,travel cooking,travel cooking
+여름 밤 인디,1,"Indy, summer night.",summer night indie,summer night indie,summer night indie
+록 가족,1,The Rocks.,rock family,rock family,rock family
+보사노바 판타지,1,Bosanoba Fantasy,bossa nova fantasy,bossa nova fantasy,bossa nova fantasy
+요리 생존,1,Cooking Survives,cooking survival,cooking survival,cooking survival
+퇴근길 애니메이션,1,Homecoming Animation,commute animation,commute home animation,commute home animation
+이별 여름 밤,1,Good summer night.,breakup summer night,breakup summer night,breakup summer night
+자기계발 시간여행,1,Time travel by yourself.,self-improvement time travel,self-help time travel,self-help time travel

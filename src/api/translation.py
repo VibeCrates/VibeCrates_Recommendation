@@ -22,11 +22,20 @@ direct 0.857 / philosophical 0.783인데 poet만 0.632다.
 
 번역에 실패해도 요청을 죽이지 않는다. 원문을 그대로 인코딩하고 넘어간다 — 품질이
 떨어질 뿐 검색은 되며, 번역기 하나 때문에 서비스가 멈추는 편이 더 나쁘다.
+
+2026-10-12 — 사전을 먼저 본다:
+  백엔드가 실제로 보내는 검색어는 "시집", "로파이 비 오는 날" 같은 짧은 단어 조합이고,
+  opus-mt는 거기서 무너진다. 로그 530종 중 33.0%가 핵심어를 잃었다(시집 → "Indulgent",
+  보사노바 → "Bosanoba"). 그래서 검색어를 사전(ko_en_dict.json, scripts/build_translation_dict.py)
+  의 단어로 끝까지 쪼갤 수 있으면 사전 번역을 이어 붙이고, 하나라도 못 쪼개면 opus-mt로
+  넘긴다. 사전은 어휘 단위로만 맞으므로 문장형 검색어는 지금처럼 opus-mt가 옮긴다.
 """
+import json
 import logging
 import os
 import re
 import threading
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
@@ -36,6 +45,60 @@ HANGUL = re.compile(r"[가-힣]")
 MT_MODEL   = os.getenv("MT_MODEL", "Helsinki-NLP/opus-mt-ko-en")
 MT_ENABLED = os.getenv("TRANSLATE_QUERIES", "1").lower() not in ("0", "", "false", "no")
 MT_BEAMS   = int(os.getenv("MT_BEAMS", "4"))
+DICT_PATH  = os.getenv("KO_EN_DICT", str(Path(__file__).with_name("ko_en_dict.json")))
+
+# 사전 단어 뒤에 붙은 조사는 떼고 찾는다("바다의" → 바다). 긴 것부터 시도한다.
+# "처럼"·"같은"은 넣지 않는다 — "영화 같은 노래"를 "movie songs"로 붙이면 뜻이 바뀐다.
+PARTICLES = ("에서", "으로", "이랑", "의", "에", "을", "를", "은", "는", "이", "가",
+             "와", "과", "도", "로", "랑")
+
+
+class DictTranslator:
+    """검색어를 사전 단위로 끝까지 쪼갤 수 있을 때만 번역한다. 못 쪼개면 None."""
+
+    def __init__(self, path: str = DICT_PATH):
+        self.entries: dict[str, str] = {}
+        try:
+            with open(path, encoding="utf-8") as f:
+                self.entries = json.load(f)["entries"]
+            logger.info(f"번역 사전 {len(self.entries):,}개 적재: {path}")
+        except Exception as e:
+            # 사전이 없으면 opus-mt만으로 지금처럼 돈다.
+            logger.error(f"번역 사전 적재 실패 — opus-mt만 씁니다: {e}")
+        self.max_words = max((len(k.split()) for k in self.entries), default=0)
+
+    def _word(self, token: str) -> str | None:
+        key = token.lower()
+        if key in self.entries:
+            return self.entries[key]
+        # 조사 떼기는 남는 말이 두 글자 이상일 때만 — "시가"를 시(poetry)+가로 읽지 않게
+        for p in PARTICLES:
+            stem = key[:-len(p)]
+            if key.endswith(p) and len(stem) >= 2 and stem in self.entries:
+                return self.entries[stem]
+        if not HANGUL.search(token):
+            return token          # 숫자·영어 단어는 그대로 둔다("재즈 3", "BTS 발라드")
+        return None
+
+    def translate(self, text: str) -> str | None:
+        toks = text.split()
+        out, i = [], 0
+        while i < len(toks):
+            # 여러 어절짜리 단위("비 오는 날", "주말 오후")를 먼저 본다
+            for n in range(min(self.max_words, len(toks) - i), 1, -1):
+                phrase = " ".join(toks[i:i + n]).lower()
+                if phrase in self.entries:
+                    out.append(self.entries[phrase])
+                    i += n
+                    break
+            else:
+                w = self._word(toks[i])
+                if w is None:
+                    return None
+                out.append(w)
+                i += 1
+        result = " ".join(w for w in out if w)
+        return result or None
 
 
 class QueryTranslator:
@@ -51,6 +114,7 @@ class QueryTranslator:
         self._tokenizer = None
         self._lock = threading.Lock()
         self._failed = False          # 한 번 실패하면 매 요청마다 재시도하지 않는다
+        self.dictionary = DictTranslator()
 
     def _ensure_loaded(self) -> bool:
         if self._model is not None:
@@ -83,9 +147,20 @@ class QueryTranslator:
         """한글이 든 것만 번역해 돌려준다. 나머지는 원문 그대로."""
         import torch
 
-        targets = [i for i, t in enumerate(texts) if self.needs_translation(t)]
+        result = list(texts)
+        targets = []
+        for i, t in enumerate(texts):
+            if not self.needs_translation(t):
+                continue
+            hit = self.dictionary.translate(t)
+            if hit is not None:
+                logger.info(f"번역(사전): {t!r} → {hit!r}")
+                result[i] = hit
+            else:
+                targets.append(i)
+        # 사전으로 다 풀리면 opus-mt를 올리지도 않는다
         if not targets or not self._ensure_loaded():
-            return list(texts)
+            return result
 
         try:
             batch = self._tokenizer([texts[i] for i in targets],
@@ -95,9 +170,8 @@ class QueryTranslator:
             decoded = self._tokenizer.batch_decode(out, skip_special_tokens=True)
         except Exception as e:
             logger.error(f"번역 실패 — 원문을 그대로 인코딩합니다: {e}")
-            return list(texts)
+            return result
 
-        result = list(texts)
         for i, translated in zip(targets, decoded):
             translated = translated.strip()
             if translated:

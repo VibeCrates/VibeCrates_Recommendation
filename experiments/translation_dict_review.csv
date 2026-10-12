@@ -1,0 +1,122 @@
+ko,category,used,gemma
+영화,domain,movie,movies
+극장판,domain,theatrical film,theatrical release
+곡,domain,songs,song
+OST,domain,soundtrack,OST
+시집,domain,poetry collection,poetry collections
+그림책,domain,picture books,picture book
+느와르,genre,noir,film noir
+SF,genre,sci-fi,SF
+에스에프,genre,sci-fi,SF
+애니,genre,anime,animation
+서부극,genre,western,Western films
+히어로,genre,superhero,hero
+하이틴,genre,teen,teen movies
+성장물,genre,coming-of-age,coming-of-age stories
+실화,genre,true story,true stories
+사극,genre,historical drama,historical dramas
+시대극,genre,historical drama,historical dramas
+독립영화,genre,indie film,independent film
+예술영화,genre,art film,art films
+블록버스터,genre,blockbuster,blockbuster movies
+의학,genre,medical,medicine
+로파이,genre,lo-fi,lofi
+일렉트로닉,genre,electronic,electronic music
+하우스,genre,house music,house
+오케스트라,genre,orchestral,orchestra
+연주곡,genre,instrumental,instrumental music
+캐럴,genre,Christmas carols,carols
+OST 명곡,genre,classic soundtrack hits,OST masterpieces
+SF 소설,genre,sci-fi novels,SF novels
+장편소설,genre,novels,long novels
+동화,genre,fairy tales,fairy tale
+자기계발,genre,self-help,self-improvement
+교양,genre,general knowledge,culture
+경제경영,genre,business and economics,business management
+회고록,genre,memoir,memoirs
+미술,genre,fine art,art
+새벽 감성,mood,late-night sentimental mood,dawn mood
+감성,mood,sentimental mood,emotional
+설렘,mood,flutter of excitement,anticipation
+고독,mood,solitude,loneliness
+두려움,mood,fear,fearfulness
+여운,mood,lingering feeling,lingering feelings
+몽환,mood,dreaminess,dreamy
+평온,mood,calm,peaceful
+평화,mood,peace,peacefulness
+청량함,mood,refreshing feeling,refreshingness
+쓸쓸함,mood,desolation,loneliness
+아련함,mood,wistfulness,nostalgia
+여유,mood,leisure,relaxation
+매정,mood,heartlessness,coldheartedness
+감동,mood,moving,emotional moments
+흥겨운,mood,lively,cheerful
+경쾌한,mood,cheerful,upbeat
+어두운,mood,dark,darkness
+슬픈,mood,sad,sadness
+쓸쓸한,mood,lonely,loneliness
+외로운,mood,lonely,loneliness
+감성적인,mood,sentimental,emotional
+감각적인,mood,stylish,sensual
+설레는,mood,heart-fluttering,fluttering hearts
+애틋한,mood,tender and wistful,tender feelings
+아련한,mood,wistful,nostalgia
+그리운,mood,longing,nostalgia
+행복한,mood,happy,happiness
+소름 돋는,mood,spine-chilling,chilling
+긴장감 넘치는,mood,suspenseful,tense atmosphere
+웅장한,mood,epic,majestic
+매정한,mood,heartless,harshness
+반전 있는,mood,with a plot twist,twists
+여운이 남는,mood,with a lingering aftertaste,lingering impression
+감동적인,mood,moving,touching
+뭉클한,mood,touching,heartwarming
+편안한,mood,relaxing,comforting
+나른한,mood,languid,lazy
+상큼한,mood,fresh,refreshing
+시원한,mood,cool,refreshing
+고요한,mood,tranquil,quietude
+기묘한,mood,eerie,strange
+이상한,mood,strange,strange things
+가벼운,mood,light,lighthearted
+무거운,mood,heavy,heaviness
+빠른,mood,fast,fast-paced
+공부할 때,situation,for studying,studying music
+운동할 때,situation,for working out,workout music
+운동,situation,workout,exercise
+퇴근길,situation,commute home,evening commute
+산책,situation,a walk,walk
+산책할 때,situation,for a walk,walking music
+집중,situation,focus,concentration
+집중할 때,situation,for focusing,when concentrating
+일할 때,situation,for working,work time
+청소할 때,situation,while cleaning,cleaning time
+요리할 때,situation,while cooking,cooking time
+샤워할 때,situation,in the shower,shower songs
+연인과,situation,with a partner,with a lover
+가족과,situation,with family,family
+비 오는 날,situation,rainy day,rainy days
+흐린 날,situation,cloudy day,cloudy days
+맑은 날,situation,sunny day,sunny days
+해질녘,time,dusk,sunset time
+연말,time,year-end,year end
+비 오는,weather,rainy,rainy days
+천둥,weather,thunder,thunderstorm
+햇살,weather,sunlight,sunshine
+산,place,mountains,mountain
+별,place,stars,star
+골목,place,alley,alleyway
+아빠,theme,father,dad
+꿈,theme,dreams,dream
+마녀,theme,witches,witch
+용,theme,dragons,dragon
+괴물,theme,monsters,monster
+탐정,theme,detective,detective stories
+연쇄살인,theme,serial killer,serial killings
+회사,theme,company,workplace
+술,theme,drinking,alcohol
+개,theme,dogs,dog
+화가,theme,painter,anger
+음악가,theme,musician,musicians
+작가,theme,writer,author
+예술가,theme,artist,artists

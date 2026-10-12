@@ -1,0 +1,21 @@
+[1] 로그 검색어 530종 — 채점 가능 528 (단위로 못 쪼갠 입력 2개 제외: ['살ㅇ', 'ทน의 극한에서 인간 존재'])
+    사전 적중 528/530 (표본 안 — 이 검색어들에서 어휘를 골랐다)
+    번역                     핵심어 손실 쿼리   요청 수 가중
+    opus-mt (이전 서빙)        174/528 = 33.0%   20.3%
+    Gemma 27B                5/528 =  0.9%    0.0%
+    사전+opus (현재 서빙)          0/528 =  0.0%    0.0%
+    현재 서빙이 잃는 단위: []
+
+[2] 평가 쿼리 40개(문장형) 사전 적중 1/40
+      차분한 피아노 연주곡 → calm piano instrumental
+    학습 쿼리 query_ko 무작위 2000개 사전 적중 19 (0.9%)
+      시골 미국 공포 → countryside America horror   (원문 영어: rural America fear)
+      섬 고독 여운 → island solitude lingering feeling   (원문 영어: island solitude reflection)
+      쓸쓸한 도시 밤 드라이브 → lonely city night driving   (원문 영어: melancholy city night drive)
+      쓸쓸한 도쿄 거리 → lonely Tokyo street   (원문 영어: melancholic Tokyo streets)
+      강렬한 노을 → intense sunset   (원문 영어: vivid yellow sunset)
+      아련한 사랑의 안개 → wistful love fog   (원문 영어: haze of longing love)
+      어두운 파리 밤 → dark Paris night   (원문 영어: darkened Parisian night)
+      뉴욕 도시의 기쁨 → New York city joy   (원문 영어: New York city skyline joy)
+      사랑의 낭만적인 여운 → love romantic lingering feeling   (원문 영어: romantic echoes of love)
+      음식으로 운명 → food fate   (원문 영어: food as destiny)

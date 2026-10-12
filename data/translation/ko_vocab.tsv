@@ -1,0 +1,484 @@
+# 한→영 번역 사전의 한국어 어휘 (scripts/build_translation_dict.py가 읽는다)
+# 열: 한국어 <TAB> 분류 <TAB> 고정 번역(선택)
+# 고정 번역이 있으면 LLM 번역 대신 그 값을 쓴다 — 검토에서 LLM이 틀린 것, 뜻이 갈리는 것.
+# 분류는 관리용이다. 서버는 쓰지 않는다.
+#
+# ── 도메인 명사 ─────────────────────────────────────────────
+영화	domain	movie
+무비	domain	movie
+극장판	domain	theatrical film
+노래	domain	songs
+음악	domain	music
+곡	domain	songs
+앨범	domain	album
+음반	domain	album
+플레이리스트	domain	playlist
+플리	domain	playlist
+OST	domain	soundtrack
+ost	domain	soundtrack
+BGM	domain	background music
+브금	domain	background music
+책	domain	books
+도서	domain	books
+소설	domain	novels
+시집	domain	poetry collection
+에세이	domain	essays
+수필	domain	essays
+단편집	domain	short story collection
+만화책	domain	comic books
+웹툰	domain	webtoon
+그림책	domain	picture books
+# ── 영화 장르 ───────────────────────────────────────────────
+액션	genre
+코미디	genre
+로맨스	genre	romance
+로맨틱 코미디	genre
+로코	genre	romantic comedy
+드라마	genre
+스릴러	genre
+공포	genre	horror
+호러	genre	horror
+미스터리	genre
+범죄	genre
+느와르	genre	noir
+누아르	genre	noir
+SF	genre	sci-fi
+에스에프	genre	sci-fi
+판타지	genre
+애니메이션	genre
+애니	genre	anime
+다큐멘터리	genre
+다큐	genre	documentary
+뮤지컬	genre
+전쟁	genre	war
+서부극	genre	western
+무협	genre	martial arts
+재난	genre	disaster
+좀비	genre
+슈퍼히어로	genre
+히어로	genre	superhero
+하이틴	genre	teen
+청춘	genre	youth
+성장	genre	coming-of-age
+성장물	genre	coming-of-age
+가족	genre	family
+실화	genre	true story
+사극	genre	historical drama
+시대극	genre	historical drama
+독립영화	genre	indie film
+예술영화	genre	art film
+고전 영화	genre	classic films
+블록버스터	genre	blockbuster
+스파이	genre
+첩보	genre	spy
+법정	genre	courtroom
+의학	genre	medical
+스포츠	genre
+# ── 음악 장르 ───────────────────────────────────────────────
+재즈	genre
+보사노바	genre	bossa nova
+클래식	genre	classical
+시티팝	genre	city pop
+인디	genre	indie
+힙합	genre	hip hop
+랩	genre	rap
+알앤비	genre	R&B
+R&B	genre
+로파이	genre	lo-fi
+발라드	genre	ballad
+록	genre	rock
+락	genre	rock
+메탈	genre	metal
+펑크	genre	punk
+팝	genre	pop
+케이팝	genre	K-pop
+K팝	genre	K-pop
+제이팝	genre	J-pop
+J팝	genre	J-pop
+트로트	genre	trot music
+EDM	genre
+일렉트로닉	genre	electronic
+하우스	genre	house music
+테크노	genre
+앰비언트	genre	ambient
+뉴에이지	genre	new age
+포크	genre	folk
+컨트리	genre	country
+블루스	genre	blues
+소울	genre	soul
+펑크록	genre	punk rock
+얼터너티브	genre	alternative
+슈게이징	genre	shoegaze
+신스팝	genre	synth-pop
+레게	genre	reggae
+라틴	genre	Latin
+가스펠	genre	gospel
+오케스트라	genre	orchestral
+피아노	genre	piano
+어쿠스틱	genre	acoustic
+연주곡	genre	instrumental
+동요	genre	children's songs
+캐럴	genre	Christmas carols
+크리스마스 캐럴	genre	Christmas carols
+OST 명곡	genre	classic soundtrack hits
+# ── 책 장르 ────────────────────────────────────────────────
+추리소설	genre	mystery novels
+추리	genre	mystery
+연애소설	genre	romance novels
+판타지 소설	genre	fantasy novels
+SF 소설	genre	sci-fi novels
+역사소설	genre	historical novels
+단편소설	genre	short stories
+장편소설	genre	novels
+고전	genre	classics
+고전문학	genre	classic literature
+문학	genre	literature
+시	genre	poetry
+동화	genre	fairy tales
+자기계발	genre	self-help
+인문학	genre	humanities
+교양	genre	general knowledge
+경제경영	genre	business and economics
+자서전	genre	autobiography
+회고록	genre	memoir
+여행기	genre	travelogue
+과학	genre	science
+수학	genre
+심리학	genre	psychology
+철학	genre	philosophy
+역사	genre	history
+경제	genre	economics
+정치	genre	politics
+사회	genre	society
+종교	genre	religion
+예술	genre	art
+건축	genre	architecture
+미술	genre	fine art
+디자인	genre	design
+육아	genre	parenting
+건강	genre	health
+요리책	genre	cookbooks
+라이트노벨	genre	light novels
+# ── 분위기·감정 (명사) ──────────────────────────────────────
+새벽 감성	mood	late-night sentimental mood
+감성	mood	sentimental mood
+힐링	mood	healing
+위로	mood	comfort
+설렘	mood	flutter of excitement
+그리움	mood	longing
+추억	mood	memories
+외로움	mood	loneliness
+고독	mood	solitude
+슬픔	mood	sadness
+우울	mood	melancholy
+우울함	mood	melancholy
+행복	mood	happiness
+기쁨	mood	joy
+분노	mood	anger
+불안	mood	anxiety
+두려움	mood	fear
+희망	mood	hope
+절망	mood	despair
+여운	mood	lingering feeling
+낭만	mood	romance
+몽환	mood	dreaminess
+긴장감	mood	suspense
+공허함	mood	emptiness
+평온	mood	calm
+평화	mood	peace
+자유	mood	freedom
+용기	mood	courage
+열정	mood	passion
+청량함	mood	refreshing feeling
+따뜻함	mood	warmth
+쓸쓸함	mood	desolation
+아련함	mood	wistfulness
+여유	mood	leisure
+재미	mood	fun
+매정	mood	heartlessness
+감동	mood	moving
+웃음	mood	laughter
+눈물	mood	tears
+# ── 분위기 (형용사) ────────────────────────────────────────
+잔잔한	mood	calm
+조용한	mood	quiet
+차분한	mood	calm
+신나는	mood	upbeat
+신난	mood	excited
+흥겨운	mood	lively
+경쾌한	mood	cheerful
+밝은	mood	bright
+어두운	mood	dark
+슬픈	mood	sad
+우울한	mood	melancholy
+쓸쓸한	mood	lonely
+외로운	mood	lonely
+따뜻한	mood	warm
+포근한	mood	cozy
+아늑한	mood	cozy
+몽환적인	mood	dreamy
+감성적인	mood	sentimental
+감각적인	mood	stylish
+낭만적인	mood	romantic
+로맨틱한	mood	romantic
+달달한	mood	sweet
+달콤한	mood	sweet
+설레는	mood	heart-fluttering
+애틋한	mood	tender and wistful
+아련한	mood	wistful
+그리운	mood	longing
+행복한	mood	happy
+즐거운	mood	joyful
+웃긴	mood	funny
+유쾌한	mood	cheerful
+무서운	mood	scary
+오싹한	mood	chilling
+소름 돋는	mood	spine-chilling
+긴장감 넘치는	mood	suspenseful
+강렬한	mood	intense
+웅장한	mood	epic
+잔혹한	mood	brutal
+매정한	mood	heartless
+충격적인	mood	shocking
+반전 있는	mood	with a plot twist
+여운이 남는	mood	with a lingering aftertaste
+감동적인	mood	moving
+뭉클한	mood	touching
+힐링되는	mood	healing
+편안한	mood	relaxing
+나른한	mood	languid
+청량한	mood	refreshing
+상큼한	mood	fresh
+시원한	mood	cool
+뜨거운	mood	hot
+차가운	mood	cold
+고요한	mood	tranquil
+평화로운	mood	peaceful
+신비로운	mood	mysterious
+기묘한	mood	eerie
+이상한	mood	strange
+독특한	mood	unique
+레트로	mood	retro
+빈티지	mood	vintage
+복고	mood	retro
+힙한	mood	hip
+세련된	mood	sophisticated
+철학적인	mood	philosophical
+지적인	mood	intellectual
+심오한	mood	profound
+가벼운	mood	light
+무거운	mood	heavy
+느린	mood	slow
+빠른	mood	fast
+# ── 상황·활동 ──────────────────────────────────────────────
+공부할 때	situation	for studying
+공부	situation	studying
+운동할 때	situation	for working out
+운동	situation	workout
+잠들기 전	situation	before bed
+자기 전	situation	before bed
+잠 안 오는 밤	situation	sleepless nights
+퇴근길	situation	commute home
+출근길	situation	morning commute
+드라이브	situation	driving
+산책	situation	a walk
+산책할 때	situation	for a walk
+독서	situation	reading
+집중	situation	focus
+집중할 때	situation	for focusing
+일할 때	situation	for working
+청소할 때	situation	while cleaning
+요리할 때	situation	while cooking
+샤워할 때	situation	in the shower
+카페	situation	cafe
+혼자	situation	alone
+혼자 있을 때	situation	when alone
+연인과	situation	with a partner
+친구와	situation	with friends
+가족과	situation	with family
+데이트	situation	date
+파티	situation	party
+캠핑	situation	camping
+여행	situation	travel
+휴가	situation	vacation
+주말	situation	weekend
+주말 오후	situation	weekend afternoon
+일요일 오후	situation	Sunday afternoon
+월요일 아침	situation	Monday morning
+비 오는 날	situation	rainy day
+눈 오는 날	situation	snowy day
+흐린 날	situation	cloudy day
+맑은 날	situation	sunny day
+듣기 좋은	filler
+볼 만한	filler
+읽기 좋은	filler
+추천	filler
+# ── 시간·계절·날씨 ─────────────────────────────────────────
+새벽	time	dawn
+아침	time	morning
+오전	time	morning
+오후	time	afternoon
+저녁	time	evening
+밤	time	night
+한밤중	time	midnight
+자정	time	midnight
+노을	time	sunset
+해질녘	time	dusk
+황혼	time	twilight
+봄	time	spring
+여름	time	summer
+가을	time	autumn
+겨울	time	winter
+봄날	time	spring day
+여름 밤	time	summer night
+겨울 밤	time	winter night
+가을 밤	time	autumn night
+겨울 아침	time	winter morning
+여름 아침	time	summer morning
+크리스마스	time	Christmas
+연말	time	year-end
+새해	time	New Year
+비	weather	rain
+비 오는	weather	rainy
+바람	weather	wind
+안개	weather	fog
+폭풍	weather	storm
+천둥	weather	thunder
+햇살	weather	sunlight
+장마	weather	monsoon season
+# ── 장소·자연 ──────────────────────────────────────────────
+숲	place	forest
+바다	place	sea
+해변	place	beach
+바닷가	place	seaside
+섬	place	island
+산	place	mountains
+강	place	river
+호수	place	lake
+사막	place	desert
+우주	place	space
+하늘	place	sky
+별	place	stars
+달	place	moon
+도시	place	city
+시골	place	countryside
+골목	place	alley
+거리	place	street
+학교	place	school
+교실	place	classroom
+도서관	place	library
+병원	place	hospital
+감옥	place	prison
+기차	place	train
+기차역	place	train station
+지하철	place	subway
+공항	place	airport
+호텔	place	hotel
+집	place	home
+방	place	room
+옥상	place	rooftop
+정원	place	garden
+유럽	place	Europe
+파리	place	Paris
+뉴욕	place	New York
+도쿄	place	Tokyo
+서울	place	Seoul
+일본	place	Japan
+미국	place	America
+한국	place	Korea
+# ── 주제·소재 ──────────────────────────────────────────────
+사랑	theme	love
+첫사랑	theme	first love
+짝사랑	theme	unrequited love
+연애	theme	romance
+이별	theme	breakup
+결혼	theme	marriage
+우정	theme	friendship
+가족애	theme	family love
+엄마	theme	mother
+아빠	theme	father
+어린 시절	theme	childhood
+학창 시절	theme	school days
+청소년	theme	teenagers
+노년	theme	old age
+죽음	theme	death
+삶	theme	life
+인생	theme	life
+꿈	theme	dreams
+기억	theme	memory
+상실	theme	loss
+복수	theme	revenge
+배신	theme	betrayal
+정의	theme	justice
+생존	theme	survival
+모험	theme	adventure
+탐험	theme	exploration
+여정	theme	journey
+시간여행	theme	time travel
+마법	theme	magic
+마녀	theme	witches
+용	theme	dragons
+괴물	theme	monsters
+유령	theme	ghosts
+귀신	theme	ghosts
+외계인	theme	aliens
+로봇	theme	robots
+인공지능	theme	artificial intelligence
+AI	theme	AI
+미래	theme	the future
+디스토피아	theme	dystopia
+종말	theme	apocalypse
+전염병	theme	epidemic
+혁명	theme	revolution
+독립운동	theme	independence movement
+왕	theme	king
+공주	theme	princess
+해적	theme	pirates
+탐정	theme	detective
+경찰	theme	police
+형사	theme	detective
+살인	theme	murder
+연쇄살인	theme	serial killer
+범인	theme	culprit
+마피아	theme	mafia
+갱스터	theme	gangster
+돈	theme	money
+성공	theme	success
+실패	theme	failure
+도전	theme	challenge
+노동	theme	labor
+직장	theme	workplace
+회사	theme	company
+학교생활	theme	school life
+음식	theme	food
+요리	theme	cooking
+커피	theme	coffee
+술	theme	drinking
+동물	theme	animals
+강아지	theme	puppy
+개	theme	dogs
+고양이	theme	cats
+자연	theme	nature
+환경	theme	environment
+기후	theme	climate
+과학자	theme	scientist
+화가	theme	painter
+음악가	theme	musician
+작가	theme	writer
+배우	theme	actor
+가수	theme	singer
+예술가	theme	artist
+천재	theme	genius
+영웅	theme	hero
+악당	theme	villain
+이유	theme	reason
+시간	theme	time
+진실	theme	truth
+비밀	theme	secret
+거짓말	theme	lies
+운명	theme	fate
+신화	theme	mythology
+전설	theme	legend
+종교적	theme	religious
+명상	theme	meditation
+테스트	misc	test
