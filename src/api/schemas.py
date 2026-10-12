@@ -95,6 +95,10 @@ class EmbeddingResponse(BaseModel):
     translated_queries: Optional[List[str]] = Field(
         default=None, description="한국어 입력을 번역한 결과들. 번역이 없었으면 null"
     )
+    domains: List[Literal["all", "movie", "music", "book"]] = Field(
+        description="입력과 같은 순서로, 각 쿼리가 명시한 도메인. 판정 규칙은 /search/vector의 "
+                    "`domain`과 같다 (src/api/domain_intent.py)",
+    )
     vectors: List[List[float]] = Field(description="입력과 같은 순서의 float 배열")
 
 

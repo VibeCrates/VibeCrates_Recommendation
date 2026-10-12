@@ -117,6 +117,7 @@ async def embeddings(
         normalized=request.normalize,
         model_version=manager.model_version(),
         translated_queries=used if translated else None,
+        domains=[detect_domain(q) for q in queries],
         vectors=z.tolist(),
     )
 
