@@ -103,10 +103,16 @@ Tailscale 사설망 주소다. 인터넷에는 아무것도 열려 있지 않고
 
 // 응답
 { "dim": 768, "normalized": true, "model_version": "...",
+  "domains": ["all", "all"],
   "vectors": [[...], [...]] }
 ```
 
 키가 `vectors`(복수)라는 점만 다르다. `text` / `query` 둘 다, 문자열과 배열 둘 다 받는다.
+쿼리마다 달라지는 필드(`vectors`, `translated_queries`, `domains`)만 입력과 같은 순서의
+배열이고, `dim`·`normalized`·`model_version`은 배치 전체에 하나다.
+
+- **`domains`(2026-10-12 추가)** — 쿼리마다 하나씩, 위 단건 경로의 `domain`과 같은 규칙으로
+  읽은 값이다. 문자열 하나를 보내도 `["movie"]`처럼 길이 1인 배열로 온다.
 
 한 가지 주의 — 배치는 개별 항목을 `null`로 표시할 수 없어서, 하나라도 번역되면
 `translated_queries`에 **번역되지 않은 것까지 포함한 전체 목록**이 나온다. 단건 경로는
