@@ -1,0 +1,121 @@
+﻿pair_id,style,query,domain_filter,b_side,a_item,a_rank,a_ov,b_item,b_rank,b_ov,a_name,b_name
+R001,philosophical,Choosing between being right and being kind,all,2,book:bx_1572240814,5,0,book:gr_48760.The_Birth_Order_Book,4,0,base,titledrop
+R002,philosophical,Between freedom and responsibility,all,1,book:kdl_B00E257T5S,10,0,book:bx_0965863409,10,0,base,titledrop
+R003,direct,A courtroom drama based on a true story,movie,1,movie:152196,5,0,movie:4216908,4,2,base,titledrop
+R004,atmosphere,A damp basement bookshop during the rainy season,all,1,book:gr_22772589-the-dude-who-did-dictionaries,8,0,movie:2315226,9,0,base,titledrop
+R005,atmosphere,Fluorescent glow of a late-night convenience store,book,1,book:gr_41315.Syrup,3,0,book:bx_0375508082,6,0,base,titledrop
+R006,philosophical,Choosing between being right and being kind,music,1,music:3fN8djLf2uPJp993x5Jyex,4,0,music:52zm3qweHMnmK3tb7dVHrm,4,0,base,titledrop
+R007,direct,Nonfiction about space exploration,movie,2,movie:120370,8,1,movie:482603,8,1,base,titledrop
+R008,poet,The smell rising from an old letter,all,1,book:bx_0312979576,3,1,book:gr_6578507-the-postmistress,4,1,base,titledrop
+R009,atmosphere,A worn motel room by the sea,movie,2,movie:436607,10,1,movie:83911,9,0,base,titledrop
+R010,poet,A season that passed without being spoken,movie,1,movie:836710,2,0,movie:2219516,3,0,base,titledrop
+R011,poet,Time slipping away like sand,book,2,book:bx_8471767465,3,0,book:gr_21420175-time-stands-still,4,0,base,titledrop
+R012,direct,Mystery thriller novel with a twist ending,movie,1,movie:118150,3,2,movie:122968,2,0,base,titledrop
+R013,atmosphere,A quiet afternoon with the sound of rain,movie,2,movie:284277,2,0,movie:2878406,9,0,base,titledrop
+R014,poet,In the name of love,music,2,music:2BgWv15eKCDfiubKo6o76k,6,1,music:5YjKdeES9QRJ8NmF4Xc8pV,7,1,base,titledrop
+R015,philosophical,A journey to find the meaning of life,movie,2,movie:275343,3,1,movie:84628,4,0,base,titledrop
+R016,philosophical,A journey to find the meaning of life,book,2,book:bx_0684835789,5,1,book:bx_1856190161,4,0,base,titledrop
+R017,direct,Action movie set in space,music,1,music:1fJTWLZHIAwPdGoBzEYnhp,9,0,music:0hXpC8CI25VOT8qNV1nr8l,10,0,base,titledrop
+R018,direct,Mystery thriller novel with a twist ending,book,1,book:kdl_B07SNTPJ9N,10,0,book:bx_0373262663,10,0,base,titledrop
+R019,poet,In the name of love,book,1,book:gr_21469302-love-from-both-sides,5,1,book:bx_0028604458,7,1,base,titledrop
+R020,atmosphere,Empty city streets at dawn,book,1,book:bx_3100922484,8,0,book:gr_393199.Down_and_Out_in_Paris_and_London,7,0,base,titledrop
+R021,philosophical,The limits of understanding another person,music,1,music:2m5ItG3IIMsaGYJjZOvUoE,2,0,music:5r9WJVe1yhJx9ZUg30XEHQ,3,0,base,titledrop
+R022,poet,A season that passed without being spoken,music,2,music:1OyNY4fiLDhopwm6oj6OmB,5,0,music:1Yv6PMPkvLdCIFbm9kanaz,9,0,base,titledrop
+R023,atmosphere,A highway rest stop at sunset,all,2,book:kdl_B0846RQ4Q5,6,0,book:bx_1566911494,6,0,base,titledrop
+R024,direct,Soulful music featuring jazz piano,music,1,music:4bCU6tEbGHQcEwTC3ny2KY,6,1,music:1VzhfMEGIIkn5hFITMJzW1,8,1,base,titledrop
+R025,poet,A heart cooling like forgotten coffee,movie,1,movie:2350496,4,0,movie:106612,6,0,base,titledrop
+R026,poet,Like the excitement of a spring day,music,2,music:6M0HMy7UhtlPYTlpaW4qRk,2,1,music:1SxC3v3Mcm5VPxeXaF59NY,6,1,base,titledrop
+R027,philosophical,Meaning inside a repeating daily life,book,1,book:kdl_B0BFJV7TQ7,10,1,book:bx_0609609017,10,0,base,titledrop
+R028,atmosphere,In front of a warm fireplace in midwinter,music,2,music:6XzpeMXDvLC86GvAfnUsIA,8,0,music:4MrfQL4TYQXJBlZYpAHTuE,3,0,base,titledrop
+R029,poet,A season that passed without being spoken,book,2,book:gr_10768069-the-cranberry-hush,8,1,book:gr_774032.A_Fan_s_Notes,8,0,base,titledrop
+R030,poet,A season that passed without being spoken,all,1,movie:1986161,10,0,music:0djZ2ndRfAL69WYNra5jRC,9,0,base,titledrop
+R031,philosophical,Meaning inside a repeating daily life,movie,1,movie:5290524,9,1,movie:1217243,10,0,base,titledrop
+R032,direct,Action movie set in space,movie,2,movie:43380,4,2,movie:79946,5,2,base,titledrop
+R033,atmosphere,Fluorescent glow of a late-night convenience store,music,1,music:77exFA9gOKLvj6yhyX07HD,5,0,music:4BP0An7SXctTY4kF41JxIQ,6,0,base,titledrop
+R034,poet,Winter breath fogging a windowpane,book,1,book:bx_0440404541,5,0,book:gr_43086508,4,0,base,titledrop
+R035,atmosphere,A quiet afternoon with the sound of rain,book,1,book:gr_120405.Fowl_Weather,2,0,book:bx_0373030762,3,0,base,titledrop
+R036,philosophical,How much of me is made of memory,all,2,movie:2402602,7,1,movie:1825806,8,0,base,titledrop
+R037,atmosphere,An open window on a summer night,music,2,music:50QL2fqn6EDwpBUJ5QaQ4m,7,1,music:3PY88239tYBnAv5LQoU2oY,6,0,base,titledrop
+R038,poet,A heart cooling like forgotten coffee,music,1,music:3wJmcmAh2YAfDSKQR8o1XS,7,1,music:1Ut07w9DCI3dBmCX9cSRUG,7,0,base,titledrop
+R039,poet,Warmth left in a room after the lights go out,music,1,music:1G7Gg1cH4VKBu3XaoCppzC,5,0,music:63thx7OANplv4I4BQsanHk,7,0,base,titledrop
+R040,poet,Warmth left in a room after the lights go out,book,1,book:gr_6869000-the-christmas-lamp,10,1,book:kdl_B07FLS2KNQ,9,0,base,titledrop
+R041,direct,Nonfiction about space exploration,book,1,book:bx_1588340023,6,1,book:bx_0140153810,8,0,base,titledrop
+R042,atmosphere,A damp basement bookshop during the rainy season,music,1,music:4c3zZWPPYkvjSV07Cv95oJ,10,0,music:20Y6MNDyaBRpFrQ1Dt5CNF,8,0,base,titledrop
+R043,atmosphere,A country train station on a snowy night,movie,1,movie:79278,10,0,movie:5156770,10,0,base,titledrop
+R044,direct,Mystery thriller novel with a twist ending,all,1,book:bx_0671700359,2,0,book:bx_0449002942,3,1,base,titledrop
+R045,direct,A courtroom drama based on a true story,all,1,movie:113500,9,0,book:bx_0345430573,8,1,base,titledrop
+R046,direct,A coming-of-age film set in the 1980s,book,2,book:gr_2142060.Grease,3,0,book:gr_450667.69,6,2,base,titledrop
+R047,poet,What remains after farewell,movie,1,movie:2437548,6,0,movie:107474,8,1,base,titledrop
+R048,philosophical,How much of me is made of memory,movie,1,movie:338013,8,1,movie:367195,8,0,base,titledrop
+R049,poet,In the name of love,movie,2,movie:35959,7,0,movie:86153,6,1,base,titledrop
+R050,poet,Winter breath fogging a windowpane,all,1,book:bx_0425176681,10,0,book:bx_0061098000,9,0,base,titledrop
+R051,direct,Rock music with a heavy guitar riff,music,1,music:7mLOaTOS6kiJi8Anm2C1zc,6,1,music:5vB0cxSvzXuVh15EDD0Cej,5,1,base,titledrop
+R052,philosophical,The border between chance and fate,music,1,music:2OgVsp77En2nju8pnCieVU,4,0,music:65fpYBrI8o2cfrwf2US4gq,5,0,base,titledrop
+R053,philosophical,Reflection on solitude and existence,music,1,music:2FQviMkaoixlgWuGL4u1EO,6,0,music:7eRU0RltchvgOTSbX6vmdv,6,0,base,titledrop
+R054,direct,Rock music with a heavy guitar riff,movie,1,movie:80321,3,3,movie:88258,3,2,base,titledrop
+R055,direct,A film about a romance between two people,all,1,movie:11865,9,0,movie:87810,9,1,base,titledrop
+R056,atmosphere,A sunlit cafe,movie,2,movie:1153053,6,0,movie:1135503,5,0,base,titledrop
+R057,philosophical,Between freedom and responsibility,book,2,book:bx_0802425496,9,0,book:bx_0965863409,9,0,base,titledrop
+R058,philosophical,What is a human being,music,1,music:0mGtbkb9zSSxZo1h3qXIDZ,10,0,music:4P5KoWXOxwuobLmHXLMobV,10,0,base,titledrop
+R059,direct,A courtroom drama based on a true story,book,2,book:bx_0440222788,9,0,book:bx_0345430573,8,1,base,titledrop
+R060,poet,The smell rising from an old letter,music,1,music:6GXl3ADX2Lw5JaOSk620j2,2,0,music:1T02MleMfYPohqKcd8uY6J,2,0,base,titledrop
+R061,philosophical,A journey to find the meaning of life,music,2,music:62d0aGpYF2p8fpvJ1qa32V,6,0,music:5mGq3cybgQDZgTEbu9ldV9,7,0,base,titledrop
+R062,poet,Time slipping away like sand,music,1,music:5zVKisBri6JH1fooBhUaVq,8,0,music:7qbLE7ssJcnWD6EO7My847,7,1,base,titledrop
+R063,poet,What remains after farewell,book,2,book:kdl_B07LGH47L4,3,0,book:gr_96082.The_Last_Time_They_Met,1,0,base,titledrop
+R064,philosophical,The border between chance and fate,movie,1,movie:1843202,3,0,movie:71269,5,0,base,titledrop
+R065,direct,Action movie set in space,all,1,movie:93405,8,1,movie:79946,5,2,base,titledrop
+R066,direct,A film about a romance between two people,music,1,music:0Lhy1sDDdtUFY2pyq2ZVi9,10,0,music:0CtHgpZKOCRdAHYYXsmEhJ,10,0,base,titledrop
+R067,poet,Time slipping away like sand,movie,2,movie:339976,7,0,movie:168950,8,0,base,titledrop
+R068,poet,Like the excitement of a spring day,all,1,book:bx_0307131483,10,1,music:0sOoGrE5PY5EBDQnR7Yysu,10,0,base,titledrop
+R069,direct,A film about a romance between two people,book,2,book:gr_25319777-miss-wrong-and-mr-right,9,1,book:bx_0553096834,8,0,base,titledrop
+R070,atmosphere,In front of a warm fireplace in midwinter,book,2,book:bx_1858137942,9,1,book:bx_1562926160,8,1,base,titledrop
+R071,direct,A novel about a family secret,all,2,book:bx_0380674548,10,0,book:gr_17201349-de-villa,10,0,base,titledrop
+R072,philosophical,Reflection on solitude and existence,all,2,book:bx_0671867806,2,0,movie:1466072,4,0,base,titledrop
+R073,direct,Nonfiction about space exploration,music,1,music:7rLAPi81R7qlVqgXfykdEL,3,0,music:4SNVaP303lu2bU5GnT3nMm,4,0,base,titledrop
+R074,atmosphere,A country train station on a snowy night,music,2,music:3MFV4DgrAOXz6KURPQxRj9,9,1,music:1msuiw6pnXYfxZ7Edyit9U,9,1,base,titledrop
+R075,poet,Like the excitement of a spring day,book,2,book:bx_0811823318,9,0,book:kdl_B00TG24J28,6,0,base,titledrop
+R076,philosophical,Reflection on solitude and existence,book,2,book:gr_355267.Reflections_on_the_Self,3,0,book:gr_5304.De_Profundis_and_Other_Writings,7,0,base,titledrop
+R077,philosophical,What is a human being,book,1,book:bx_0691023697,8,1,book:gr_257106.Our_Inner_Ape,7,1,base,titledrop
+R078,poet,The smell rising from an old letter,book,1,book:bx_3455026508,6,0,book:bx_0064400816,8,0,base,titledrop
+R079,philosophical,Choosing between being right and being kind,movie,1,movie:223897,10,0,movie:2637276,8,0,base,titledrop
+R080,poet,The smell rising from an old letter,movie,1,movie:59643,6,0,movie:1311071,9,0,base,titledrop
+R081,atmosphere,A sunlit cafe,music,1,music:74OLeDsyhWDNZgoAjIIw9I,8,0,music:5FMu7ZbfPXmGeOU7FnGijE,9,0,base,titledrop
+R082,direct,A novel about a family secret,music,1,music:4DDVNfXxsHAlvg4nace2Ze,7,0,music:5dPc0lDy55q0GCyL66Uudy,7,0,base,titledrop
+R083,atmosphere,Empty city streets at dawn,movie,2,movie:107922,8,1,movie:2395417,9,0,base,titledrop
+R084,poet,A heart cooling like forgotten coffee,book,2,book:gr_1244286.Filosofi_Kopi,9,0,book:bx_0446521582,8,1,base,titledrop
+R085,poet,Like the excitement of a spring day,movie,1,movie:4902012,9,0,movie:22899,7,1,base,titledrop
+R086,atmosphere,A worn motel room by the sea,music,2,music:3i9uwwYaRFtHAGcIKrVJsp,7,0,music:4EGbPc7wiuVozk9YmLUYqa,7,0,base,titledrop
+R087,philosophical,Meaning inside a repeating daily life,all,2,book:bx_0913668583,8,1,book:bx_1552783111,9,1,base,titledrop
+R088,philosophical,What is a human being,movie,2,movie:2209764,9,1,movie:251300,10,0,base,titledrop
+R089,philosophical,The limits of understanding another person,movie,2,movie:499596,7,0,movie:5604510,9,0,base,titledrop
+R090,direct,Rock music with a heavy guitar riff,book,1,book:kdl_B01LXKB2WE,6,2,book:bx_0753502313,8,1,base,titledrop
+R091,atmosphere,An open window on a summer night,movie,2,movie:106612,9,0,movie:82361,9,0,base,titledrop
+R092,poet,Warmth left in a room after the lights go out,all,2,music:1G7Gg1cH4VKBu3XaoCppzC,7,0,book:gr_12471652-everything-i-miss-at-home,7,0,base,titledrop
+R093,direct,A film about a romance between two people,movie,1,movie:50307,2,1,movie:399222,5,1,base,titledrop
+R094,direct,Nonfiction about space exploration,all,1,book:gr_1117692.The_Good_New_Stuff,4,0,book:bx_0060952768,3,1,base,titledrop
+R095,direct,Action movie set in space,book,1,book:gr_16206028-buck-rogers-in-the-25th-century,6,1,book:bx_0575050047,2,0,base,titledrop
+R096,atmosphere,A worn motel room by the sea,all,2,book:gr_24452249-did-you-ever-have-a-family,6,0,book:bx_1400077354,5,0,base,titledrop
+R097,atmosphere,A country train station on a snowy night,all,2,book:bx_0395713250,6,1,book:bx_0373292317,9,0,base,titledrop
+R098,direct,A coming-of-age film set in the 1980s,music,2,music:426i8hiYTwwlImNaluBb9C,7,0,music:0jrdWPwYjUZvqfJcwE8ddh,9,0,base,titledrop
+R099,atmosphere,Fluorescent glow of a late-night convenience store,movie,2,movie:119278,9,0,movie:1442512,9,0,base,titledrop
+R100,direct,A novel about a family secret,movie,1,movie:232083,6,0,movie:2002845,4,0,base,titledrop
+R101,atmosphere,An open window on a summer night,book,1,book:bx_0807610313,8,0,book:gr_12294652-my-life-next-door,7,1,base,titledrop
+R102,direct,Soulful music featuring jazz piano,book,1,book:kdl_B00IQ1V8WO,9,1,book:bx_3596113350,8,0,base,titledrop
+R103,atmosphere,Empty city streets at dawn,music,1,music:3O1hpSOaJDW4SelgUG2XT3,7,1,music:2TlXPShOrPn4K51fP0Fykd,8,0,base,titledrop
+R104,direct,Mystery thriller novel with a twist ending,music,1,music:7l3kYZIfTIpgthYcekjv4k,2,0,music:5wTV2aPLlM3nB3GmEMiXZb,2,0,base,titledrop
+R105,direct,A calm solo piano piece,movie,2,movie:54389,10,0,movie:62804,9,0,base,titledrop
+R106,philosophical,The weight of a life facing its end,all,1,book:gr_5569027-ademloos,8,0,music:0304Y3lXclcRh5N50KJ3sE,8,1,base,titledrop
+R107,atmosphere,A highway rest stop at sunset,music,2,music:09ln4QumFqjIkfCFiW9aRk,7,1,music:3ayP2t2qMgIqj8Yy1xHtaa,8,0,base,titledrop
+R108,direct,Rock music with a heavy guitar riff,all,2,music:2RiYPJlh9iAidCJdx5yjTb,8,1,book:kdl_B0BHLVZHR8,8,1,base,titledrop
+R109,atmosphere,A highway rest stop at sunset,book,1,book:gr_39280558-the-remarkable-journey-of-coyote-sunrise,5,0,book:bx_2020333910,5,0,base,titledrop
+R110,atmosphere,A country train station on a snowy night,book,2,book:gr_640097.Nowhere_to_Call_Home,2,0,book:gr_420282.The_Polar_Express,3,0,base,titledrop
+R111,poet,Time slipping away like sand,all,2,book:gr_21795840-a-time-to-die,6,0,music:3Xls4cNOwy01dtrNXb1inG,7,1,base,titledrop
+R112,atmosphere,An open window on a summer night,all,1,music:35Ki1lvKPC2sFBD3GmKdRG,3,0,music:43CFDpciGFDm226POTLEXU,5,1,base,titledrop
+R113,atmosphere,A worn motel room by the sea,book,1,book:kdl_B07VFKCJVS,8,0,book:bx_0156006332,7,1,base,titledrop
+R114,philosophical,The border between chance and fate,book,2,book:bx_0786869143,2,2,book:gr_73089.Match_Me_If_You_Can,7,0,base,titledrop
+R115,philosophical,A journey to find the meaning of life,all,2,book:gr_691209.Grooks_1,5,1,book:gr_12698470-life-traveler,4,0,base,titledrop
+R116,philosophical,Reflection on solitude and existence,movie,1,movie:1320352,2,1,movie:1294212,7,0,base,titledrop
+R117,atmosphere,A damp basement bookshop during the rainy season,book,1,book:gr_22772589-the-dude-who-did-dictionaries,8,0,book:bx_0375706399,10,0,base,titledrop
+R118,poet,Warmth left in a room after the lights go out,movie,2,movie:3569326,6,0,movie:5917230,4,0,base,titledrop
+R119,philosophical,The weight of a life facing its end,book,2,book:gr_486298.Death_Be_Not_Proud,7,0,book:kdl_B00LEYI4L8,10,0,base,titledrop
+R120,poet,What remains after farewell,all,2,music:12MqM3S0fTvR6X4Jt1Xvn6,4,0,book:gr_96082.The_Last_Time_They_Met,3,0,base,titledrop

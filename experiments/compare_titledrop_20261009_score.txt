@@ -1,0 +1,19 @@
+experiments/compare_titledrop_20261009: 120쌍, 라벨 미완료 0
+
+[미리 정한 판정]
+  전체                     titledrop  55 / base  60 / 애매  5   titledrop 선호율  47.8%   p=0.709
+
+[사후 분석 — 가설로만]
+  도메인필터=all              titledrop  14 / base  11 / 애매  1   titledrop 선호율  56.0%   p=0.690
+  도메인필터=movie            titledrop   8 / base  23 / 애매  0   titledrop 선호율  25.8%   p=0.011
+  도메인필터=music            titledrop  14 / base  13 / 애매  3   titledrop 선호율  51.9%   p=1.000
+  도메인필터=book             titledrop  19 / base  13 / 애매  1   titledrop 선호율  59.4%   p=0.377
+  base만 쿼리 단어 겹침         titledrop   5 / base  20 / 애매  0   titledrop 선호율  20.0%   p=0.004
+  titledrop만 쿼리 단어 겹침    titledrop  11 / base   6 / 애매  0   titledrop 선호율  64.7%   p=0.332
+  겹침 같음(둘 다/없음)          titledrop  39 / base  34 / 애매  5   titledrop 선호율  53.4%   p=0.640
+  스타일=atmosphere         titledrop  14 / base  16 / 애매  0   titledrop 선호율  46.7%   p=0.856
+  스타일=direct             titledrop  16 / base  14 / 애매  1   titledrop 선호율  53.3%   p=0.856
+  스타일=philosophical      titledrop   7 / base  18 / 애매  3   titledrop 선호율  28.0%   p=0.043
+  스타일=poet               titledrop  18 / base  12 / 애매  1   titledrop 선호율  60.0%   p=0.362
+
+[위치 점검] 후보1 선택 68/115 (59.1%), p=0.062 — titledrop 쪽이 1번인 쌍 67/120

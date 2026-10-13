@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>__TITLE__</title>
+<style>
+  :root { --bg:#f6f5f2; --card:#fff; --ink:#1d1d1f; --mute:#6b6b70; --line:#dedcd6; --pick:#2f6fdb; --pickbg:#e9f0fd; --ok:#1f8a4c; --bad:#c0392b; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#17171a; --card:#222226; --ink:#ececef; --mute:#9a9aa2; --line:#36363c; --pick:#6c9cf0; --pickbg:#24304a; --ok:#4cc27e; --bad:#ef6b5b; } }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:15px/1.6 -apple-system, "Apple SD Gothic Neo", sans-serif; }
+  header { position:sticky; top:0; background:var(--bg); border-bottom:1px solid var(--line); padding:10px 16px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; z-index:2; }
+  header b { font-size:14px; }
+  .prog { color:var(--mute); font-size:13px; }
+  .save { font-size:12.5px; }
+  .save.ok { color:var(--ok); } .save.bad { color:var(--bad); font-weight:600; }
+  button { font:inherit; padding:6px 12px; border:1px solid var(--line); background:var(--card); color:var(--ink); border-radius:8px; cursor:pointer; }
+  main { max-width:1100px; margin:0 auto; padding:16px; }
+  .query { font-size:21px; font-weight:600; margin:4px 0 0; }
+  .query-en { color:var(--mute); font-size:13.5px; }
+  .pid { color:var(--mute); font-size:13px; }
+  .pair { display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:14px; }
+  @media (max-width:720px) { .pair { grid-template-columns:1fr; } }
+  .cand { background:var(--card); border:2px solid var(--line); border-radius:12px; padding:14px; cursor:pointer; display:flex; flex-direction:column; gap:10px; }
+  .cand.on { border-color:var(--pick); background:var(--pickbg); }
+  .cand .top { display:flex; gap:12px; align-items:flex-start; }
+  .cand img, .noimg { width:130px; flex:none; border-radius:6px; background:var(--line); }
+  .noimg { height:130px; display:flex; align-items:center; justify-content:center; color:var(--mute); font-size:12px; }
+  .num { font-size:12px; color:var(--mute); }
+  .title { font-size:17px; font-weight:600; }
+  .body { white-space:pre-wrap; font-size:14px; max-height:360px; overflow:auto; }
+  details { font-size:12.5px; color:var(--mute); }
+  details pre { white-space:pre-wrap; font:inherit; margin:6px 0 0; max-height:240px; overflow:auto; }
+  .row { display:flex; gap:10px; align-items:center; margin-top:14px; flex-wrap:wrap; }
+  input[type=text] { flex:1; min-width:200px; font:inherit; padding:7px 10px; border:1px solid var(--line); border-radius:8px; background:var(--card); color:var(--ink); }
+  .hint { color:var(--mute); font-size:12.5px; margin-top:10px; }
+  .grid { display:flex; flex-wrap:wrap; gap:4px; margin-top:22px; }
+  .grid span { width:48px; text-align:center; font-size:11px; padding:3px 0; border-radius:4px; border:1px solid var(--line); cursor:pointer; color:var(--mute); }
+  .grid span.done { background:var(--pickbg); color:var(--ink); }
+  .grid span.cur { outline:2px solid var(--pick); }
+</style>
+</head>
+<body>
+<header>
+  <b>__TITLE__</b>
+  <span class="prog" id="prog"></span>
+  <span class="save" id="save"></span>
+  <span style="flex:1"></span>
+  <button onclick="go(-1)">← 이전</button>
+  <button onclick="go(1)">다음 →</button>
+</header>
+<main>
+  <div class="pid" id="pid"></div>
+  <div class="query" id="query"></div>
+  <div class="query-en" id="query-en"></div>
+  <div class="pair" id="pair"></div>
+  <div class="row">
+    <button onclick="pick('')">애매함 (비움)</button>
+    <input type="text" id="memo" placeholder="메모 (선택)">
+  </div>
+  <div class="hint">검색어에 더 잘 맞는 후보를 고른다. 키보드: <b>1</b>/<b>2</b> 선택 후 다음으로 · <b>0</b> 애매함 · <b>←</b>/<b>→</b> 이동.
+    누를 때마다 파일에 바로 기록된다(위 저장 표시 참고). 가사는 원문 대신 내용 요지를 적었다.</div>
+  <div class="grid" id="grid"></div>
+</main>
+<script>
+const PAIRS = __DATA__;
+const STORE = "label:__STORE__";
+let labels = {}, cur = 0, server = location.protocol.startsWith("http");
+try { labels = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch (e) {}
+try { cur = Math.min(+localStorage.getItem(STORE + ":cur") || 0, PAIRS.length - 1); } catch (e) {}
+
+function status(text, cls) { const s = document.getElementById("save"); s.textContent = text; s.className = "save " + cls; }
+let pending = null;
+function save() {
+  try { localStorage.setItem(STORE, JSON.stringify(labels)); localStorage.setItem(STORE + ":cur", cur); } catch (e) {}
+  if (!server) { status("⚠ 파일 저장 안 됨 — serve_compare_page.py로 열어야 함", "bad"); return; }
+  clearTimeout(pending);
+  pending = setTimeout(() => {
+    fetch("/labels", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(labels) })
+      .then(r => { if (!r.ok) throw 0; status("✓ 파일에 저장됨 " + new Date().toLocaleTimeString(), "ok"); })
+      .catch(() => status("⚠ 파일 저장 실패 — 서버가 꺼졌는지 확인", "bad"));
+  }, 250);
+}
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+const isDone = l => l && l.done;
+
+function render() {
+  const p = PAIRS[cur], L = labels[p.id] || {};
+  document.getElementById("pid").textContent = p.id;
+  document.getElementById("query").textContent = p.query_ko || p.query;
+  document.getElementById("query-en").textContent = p.query_ko ? p.query : "";
+  document.getElementById("pair").innerHTML = p.c.map((c, k) => `
+    <div class="cand ${isDone(L) && L.choice === String(k + 1) ? "on" : ""}" onclick="pick('${k + 1}')">
+      <div class="top">
+        ${c.img ? `<img src="${c.img}" alt="">` : `<div class="noimg">이미지 없음</div>`}
+        <div><div class="num">후보${k + 1} · ${{movie: "영화", music: "음악", book: "책"}[c.domain] || c.domain}</div><div class="title">${esc(c.title)}</div></div>
+      </div>
+      <div class="body">${esc(c.body)}</div>
+      ${c.orig ? `<details onclick="event.stopPropagation()"><summary>원문 보기</summary><pre>${esc(c.orig)}</pre></details>` : ""}
+    </div>`).join("");
+  document.getElementById("memo").value = L.memo || "";
+  const done = PAIRS.filter(q => isDone(labels[q.id])).length;
+  document.getElementById("prog").textContent = `${cur + 1} / ${PAIRS.length} · 완료 ${done}`;
+  document.getElementById("grid").innerHTML = PAIRS.map((q, i) => {
+    const l = labels[q.id], mark = isDone(l) ? (l.choice || "–") : "";
+    return `<span class="${mark ? "done" : ""} ${i === cur ? "cur" : ""}" onclick="jump(${i})">${q.id.slice(1)}${mark ? " " + mark : ""}</span>`;
+  }).join("");
+}
+function pick(v) {
+  const id = PAIRS[cur].id;
+  labels[id] = Object.assign(labels[id] || {}, { choice: v, done: true });
+  save(); render();
+  setTimeout(() => go(1), 180);
+}
+function go(d) { cur = Math.max(0, Math.min(PAIRS.length - 1, cur + d)); try { localStorage.setItem(STORE + ":cur", cur); } catch (e) {} render(); window.scrollTo(0, 0); }
+function jump(i) { cur = i; go(0); }
+document.getElementById("memo").addEventListener("input", e => {
+  const id = PAIRS[cur].id;
+  labels[id] = Object.assign(labels[id] || {}, { memo: e.target.value });
+  save();
+});
+document.addEventListener("keydown", e => {
+  if (e.target.tagName === "INPUT") return;
+  if (e.key === "1" || e.key === "2") pick(e.key);
+  else if (e.key === "0") pick("");
+  else if (e.key === "ArrowRight") go(1);
+  else if (e.key === "ArrowLeft") go(-1);
+});
+
+// 서버로 열었으면 파일(CSV)이 정본이다 — 파일의 라벨로 시작한다
+if (server) {
+  fetch("/labels").then(r => r.json()).then(fromFile => {
+    if (Object.keys(fromFile).length) labels = fromFile;
+    status(Object.keys(fromFile).length ? "✓ 파일에서 이어서 불러옴" : "✓ 파일 저장 연결됨", "ok");
+    render();
+  }).catch(() => { status("⚠ 서버 연결 실패", "bad"); render(); });
+} else { status("⚠ 파일 저장 안 됨 — serve_compare_page.py로 열어야 함", "bad"); render(); }
+</script>
+</body>
+</html>
