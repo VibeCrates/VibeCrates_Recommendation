@@ -9,7 +9,14 @@ from .dependencies import initialize_dependencies, cleanup_dependencies
 from src import config
 
 # Configure logging
-logging.basicConfig(level=logging.INFO)
+# 모든 줄에 시각을 찍는다. uvicorn 기본 접근 로그에는 시각이 없어 "백엔드가 마지막으로
+# 부른 때"를 파일 수정 시각으로 짐작해야 했다(10/14). uvicorn은 앱을 import하기 전에
+# 자기 로거를 설정하므로, 여기서 그 핸들러의 포맷만 바꾼다.
+LOG_FORMAT = "%(asctime)s %(levelname)s %(name)s: %(message)s"
+logging.basicConfig(level=logging.INFO, format=LOG_FORMAT, force=True)
+for _name in ("uvicorn", "uvicorn.error", "uvicorn.access"):
+    for _h in logging.getLogger(_name).handlers:
+        _h.setFormatter(logging.Formatter(LOG_FORMAT))
 logger = logging.getLogger(__name__)
 
 # Create FastAPI app
