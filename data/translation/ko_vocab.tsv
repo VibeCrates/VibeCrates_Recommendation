@@ -482,3 +482,60 @@ AI	theme	AI
 종교적	theme	religious
 명상	theme	meditation
 테스트	misc	test
+# ── 백엔드 조합형 검색어에서 빠진 단위 (2026-10-14) ─────────────────
+# 10/13~14 백엔드가 "상황 + 분위기 + 소재 (+ 영화/노래/책)" 조합 37,564종을 보냈고, 77%가
+# 아래 단위 하나 이상이 없어 opus-mt로 넘어갔다("이별한 날 아늑한 바다" → "Safe sea on a
+# strange day"). 상황은 백엔드가 보낸 모양 그대로(조사 포함) 넣는다 — 여러 어절 단위는
+# 조사를 떼고 찾지 않기 때문이다. 번역은 사람이 정했다(Gemma 미검토).
+추운 날	situation	cold day
+더운 날	situation	hot day
+설레는 날	situation	exciting day
+지친 날	situation	exhausting day
+바람 부는 날	situation	windy day
+첫눈 오는 날	situation	first snow of the year
+이별한 날	situation	after a breakup
+퇴사한 날	situation	the day I quit my job
+이사한 날	situation	moving day
+졸업식 날	situation	graduation day
+소풍 가는 날	situation	picnic day
+시험 끝난 날	situation	after exams are over
+한가한 오후에	situation	lazy afternoon
+안개 낀 아침에	situation	foggy morning
+휴일 아침에	situation	holiday morning
+늦은 밤에	situation	late at night
+여름 밤에	situation	summer night
+해 질 녘에	situation	at dusk
+비 그친 뒤에	situation	after the rain
+새해 첫날에	situation	New Year's Day
+잠들기 전에	situation	before bed
+드라이브할 때	situation	for a drive
+캠핑할 때	situation	while camping
+야근할 때	situation	working late
+우울할 때	situation	when feeling down
+여행 가는 길에	situation	on the way to a trip
+비행기에서	situation	on a plane
+명절에	situation	holiday season
+연휴에	situation	long holiday weekend
+생일에	situation	birthday
+장마철에	situation	rainy season
+거친	mood	gritty
+고독한	mood	solitary
+귀여운	mood	cute
+담담한	mood	understated
+따스한	mood	warm
+묵직한	mood	weighty
+벅찬	mood	overwhelming
+부드러운	mood	gentle
+서정적인	mood	lyrical
+섬세한	mood	delicate
+소박한	mood	humble
+엉뚱한	mood	quirky
+은은한	mood	subtle
+진지한	mood	serious
+짜릿한	mood	thrilling
+통쾌한	mood	cathartic
+화려한	mood	dazzling
+활기찬	mood	lively
+희망찬	mood	hopeful
+왕국	theme	kingdom
+축구	theme	soccer
