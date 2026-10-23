@@ -6,6 +6,7 @@ import time
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi.concurrency import run_in_threadpool
 
 from .dependencies import get_model_manager, get_manager_unchecked
 from .translation import HANGUL, prepare as prepare_queries
@@ -70,7 +71,7 @@ async def recommend(
         raise HTTPException(status_code=503, detail="아직 준비된 인덱스가 없습니다.")
 
     # 한국어 검색어는 영어로 번역해서 인코더에 넣는다(src/api/translation.py의 실측 참조).
-    used, translated = prepare_queries([request.query])
+    used, translated = await run_in_threadpool(prepare_queries, [request.query])
     results = manager.search(used[0], request.top_k, domain=request.domain)
     return RecommendationResponse(
         query=request.query,
@@ -115,8 +116,10 @@ async def embeddings(
 
     # 요청마다 검색어 수·한국어 수·처리 시간을 남긴다. 번역 로그에는 한국어만 찍혀서
     # 백엔드가 한 요청에 몇 개를 담는지, 동시 요청이 줄을 서는지 알 수 없었다(10/16).
+    # 번역은 스레드에서 돌린다 — LLM 응답을 기다리는 동안 다른 요청도 번역을 보내야
+    # vLLM이 동시 요청을 묶어 처리한다. 이벤트 루프에서 돌리면 요청이 하나씩 줄을 선다.
     t0 = time.perf_counter()
-    used, translated = prepare_queries(queries)
+    used, translated = await run_in_threadpool(prepare_queries, queries)
     z = manager.encode_queries(used, normalize=request.normalize)
     logger.info(f"embeddings: 검색어 {len(queries)}개(한국어 {sum(bool(HANGUL.search(q or '')) for q in queries)}개), "
                 f"{(time.perf_counter() - t0) * 1000:.0f}ms")
@@ -144,7 +147,7 @@ async def search_vector(
     if not manager.can_embed():
         raise HTTPException(status_code=503, detail="모델이 로드되지 않았습니다.")
 
-    used, translated = prepare_queries([keyword])
+    used, translated = await run_in_threadpool(prepare_queries, [keyword])
     z = manager.encode_queries(used, normalize=normalize)
     return VectorSearchResponse(
         keyword=keyword,
@@ -174,7 +177,7 @@ async def search_vector_post(
     if not text:
         raise HTTPException(status_code=422, detail="text가 비어 있습니다.")
 
-    used, translated = prepare_queries([text])
+    used, translated = await run_in_threadpool(prepare_queries, [text])
     z = manager.encode_queries(used, normalize=request.normalize)
     return TextVectorResponse(
         text=text,

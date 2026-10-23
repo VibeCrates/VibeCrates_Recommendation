@@ -29,12 +29,20 @@ direct 0.857 / philosophical 0.783인데 poet만 0.632다.
   보사노바 → "Bosanoba"). 그래서 검색어를 사전(ko_en_dict.json, scripts/build_translation_dict.py)
   의 단어로 끝까지 쪼갤 수 있으면 사전 번역을 이어 붙이고, 하나라도 못 쪼개면 opus-mt로
   넘긴다. 사전은 어휘 단위로만 맞으므로 문장형 검색어는 지금처럼 opus-mt가 옮긴다.
+
+2026-10-23 — 사전으로 안 풀리는 문장형은 LLM에 먼저 보낸다:
+  10/15 사람 판정에서 opus-mt는 평균 3.64점·1~2점 17.1%, Gemma 3 4B는 4.42~4.52점·
+  0.7~2.9%였다(experiments/translation_review_20261015_*). GPU가 있는 서버(학교 AstraGo)에서
+  vLLM으로 띄운 Gemma를 HTTP로 부른다 — 문장당 0.13초, 20건 동시 0.33초. LLM_TRANSLATE_URL이
+  없으면(Mac 서버) 이 단계를 건너뛰고, 시간 안에 답이 없거나 실패한 검색어만 opus-mt로 넘긴다.
 """
 import json
 import logging
 import os
 import re
 import threading
+import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 logger = logging.getLogger(__name__)
@@ -46,6 +54,24 @@ MT_MODEL   = os.getenv("MT_MODEL", "Helsinki-NLP/opus-mt-ko-en")
 MT_ENABLED = os.getenv("TRANSLATE_QUERIES", "1").lower() not in ("0", "", "false", "no")
 MT_BEAMS   = int(os.getenv("MT_BEAMS", "4"))
 DICT_PATH  = os.getenv("KO_EN_DICT", str(Path(__file__).with_name("ko_en_dict.json")))
+
+# OpenAI 호환 서버 주소(예: http://127.0.0.1:8001/v1). 비어 있으면 LLM 번역을 쓰지 않는다.
+LLM_URL     = os.getenv("LLM_TRANSLATE_URL", "").rstrip("/")
+LLM_MODEL   = os.getenv("LLM_TRANSLATE_MODEL", "gemma3-4b")
+LLM_TIMEOUT = float(os.getenv("LLM_TRANSLATE_TIMEOUT", "1.0"))
+
+# scripts/translate_sentence_bench.py의 PROMPT와 같은 문구 — 10/15 판정이 이 프롬프트로 나왔다.
+LLM_PROMPT = (
+    "Translate this Korean search query from a book/movie/music recommendation app into "
+    "natural English.\n\n"
+    "Rules:\n"
+    "- Keep the meaning, imagery and mood. Do not turn a metaphor into a literal or religious term.\n"
+    "- Do not add anything the Korean does not say, and do not drop anything it does say.\n"
+    "- Slang and internet abbreviations (ㅊㅊ = recommend, ㄱㄱ = go) become plain English.\n"
+    "- Titles and names use their usual English form.\n\n"
+    "Korean: {ko}\n\n"
+    "Output the English translation only. No quotes, no explanation."
+)
 
 # 사전 단어 뒤에 붙은 조사는 떼고 찾는다("바다의" → 바다). 긴 것부터 시도한다.
 # "처럼"·"같은"은 넣지 않는다 — "영화 같은 노래"를 "movie songs"로 붙이면 뜻이 바뀐다.
@@ -101,6 +127,43 @@ class DictTranslator:
         return result or None
 
 
+class LLMTranslator:
+    """vLLM 서버에 한 검색어씩 동시에 보낸다. vLLM이 동시 요청을 묶어 처리한다."""
+
+    def __init__(self, url: str = LLM_URL):
+        self.url = url
+        self._pool = ThreadPoolExecutor(max_workers=16) if url else None
+        if url:
+            logger.info(f"LLM 번역 사용: {url} ({LLM_MODEL}, 제한 {LLM_TIMEOUT}s)")
+
+    @staticmethod
+    def _clean(raw: str) -> str:
+        s = raw.strip().split("\n")[0].strip()
+        s = re.sub(r"^(English|Translation)\s*:\s*", "", s, flags=re.I).strip()
+        return re.sub(r'^["\'“‘]|["\'”’]$', "", s).strip()
+
+    def _one(self, text: str) -> str | None:
+        body = json.dumps({
+            "model": LLM_MODEL, "temperature": 0, "max_tokens": 96,
+            "messages": [{"role": "user", "content": LLM_PROMPT.format(ko=text)}],
+        }).encode()
+        req = urllib.request.Request(f"{self.url}/chat/completions", data=body,
+                                     headers={"Content-Type": "application/json"})
+        try:
+            with urllib.request.urlopen(req, timeout=LLM_TIMEOUT) as r:
+                out = self._clean(json.load(r)["choices"][0]["message"]["content"])
+        except Exception as e:
+            logger.warning(f"LLM 번역 실패({type(e).__name__}) — opus-mt로 넘깁니다: {text!r}")
+            return None
+        # 번역문에 한글이 남으면 옮기지 못한 것이다
+        return out if out and not HANGUL.search(out) else None
+
+    def translate(self, texts: list[str]) -> list[str | None]:
+        if not self._pool:
+            return [None] * len(texts)
+        return list(self._pool.map(self._one, texts))
+
+
 class QueryTranslator:
     """모델은 첫 한국어 요청 때 올린다.
 
@@ -115,6 +178,7 @@ class QueryTranslator:
         self._lock = threading.Lock()
         self._failed = False          # 한 번 실패하면 매 요청마다 재시도하지 않는다
         self.dictionary = DictTranslator()
+        self.llm = LLMTranslator()
 
     def _ensure_loaded(self) -> bool:
         if self._model is not None:
@@ -158,7 +222,16 @@ class QueryTranslator:
                 result[i] = hit
             else:
                 targets.append(i)
-        # 사전으로 다 풀리면 opus-mt를 올리지도 않는다
+        if targets and self.llm.url:
+            remaining = []
+            for i, hit in zip(targets, self.llm.translate([texts[i] for i in targets])):
+                if hit is None:
+                    remaining.append(i)
+                else:
+                    logger.info(f"번역(LLM): {texts[i]!r} → {hit!r}")
+                    result[i] = hit
+            targets = remaining
+        # 사전·LLM으로 다 풀리면 opus-mt를 올리지도 않는다
         if not targets or not self._ensure_loaded():
             return result
 
