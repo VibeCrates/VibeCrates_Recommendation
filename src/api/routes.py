@@ -1,12 +1,14 @@
 """
 API Routes
 """
+import logging
+import time
 from datetime import datetime, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Query
 
 from .dependencies import get_model_manager, get_manager_unchecked
-from .translation import prepare as prepare_queries
+from .translation import HANGUL, prepare as prepare_queries
 from .domain_intent import detect_domain
 from .schemas import (
     EmbeddingRequest,
@@ -22,6 +24,7 @@ from .schemas import (
 )
 
 router = APIRouter(prefix="/api/v1", tags=["recommendations"])
+logger = logging.getLogger(__name__)
 
 
 @router.get("/ping", response_model=PingResponse)
@@ -110,8 +113,13 @@ async def embeddings(
     if not queries:
         raise HTTPException(status_code=422, detail="query(또는 text)가 비어 있습니다.")
 
+    # 요청마다 검색어 수·한국어 수·처리 시간을 남긴다. 번역 로그에는 한국어만 찍혀서
+    # 백엔드가 한 요청에 몇 개를 담는지, 동시 요청이 줄을 서는지 알 수 없었다(10/16).
+    t0 = time.perf_counter()
     used, translated = prepare_queries(queries)
     z = manager.encode_queries(used, normalize=request.normalize)
+    logger.info(f"embeddings: 검색어 {len(queries)}개(한국어 {sum(bool(HANGUL.search(q or '')) for q in queries)}개), "
+                f"{(time.perf_counter() - t0) * 1000:.0f}ms")
     return EmbeddingResponse(
         dim=z.shape[1],
         normalized=request.normalize,
