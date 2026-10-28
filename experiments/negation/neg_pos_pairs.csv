@@ -1,0 +1,13 @@
+domain,negated,positive,base
+movie,Non-violent action movies,Violent action movies,Action movies
+movie,Non-depressing war movies,Depressing war movies,War movies
+movie,Non-violent thrillers,Violent thrillers,Thrillers
+movie,Non-boring documentaries,Boring documentaries,Documentaries
+music,Songs that aren't love songs,Love songs,Songs
+music,Rap music without explicit lyrics,Rap music with explicit lyrics,Rap music
+music,Songs that are sad but not depressing,Sad and depressing songs,Sad songs
+music,Love songs that aren't overly sentimental,Overly sentimental love songs,Love songs
+book,Fantasy novels that aren't scary,Scary fantasy novels,Fantasy novels
+book,A novel that's not about romance,A novel about romance,Novels
+book,Non-violent mystery novels,Violent mystery novels,Mystery novels
+book,A coming-of-age novel that isn't depressing,A depressing coming-of-age novel,Coming-of-age novels

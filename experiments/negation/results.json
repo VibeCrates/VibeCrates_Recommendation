@@ -1,0 +1,4214 @@
+[
+ {
+  "domain": "movie",
+  "query": "무섭지 않은 공포 영화",
+  "mac": {
+   "translated": "No scary horror movies.",
+   "ms": 1538,
+   "top10": [
+    {
+     "id": "101917",
+     "title": "Freddy's Dead: The Final Nightmare (1991)",
+     "score": 0.6143
+    },
+    {
+     "id": "390073",
+     "title": "The Halfway House (2004)",
+     "score": 0.6091
+    },
+    {
+     "id": "482606",
+     "title": "The Strangers (2008)",
+     "score": 0.6049
+    },
+    {
+     "id": "482606",
+     "title": "The Strangers (2008)",
+     "score": 0.6049
+    },
+    {
+     "id": "815165",
+     "title": "The Gay Bed and Breakfast of Terror (2007)",
+     "score": 0.6022
+    },
+    {
+     "id": "91560",
+     "title": "Mountaintop Motel Massacre (1986)",
+     "score": 0.5976
+    },
+    {
+     "id": "63350",
+     "title": "Night of the Living Dead (1968)",
+     "score": 0.5835
+    },
+    {
+     "id": "80761",
+     "title": "Friday the 13th (1980)",
+     "score": 0.583
+    },
+    {
+     "id": "455407",
+     "title": "The Crazies (2010)",
+     "score": 0.5766
+    },
+    {
+     "id": "93220",
+     "title": "House II: The Second Story (1987)",
+     "score": 0.5734
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Scary movies that aren't frightening.",
+   "ms": 309,
+   "top10": [
+    {
+     "id": "101917",
+     "title": "Freddy's Dead: The Final Nightmare (1991)",
+     "score": 0.6439
+    },
+    {
+     "id": "83767",
+     "title": "Creepshow (1982)",
+     "score": 0.6305
+    },
+    {
+     "id": "1305112",
+     "title": "Drive-In Horrorshow (2009)",
+     "score": 0.6235
+    },
+    {
+     "id": "92796",
+     "title": "Creepshow 2 (1987)",
+     "score": 0.6151
+    },
+    {
+     "id": "981224",
+     "title": "Midnight Movie (2008)",
+     "score": 0.6119
+    },
+    {
+     "id": "1010271",
+     "title": "The Poughkeepsie Tapes (2007)",
+     "score": 0.6105
+    },
+    {
+     "id": "319728",
+     "title": "The Last Horror Movie (2003)",
+     "score": 0.6031
+    },
+    {
+     "id": "93220",
+     "title": "House II: The Second Story (1987)",
+     "score": 0.602
+    },
+    {
+     "id": "4467626",
+     "title": "Scare Campaign (2016)",
+     "score": 0.601
+    },
+    {
+     "id": "97527",
+     "title": "The Horror Show (1989)",
+     "score": 0.5985
+    }
+   ]
+  },
+  "overlap": 2
+ },
+ {
+  "domain": "movie",
+  "query": "슬프지 않은 영화",
+  "mac": {
+   "translated": "Not sad.",
+   "ms": 163,
+   "top10": [
+    {
+     "id": "1821449",
+     "title": "Happy End (2011)",
+     "score": 0.4865
+    },
+    {
+     "id": "297871",
+     "title": "Eierdiebe (2003)",
+     "score": 0.4587
+    },
+    {
+     "id": "3650290",
+     "title": "Kobry a uzovky (2015)",
+     "score": 0.4554
+    },
+    {
+     "id": "301357",
+     "title": "Good Bye Lenin! (2003)",
+     "score": 0.454
+    },
+    {
+     "id": "1398991",
+     "title": "De jueves a domingo (2012)",
+     "score": 0.4505
+    },
+    {
+     "id": "1827578",
+     "title": "The End of Love (2012)",
+     "score": 0.4498
+    },
+    {
+     "id": "1931470",
+     "title": "La guerre est dÌ©clarÌ©e (2011)",
+     "score": 0.4471
+    },
+    {
+     "id": "1465490",
+     "title": "Joy (2010)",
+     "score": 0.4471
+    },
+    {
+     "id": "3094914",
+     "title": "Bakit hindi ka crush ng crush mo? (2013)",
+     "score": 0.443
+    },
+    {
+     "id": "1365474",
+     "title": "Komt een vrouw bij de dokter (2009)",
+     "score": 0.4426
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Movies that aren't sad.",
+   "ms": 154,
+   "top10": [
+    {
+     "id": "1045642",
+     "title": "Tales from the Script (2009)",
+     "score": 0.6325
+    },
+    {
+     "id": "973844",
+     "title": "Chacun son cinÌ©ma ou Ce petit coup au coeur quand la lumiÌ¬re s'Ì©teint et que le film commence (2007)",
+     "score": 0.6079
+    },
+    {
+     "id": "449786",
+     "title": "The 50 Worst Movies Ever Made (2004)",
+     "score": 0.5929
+    },
+    {
+     "id": "4487148",
+     "title": "The Third Annual 'On Cinema' Oscar Special (2015)",
+     "score": 0.5882
+    },
+    {
+     "id": "3758094",
+     "title": "The First Annual 'On Cinema' Oscar Special (2013)",
+     "score": 0.5845
+    },
+    {
+     "id": "3576518",
+     "title": "The Second Annual 'On Cinema' Oscar Special (2014)",
+     "score": 0.5826
+    },
+    {
+     "id": "2382298",
+     "title": "Life Itself (2014)",
+     "score": 0.5652
+    },
+    {
+     "id": "1352717",
+     "title": "I Knew It Was You: Rediscovering John Cazale (2009)",
+     "score": 0.5593
+    },
+    {
+     "id": "131461",
+     "title": "The Life and Death of 9413, a Hollywood Extra (1928)",
+     "score": 0.5516
+    },
+    {
+     "id": "1683048",
+     "title": "De Palma (2015)",
+     "score": 0.5507
+    }
+   ]
+  },
+  "overlap": 0
+ },
+ {
+  "domain": "movie",
+  "query": "너무 길지 않은 영화",
+  "mac": {
+   "translated": "Not too long.",
+   "ms": 231,
+   "top10": [
+    {
+     "id": "3865478",
+     "title": "11 minut (2015)",
+     "score": 0.6139
+    },
+    {
+     "id": "98962",
+     "title": "12:01 PM (1990)",
+     "score": 0.5763
+    },
+    {
+     "id": "115471",
+     "title": "Adrenalin: Fear the Rush (1996)",
+     "score": 0.5675
+    },
+    {
+     "id": "1194612",
+     "title": "Into Eternity: A Film for the Future (2010)",
+     "score": 0.5447
+    },
+    {
+     "id": "339976",
+     "title": "10 minuta (2002)",
+     "score": 0.5182
+    },
+    {
+     "id": "983909",
+     "title": "Real Time (2008)",
+     "score": 0.5137
+    },
+    {
+     "id": "137457",
+     "title": "Dead on Time (1983)",
+     "score": 0.5073
+    },
+    {
+     "id": "1706542",
+     "title": "The Ah of Life (2010)",
+     "score": 0.5072
+    },
+    {
+     "id": "2176504",
+     "title": "The End of Time (2012)",
+     "score": 0.5033
+    },
+    {
+     "id": "892422",
+     "title": "Pente lepta akoma (2006)",
+     "score": 0.503
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Not too long movies",
+   "ms": 111,
+   "top10": [
+    {
+     "id": "179624",
+     "title": "100 Years at the Movies (1994)",
+     "score": 0.6291
+    },
+    {
+     "id": "3758094",
+     "title": "The First Annual 'On Cinema' Oscar Special (2013)",
+     "score": 0.5854
+    },
+    {
+     "id": "973844",
+     "title": "Chacun son cinÌ©ma ou Ce petit coup au coeur quand la lumiÌ¬re s'Ì©teint et que le film commence (2007)",
+     "score": 0.5839
+    },
+    {
+     "id": "4355574",
+     "title": "Live from New York! (2015)",
+     "score": 0.57
+    },
+    {
+     "id": "1529331",
+     "title": "Something's Gonna Live (2010)",
+     "score": 0.5666
+    },
+    {
+     "id": "158831",
+     "title": "Off the Menu: The Last Days of Chasen's (1997)",
+     "score": 0.5546
+    },
+    {
+     "id": "1454902",
+     "title": "1939: Hollywood's Greatest Year (2009)",
+     "score": 0.5462
+    },
+    {
+     "id": "1683048",
+     "title": "De Palma (2015)",
+     "score": 0.5388
+    },
+    {
+     "id": "799934",
+     "title": "Be Kind Rewind (2008)",
+     "score": 0.5379
+    },
+    {
+     "id": "799934",
+     "title": "Be Kind Rewind (2008)",
+     "score": 0.5379
+    }
+   ]
+  },
+  "overlap": 0
+ },
+ {
+  "domain": "movie",
+  "query": "잔인하지 않은 스릴러",
+  "mac": {
+   "translated": "Not a cruel thriller.",
+   "ms": 178,
+   "top10": [
+    {
+     "id": "3024324",
+     "title": "Kill Game (2017)",
+     "score": 0.5492
+    },
+    {
+     "id": "889212",
+     "title": "Phii khon pen (2006)",
+     "score": 0.5451
+    },
+    {
+     "id": "1282052",
+     "title": "His Name Was Jason: 30 Years of Friday the 13th (2009)",
+     "score": 0.5369
+    },
+    {
+     "id": "329101",
+     "title": "Freddy vs. Jason (2003)",
+     "score": 0.5362
+    },
+    {
+     "id": "91080",
+     "title": "Jason Lives: Friday the 13th Part VI (1986)",
+     "score": 0.532
+    },
+    {
+     "id": "2061604",
+     "title": "Casey Jones (2011)",
+     "score": 0.5289
+    },
+    {
+     "id": "284929",
+     "title": "Ted Bundy (2002)",
+     "score": 0.528
+    },
+    {
+     "id": "119167",
+     "title": "Funny Games (1997)",
+     "score": 0.5263
+    },
+    {
+     "id": "100114",
+     "title": "Marked for Death (1990)",
+     "score": 0.5263
+    },
+    {
+     "id": "240380",
+     "title": "Bloody Murder (2000)",
+     "score": 0.5251
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Non-violent thrillers",
+   "ms": 128,
+   "top10": [
+    {
+     "id": "2301155",
+     "title": "Shootout at Wadala (2013)",
+     "score": 0.5419
+    },
+    {
+     "id": "4019578",
+     "title": "Rege (2014)",
+     "score": 0.5257
+    },
+    {
+     "id": "69121",
+     "title": "Prime Cut (1972)",
+     "score": 0.5179
+    },
+    {
+     "id": "811066",
+     "title": "Shootout at Lokhandwala (2007)",
+     "score": 0.5022
+    },
+    {
+     "id": "910934",
+     "title": "Urban Justice (2007)",
+     "score": 0.4974
+    },
+    {
+     "id": "62218",
+     "title": "Rough Night in Jericho (1967)",
+     "score": 0.4947
+    },
+    {
+     "id": "50547",
+     "title": "The Iron Sheriff (1957)",
+     "score": 0.492
+    },
+    {
+     "id": "913401",
+     "title": "Kill Buljo: The Movie (2007)",
+     "score": 0.4897
+    },
+    {
+     "id": "70781",
+     "title": "Kill Django... Kill First (1971)",
+     "score": 0.4876
+    },
+    {
+     "id": "85977",
+     "title": "Murder in Coweta County (1983)",
+     "score": 0.4851
+    }
+   ]
+  },
+  "overlap": 0
+ },
+ {
+  "domain": "movie",
+  "query": "뻔하지 않은 로맨스 영화",
+  "mac": {
+   "translated": "No, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no",
+   "ms": 1033,
+   "top10": [
+    {
+     "id": "81203",
+     "title": "Murder by Phone (1982)",
+     "score": 0.5314
+    },
+    {
+     "id": "49366",
+     "title": "Invasion of the Body Snatchers (1956)",
+     "score": 0.5194
+    },
+    {
+     "id": "68611",
+     "title": "Frenzy (1972)",
+     "score": 0.5124
+    },
+    {
+     "id": "80645",
+     "title": "Don't Answer the Phone! (1980)",
+     "score": 0.5117
+    },
+    {
+     "id": "98184",
+     "title": "Relentless (1989)",
+     "score": 0.5098
+    },
+    {
+     "id": "59678",
+     "title": "The Satan Bug (1965)",
+     "score": 0.4886
+    },
+    {
+     "id": "324127",
+     "title": "Suspect Zero (2004)",
+     "score": 0.4866
+    },
+    {
+     "id": "66827",
+     "title": "La bestia uccide a sangue freddo (1971)",
+     "score": 0.4836
+    },
+    {
+     "id": "3780208",
+     "title": "Dark Signal (2016)",
+     "score": 0.4794
+    },
+    {
+     "id": "462673",
+     "title": "Danger! 50,000 Zombies! (2004)",
+     "score": 0.4764
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Uncliche romantic movies",
+   "ms": 121,
+   "top10": [
+    {
+     "id": "82764",
+     "title": "Modern Romance (1981)",
+     "score": 0.62
+    },
+    {
+     "id": "234940",
+     "title": "Un couple í©patant (2002)",
+     "score": 0.6132
+    },
+    {
+     "id": "35428",
+     "title": "They All Kissed the Bride (1942)",
+     "score": 0.5948
+    },
+    {
+     "id": "31602",
+     "title": "Made for Each Other (1939)",
+     "score": 0.5928
+    },
+    {
+     "id": "33592",
+     "title": "Father Takes a Wife (1941)",
+     "score": 0.5912
+    },
+    {
+     "id": "29395",
+     "title": "Personal Property (1937)",
+     "score": 0.5857
+    },
+    {
+     "id": "139388",
+     "title": "It Had to Be You (2000)",
+     "score": 0.5853
+    },
+    {
+     "id": "95927",
+     "title": "Punchline (1988)",
+     "score": 0.5835
+    },
+    {
+     "id": "2186812",
+     "title": "20 ans d'Ì©cart (2013)",
+     "score": 0.5825
+    },
+    {
+     "id": "381716",
+     "title": "Yeongeo wanjeonjeongbok (2003)",
+     "score": 0.5761
+    }
+   ]
+  },
+  "overlap": 0
+ },
+ {
+  "domain": "movie",
+  "query": "해피엔딩이 아닌 영화",
+  "mac": {
+   "translated": "Not a happy ending.",
+   "ms": 274,
+   "top10": [
+    {
+     "id": "2053423",
+     "title": "Revenge for Jolly! (2012)",
+     "score": 0.5651
+    },
+    {
+     "id": "286921",
+     "title": "Revengers Tragedy (2002)",
+     "score": 0.5398
+    },
+    {
+     "id": "77504",
+     "title": "The End (1978)",
+     "score": 0.5126
+    },
+    {
+     "id": "98486",
+     "title": "Der Todesking (1990)",
+     "score": 0.4907
+    },
+    {
+     "id": "203536",
+     "title": "A Good Night to Die (2003)",
+     "score": 0.4869
+    },
+    {
+     "id": "1449175",
+     "title": "Hamlet (2009)",
+     "score": 0.4845
+    },
+    {
+     "id": "1748016",
+     "title": "Brother's Keeper (2013)",
+     "score": 0.4843
+    },
+    {
+     "id": "373762",
+     "title": "Der Clown (2005)",
+     "score": 0.4813
+    },
+    {
+     "id": "1458175",
+     "title": "The Next Three Days (2010)",
+     "score": 0.48
+    },
+    {
+     "id": "490075",
+     "title": "Aftermath (2013)",
+     "score": 0.477
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Movies that don't have happy endings",
+   "ms": 161,
+   "top10": [
+    {
+     "id": "322422",
+     "title": "Gleason (2002)",
+     "score": 0.5397
+    },
+    {
+     "id": "2450440",
+     "title": "The Last of Robin Hood (2013)",
+     "score": 0.5385
+    },
+    {
+     "id": "1245492",
+     "title": "This Is the End (2013)",
+     "score": 0.5364
+    },
+    {
+     "id": "2753778",
+     "title": "The Death of \"Superman Lives\": What Happened? (2015)",
+     "score": 0.5153
+    },
+    {
+     "id": "4487148",
+     "title": "The Third Annual 'On Cinema' Oscar Special (2015)",
+     "score": 0.5139
+    },
+    {
+     "id": "278823",
+     "title": "Hollywood Ending (2002)",
+     "score": 0.5131
+    },
+    {
+     "id": "179196",
+     "title": "Goodbye, 20th Century (1998)",
+     "score": 0.4912
+    },
+    {
+     "id": "77504",
+     "title": "The End (1978)",
+     "score": 0.4802
+    },
+    {
+     "id": "240628",
+     "title": "James Dean (2001)",
+     "score": 0.4667
+    },
+    {
+     "id": "284674",
+     "title": "Pauly Shore Is Dead (2003)",
+     "score": 0.4666
+    }
+   ]
+  },
+  "overlap": 1
+ },
+ {
+  "domain": "movie",
+  "query": "폭력적이지 않은 액션 영화",
+  "mac": {
+   "translated": "Not violent action movies.",
+   "ms": 184,
+   "top10": [
+    {
+     "id": "2002718",
+     "title": "Machete Kills (2013)",
+     "score": 0.6434
+    },
+    {
+     "id": "102915",
+     "title": "Showdown in Little Tokyo (1991)",
+     "score": 0.6415
+    },
+    {
+     "id": "2265171",
+     "title": "The Raid 2 (2014)",
+     "score": 0.6352
+    },
+    {
+     "id": "120724",
+     "title": "Knock Off (1998)",
+     "score": 0.6221
+    },
+    {
+     "id": "3398252",
+     "title": "Samurai Cop 2: Deadly Vengeance (2015)",
+     "score": 0.6186
+    },
+    {
+     "id": "120868",
+     "title": "Torrente, el brazo tonto de la ley (1998)",
+     "score": 0.6181
+    },
+    {
+     "id": "3397948",
+     "title": "Zombie Ninjas vs Black Ops (2015)",
+     "score": 0.6179
+    },
+    {
+     "id": "2409302",
+     "title": "Jigoku de naze warui (2013)",
+     "score": 0.6179
+    },
+    {
+     "id": "1290099",
+     "title": "Ninjas vs. Zombies (2008)",
+     "score": 0.6176
+    },
+    {
+     "id": "72348",
+     "title": "Tough Guys (1974)",
+     "score": 0.6072
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Non-violent action movies",
+   "ms": 118,
+   "top10": [
+    {
+     "id": "49539",
+     "title": "Naked Gun (1956)",
+     "score": 0.5261
+    },
+    {
+     "id": "120868",
+     "title": "Torrente, el brazo tonto de la ley (1998)",
+     "score": 0.5239
+    },
+    {
+     "id": "104293",
+     "title": "Four Eyes and Six-Guns (1992)",
+     "score": 0.5218
+    },
+    {
+     "id": "2002718",
+     "title": "Machete Kills (2013)",
+     "score": 0.5185
+    },
+    {
+     "id": "75222",
+     "title": "Silent Movie (1976)",
+     "score": 0.5156
+    },
+    {
+     "id": "996966",
+     "title": "Not Quite Hollywood: The Wild, Untold Story of Ozploitation! (2008)",
+     "score": 0.5104
+    },
+    {
+     "id": "79043",
+     "title": "The Magnificent Ruffians (1979)",
+     "score": 0.5063
+    },
+    {
+     "id": "905979",
+     "title": "Chicago 10 (2007)",
+     "score": 0.5042
+    },
+    {
+     "id": "905979",
+     "title": "Chicago 10 (2007)",
+     "score": 0.5042
+    },
+    {
+     "id": "74952",
+     "title": "Violent Naples (1976)",
+     "score": 0.5022
+    }
+   ]
+  },
+  "overlap": 2
+ },
+ {
+  "domain": "movie",
+  "query": "지루하지 않은 다큐멘터리",
+  "mac": {
+   "translated": "Boring documentaries",
+   "ms": 128,
+   "top10": [
+    {
+     "id": "73172",
+     "title": "Inserts (1975)",
+     "score": 0.6176
+    },
+    {
+     "id": "473709",
+     "title": "The TV Set (2006)",
+     "score": 0.5663
+    },
+    {
+     "id": "3319212",
+     "title": "VHS Massacre: Cult Films and the Decline of Physical Media (2016)",
+     "score": 0.5583
+    },
+    {
+     "id": "1743720",
+     "title": "The Greatest Movie Ever Sold (2011)",
+     "score": 0.5543
+    },
+    {
+     "id": "1144539",
+     "title": "Best Worst Movie (2009)",
+     "score": 0.5531
+    },
+    {
+     "id": "996966",
+     "title": "Not Quite Hollywood: The Wild, Untold Story of Ozploitation! (2008)",
+     "score": 0.5478
+    },
+    {
+     "id": "2076781",
+     "title": "6 Days to Air: The Making of South Park (2011)",
+     "score": 0.5438
+    },
+    {
+     "id": "420917",
+     "title": "Snowball Effect: The Story of 'Clerks' (2004)",
+     "score": 0.5414
+    },
+    {
+     "id": "449786",
+     "title": "The 50 Worst Movies Ever Made (2004)",
+     "score": 0.5405
+    },
+    {
+     "id": "97531",
+     "title": "How to Get Ahead in Advertising (1989)",
+     "score": 0.5378
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Non-boring documentaries",
+   "ms": 124,
+   "top10": [
+    {
+     "id": "996966",
+     "title": "Not Quite Hollywood: The Wild, Untold Story of Ozploitation! (2008)",
+     "score": 0.6979
+    },
+    {
+     "id": "2076781",
+     "title": "6 Days to Air: The Making of South Park (2011)",
+     "score": 0.6533
+    },
+    {
+     "id": "382966",
+     "title": "See This Movie (2004)",
+     "score": 0.6383
+    },
+    {
+     "id": "3657420",
+     "title": "21 Years: Richard Linklater (2014)",
+     "score": 0.6298
+    },
+    {
+     "id": "4677300",
+     "title": "Very Semi-Serious (2015)",
+     "score": 0.6282
+    },
+    {
+     "id": "79302",
+     "title": "Home Movies (1979)",
+     "score": 0.6235
+    },
+    {
+     "id": "1302019",
+     "title": "Not Another Not Another Movie (2011)",
+     "score": 0.6225
+    },
+    {
+     "id": "390336",
+     "title": "Overnight (2003)",
+     "score": 0.6092
+    },
+    {
+     "id": "1680058",
+     "title": "Boris - Il film (2011)",
+     "score": 0.6091
+    },
+    {
+     "id": "449786",
+     "title": "The 50 Worst Movies Ever Made (2004)",
+     "score": 0.6088
+    }
+   ]
+  },
+  "overlap": 3
+ },
+ {
+  "domain": "movie",
+  "query": "야하지 않은 로맨스 영화",
+  "mac": {
+   "translated": "It's a dirty romance movie.",
+   "ms": 223,
+   "top10": [
+    {
+     "id": "102411",
+     "title": "The Marrying Man (1991)",
+     "score": 0.6068
+    },
+    {
+     "id": "82764",
+     "title": "Modern Romance (1981)",
+     "score": 0.5994
+    },
+    {
+     "id": "92666",
+     "title": "Blind Date (1987)",
+     "score": 0.597
+    },
+    {
+     "id": "55100",
+     "title": "Lover Come Back (1961)",
+     "score": 0.5841
+    },
+    {
+     "id": "1279935",
+     "title": "Date Night (2010)",
+     "score": 0.5804
+    },
+    {
+     "id": "82131",
+     "title": "La caliente niÌ±a Julietta (1981)",
+     "score": 0.5746
+    },
+    {
+     "id": "97790",
+     "title": "Loverboy (1989)",
+     "score": 0.5688
+    },
+    {
+     "id": "93737",
+     "title": "The Pick-up Artist (1987)",
+     "score": 0.5683
+    },
+    {
+     "id": "174336",
+     "title": "Whipped (2000)",
+     "score": 0.5646
+    },
+    {
+     "id": "492650",
+     "title": "Jakeob-ui jeongseok (2005)",
+     "score": 0.5582
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Romantic movies I haven't seen.",
+   "ms": 159,
+   "top10": [
+    {
+     "id": "82764",
+     "title": "Modern Romance (1981)",
+     "score": 0.6568
+    },
+    {
+     "id": "138987",
+     "title": "20 Dates (1998)",
+     "score": 0.6501
+    },
+    {
+     "id": "32617",
+     "title": "I Love You Again (1940)",
+     "score": 0.6319
+    },
+    {
+     "id": "57999",
+     "title": "Dear Heart (1964)",
+     "score": 0.6198
+    },
+    {
+     "id": "313792",
+     "title": "Anything Else (2003)",
+     "score": 0.6051
+    },
+    {
+     "id": "817230",
+     "title": "Valentine's Day (2010)",
+     "score": 0.6019
+    },
+    {
+     "id": "52662",
+     "title": "But Not for Me (1959)",
+     "score": 0.6005
+    },
+    {
+     "id": "47191",
+     "title": "The Long, Long Trailer (1953)",
+     "score": 0.5988
+    },
+    {
+     "id": "138590",
+     "title": "Twice Upon a Yesterday (1998)",
+     "score": 0.5957
+    },
+    {
+     "id": "23303",
+     "title": "One Hour with You (1932)",
+     "score": 0.5931
+    }
+   ]
+  },
+  "overlap": 1
+ },
+ {
+  "domain": "movie",
+  "query": "어린이용이 아닌 애니메이션",
+  "mac": {
+   "translated": "Not for children, but animation",
+   "ms": 195,
+   "top10": [
+    {
+     "id": "450295",
+     "title": "Make Your Own Damn Movie! (2005)",
+     "score": 0.6186
+    },
+    {
+     "id": "94847",
+     "title": "The Cat Came Back (1988)",
+     "score": 0.6126
+    },
+    {
+     "id": "80629",
+     "title": "Dinosaurs! (1987)",
+     "score": 0.5712
+    },
+    {
+     "id": "3214286",
+     "title": "A Lego Brickumentary (2014)",
+     "score": 0.5566
+    },
+    {
+     "id": "1787660",
+     "title": "Being Elmo: A Puppeteer's Journey (2011)",
+     "score": 0.542
+    },
+    {
+     "id": "331999",
+     "title": "Don't Eat the Pictures: Sesame Street at the Metropolitan Museum of Art (1983)",
+     "score": 0.5378
+    },
+    {
+     "id": "81915",
+     "title": "The Pee Wee Herman Show (1981)",
+     "score": 0.5372
+    },
+    {
+     "id": "79302",
+     "title": "Home Movies (1979)",
+     "score": 0.531
+    },
+    {
+     "id": "2076781",
+     "title": "6 Days to Air: The Making of South Park (2011)",
+     "score": 0.5297
+    },
+    {
+     "id": "82679",
+     "title": "The Looney, Looney, Looney Bugs Bunny Movie (1981)",
+     "score": 0.526
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Animation not intended for children",
+   "ms": 130,
+   "top10": [
+    {
+     "id": "94847",
+     "title": "The Cat Came Back (1988)",
+     "score": 0.5708
+    },
+    {
+     "id": "93072",
+     "title": "The Garbage Pail Kids Movie (1987)",
+     "score": 0.5637
+    },
+    {
+     "id": "3214286",
+     "title": "A Lego Brickumentary (2014)",
+     "score": 0.5554
+    },
+    {
+     "id": "81915",
+     "title": "The Pee Wee Herman Show (1981)",
+     "score": 0.5404
+    },
+    {
+     "id": "384700",
+     "title": "The Work of Director Michel Gondry (2003)",
+     "score": 0.5396
+    },
+    {
+     "id": "74720",
+     "title": "The Toy (1976)",
+     "score": 0.5324
+    },
+    {
+     "id": "105629",
+     "title": "Toys (1992)",
+     "score": 0.5302
+    },
+    {
+     "id": "74788",
+     "title": "Let My Puppets Come (1976)",
+     "score": 0.5246
+    },
+    {
+     "id": "80629",
+     "title": "Dinosaurs! (1987)",
+     "score": 0.5226
+    },
+    {
+     "id": "104083",
+     "title": "Demonic Toys (1992)",
+     "score": 0.5144
+    }
+   ]
+  },
+  "overlap": 4
+ },
+ {
+  "domain": "movie",
+  "query": "우울하지 않은 전쟁 영화",
+  "mac": {
+   "translated": "A non-depressive war movie.",
+   "ms": 228,
+   "top10": [
+    {
+     "id": "65391",
+     "title": "The American Soldier (1970)",
+     "score": 0.6535
+    },
+    {
+     "id": "65391",
+     "title": "The American Soldier (1970)",
+     "score": 0.6535
+    },
+    {
+     "id": "66206",
+     "title": "Patton (1970)",
+     "score": 0.6518
+    },
+    {
+     "id": "23939",
+     "title": "Deserter (1933)",
+     "score": 0.6145
+    },
+    {
+     "id": "43590",
+     "title": "Go for Broke! (1951)",
+     "score": 0.6136
+    },
+    {
+     "id": "52861",
+     "title": "La grande guerra (1959)",
+     "score": 0.6129
+    },
+    {
+     "id": "837800",
+     "title": "The Mark of Cain (2007)",
+     "score": 0.6089
+    },
+    {
+     "id": "996994",
+     "title": "The War",
+     "score": 0.6048
+    },
+    {
+     "id": "1221143",
+     "title": "My First War (2008)",
+     "score": 0.5978
+    },
+    {
+     "id": "64754",
+     "title": "Oh! What a Lovely War (1969)",
+     "score": 0.5962
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Non-depressing war movies",
+   "ms": 140,
+   "top10": [
+    {
+     "id": "65611",
+     "title": "Darling Lili (1970)",
+     "score": 0.5911
+    },
+    {
+     "id": "36112",
+     "title": "The Life and Death of Colonel Blimp (1943)",
+     "score": 0.5793
+    },
+    {
+     "id": "359078",
+     "title": "Churchill: The Hollywood Years (2004)",
+     "score": 0.5768
+    },
+    {
+     "id": "61176",
+     "title": "What Did You Do in the War, Daddy? (1966)",
+     "score": 0.5729
+    },
+    {
+     "id": "33436",
+     "title": "Buck Privates (1941)",
+     "score": 0.5421
+    },
+    {
+     "id": "66206",
+     "title": "Patton (1970)",
+     "score": 0.5413
+    },
+    {
+     "id": "64754",
+     "title": "Oh! What a Lovely War (1969)",
+     "score": 0.5403
+    },
+    {
+     "id": "2048807",
+     "title": "Mickey Mouse in Vietnam (1968)",
+     "score": 0.5379
+    },
+    {
+     "id": "250730",
+     "title": "Shooting War (2000)",
+     "score": 0.5374
+    },
+    {
+     "id": "60474",
+     "title": "La Grande Vadrouille (1966)",
+     "score": 0.5361
+    }
+   ]
+  },
+  "overlap": 2
+ },
+ {
+  "domain": "movie",
+  "query": "반전 없는 잔잔한 영화",
+  "mac": {
+   "translated": "A calm, unreverseed movie.",
+   "ms": 211,
+   "top10": [
+    {
+     "id": "2271401",
+     "title": "Inori (2012)",
+     "score": 0.5754
+    },
+    {
+     "id": "95385",
+     "title": "It's Impossible to Learn to Plow by Reading Books (1988)",
+     "score": 0.5604
+    },
+    {
+     "id": "792985",
+     "title": "Paul dans sa vie (2005)",
+     "score": 0.5572
+    },
+    {
+     "id": "169364",
+     "title": "Wind with the Gone (1998)",
+     "score": 0.5382
+    },
+    {
+     "id": "85380",
+     "title": "Cross Creek (1983)",
+     "score": 0.5364
+    },
+    {
+     "id": "483836",
+     "title": "What Remains (2005)",
+     "score": 0.5352
+    },
+    {
+     "id": "2043931",
+     "title": "Neil Young Journeys (2011)",
+     "score": 0.5319
+    },
+    {
+     "id": "881310",
+     "title": "Profils paysans: La Vie moderne (2008)",
+     "score": 0.5253
+    },
+    {
+     "id": "825244",
+     "title": "Dialogue avec mon jardinier (2007)",
+     "score": 0.5205
+    },
+    {
+     "id": "151372",
+     "title": "Ljuset hÌ´ller mig sÌ_llskap (2000)",
+     "score": 0.5195
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Quiet, predictable movies.",
+   "ms": 130,
+   "top10": [
+    {
+     "id": "1045642",
+     "title": "Tales from the Script (2009)",
+     "score": 0.6616
+    },
+    {
+     "id": "249555",
+     "title": "The Great Stone Face (1968)",
+     "score": 0.628
+    },
+    {
+     "id": "75222",
+     "title": "Silent Movie (1976)",
+     "score": 0.5895
+    },
+    {
+     "id": "29605",
+     "title": "Stand-In (1937)",
+     "score": 0.5804
+    },
+    {
+     "id": "16129",
+     "title": "The Movies (1925)",
+     "score": 0.5789
+    },
+    {
+     "id": "4487148",
+     "title": "The Third Annual 'On Cinema' Oscar Special (2015)",
+     "score": 0.5728
+    },
+    {
+     "id": "379730",
+     "title": "Charlie: The Life and Art of Charles Chaplin (2003)",
+     "score": 0.5701
+    },
+    {
+     "id": "50259",
+     "title": "The Comedian",
+     "score": 0.556
+    },
+    {
+     "id": "4677300",
+     "title": "Very Semi-Serious (2015)",
+     "score": 0.552
+    },
+    {
+     "id": "449786",
+     "title": "The 50 Worst Movies Ever Made (2004)",
+     "score": 0.5426
+    }
+   ]
+  },
+  "overlap": 0
+ },
+ {
+  "domain": "music",
+  "query": "시끄럽지 않은 록 음악",
+  "mac": {
+   "translated": "No loud rock music.",
+   "ms": 473,
+   "top10": [
+    {
+     "id": "6HGkds3oqTAr4qyCRZmy4b",
+     "title": "Bad Boy Boogie",
+     "score": 0.6576
+    },
+    {
+     "id": "2RiYPJlh9iAidCJdx5yjTb",
+     "title": "Mean Man",
+     "score": 0.6534
+    },
+    {
+     "id": "1dlgaGdQXmsYKMRuewIZkF",
+     "title": "Miss Alissa",
+     "score": 0.653
+    },
+    {
+     "id": "4cbXRMGdKMjeWei1rOZz8M",
+     "title": "Punk Rawk Show",
+     "score": 0.6374
+    },
+    {
+     "id": "1Q92pr5ZjhaOfNTvrjYLnE",
+     "title": "Get The Funk Out",
+     "score": 0.632
+    },
+    {
+     "id": "5u07rgQcg8F2xIZp90lm3p",
+     "title": "Loose",
+     "score": 0.6308
+    },
+    {
+     "id": "7LqPbpF0tmGOkBBmXKmfI8",
+     "title": "Urban Struggle",
+     "score": 0.6299
+    },
+    {
+     "id": "1SbRJXUX4yNmAr7CZumctk",
+     "title": "Rock Your Heart Out",
+     "score": 0.6293
+    },
+    {
+     "id": "4yXNMbZrsFJbPTH0WfhwEB",
+     "title": "Young Volcanoes",
+     "score": 0.6222
+    },
+    {
+     "id": "17lu4tymfnhmcIDlzBbtAb",
+     "title": "For Those About to Rock (We Salute You)",
+     "score": 0.6192
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Quiet rock music",
+   "ms": 163,
+   "top10": [
+    {
+     "id": "2pbHaKsIRuIqjZHCLpyQMv",
+     "title": "You Got The Silver",
+     "score": 0.6177
+    },
+    {
+     "id": "32gGuJXlLJbKCk3MDfW53y",
+     "title": "The Times They Are A-Changin' - Live at Sony Music Studios, New York, NY - November 1994",
+     "score": 0.6071
+    },
+    {
+     "id": "5DEPLRnrRCXcrqrpqZO5Bz",
+     "title": "Signe - Acoustic; Live at MTV Unplugged, Bray Film Studios, Windsor, England, UK, 1/16/1992; 2013 Remaster",
+     "score": 0.6018
+    },
+    {
+     "id": "09eg3FGzsZQbZk8qEXhJIA",
+     "title": "Stop Breaking Down",
+     "score": 0.5993
+    },
+    {
+     "id": "4UuVbsWwTyfJ6CcNOCtzBe",
+     "title": "Trouble",
+     "score": 0.5989
+    },
+    {
+     "id": "64fZ1gcn7rEzbdibOP1inl",
+     "title": "Running On Faith - Acoustic; Live at MTV Unplugged, Bray Film Studios, Windsor, England, UK, 1/16/1992; 2013 Remaster",
+     "score": 0.5892
+    },
+    {
+     "id": "4J2nhinyaIxkoGh9vw5UbI",
+     "title": "Have I Told You Lately - Live Unplugged; 2008 Remaster",
+     "score": 0.5872
+    },
+    {
+     "id": "0Se82Sof9IOUY4VdR9un2A",
+     "title": "Nobody Knows You When You're Down and Out - Acoustic; Live at MTV Unplugged, Bray Film Studios, Windsor, England, UK, 1/16/1992; 2013 Remaster",
+     "score": 0.5819
+    },
+    {
+     "id": "3HHTF12zYLGtLsZbBaLMhk",
+     "title": "Everybody Hurts - MTV Unplugged Live Version",
+     "score": 0.5805
+    },
+    {
+     "id": "0V1771LhL3tG36pb55EZAH",
+     "title": "Just Like Tom Thumb's Blues",
+     "score": 0.575
+    }
+   ]
+  },
+  "overlap": 0
+ },
+ {
+  "domain": "music",
+  "query": "슬프지 않은 발라드",
+  "mac": {
+   "translated": "You're not sad, Valad.",
+   "ms": 271,
+   "top10": [
+    {
+     "id": "3CIQuyJQZNNyfkHSyBzwvi",
+     "title": "Arthas, My Son (Cinematic Intro)",
+     "score": 0.5364
+    },
+    {
+     "id": "1fu5IQSRgPxJL2OTP7FVLW",
+     "title": "I See Fire",
+     "score": 0.4952
+    },
+    {
+     "id": "34w8Wslcni7dXe4SfVX8rK",
+     "title": "The Lost Vikings",
+     "score": 0.4897
+    },
+    {
+     "id": "1vPEPhmGDnp8RR6GCBozaa",
+     "title": "A Lannister Always Pays His Debts",
+     "score": 0.4827
+    },
+    {
+     "id": "5tvdxJ8JpA9u4lKsLcUYKL",
+     "title": "Face Fisted",
+     "score": 0.4753
+    },
+    {
+     "id": "5kEl3Tu4PbaKzfUnA2ZbZ5",
+     "title": "Bloodrocuted",
+     "score": 0.4736
+    },
+    {
+     "id": "6qQFz7pPq8lqOLFDxwWfcl",
+     "title": "The Black Rider",
+     "score": 0.465
+    },
+    {
+     "id": "2q6fxAvSpqXR4jx9Ne7RGz",
+     "title": "Main Title - From The \"Game Of Thrones\" Soundtrack",
+     "score": 0.4646
+    },
+    {
+     "id": "0QE5hb7A6qCQtZ8bPtFFPa",
+     "title": "Go Forth and Die",
+     "score": 0.4602
+    },
+    {
+     "id": "6doZryBQYC5hQJdx1lyc2W",
+     "title": "Skinnyman",
+     "score": 0.4588
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Sad ballads",
+   "ms": 80,
+   "top10": [
+    {
+     "id": "1DPy2UtzfVPL7T1xSoTC17",
+     "title": "Words Of Love - Single Version",
+     "score": 0.6345
+    },
+    {
+     "id": "3xNO6JUk9ySYjxuqzcZYRB",
+     "title": "If You See Her, Say Hello",
+     "score": 0.6326
+    },
+    {
+     "id": "1WeX8wcU8FDEZxWurJLU0r",
+     "title": "Three O'clock Blues",
+     "score": 0.6279
+    },
+    {
+     "id": "3c3b5daSKE7C83YLIOrSnX",
+     "title": "Don't Let Me Be Lonely Tonight",
+     "score": 0.6276
+    },
+    {
+     "id": "4NHSJKpOWIBGqhaEo28y0S",
+     "title": "Have You Ever Been Lonely (Have You Ever Been Blue)",
+     "score": 0.6274
+    },
+    {
+     "id": "64MISVB9IIchhOKmWHftoz",
+     "title": "You're Gonna Make Me Lonesome When You Go",
+     "score": 0.6259
+    },
+    {
+     "id": "6qdaMyeAxixEtIiI1Wqr4l",
+     "title": "What I'd Say",
+     "score": 0.6159
+    },
+    {
+     "id": "2idijP1bI3eqkU0gbVMdjU",
+     "title": "I Can't Quit You Baby - 2014 Remaster",
+     "score": 0.6135
+    },
+    {
+     "id": "2s1tc8yYKf0QAO70Xe1VjU",
+     "title": "Stay Away from My Baby",
+     "score": 0.6109
+    },
+    {
+     "id": "17nOJOcPbcl4sKzM2yyYDp",
+     "title": "Sugar Man",
+     "score": 0.6069
+    }
+   ]
+  },
+  "overlap": 0
+ },
+ {
+  "domain": "music",
+  "query": "가사 없는 잔잔한 음악",
+  "mac": {
+   "translated": "Quiet music without lyrics",
+   "ms": 170,
+   "top10": [
+    {
+     "id": "2WPLFvAldG0GG6Ad3Xa0TO",
+     "title": "Little Martha",
+     "score": 0.6107
+    },
+    {
+     "id": "6PDNzObD6ivpq2oO1j0VCH",
+     "title": "Petite Belle",
+     "score": 0.5809
+    },
+    {
+     "id": "4jep6dMPP0z7HrN375InoL",
+     "title": "Première Gymnopédie",
+     "score": 0.5746
+    },
+    {
+     "id": "4gRuC34ZpRcpVXxMXM1csQ",
+     "title": "You",
+     "score": 0.5722
+    },
+    {
+     "id": "0wJdUKOgyPSzNgFzsgZhEX",
+     "title": "My Cup Runneth Over",
+     "score": 0.5648
+    },
+    {
+     "id": "1v8nEP8CRicvuRiGxxjZF6",
+     "title": "Snesl bych ti modré z nebe",
+     "score": 0.564
+    },
+    {
+     "id": "6MhRt1yRpJUgm5LSMWlBkx",
+     "title": "Mellow Mood - Pt. I",
+     "score": 0.563
+    },
+    {
+     "id": "4820SC1xnUaabzzYQTDkP2",
+     "title": "Gnossienne: No. 1",
+     "score": 0.5622
+    },
+    {
+     "id": "5PwaPGDCqwyWqoh7PjQooK",
+     "title": "Ma mère l'oye, M. 60 (Version for Piano Duo): III. Laideronnette, imperatrice des pagodes",
+     "score": 0.5616
+    },
+    {
+     "id": "0NOzMlTrPHMQ68snNK891G",
+     "title": "La Tour",
+     "score": 0.5602
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Calm, instrumental music without lyrics.",
+   "ms": 163,
+   "top10": [
+    {
+     "id": "6IuiRJsGQ1pCqyGwc9lBgi",
+     "title": "Denzil's Best",
+     "score": 0.6384
+    },
+    {
+     "id": "4gGbnyw4jztAZSIPYuabs5",
+     "title": "Are You Going With Me?",
+     "score": 0.631
+    },
+    {
+     "id": "2DlsEWns58UPs5X7PXrPJI",
+     "title": "Meditation",
+     "score": 0.6273
+    },
+    {
+     "id": "5E7hYtzDxeIsa5yEI597KO",
+     "title": "James",
+     "score": 0.6261
+    },
+    {
+     "id": "0SjsIzJkZfDU7wlcdklEFR",
+     "title": "John Brown's Song",
+     "score": 0.6182
+    },
+    {
+     "id": "37bWNUTzhM1DvYyOEXY0rC",
+     "title": "...There You Are!",
+     "score": 0.6157
+    },
+    {
+     "id": "1swmf4hFMJYRNA8Rq9PVaW",
+     "title": "Martha My Dear - Remastered 2009",
+     "score": 0.6137
+    },
+    {
+     "id": "4gRuC34ZpRcpVXxMXM1csQ",
+     "title": "You",
+     "score": 0.6125
+    },
+    {
+     "id": "6QQ8diRSTraMgZIE4O0LNy",
+     "title": "Good",
+     "score": 0.6082
+    },
+    {
+     "id": "7LYeytL8R2fuqnsW1s0k86",
+     "title": "Phone Call - Score",
+     "score": 0.6079
+    }
+   ]
+  },
+  "overlap": 1
+ },
+ {
+  "domain": "music",
+  "query": "우울하지 않은 비 오는 날 노래",
+  "mac": {
+   "translated": "It's not depressing. It's raining.",
+   "ms": 350,
+   "top10": [
+    {
+     "id": "7ny2ATvjtKszCpLpfsGnVQ",
+     "title": "A Hard Rain's A-Gonna Fall",
+     "score": 0.689
+    },
+    {
+     "id": "5TeoCsHbzWo9UgMW3rv7JL",
+     "title": "Clap Hands",
+     "score": 0.6823
+    },
+    {
+     "id": "5C7IK8ndC9X0VhwvpVL2Mh",
+     "title": "Standin' in the Rain",
+     "score": 0.6583
+    },
+    {
+     "id": "5A1OTrmeDweZFegTTzOMDY",
+     "title": "Rain Is Falling",
+     "score": 0.6475
+    },
+    {
+     "id": "6jXzkgISP6UfMEEaKkxWJw",
+     "title": "Ball and Chain",
+     "score": 0.6459
+    },
+    {
+     "id": "0QKWweCMHWJ1F1VXxYW6Vj",
+     "title": "Fall Asleep Rain",
+     "score": 0.6263
+    },
+    {
+     "id": "4Xh9F5OQyJjN9Gx7IUiL0n",
+     "title": "Soggy Afternoon",
+     "score": 0.6254
+    },
+    {
+     "id": "5HEeRxhPObDXGiviqH2PXv",
+     "title": "Afternoon Rain",
+     "score": 0.6212
+    },
+    {
+     "id": "5cbZDpFu1hTwaU7hDQpf13",
+     "title": "Rainy Days And Mondays",
+     "score": 0.6199
+    },
+    {
+     "id": "0KRBBQiQRyN6KIZT3fEf06",
+     "title": "Rain Sounds Chill",
+     "score": 0.6165
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Songs for when it’s not sad on a rainy day.",
+   "ms": 231,
+   "top10": [
+    {
+     "id": "6IZIEhCq9crPjl2jGUvELS",
+     "title": "Save It For A Rainy Day",
+     "score": 0.5356
+    },
+    {
+     "id": "62XR7Tt1LenZa8letZAJm1",
+     "title": "Waiting on the Rain",
+     "score": 0.5353
+    },
+    {
+     "id": "1vkEVT81wJQtMZ23FJ1q1i",
+     "title": "Same Old Blues",
+     "score": 0.5323
+    },
+    {
+     "id": "5obt1hqMSHTfDMFwzYMKQC",
+     "title": "Pocket Full of Rainbows",
+     "score": 0.5313
+    },
+    {
+     "id": "7f1X6tauagdeqpfNuNOYWr",
+     "title": "Have You Ever Seen The Rain",
+     "score": 0.5249
+    },
+    {
+     "id": "4AM1azNqzCYzUUEia6X2Tw",
+     "title": "Bathtime",
+     "score": 0.5247
+    },
+    {
+     "id": "6zyooAtuu9501vDvV7F8Ga",
+     "title": "Gary's Song",
+     "score": 0.5191
+    },
+    {
+     "id": "65LjCuIAEUX2AmWUjD9tA3",
+     "title": "A Part of Me",
+     "score": 0.5186
+    },
+    {
+     "id": "4GV5wmFd0G5NW8lQK9aVvP",
+     "title": "Early Morning Rain",
+     "score": 0.5171
+    },
+    {
+     "id": "0xGa0PyJsByzRajl8KYefg",
+     "title": "Kisses in the Rain",
+     "score": 0.517
+    }
+   ]
+  },
+  "overlap": 0
+ },
+ {
+  "domain": "music",
+  "query": "신나지 않은 차분한 노래",
+  "mac": {
+   "translated": "It's not exciting. It's calm.",
+   "ms": 280,
+   "top10": [
+    {
+     "id": "0VYW3wl6t6MG8HpAOzQkh2",
+     "title": "No Phone",
+     "score": 0.528
+    },
+    {
+     "id": "1i6N76fftMZhijOzFQ5ZtL",
+     "title": "Psycho Killer - 2005 Remaster",
+     "score": 0.5042
+    },
+    {
+     "id": "2UiUTpQkTCmE1OX6senl6j",
+     "title": "Jackass",
+     "score": 0.4803
+    },
+    {
+     "id": "1LOZMYF5s8qhW7Rv4w2gun",
+     "title": "Dreadlock Holiday",
+     "score": 0.4721
+    },
+    {
+     "id": "5h6SovHOYpIMlAkafxcbq3",
+     "title": "Funk #49",
+     "score": 0.4701
+    },
+    {
+     "id": "05gjrT0jcQ0fRkHuYgJTdR",
+     "title": "Nervous Shakedown",
+     "score": 0.4694
+    },
+    {
+     "id": "4MaJMSbaMBW3IrBuvWlOSX",
+     "title": "White Noise - Loopable With No Fade",
+     "score": 0.4674
+    },
+    {
+     "id": "0QNazxl077qLE9t93s3jjh",
+     "title": "Steppin' Stone",
+     "score": 0.4593
+    },
+    {
+     "id": "6cbBAD1AAYVaQR1cx89AZX",
+     "title": "Witch Hunt",
+     "score": 0.4574
+    },
+    {
+     "id": "1cDoexqoPljd8ztMW7dLCe",
+     "title": "Pink Noise (Loopable)",
+     "score": 0.4536
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Calm, unexciting songs",
+   "ms": 157,
+   "top10": [
+    {
+     "id": "4iWRMBM1uLCkDGPkeBxfRU",
+     "title": "Be Kind to Me",
+     "score": 0.5717
+    },
+    {
+     "id": "0s1aSsYlLIEiy16LjFWbdp",
+     "title": "Dirty Work",
+     "score": 0.5334
+    },
+    {
+     "id": "2X9H5BokS1u5O46YpNYNsZ",
+     "title": "I'm So Tired - Remastered 2009",
+     "score": 0.5331
+    },
+    {
+     "id": "70dh9SQ7pcNLn7QE5dbIiX",
+     "title": "Sit Down I Think I Love You",
+     "score": 0.5196
+    },
+    {
+     "id": "1qmFsdNHa7QB1PRbSkkI0r",
+     "title": "Out Loud (Live)",
+     "score": 0.5187
+    },
+    {
+     "id": "5VWmMZCfJ4yVkJw9ZLFXej",
+     "title": "1, 2, 3, 4",
+     "score": 0.5157
+    },
+    {
+     "id": "5VWmMZCfJ4yVkJw9ZLFXej",
+     "title": "1, 2, 3, 4",
+     "score": 0.5157
+    },
+    {
+     "id": "5xwKCPdE3kyU0XwqfbyQsx",
+     "title": "Pills",
+     "score": 0.5147
+    },
+    {
+     "id": "34FWzxRaGdAZyGQz0krlHF",
+     "title": "Amie - Remastered 1988",
+     "score": 0.5135
+    },
+    {
+     "id": "1Pwcxq35Hl2kqwUVd5XCRg",
+     "title": "Shower the People - 2019 Remaster",
+     "score": 0.5089
+    }
+   ]
+  },
+  "overlap": 0
+ },
+ {
+  "domain": "music",
+  "query": "너무 빠르지 않은 댄스곡",
+  "mac": {
+   "translated": "Not too fast.",
+   "ms": 181,
+   "top10": [
+    {
+     "id": "05gjrT0jcQ0fRkHuYgJTdR",
+     "title": "Nervous Shakedown",
+     "score": 0.562
+    },
+    {
+     "id": "4Dq75eGDLZGM9EGP0XHbo2",
+     "title": "Trying Not to Love You",
+     "score": 0.5501
+    },
+    {
+     "id": "6aqm56xP40foYBBtAWWrnY",
+     "title": "Running on Empty",
+     "score": 0.5408
+    },
+    {
+     "id": "0YwqJeTUyviMJw70jRt9ET",
+     "title": "A Little Faster",
+     "score": 0.5348
+    },
+    {
+     "id": "37ZgsOy8t4vMnGtMExr6ah",
+     "title": "Threat of Joy",
+     "score": 0.5278
+    },
+    {
+     "id": "08onVqQ8YicJ98Ycm1qoLf",
+     "title": "Urgent",
+     "score": 0.5177
+    },
+    {
+     "id": "4bOgWjaOVTvhyRpvLxFeEm",
+     "title": "86",
+     "score": 0.5143
+    },
+    {
+     "id": "0Z26mbSHJ1dkUu7g9DDgif",
+     "title": "Trigger",
+     "score": 0.5129
+    },
+    {
+     "id": "1Hbte6Mj6ROBir1Dae8RKM",
+     "title": "Too Late Marlene - 2010 Remaster",
+     "score": 0.5096
+    },
+    {
+     "id": "33n3pRhzyat73ZGUzluZjx",
+     "title": "Set Phasers To Stun",
+     "score": 0.5044
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "I’m looking for fast dance songs.",
+   "ms": 169,
+   "top10": [
+    {
+     "id": "48gBfTRel9fajeev7tmLpo",
+     "title": "Better Off Alone (Remastered) - 1999 Original Hit Radio",
+     "score": 0.6568
+    },
+    {
+     "id": "6Dn5iKJnMEEIxdJkTIc9uB",
+     "title": "Better Off Alone",
+     "score": 0.6477
+    },
+    {
+     "id": "3FrX3mx8qq7SZX2NYbzDoj",
+     "title": "Who's That Chick? (feat. Rihanna)",
+     "score": 0.636
+    },
+    {
+     "id": "1ddIzagwpJRzaK8syw91PC",
+     "title": "My Love For You",
+     "score": 0.6316
+    },
+    {
+     "id": "4CtA9FOOXtoiwV4KhVYbPl",
+     "title": "Bump It",
+     "score": 0.6247
+    },
+    {
+     "id": "6bFGodepI4y7w4AJBcCB1E",
+     "title": "When I Hear Music",
+     "score": 0.6192
+    },
+    {
+     "id": "6dugx9WBSS8TDxbKqp9zmj",
+     "title": "Scatman's World",
+     "score": 0.6171
+    },
+    {
+     "id": "6edIZ76uLiHDkW64VVxGk8",
+     "title": "The Politics of Dancing",
+     "score": 0.6071
+    },
+    {
+     "id": "63rbP24OzfaQCJjsHWZXnY",
+     "title": "Where Them Girls At (feat. Nicki Minaj & Flo Rida)",
+     "score": 0.6068
+    },
+    {
+     "id": "4VPuE2QaXfl5PvCDSmD2S9",
+     "title": "I Like To Move It (feat. The Mad Stuntman) - Radio Mix",
+     "score": 0.6051
+    }
+   ]
+  },
+  "overlap": 0
+ },
+ {
+  "domain": "music",
+  "query": "사랑 노래가 아닌 노래",
+  "mac": {
+   "translated": "It's not a love song. It's a song.",
+   "ms": 307,
+   "top10": [
+    {
+     "id": "3gtSCifHWtbRxX0GFLBpcH",
+     "title": "L O V E",
+     "score": 0.6437
+    },
+    {
+     "id": "5zMOnpgoSb9akRw5YlYeAs",
+     "title": "Poetry In Motion",
+     "score": 0.6364
+    },
+    {
+     "id": "0snHlyyyUp2hKYEz7ffmkx",
+     "title": "Never Be Anyone Else But You - Remastered",
+     "score": 0.6341
+    },
+    {
+     "id": "3Sm5TYFgMXyXwgAcY2xweX",
+     "title": "So Into You",
+     "score": 0.6286
+    },
+    {
+     "id": "6g14FUj5zU9FDRwBi963vS",
+     "title": "My Kinda Lover - Remastered",
+     "score": 0.619
+    },
+    {
+     "id": "2CAXzfk8tLXCi3rWjAJUNp",
+     "title": "Kiss Me Quick",
+     "score": 0.6145
+    },
+    {
+     "id": "5Pt8yWyz5w5J2XREWuFXro",
+     "title": "Everlasting Love",
+     "score": 0.6089
+    },
+    {
+     "id": "6pMliTILbMMQJVFvru12DX",
+     "title": "Give U My Heart (feat. Toni Braxton)",
+     "score": 0.6073
+    },
+    {
+     "id": "0IMS1Za69G3KHMX4liB2Nr",
+     "title": "Hello Mary Lou (Goodbye Heart)",
+     "score": 0.6068
+    },
+    {
+     "id": "3jTavhTXfWlnu8zsn9NCAY",
+     "title": "Angie's Heart",
+     "score": 0.6051
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Songs that aren't love songs",
+   "ms": 149,
+   "top10": [
+    {
+     "id": "3gtSCifHWtbRxX0GFLBpcH",
+     "title": "L O V E",
+     "score": 0.6395
+    },
+    {
+     "id": "2aEuA8PSqLa17Y4hKPj5rr",
+     "title": "Cheri Cheri Lady",
+     "score": 0.6203
+    },
+    {
+     "id": "1N131UBLlYAUJNVpHOfEc1",
+     "title": "The Book of Love",
+     "score": 0.5934
+    },
+    {
+     "id": "53PlbcGzLTx65vjaS6tG0N",
+     "title": "Atlantis Is Calling (S.O.S. for Love)",
+     "score": 0.5834
+    },
+    {
+     "id": "7M21rVAyp9jH9LBFuyYBsn",
+     "title": "Hey You",
+     "score": 0.58
+    },
+    {
+     "id": "2BgWv15eKCDfiubKo6o76k",
+     "title": "Two Hearts",
+     "score": 0.5793
+    },
+    {
+     "id": "3jTavhTXfWlnu8zsn9NCAY",
+     "title": "Angie's Heart",
+     "score": 0.576
+    },
+    {
+     "id": "2YM0kfevj552icN9DisbT9",
+     "title": "I'm Straight",
+     "score": 0.5735
+    },
+    {
+     "id": "3xSu3S8v206qwhob9N2LGJ",
+     "title": "Baby I'm Yours",
+     "score": 0.5705
+    },
+    {
+     "id": "5EYi2rH4LYs6M21ZLOyQTx",
+     "title": "Loving Is Easy",
+     "score": 0.5667
+    }
+   ]
+  },
+  "overlap": 2
+ },
+ {
+  "domain": "music",
+  "query": "욕 없는 힙합",
+  "mac": {
+   "translated": "Hip-hop without swearing.",
+   "ms": 207,
+   "top10": [
+    {
+     "id": "6YYd5MLpu45J0uLrMdivF7",
+     "title": "Got Your Money (feat. Kelis)",
+     "score": 0.6679
+    },
+    {
+     "id": "6YYd5MLpu45J0uLrMdivF7",
+     "title": "Got Your Money (feat. Kelis)",
+     "score": 0.6679
+    },
+    {
+     "id": "6naGRp5hPdsyIJo0yokznl",
+     "title": "Rubberband Banks",
+     "score": 0.6568
+    },
+    {
+     "id": "6JFdyoLzHdGibgutS7LrBb",
+     "title": "Yay Area",
+     "score": 0.6545
+    },
+    {
+     "id": "6glsMWIMIxQ4BedzLqGVi4",
+     "title": "So Fresh, So Clean",
+     "score": 0.651
+    },
+    {
+     "id": "5ZY9x3X2CujeJc59pJ9EUV",
+     "title": "I Got Five On It Remix",
+     "score": 0.6481
+    },
+    {
+     "id": "5RGXoZt1qxmAErdhbyKJKq",
+     "title": "Boyz-N-The-Hood",
+     "score": 0.6465
+    },
+    {
+     "id": "7pupQfS2aVBHFNTqXLN37c",
+     "title": "Smooth",
+     "score": 0.6433
+    },
+    {
+     "id": "4Qxv2L4JICAWLFrBV6QeH8",
+     "title": "Around The Way Girl",
+     "score": 0.642
+    },
+    {
+     "id": "48ZUwXrEOhaXLCxvmRYhZv",
+     "title": "Don't Sweat The Technique",
+     "score": 0.641
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Rap music without explicit lyrics.",
+   "ms": 133,
+   "top10": [
+    {
+     "id": "6ddQ5KCkvCggk3j6KdA0zL",
+     "title": "Bonkers",
+     "score": 0.6169
+    },
+    {
+     "id": "3x9kxhxxkhag7vpKbrJYEq",
+     "title": "Just Don't Bite It",
+     "score": 0.5919
+    },
+    {
+     "id": "79sM5tBIBJascGwZWLN2fM",
+     "title": "Check It Out",
+     "score": 0.5787
+    },
+    {
+     "id": "6YYd5MLpu45J0uLrMdivF7",
+     "title": "Got Your Money (feat. Kelis)",
+     "score": 0.5746
+    },
+    {
+     "id": "6YYd5MLpu45J0uLrMdivF7",
+     "title": "Got Your Money (feat. Kelis)",
+     "score": 0.5746
+    },
+    {
+     "id": "1FLQYGTaDYzGjpP9c82Q1G",
+     "title": "The Fez",
+     "score": 0.5695
+    },
+    {
+     "id": "2T31osJ8UyFAXwLH9QW1kr",
+     "title": "Oh I Think Dey Like Me",
+     "score": 0.5675
+    },
+    {
+     "id": "3p2x3UD9wz9yt3gtftKwT0",
+     "title": "What They Want",
+     "score": 0.5663
+    },
+    {
+     "id": "13BRH2RILNifFRNTXbLUka",
+     "title": "The Rascal King",
+     "score": 0.5627
+    },
+    {
+     "id": "1z85Zqe4mrTCHbBPONRBIb",
+     "title": "40 & a Blunt",
+     "score": 0.5614
+    }
+   ]
+  },
+  "overlap": 1
+ },
+ {
+  "domain": "music",
+  "query": "졸리지 않은 공부할 때 음악",
+  "mac": {
+   "translated": "Music when you're studying.",
+   "ms": 200,
+   "top10": [
+    {
+     "id": "67R6DqIitHxBe2wJYC0FZK",
+     "title": "Single Phial",
+     "score": 0.5215
+    },
+    {
+     "id": "1NvdM6ALKb20zMbnNKp9Pq",
+     "title": "Play Guitar",
+     "score": 0.5068
+    },
+    {
+     "id": "3RYwxAkUbHCzCmX8M0C0Zd",
+     "title": "School Day (Ring Ring Goes The Bell)",
+     "score": 0.4872
+    },
+    {
+     "id": "6nbRXoZJAWlHtnWcPAY9Or",
+     "title": "Pop, Lock & Drop It (feat. Bow Wow & T-Pain) - Remix Version",
+     "score": 0.4867
+    },
+    {
+     "id": "6nbRXoZJAWlHtnWcPAY9Or",
+     "title": "Pop, Lock & Drop It - Remix",
+     "score": 0.4799
+    },
+    {
+     "id": "7znZstuIvZjldNIO1E11U4",
+     "title": "Rise",
+     "score": 0.4742
+    },
+    {
+     "id": "6M6UoxIPn4NOWW0x7JPRfv",
+     "title": "Young Folks",
+     "score": 0.4716
+    },
+    {
+     "id": "4aOjDKk1s5hlsEY5ZhhX3l",
+     "title": "My Hooptie",
+     "score": 0.468
+    },
+    {
+     "id": "7IEdlE4ZwzPDxnoWFv10aj",
+     "title": "Lobby Music (Original Soundtrack)",
+     "score": 0.4678
+    },
+    {
+     "id": "2aqHQzbPcrMl6m37ndVHOQ",
+     "title": "You've Never Been This Far Before - Re-Recorded In Stereo",
+     "score": 0.4606
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Music to listen to while studying without getting tired.",
+   "ms": 187,
+   "top10": [
+    {
+     "id": "67R6DqIitHxBe2wJYC0FZK",
+     "title": "Single Phial",
+     "score": 0.5093
+    },
+    {
+     "id": "3ipzZgH1766XXRamVwk1Iw",
+     "title": "I Juswanna Chill",
+     "score": 0.485
+    },
+    {
+     "id": "33lj1WVboFiKGLBdxOzSAl",
+     "title": "We're Ready",
+     "score": 0.4689
+    },
+    {
+     "id": "6M6UoxIPn4NOWW0x7JPRfv",
+     "title": "Young Folks",
+     "score": 0.4653
+    },
+    {
+     "id": "3RYwxAkUbHCzCmX8M0C0Zd",
+     "title": "School Day (Ring Ring Goes The Bell)",
+     "score": 0.4588
+    },
+    {
+     "id": "3mwFncaI2HBczQ92GP9MQF",
+     "title": "Lady Writer",
+     "score": 0.4496
+    },
+    {
+     "id": "4KPq1367Nd9DtkmSmPsycY",
+     "title": "Matthew & Son - Stereo Version",
+     "score": 0.4429
+    },
+    {
+     "id": "6TErrSCoOBfHFeju90jgoJ",
+     "title": "Pipeline - Instrumental",
+     "score": 0.4426
+    },
+    {
+     "id": "5NUCLgfK7d3zJeOJN0hZIv",
+     "title": "The Office Theme",
+     "score": 0.4401
+    },
+    {
+     "id": "5kQ2ZEav7TgUoLSLrm7h8S",
+     "title": "Wake Up Everybody",
+     "score": 0.4392
+    }
+   ]
+  },
+  "overlap": 3
+ },
+ {
+  "domain": "music",
+  "query": "오글거리지 않은 사랑 노래",
+  "mac": {
+   "translated": "A love song that didn't go out.",
+   "ms": 285,
+   "top10": [
+    {
+     "id": "0IMS1Za69G3KHMX4liB2Nr",
+     "title": "Hello Mary Lou (Goodbye Heart)",
+     "score": 0.6977
+    },
+    {
+     "id": "0snHlyyyUp2hKYEz7ffmkx",
+     "title": "Never Be Anyone Else But You - Remastered",
+     "score": 0.6696
+    },
+    {
+     "id": "3KPwt1LBpt1jVSHz8GXERo",
+     "title": "Feel like Makin' Love - 2015 Remaster",
+     "score": 0.652
+    },
+    {
+     "id": "3gtSCifHWtbRxX0GFLBpcH",
+     "title": "L O V E",
+     "score": 0.6517
+    },
+    {
+     "id": "1NI2i1BjKiVrEYCC0WTug4",
+     "title": "Real Love",
+     "score": 0.6471
+    },
+    {
+     "id": "7sWlOFUnQShNdxgk1B0TuW",
+     "title": "You And I",
+     "score": 0.6433
+    },
+    {
+     "id": "0pvfhcqCJj8DT4vpI5U1Kn",
+     "title": "Don't Cry Joni",
+     "score": 0.6352
+    },
+    {
+     "id": "70TsRbycWfabtevnripyRu",
+     "title": "Don't Let Our Love Start Slippin' Away",
+     "score": 0.6343
+    },
+    {
+     "id": "6Kiffo1xFY46yVFlhKVjvA",
+     "title": "Tonight, Tonight",
+     "score": 0.6296
+    },
+    {
+     "id": "51FpzuGkRYXFgsE2zXt9av",
+     "title": "When a Man Loves a Woman",
+     "score": 0.6254
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Love songs that aren't overly sentimental.",
+   "ms": 173,
+   "top10": [
+    {
+     "id": "6Kiffo1xFY46yVFlhKVjvA",
+     "title": "Tonight, Tonight",
+     "score": 0.6174
+    },
+    {
+     "id": "5OHUTC4EvTbL0DuZQRIGGX",
+     "title": "A Groovy Kind of Love",
+     "score": 0.617
+    },
+    {
+     "id": "16DTl4nJDz444OcvTlbxxD",
+     "title": "Ice Cream Love",
+     "score": 0.6129
+    },
+    {
+     "id": "7N25xNY1ap5wrSKzlbXd0B",
+     "title": "After The Lovin'",
+     "score": 0.6019
+    },
+    {
+     "id": "1QR3Wcba5NBidmxEE8DW3w",
+     "title": "I'm Gonna Love You Just A Little More Baby",
+     "score": 0.5965
+    },
+    {
+     "id": "3Sm5TYFgMXyXwgAcY2xweX",
+     "title": "So Into You",
+     "score": 0.5947
+    },
+    {
+     "id": "3KPwt1LBpt1jVSHz8GXERo",
+     "title": "Feel like Makin' Love - 2015 Remaster",
+     "score": 0.5923
+    },
+    {
+     "id": "3gtSCifHWtbRxX0GFLBpcH",
+     "title": "L O V E",
+     "score": 0.5914
+    },
+    {
+     "id": "1f14Tz6xCm7CoGcXykDX2A",
+     "title": "I Feel Good All Over",
+     "score": 0.5898
+    },
+    {
+     "id": "3l91QxfQ9vyxq5AJU4D1FC",
+     "title": "This Guy's In Love With You",
+     "score": 0.5884
+    }
+   ]
+  },
+  "overlap": 3
+ },
+ {
+  "domain": "music",
+  "query": "어둡지 않은 일렉트로닉 음악",
+  "mac": {
+   "translated": "Undark Electric Music",
+   "ms": 181,
+   "top10": [
+    {
+     "id": "7lVHsLX1Tgy0UqQFk8NsCO",
+     "title": "Bad (feat. Pitbull)",
+     "score": 0.6208
+    },
+    {
+     "id": "4cZ7dGQZi9duyPn1SY2lgU",
+     "title": "Radio, Radio",
+     "score": 0.6204
+    },
+    {
+     "id": "3HEBH4eycANlb6xqAc8HE6",
+     "title": "Pump It Up! - Radio Edit",
+     "score": 0.6181
+    },
+    {
+     "id": "6KzkqZqhUBEsWYJJa2aBOd",
+     "title": "The Weekend - Radio Edit",
+     "score": 0.6179
+    },
+    {
+     "id": "5vaS8HFphziQQ3kcXOA6PD",
+     "title": "So What'Cha Want - 2005 Remaster",
+     "score": 0.6162
+    },
+    {
+     "id": "5A3IdgGphzKS2etiGFB73S",
+     "title": "Das Boot",
+     "score": 0.6134
+    },
+    {
+     "id": "21qnJAMtzC6S5SESuqQLEK",
+     "title": "Pump Up The Jam",
+     "score": 0.6089
+    },
+    {
+     "id": "2MOOJh1xUgND4rLjB6h4jY",
+     "title": "Get Up (Before The Night Is Over)",
+     "score": 0.6076
+    },
+    {
+     "id": "0OpcI3rARLsNWgVbPdwHD9",
+     "title": "You Know You Like It - Tchami Remix",
+     "score": 0.6055
+    },
+    {
+     "id": "3o6vSnVpi4Iq9yDtwQDKH1",
+     "title": "Reaktorn läck i Barsebäck",
+     "score": 0.5974
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Upbeat electronic music",
+   "ms": 108,
+   "top10": [
+    {
+     "id": "2pZbERJUZsfkKRn1EU1mgD",
+     "title": "You Can Win If You Want",
+     "score": 0.6215
+    },
+    {
+     "id": "6j7Fdvi61J0qwjqh1OPeFM",
+     "title": "You Don't Know Me (feat. Duane Harden)",
+     "score": 0.612
+    },
+    {
+     "id": "33gDIKlrUnY1dTWYsm5BFL",
+     "title": "Go West - 2003 Remaster",
+     "score": 0.6118
+    },
+    {
+     "id": "0kn7zFFIwtwbtQntQz7LWH",
+     "title": "Moomba",
+     "score": 0.6025
+    },
+    {
+     "id": "6KzkqZqhUBEsWYJJa2aBOd",
+     "title": "The Weekend - Radio Edit",
+     "score": 0.5998
+    },
+    {
+     "id": "4vwLjB2NRtl9b34jRe6cWd",
+     "title": "Love Plus One",
+     "score": 0.5984
+    },
+    {
+     "id": "6Kbkge4WbvwWv1jVzSQsr8",
+     "title": "When You Were Mine",
+     "score": 0.5943
+    },
+    {
+     "id": "4ArtWWANopFCYP9HO1eOUg",
+     "title": "Medicine Show",
+     "score": 0.5937
+    },
+    {
+     "id": "6x2xqg5fQNu9dNCXu83ezE",
+     "title": "Acceptable in the 80's",
+     "score": 0.5932
+    },
+    {
+     "id": "5ay7lvuij2y4KFf3jThDsG",
+     "title": "Twenty Four Hour Party People",
+     "score": 0.5928
+    }
+   ]
+  },
+  "overlap": 1
+ },
+ {
+  "domain": "music",
+  "query": "슬픈데 우울하지 않은 노래",
+  "mac": {
+   "translated": "It's sad, but it's not depressing.",
+   "ms": 271,
+   "top10": [
+    {
+     "id": "1ze24O8m1ZIbrxLafPCcMk",
+     "title": "Condition 11:11",
+     "score": 0.5947
+    },
+    {
+     "id": "1zTtpTKjk7RsMBx9ybrAqP",
+     "title": "Carry Me Home",
+     "score": 0.5759
+    },
+    {
+     "id": "44RrOIa9ziCFW9YC6ndAUL",
+     "title": "We All Float Down Here",
+     "score": 0.5731
+    },
+    {
+     "id": "39yvhCgBmNrLf0m9lan0Ge",
+     "title": "Tragedy + Time",
+     "score": 0.5697
+    },
+    {
+     "id": "0pwF4WOZdvnXpSwBZXp1iA",
+     "title": "How Will I Laugh Tomorrow",
+     "score": 0.567
+    },
+    {
+     "id": "2ZnsnOk8bEM6LIUUUpWgDV",
+     "title": "All the Madmen - 2015 Remaster",
+     "score": 0.5649
+    },
+    {
+     "id": "2Wm84PF0DHyRQx79Lj9NwI",
+     "title": "The Decline",
+     "score": 0.5583
+    },
+    {
+     "id": "7hVubnmukfvV2dUXoxybpJ",
+     "title": "Mickey Mouse Is Dead",
+     "score": 0.5581
+    },
+    {
+     "id": "6Dww26l37RgujIGsfDmDLp",
+     "title": "cutthroat",
+     "score": 0.5534
+    },
+    {
+     "id": "10A07uxFCtZAu5An5RBiXB",
+     "title": "Everything Turns Grey",
+     "score": 0.5533
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Songs that are sad but not depressing.",
+   "ms": 164,
+   "top10": [
+    {
+     "id": "79lzbYqczF4oLoOkxx9mHK",
+     "title": "Yer Killin' Me",
+     "score": 0.59
+    },
+    {
+     "id": "0dqJjKKxuKD5Dt3QH2n4CG",
+     "title": "Hands Down",
+     "score": 0.5527
+    },
+    {
+     "id": "0Vth3l4XAo8hNYmxjzhr2y",
+     "title": "On And On",
+     "score": 0.5501
+    },
+    {
+     "id": "6Gw0pXSERCgHL4JqiWeudB",
+     "title": "Leaving on a Jet Plane",
+     "score": 0.5449
+    },
+    {
+     "id": "2EUxbBRKE07EOWW8mBkg5q",
+     "title": "Sad",
+     "score": 0.5434
+    },
+    {
+     "id": "3ajnLvUV6cZiKtij8q0tzx",
+     "title": "You",
+     "score": 0.542
+    },
+    {
+     "id": "3K9QlS0VCtkzUvo0HY75VE",
+     "title": "Love Stinks",
+     "score": 0.5372
+    },
+    {
+     "id": "371Tb0eNfpjpSqggjcLv8c",
+     "title": "Therapy",
+     "score": 0.5366
+    },
+    {
+     "id": "5VWmMZCfJ4yVkJw9ZLFXej",
+     "title": "1, 2, 3, 4",
+     "score": 0.5302
+    },
+    {
+     "id": "5VWmMZCfJ4yVkJw9ZLFXej",
+     "title": "1, 2, 3, 4",
+     "score": 0.5302
+    }
+   ]
+  },
+  "overlap": 0
+ },
+ {
+  "domain": "book",
+  "query": "어렵지 않은 철학 책",
+  "mac": {
+   "translated": "It's a philosophy book.",
+   "ms": 1157,
+   "top10": [
+    {
+     "id": "bx_0415146941",
+     "title": "Philosophy: The Basics",
+     "score": 0.7008
+    },
+    {
+     "id": "bx_0028643380",
+     "title": "The Complete Idiot's Guide to Philosophy (2nd Edition)",
+     "score": 0.6833
+    },
+    {
+     "id": "kdl_B0793YD84D",
+     "title": "The Problems of Philosophy",
+     "score": 0.6697
+    },
+    {
+     "id": "gr_326870.Science_of_Knowledge",
+     "title": "Science of Knowledge: With the First and Second Introductions (Texts in German Philosophy)",
+     "score": 0.6651
+    },
+    {
+     "id": "bx_0415254086",
+     "title": "Tractatus Logico Philosophicus (Routledge Classics)",
+     "score": 0.6649
+    },
+    {
+     "id": "gr_9462.Plato",
+     "title": "Plato: Complete Works",
+     "score": 0.6595
+    },
+    {
+     "id": "gr_1689454.Essays",
+     "title": "Essays",
+     "score": 0.6578
+    },
+    {
+     "id": "kdl_B09LR69963",
+     "title": "The Socratic Way Of Questioning: How To Use Socrates' Method To Discover The Truth And Argue Wisely (Critical Thinking & Logic Mastery)",
+     "score": 0.6577
+    },
+    {
+     "id": "gr_843433.Philosophy",
+     "title": "Philosophy: Who Needs It",
+     "score": 0.6558
+    },
+    {
+     "id": "kdl_B01NALYEVA",
+     "title": "The Big Questions: A Short Introduction to Philosophy",
+     "score": 0.6548
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Easy philosophy books",
+   "ms": 289,
+   "top10": [
+    {
+     "id": "bx_0415146941",
+     "title": "Philosophy: The Basics",
+     "score": 0.7202
+    },
+    {
+     "id": "bx_0028643380",
+     "title": "The Complete Idiot's Guide to Philosophy (2nd Edition)",
+     "score": 0.6633
+    },
+    {
+     "id": "kdl_B00BB16S3U",
+     "title": "Selections from Science and Sanity",
+     "score": 0.6576
+    },
+    {
+     "id": "gr_843433.Philosophy",
+     "title": "Philosophy: Who Needs It",
+     "score": 0.6552
+    },
+    {
+     "id": "bx_0023248807",
+     "title": "Introduction to logic",
+     "score": 0.6536
+    },
+    {
+     "id": "kdl_B0C6B8CRST",
+     "title": "Western Philosophy in Simple French: Learn French the Fun Way with Topics that Matter (Topics that Matter: French Edition)",
+     "score": 0.6517
+    },
+    {
+     "id": "gr_31862.Discourse_on_Method_and_Meditations_on_First_Philosophy",
+     "title": "Discourse on Method and Meditations on First Philosophy",
+     "score": 0.6464
+    },
+    {
+     "id": "bx_0415254086",
+     "title": "Tractatus Logico Philosophicus (Routledge Classics)",
+     "score": 0.6425
+    },
+    {
+     "id": "kdl_B00PBJWLI4",
+     "title": "Phenomenological Research Methods",
+     "score": 0.6404
+    },
+    {
+     "id": "gr_159418.Discourse_on_Method",
+     "title": "Discourse on Method",
+     "score": 0.6388
+    }
+   ]
+  },
+  "overlap": 4
+ },
+ {
+  "domain": "book",
+  "query": "두껍지 않은 소설",
+  "mac": {
+   "translated": "Not a thick novel.",
+   "ms": 181,
+   "top10": [
+    {
+     "id": "gr_2360064.How_Not_to_Write_a_Novel",
+     "title": "How Not to Write a Novel: 200 Classic Mistakes and How to Avoid Them—A Misstep-by-Misstep Guide",
+     "score": 0.7135
+    },
+    {
+     "id": "bx_186205102X",
+     "title": "Bizarre Books",
+     "score": 0.6308
+    },
+    {
+     "id": "bx_0671035584",
+     "title": "The New Yorker Book of Literary Cartoons",
+     "score": 0.6247
+    },
+    {
+     "id": "bx_0971865906",
+     "title": "A Reader's Manifesto: An Attack on the Growing Pretentiousness in American Literary Prose",
+     "score": 0.6207
+    },
+    {
+     "id": "bx_0898799767",
+     "title": "Writer's Digest Flip Dictionary",
+     "score": 0.6179
+    },
+    {
+     "id": "bx_0671709429",
+     "title": "ADVENTURES OF A VERBIVORE : ADVENTURES OF A VERBIVORE",
+     "score": 0.6179
+    },
+    {
+     "id": "gr_1637819.Stainless_Longganisa",
+     "title": "Stainless Longganisa",
+     "score": 0.6172
+    },
+    {
+     "id": "bx_0062735233",
+     "title": "On Writing Well: The Classic Guide to Writing Nonfiction",
+     "score": 0.6152
+    },
+    {
+     "id": "kdl_B09PY48Z6Y",
+     "title": "Curious Writer, The",
+     "score": 0.6146
+    },
+    {
+     "id": "bx_0898793912",
+     "title": "How to Write Irresistible Query Letters (Writer's Basic Bookshelf)",
+     "score": 0.6096
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Thin novels",
+   "ms": 99,
+   "top10": [
+    {
+     "id": "gr_2226289.The_Writing_Class",
+     "title": "The Writing Class",
+     "score": 0.5838
+    },
+    {
+     "id": "bx_0385337418",
+     "title": "The Book of Joe",
+     "score": 0.5759
+    },
+    {
+     "id": "gr_1637819.Stainless_Longganisa",
+     "title": "Stainless Longganisa",
+     "score": 0.574
+    },
+    {
+     "id": "gr_23341894-every-last-word",
+     "title": "Every Last Word",
+     "score": 0.5524
+    },
+    {
+     "id": "bx_1555910807",
+     "title": "Biblioholism: The Literary Addiction",
+     "score": 0.5454
+    },
+    {
+     "id": "gr_41741010-500-words-or-less",
+     "title": "500 Words or Less",
+     "score": 0.5445
+    },
+    {
+     "id": "bx_0449910091",
+     "title": "The Gutenberg Elegies : The Fate of Reading in an Electronic Age",
+     "score": 0.5401
+    },
+    {
+     "id": "bx_0375504443",
+     "title": "Double Fold: Libraries and the Assault on Paper",
+     "score": 0.5373
+    },
+    {
+     "id": "bx_0809299046",
+     "title": "Stranger Than Fiction: A Book of Literary Lists",
+     "score": 0.5331
+    },
+    {
+     "id": "gr_201817.The_Taker",
+     "title": "The Taker",
+     "score": 0.5322
+    }
+   ]
+  },
+  "overlap": 1
+ },
+ {
+  "domain": "book",
+  "query": "무겁지 않은 역사 책",
+  "mac": {
+   "translated": "A Book of History Not Heavy",
+   "ms": 221,
+   "top10": [
+    {
+     "id": "bx_0393046877",
+     "title": "In Defense of History",
+     "score": 0.6698
+    },
+    {
+     "id": "bx_0618042474",
+     "title": "The Human Record: Sources of Global History  Volume II: Since 1500",
+     "score": 0.6605
+    },
+    {
+     "id": "bx_0395329434",
+     "title": "The American Heritage dictionary",
+     "score": 0.6506
+    },
+    {
+     "id": "bx_0380712520",
+     "title": "Don't Know Much About History: Everything You Need to Know About American History but Never Learned",
+     "score": 0.6491
+    },
+    {
+     "id": "bx_0553562576",
+     "title": "Guinness Book of Records 1993",
+     "score": 0.6373
+    },
+    {
+     "id": "bx_0440237017",
+     "title": "The American Heritage Dictionary : Fourth Edition (21st Century Reference)",
+     "score": 0.6317
+    },
+    {
+     "id": "bx_3423308761",
+     "title": "War Karl der Kahle wirklich kahl? Historische Beinamen - und was dahinter steckt.",
+     "score": 0.6236
+    },
+    {
+     "id": "bx_067980353X",
+     "title": "The Look-It-Up Book of Presidents",
+     "score": 0.6163
+    },
+    {
+     "id": "kdl_B08W27D55G",
+     "title": "The Origin and Goal of History (Routledge Classics)",
+     "score": 0.6153
+    },
+    {
+     "id": "bx_1586604082",
+     "title": "Bible Survival: A Trivia Challenge for the Adventurous Soul",
+     "score": 0.6103
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Light historical books",
+   "ms": 113,
+   "top10": [
+    {
+     "id": "kdl_B004UABPL4",
+     "title": "Historical Theology: An Introduction to Christian Doctrine",
+     "score": 0.7205
+    },
+    {
+     "id": "gr_27777739-the-historical-reliability-of-the-new-testament",
+     "title": "The Historical Reliability of the New Testament: Countering the Challenges to Evangelical Christian Beliefs",
+     "score": 0.7041
+    },
+    {
+     "id": "gr_678114.The_Historical_Reliability_of_the_Gospels",
+     "title": "The Historical Reliability of the Gospels",
+     "score": 0.6961
+    },
+    {
+     "id": "bx_0393046877",
+     "title": "In Defense of History",
+     "score": 0.6857
+    },
+    {
+     "id": "kdl_B07TG7B3JR",
+     "title": "The New Testament in Antiquity, 2nd Edition: A Survey of the New Testament within Its Cultural Contexts",
+     "score": 0.6856
+    },
+    {
+     "id": "bx_0192813242",
+     "title": "The Concise Oxford Dictionary of Quotations",
+     "score": 0.6768
+    },
+    {
+     "id": "kdl_B00GXC0UGI",
+     "title": "Readings in World Christian History: Volume 1: Earliest Christianity to 1453",
+     "score": 0.6725
+    },
+    {
+     "id": "gr_102104.Who_Wrote_the_Bible_",
+     "title": "Who Wrote the Bible?",
+     "score": 0.6718
+    },
+    {
+     "id": "gr_701171.A_Popular_Survey_of_the_Old_Testament",
+     "title": "A Popular Survey of the Old Testament",
+     "score": 0.6713
+    },
+    {
+     "id": "gr_683927.The_History_of_the_Qur_anic_Text_from_Revelation_to_Compilation",
+     "title": "The History of the Qurʾanic Text from Revelation to Compilation: A Comparative Study with the Old and New Testaments",
+     "score": 0.6686
+    }
+   ]
+  },
+  "overlap": 1
+ },
+ {
+  "domain": "book",
+  "query": "뻔하지 않은 자기계발서",
+  "mac": {
+   "translated": "A self-respecting self-helper.",
+   "ms": 254,
+   "top10": [
+    {
+     "id": "kdl_B01CFGRH6Q",
+     "title": "Self-Esteem: A Proven Program of Cognitive Techniques for Assessing, Improving, and Maintaining Your Self-Esteem",
+     "score": 0.5846
+    },
+    {
+     "id": "bx_006008829X",
+     "title": "Choices: Taking Control of Your Life and Making It Matter",
+     "score": 0.5825
+    },
+    {
+     "id": "kdl_B07PFWTY3T",
+     "title": "Do the Work: The Official Unrepentant, Ass-Kicking, No-Kidding, Change-Your-Life Sidekick to Unfu*k Yourself (Unfu*k Yourself series)",
+     "score": 0.5816
+    },
+    {
+     "id": "gr_26233482-motivational-quotes-to-help-you-be-more-positive",
+     "title": "Motivational Quotes to Help You Be More Positive",
+     "score": 0.5797
+    },
+    {
+     "id": "bx_074991937X",
+     "title": "Life Coaching: Change Your Life in 7 Days",
+     "score": 0.5785
+    },
+    {
+     "id": "bx_0340770287",
+     "title": "Be Your Own Life Coach",
+     "score": 0.5782
+    },
+    {
+     "id": "kdl_B07Z8HB15X",
+     "title": "Cómo hacerse inolvidable: Una guía para convertirse en la persona que todos recuerdan y nadie puede resistir (Spanish Edition)",
+     "score": 0.5764
+    },
+    {
+     "id": "gr_957355.The_Art_of_Exceptional_Living",
+     "title": "The Art of Exceptional Living",
+     "score": 0.5746
+    },
+    {
+     "id": "kdl_B07DZX1TQH",
+     "title": "Authentic: How to be yourself and why it matters",
+     "score": 0.5705
+    },
+    {
+     "id": "gr_96593.The_Success_Principles",
+     "title": "The Success Principles: How to Get from Where You Are to Where You Want to Be",
+     "score": 0.5693
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "A self-improvement book that isn't cliché.",
+   "ms": 212,
+   "top10": [
+    {
+     "id": "bx_0440504708",
+     "title": "I'm Good Enough, I'm Smart Enough, and Doggone It, People Like Me! : Daily Affirmations By Stuart Smalley",
+     "score": 0.6346
+    },
+    {
+     "id": "kdl_B004G5ZJE2",
+     "title": "HBR's 10 Must Reads on Managing Yourself (with bonus article \"How Will You Measure Your Life?\" by Clayton M. Christensen)",
+     "score": 0.6229
+    },
+    {
+     "id": "kdl_B01CFGRH6Q",
+     "title": "Self-Esteem: A Proven Program of Cognitive Techniques for Assessing, Improving, and Maintaining Your Self-Esteem",
+     "score": 0.6005
+    },
+    {
+     "id": "bx_0671708635",
+     "title": "Seven Habits Of Highly Effective People",
+     "score": 0.5905
+    },
+    {
+     "id": "kdl_B01ILZPRU8",
+     "title": "How to Be a Bawse: A Guide to Conquering Life",
+     "score": 0.5843
+    },
+    {
+     "id": "bx_0786885149",
+     "title": "The Life Strategies Workbook: Exercises and Self-Tests to Help You Change Your Life",
+     "score": 0.5811
+    },
+    {
+     "id": "gr_31111142-get-your-sh-t-together",
+     "title": "Get Your Sh*t Together: How to Stop Worrying About What You Should Do So You Can Finish What You Need to Do and Start Doing What You Want to Do (A No F*cks Given Guide)",
+     "score": 0.5786
+    },
+    {
+     "id": "kdl_B00TXS49UW",
+     "title": "Managing Oneself (Harvard Business Review Classics)",
+     "score": 0.5785
+    },
+    {
+     "id": "bx_1579544827",
+     "title": "Outwit Your Weight : Fat-Proof Your Life With More Than 200 Tips, Tools, &amp; Techniques to Help You Defeat Your Diet Danger Zones",
+     "score": 0.5767
+    },
+    {
+     "id": "bx_0764551264",
+     "title": "Dieting for Dummies",
+     "score": 0.5752
+    }
+   ]
+  },
+  "overlap": 1
+ },
+ {
+  "domain": "book",
+  "query": "잔인하지 않은 추리 소설",
+  "mac": {
+   "translated": "It's not cruel. It's not cruel.",
+   "ms": 296,
+   "top10": [
+    {
+     "id": "bx_8483102226",
+     "title": "Los Perros De Riga (Andanzas)",
+     "score": 0.5913
+    },
+    {
+     "id": "bx_0679720553",
+     "title": "Childhood Is Hell: A Cartoon Book",
+     "score": 0.5351
+    },
+    {
+     "id": "bx_3746616360",
+     "title": "Das Puppenkind.",
+     "score": 0.5278
+    },
+    {
+     "id": "bx_034531199X",
+     "title": "The Killing Doll",
+     "score": 0.5222
+    },
+    {
+     "id": "gr_1384809.The_Boy_Who_Kicked_Pigs",
+     "title": "The Boy Who Kicked Pigs",
+     "score": 0.5216
+    },
+    {
+     "id": "bx_0064408655",
+     "title": "The Vile Village (A Series of Unfortunate Events, Book 7)",
+     "score": 0.52
+    },
+    {
+     "id": "gr_13246071-little-prisoners",
+     "title": "Little Prisoners: A Tragic Story of Siblings Trapped in a World of Abuse and Suffering",
+     "score": 0.5152
+    },
+    {
+     "id": "bx_3404612442",
+     "title": "Weinen in der Dunkelheit. ( Erfahrungen).",
+     "score": 0.5131
+    },
+    {
+     "id": "bx_0440109930",
+     "title": "Ceremony",
+     "score": 0.5104
+    },
+    {
+     "id": "bx_0671892495",
+     "title": "OPERATION SHERLOCK (AI GANG 1) : OPERATION SHERLOCK (AI GANG 1)",
+     "score": 0.51
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Non-violent mystery novels",
+   "ms": 134,
+   "top10": [
+    {
+     "id": "gr_557265.The_Mystery_of_the_Spiteful_Letters",
+     "title": "The Mystery of the Spiteful Letters",
+     "score": 0.599
+    },
+    {
+     "id": "bx_0425167070",
+     "title": "Murder They Wrote II",
+     "score": 0.5975
+    },
+    {
+     "id": "bx_042516702X",
+     "title": "Jessica Fletcher Presents...: Murder, They Wrote : 18 All New Stories from Today's Most Popular Mystery Authors",
+     "score": 0.5837
+    },
+    {
+     "id": "bx_0425177017",
+     "title": "The Crossword Murder",
+     "score": 0.5735
+    },
+    {
+     "id": "gr_6077869-homicide-in-hardcover",
+     "title": "Homicide in Hardcover",
+     "score": 0.5604
+    },
+    {
+     "id": "bx_0553572350",
+     "title": "Murder at Monticello (Mrs. Murphy Mysteries (Paperback))",
+     "score": 0.5581
+    },
+    {
+     "id": "bx_0440120500",
+     "title": "The Dirty Duck",
+     "score": 0.5534
+    },
+    {
+     "id": "bx_0425178005",
+     "title": "Murder Past Due (Reading Group Mysteries)",
+     "score": 0.5531
+    },
+    {
+     "id": "bx_8475307825",
+     "title": "Obras Completas De Agatha Christie (Grandes Maestros Del Crimen Y Misterio)",
+     "score": 0.5504
+    },
+    {
+     "id": "bx_0425173097",
+     "title": "Murder in Volume (Prime Crime Mysteries)",
+     "score": 0.5502
+    }
+   ]
+  },
+  "overlap": 0
+ },
+ {
+  "domain": "book",
+  "query": "연애 이야기가 아닌 소설",
+  "mac": {
+   "translated": "It's not a romance. It's a novel.",
+   "ms": 311,
+   "top10": [
+    {
+     "id": "bx_0786884851",
+     "title": "Shakespeare in Love: A Screenplay",
+     "score": 0.5794
+    },
+    {
+     "id": "gr_13627782-indie-authors-make-better-lovers",
+     "title": "Indie Authors Make Better Lovers",
+     "score": 0.5573
+    },
+    {
+     "id": "gr_450767.Dating_Mr_Darcy",
+     "title": "Dating Mr. Darcy",
+     "score": 0.5567
+    },
+    {
+     "id": "gr_18759748-screwdrivered",
+     "title": "Screwdrivered",
+     "score": 0.5527
+    },
+    {
+     "id": "gr_4944389-l",
+     "title": "L",
+     "score": 0.551
+    },
+    {
+     "id": "bx_0823084388",
+     "title": "Truer Than True Romance: Classic Love Comics Retold!",
+     "score": 0.543
+    },
+    {
+     "id": "gr_2412176.Seducing_Mr_Darcy",
+     "title": "Seducing Mr. Darcy",
+     "score": 0.5341
+    },
+    {
+     "id": "bx_0373196636",
+     "title": "The Knight's Kiss",
+     "score": 0.533
+    },
+    {
+     "id": "bx_055344123X",
+     "title": "Romancing Susan (Loveswept, No 472)",
+     "score": 0.5302
+    },
+    {
+     "id": "bx_0515122610",
+     "title": "The Very Thought of You",
+     "score": 0.5296
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "A novel that’s not about romance.",
+   "ms": 187,
+   "top10": [
+    {
+     "id": "gr_18759748-screwdrivered",
+     "title": "Screwdrivered",
+     "score": 0.5974
+    },
+    {
+     "id": "gr_4944389-l",
+     "title": "L",
+     "score": 0.5754
+    },
+    {
+     "id": "kdl_B09S3FT46J",
+     "title": "Better than Fiction",
+     "score": 0.5625
+    },
+    {
+     "id": "gr_13627782-indie-authors-make-better-lovers",
+     "title": "Indie Authors Make Better Lovers",
+     "score": 0.5429
+    },
+    {
+     "id": "gr_656048.Happily_Ever_After",
+     "title": "Happily Ever After",
+     "score": 0.5352
+    },
+    {
+     "id": "gr_20801166-a-little-something-different",
+     "title": "A Little Something Different",
+     "score": 0.5335
+    },
+    {
+     "id": "gr_39296114-book-love",
+     "title": "Book Love",
+     "score": 0.5317
+    },
+    {
+     "id": "gr_9279177-the-lover-s-dictionary",
+     "title": "The Lover's Dictionary",
+     "score": 0.5254
+    },
+    {
+     "id": "gr_27912522-a-sudden-crush",
+     "title": "A Sudden Crush",
+     "score": 0.5187
+    },
+    {
+     "id": "gr_1410403.Lila_Lila",
+     "title": "Lila, Lila",
+     "score": 0.5111
+    }
+   ]
+  },
+  "overlap": 3
+ },
+ {
+  "domain": "book",
+  "query": "우울하지 않은 성장 소설",
+  "mac": {
+   "translated": "Not the gloom of growing up.",
+   "ms": 206,
+   "top10": [
+    {
+     "id": "gr_25986929-goodnight-punpun-omnibus-vol-1",
+     "title": "Goodnight Punpun Omnibus, Vol. 1",
+     "score": 0.5419
+    },
+    {
+     "id": "gr_4855175-the-everyday-living-of-children-and-teens-monologues-volume-ii",
+     "title": "The Everyday Living of Children and Teens Monologues Volume II",
+     "score": 0.541
+    },
+    {
+     "id": "kdl_B000OCXGG4",
+     "title": "The Privilege of Youth",
+     "score": 0.5394
+    },
+    {
+     "id": "bx_044023767X",
+     "title": "Teen Angst? Naaah . . . A Quasi-autobiography",
+     "score": 0.539
+    },
+    {
+     "id": "gr_3007030-losers",
+     "title": "Losers",
+     "score": 0.5375
+    },
+    {
+     "id": "gr_51069.The_Growing_Pains_of_Adrian_Mole",
+     "title": "The Growing Pains of Adrian Mole",
+     "score": 0.5334
+    },
+    {
+     "id": "kdl_B00AJI08QE",
+     "title": "The Road to Whatever: Middle-Class Culture and the Crisis of Adolescence",
+     "score": 0.5326
+    },
+    {
+     "id": "gr_475037.Growth_Spurt",
+     "title": "Growth Spurt",
+     "score": 0.5317
+    },
+    {
+     "id": "bx_060629466X",
+     "title": "Secret Diaries of Adrian Mole, Aged 13 3/4",
+     "score": 0.5229
+    },
+    {
+     "id": "bx_0590407651",
+     "title": "Turning Thirteen",
+     "score": 0.5203
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "A coming-of-age novel that isn't depressing.",
+   "ms": 231,
+   "top10": [
+    {
+     "id": "gr_3007030-losers",
+     "title": "Losers",
+     "score": 0.5983
+    },
+    {
+     "id": "gr_7146335-skippy-dies",
+     "title": "Skippy Dies",
+     "score": 0.5932
+    },
+    {
+     "id": "gr_10166594-my-life-is-a-movie",
+     "title": "My Life Is A Movie",
+     "score": 0.592
+    },
+    {
+     "id": "bx_078681392X",
+     "title": "Olivia (Fab 5 Series)",
+     "score": 0.5908
+    },
+    {
+     "id": "gr_16281720-omg-is-this-actually-my-life",
+     "title": "OMG! Is This Actually My Life?",
+     "score": 0.5901
+    },
+    {
+     "id": "bx_060629466X",
+     "title": "Secret Diaries of Adrian Mole, Aged 13 3/4",
+     "score": 0.5892
+    },
+    {
+     "id": "gr_13506764-teenage-rewrite",
+     "title": "Teenage Rewrite",
+     "score": 0.584
+    },
+    {
+     "id": "gr_10570.King_Dork",
+     "title": "King Dork",
+     "score": 0.5836
+    },
+    {
+     "id": "bx_9722105485",
+     "title": "NinguÃ©m morre sozinho: O adolescente e o suicÃ­dio (ColecÃ§Ã£o universitÃ¡ria)",
+     "score": 0.5833
+    },
+    {
+     "id": "gr_51070.The_Secret_Diary_of_Adrian_Mole_Aged_13_3_4",
+     "title": "The Secret Diary of Adrian Mole, Aged 13 3/4",
+     "score": 0.5822
+    }
+   ]
+  },
+  "overlap": 2
+ },
+ {
+  "domain": "book",
+  "query": "결말이 슬프지 않은 소설",
+  "mac": {
+   "translated": "It's not a sad ending.",
+   "ms": 323,
+   "top10": [
+    {
+     "id": "gr_30649795-goodbye-days",
+     "title": "Goodbye Days",
+     "score": 0.591
+    },
+    {
+     "id": "gr_13424848-if-it-s-not-forever-it-s-not-love",
+     "title": "If It's Not Forever. It's Not Love.",
+     "score": 0.5712
+    },
+    {
+     "id": "gr_18742824-the-last-days-of-rabbit-hayes",
+     "title": "The Last Days of Rabbit Hayes",
+     "score": 0.5531
+    },
+    {
+     "id": "gr_20589303-that-ever-died-so-young",
+     "title": "That Ever Died So Young",
+     "score": 0.5349
+    },
+    {
+     "id": "kdl_1534466355",
+     "title": "All This Time",
+     "score": 0.5259
+    },
+    {
+     "id": "gr_54042.Malone_Dies",
+     "title": "Malone Dies",
+     "score": 0.5139
+    },
+    {
+     "id": "gr_3187852-the-truth-about-forever",
+     "title": "The Truth about Forever: Kebencian Membuatmu Kesepian",
+     "score": 0.5101
+    },
+    {
+     "id": "gr_23016909-the-alternate-ending",
+     "title": "The Alternate Ending",
+     "score": 0.5086
+    },
+    {
+     "id": "gr_8044557-all-my-friends-are-dead",
+     "title": "All My Friends Are Dead",
+     "score": 0.5034
+    },
+    {
+     "id": "bx_0385501757",
+     "title": "Remember Me When I'm Gone : The Rich and Famous Write Their Own Epitaphs and Obituaries",
+     "score": 0.5022
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Novels with happy endings",
+   "ms": 135,
+   "top10": [
+    {
+     "id": "bx_0689841809",
+     "title": "Shelf Life : Stories by the Book",
+     "score": 0.5745
+    },
+    {
+     "id": "bx_1840242884",
+     "title": "The Little Book of Books",
+     "score": 0.5428
+    },
+    {
+     "id": "bx_0395875145",
+     "title": "The Best American Short Stories 1998 (Serial)",
+     "score": 0.5122
+    },
+    {
+     "id": "bx_0151004250",
+     "title": "Bookstore: The Life and Times of Jeannette Watson and Books &amp; Co.",
+     "score": 0.5066
+    },
+    {
+     "id": "gr_39296114-book-love",
+     "title": "Book Love",
+     "score": 0.4955
+    },
+    {
+     "id": "bx_0374423296",
+     "title": "5 Novels : Alan Mendelsohn, the Boy from Mars; Slaves of Spiegel; The Last Guru; Young Adult Novel; The Snarkout Boys and the Avocado of Death",
+     "score": 0.4906
+    },
+    {
+     "id": "bx_0393314367",
+     "title": "Now All We Need Is a Title: Famous Book Titles and How They Got That Way",
+     "score": 0.4869
+    },
+    {
+     "id": "gr_12349761-contos-humor-sticos",
+     "title": "Contos Humorísticos (Biblioteca de Verão JN 2011, #16)",
+     "score": 0.4827
+    },
+    {
+     "id": "gr_20011917-tales-from-a-not-so-happily-ever-after",
+     "title": "Tales from a Not-So-Happily Ever After!",
+     "score": 0.4789
+    },
+    {
+     "id": "bx_1558747699",
+     "title": "Chicken Soup for the Writer's Soul : Stories to Open the Heart and Rekindle the Spirit of Writers (Chicken Soup for the Soul)",
+     "score": 0.4773
+    }
+   ]
+  },
+  "overlap": 0
+ },
+ {
+  "domain": "book",
+  "query": "지루하지 않은 고전 문학",
+  "mac": {
+   "translated": "Not Boring Classic Literature",
+   "ms": 185,
+   "top10": [
+    {
+     "id": "bx_0862782481",
+     "title": "The Wit of Oscar Wilde",
+     "score": 0.6956
+    },
+    {
+     "id": "gr_1423.The_Compleat_Works_of_Wllm_Shkspr",
+     "title": "The Compleat Works of Wllm Shkspr (abridged)",
+     "score": 0.6874
+    },
+    {
+     "id": "bx_006017367X",
+     "title": "The Wit &amp; Wisdom of Oscar Wilde: A Treasury of Quotations, Anecdotes, and Repartee",
+     "score": 0.6827
+    },
+    {
+     "id": "bx_0393314367",
+     "title": "Now All We Need Is a Title: Famous Book Titles and How They Got That Way",
+     "score": 0.6713
+    },
+    {
+     "id": "kdl_B087439FGN",
+     "title": "The Life and Opinions of Tristram Shandy, Gentleman",
+     "score": 0.6555
+    },
+    {
+     "id": "kdl_B01J4CLLN4",
+     "title": "Farnsworth's Classical English Metaphor",
+     "score": 0.6515
+    },
+    {
+     "id": "gr_50381.The_Friendly_Jane_Austen",
+     "title": "The Friendly Jane Austen: A Well-Mannered Introduction to a Lady of Sense and Sensibility",
+     "score": 0.6443
+    },
+    {
+     "id": "gr_2322.The_Deeper_Meaning_of_Liff",
+     "title": "The Deeper Meaning of Liff",
+     "score": 0.6373
+    },
+    {
+     "id": "bx_0192813242",
+     "title": "The Concise Oxford Dictionary of Quotations",
+     "score": 0.6368
+    },
+    {
+     "id": "gr_13623953-judging-a-book-by-its-lover",
+     "title": "Judging a Book by Its Lover: A Field Guide to the Hearts and Minds of Readers Everywhere",
+     "score": 0.6354
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Non-boring classic literature",
+   "ms": 144,
+   "top10": [
+    {
+     "id": "bx_0862782481",
+     "title": "The Wit of Oscar Wilde",
+     "score": 0.7354
+    },
+    {
+     "id": "gr_1423.The_Compleat_Works_of_Wllm_Shkspr",
+     "title": "The Compleat Works of Wllm Shkspr (abridged)",
+     "score": 0.705
+    },
+    {
+     "id": "bx_006017367X",
+     "title": "The Wit &amp; Wisdom of Oscar Wilde: A Treasury of Quotations, Anecdotes, and Repartee",
+     "score": 0.6881
+    },
+    {
+     "id": "bx_1853753564",
+     "title": "The Cynic's Dictionary",
+     "score": 0.6815
+    },
+    {
+     "id": "kdl_B087439FGN",
+     "title": "The Life and Opinions of Tristram Shandy, Gentleman",
+     "score": 0.6709
+    },
+    {
+     "id": "bx_0393314367",
+     "title": "Now All We Need Is a Title: Famous Book Titles and How They Got That Way",
+     "score": 0.6543
+    },
+    {
+     "id": "bx_0440204992",
+     "title": "Get Thee to a Punnery",
+     "score": 0.6541
+    },
+    {
+     "id": "gr_7735399-pl-tzlich-shakespeare",
+     "title": "Plötzlich Shakespeare",
+     "score": 0.6525
+    },
+    {
+     "id": "gr_2322.The_Deeper_Meaning_of_Liff",
+     "title": "The Deeper Meaning of Liff",
+     "score": 0.6487
+    },
+    {
+     "id": "gr_229432.The_Pickwick_Papers",
+     "title": "The Pickwick Papers",
+     "score": 0.6475
+    }
+   ]
+  },
+  "overlap": 6
+ },
+ {
+  "domain": "book",
+  "query": "교훈적이지 않은 동화",
+  "mac": {
+   "translated": "Undirected fairy tales.",
+   "ms": 174,
+   "top10": [
+    {
+     "id": "gr_17261414-grimm-s-fairy-stories",
+     "title": "Grimm's Fairy Stories",
+     "score": 0.734
+    },
+    {
+     "id": "bx_096546377X",
+     "title": "A Tolkien Miscellany",
+     "score": 0.7225
+    },
+    {
+     "id": "gr_43811339-the-fool-and-other-moral-tales",
+     "title": "The Fool and Other Moral Tales",
+     "score": 0.7068
+    },
+    {
+     "id": "bx_0486216756",
+     "title": "The Violet Fairy Book",
+     "score": 0.6735
+    },
+    {
+     "id": "bx_0415902630",
+     "title": "Don't Bet on the Prince: Contemporary Feminist Fairy Tales in North America and England",
+     "score": 0.667
+    },
+    {
+     "id": "bx_0394709306",
+     "title": "The Complete Grimm's Fairy Tales (Pantheon Fairy Tale and Folklore Library)",
+     "score": 0.6668
+    },
+    {
+     "id": "bx_0060286245",
+     "title": "Little Lit: Folklore &amp; Fairy Tale Funnies",
+     "score": 0.6629
+    },
+    {
+     "id": "gr_447937.Don_t_Bet_on_the_Prince",
+     "title": "Don't Bet on the Prince: Contemporary Feminist Fairy Tales in North America and England",
+     "score": 0.66
+    },
+    {
+     "id": "gr_81021.Angela_Carter_s_Book_of_Fairy_Tales",
+     "title": "Angela Carter's Book of Fairy Tales",
+     "score": 0.6556
+    },
+    {
+     "id": "bx_0582541492",
+     "title": "Tales from Hans Anderson (Longman Classics, Stage 1)",
+     "score": 0.6554
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Unwise fables",
+   "ms": 122,
+   "top10": [
+    {
+     "id": "gr_43811339-the-fool-and-other-moral-tales",
+     "title": "The Fool and Other Moral Tales",
+     "score": 0.5784
+    },
+    {
+     "id": "bx_0914294539",
+     "title": "The Unabridged Mark Twain",
+     "score": 0.5755
+    },
+    {
+     "id": "kdl_B07G14SV36",
+     "title": "Collected Fables",
+     "score": 0.5743
+    },
+    {
+     "id": "gr_132380.Politically_Correct_Bedtime_Stories",
+     "title": "Politically Correct Bedtime Stories",
+     "score": 0.5445
+    },
+    {
+     "id": "gr_4469001-podatek",
+     "title": "Podatek",
+     "score": 0.5355
+    },
+    {
+     "id": "bx_0679819967",
+     "title": "Poems of A. Nonny Mouse",
+     "score": 0.5317
+    },
+    {
+     "id": "bx_186205102X",
+     "title": "Bizarre Books",
+     "score": 0.5288
+    },
+    {
+     "id": "gr_18007571-one-more-thing",
+     "title": "One More Thing: Stories and Other Stories",
+     "score": 0.5257
+    },
+    {
+     "id": "bx_0192833685",
+     "title": "Northanger Abbey, Lady Susan, the Watsons, and Sanditon: Lady Susan ; The Watsons ; And, Sanditon (World's Classics)",
+     "score": 0.5237
+    },
+    {
+     "id": "bx_1592220096",
+     "title": "Myth Alliances (Myth Adventures, 13)",
+     "score": 0.5216
+    }
+   ]
+  },
+  "overlap": 1
+ },
+ {
+  "domain": "book",
+  "query": "수학 공식 없는 과학 책",
+  "mac": {
+   "translated": "Science Without Mathematics",
+   "ms": 214,
+   "top10": [
+    {
+     "id": "kdl_B07QQFQQ36",
+     "title": "Schaum's Outline of Physics for Engineering and Science, Fourth Edition (Schaum's Outlines)",
+     "score": 0.733
+    },
+    {
+     "id": "kdl_B08R2BZ4MX",
+     "title": "Introduction to Elementary Particles",
+     "score": 0.719
+    },
+    {
+     "id": "kdl_B07BJ3RP3X",
+     "title": "Intro to Materials Science - Book 5: 310+ Questions & Answers",
+     "score": 0.7172
+    },
+    {
+     "id": "kdl_B00H4NLDJS",
+     "title": "More Great Formulas Explained",
+     "score": 0.7116
+    },
+    {
+     "id": "kdl_B06XWM2S54",
+     "title": "Calculations in Chemistry: An Introduction (Second Edition)",
+     "score": 0.7096
+    },
+    {
+     "id": "kdl_111978736X",
+     "title": "The Official ACT Science Guide",
+     "score": 0.7043
+    },
+    {
+     "id": "kdl_B00UGDPNFI",
+     "title": "Principles of Modern Chemistry",
+     "score": 0.7004
+    },
+    {
+     "id": "kdl_B004OVEYNU",
+     "title": "Six Easy Pieces: Essentials of Physics Explained by Its Most Brilliant Teacher",
+     "score": 0.6994
+    },
+    {
+     "id": "kdl_B084SQ56Z1",
+     "title": "Essential Mathematics for Engineers and Scientists",
+     "score": 0.6986
+    },
+    {
+     "id": "bx_0471898503",
+     "title": "Physics",
+     "score": 0.6939
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Science books without formulas.",
+   "ms": 132,
+   "top10": [
+    {
+     "id": "bx_0812045998",
+     "title": "Chemistry (Barron's E Z 101 Study Keys)",
+     "score": 0.7009
+    },
+    {
+     "id": "bx_0395613531",
+     "title": "General Chemistry",
+     "score": 0.6969
+    },
+    {
+     "id": "kdl_B00SLB5OUG",
+     "title": "Organic Chemistry (Fifth Edition)",
+     "score": 0.6837
+    },
+    {
+     "id": "kdl_111978736X",
+     "title": "The Official ACT Science Guide",
+     "score": 0.6789
+    },
+    {
+     "id": "kdl_B07BJ3RP3X",
+     "title": "Intro to Materials Science - Book 5: 310+ Questions & Answers",
+     "score": 0.6506
+    },
+    {
+     "id": "kdl_B071KVG8CN",
+     "title": "Clinical Laboratory Chemistry (Pearson Clinical Laboratory Science Series)",
+     "score": 0.6501
+    },
+    {
+     "id": "bx_0836270045",
+     "title": "You Can With Beakman: : Science stuff You Can Do (You Can with Beakman &amp; Jax)",
+     "score": 0.6492
+    },
+    {
+     "id": "kdl_B08DMKVJM3",
+     "title": "Laboratory Manual in Physical Geology",
+     "score": 0.6479
+    },
+    {
+     "id": "kdl_B07D121389",
+     "title": "Anatomy & Physiology Workbook For Dummies with Online Practice",
+     "score": 0.6462
+    },
+    {
+     "id": "kdl_B0014CUORM",
+     "title": "Evidence-Based Educational Methods (ISSN)",
+     "score": 0.6433
+    }
+   ]
+  },
+  "overlap": 2
+ },
+ {
+  "domain": "book",
+  "query": "무섭지 않은 판타지 소설",
+  "mac": {
+   "translated": "Not a scary fantasy novel.",
+   "ms": 183,
+   "top10": [
+    {
+     "id": "gr_23942402-the-monster-exorcist",
+     "title": "The Monster Exorcist",
+     "score": 0.6023
+    },
+    {
+     "id": "bx_0345449266",
+     "title": "The Children of Cthulhu : Chilling New Tales Inspired by H.P. Lovecraft",
+     "score": 0.5964
+    },
+    {
+     "id": "bx_0500271194",
+     "title": "The fantasy book: The ghostly, the Gothic, the magical, the unreal",
+     "score": 0.5765
+    },
+    {
+     "id": "gr_458341.Courtney_Crumrin_and_the_Night_Things",
+     "title": "Courtney Crumrin and the Night Things",
+     "score": 0.576
+    },
+    {
+     "id": "bx_1563895013",
+     "title": "The Big Book of Grimm (Factoid Books)",
+     "score": 0.571
+    },
+    {
+     "id": "bx_0671042599",
+     "title": "The Monster Book",
+     "score": 0.5634
+    },
+    {
+     "id": "bx_059093483X",
+     "title": " Little Comic Shop of Horrors (Give Yourself Goosebumps, Book 17)",
+     "score": 0.5566
+    },
+    {
+     "id": "bx_1563892650",
+     "title": " Summonings: Books of Magic, Vol. 2",
+     "score": 0.555
+    },
+    {
+     "id": "gr_6364017-malice",
+     "title": "Malice",
+     "score": 0.5544
+    },
+    {
+     "id": "bx_0030073189",
+     "title": "The Goblins of Labyrinth",
+     "score": 0.5532
+    }
+   ]
+  },
+  "astrago": {
+   "translated": "Fantasy novels that aren't scary.",
+   "ms": 180,
+   "top10": [
+    {
+     "id": "gr_148205.M_Y_T_H_Inc_Link",
+     "title": "M.Y.T.H. Inc. Link",
+     "score": 0.6289
+    },
+    {
+     "id": "gr_289232.Hellboy",
+     "title": "Hellboy: Odd Jobs",
+     "score": 0.5921
+    },
+    {
+     "id": "bx_0441023142",
+     "title": "A Night in the Netherhells",
+     "score": 0.5757
+    },
+    {
+     "id": "bx_0898658586",
+     "title": "Sweet Myth-Tery of Life (Myth Adventure)",
+     "score": 0.5745
+    },
+    {
+     "id": "bx_0743435419",
+     "title": "The Philosophical Strangler",
+     "score": 0.5745
+    },
+    {
+     "id": "bx_3453058607",
+     "title": "Die Farben der Magie. Ein Roman von der bizarren Scheibenwelt.",
+     "score": 0.5741
+    },
+    {
+     "id": "kdl_B00GU32WNY",
+     "title": "Eric: Discworld: The Unseen University Collection (Discworld series Book 9)",
+     "score": 0.573
+    },
+    {
+     "id": "bx_1560766190",
+     "title": "Monstrous Manual (Advanced Dungeons and Dragons, 2nd Edition)",
+     "score": 0.5706
+    },
+    {
+     "id": "gr_1641944._vos_souhaits",
+     "title": "À vos souhaits",
+     "score": 0.5695
+    },
+    {
+     "id": "gr_972188.The_Monsters_of_Otherness",
+     "title": "The Monsters of Otherness",
+     "score": 0.5682
+    }
+   ]
+  },
+  "overlap": 0
+ }
+]

@@ -1,0 +1,117 @@
+domain,base,adj,antonym,intrinsic,q_base,q_attr,q_neg,q_non,q_anti
+movie,movies,sad,happy,0,Movies,Sad movies,Movies that are not sad,Non-sad movies,Happy movies
+movie,comedies,dark,lighthearted,0,Comedies,Dark comedies,Comedies that are not dark,Non-dark comedies,Lighthearted comedies
+movie,documentaries,boring,exciting,0,Documentaries,Boring documentaries,Documentaries that are not boring,Non-boring documentaries,Exciting documentaries
+movie,animated films,scary,comforting,0,Animated films,Scary animated films,Animated films that are not scary,Non-scary animated films,Comforting animated films
+movie,road movies,slow,fast-paced,0,Road movies,Slow road movies,Road movies that are not slow,Non-slow road movies,Fast-paced road movies
+movie,family movies,long,short,0,Family movies,Long family movies,Family movies that are not long,Non-long family movies,Short family movies
+movie,sci-fi movies,depressing,uplifting,0,Sci-fi movies,Depressing sci-fi movies,Sci-fi movies that are not depressing,Non-depressing sci-fi movies,Uplifting sci-fi movies
+movie,period dramas,romantic,unromantic,0,Period dramas,Romantic period dramas,Period dramas that are not romantic,Non-romantic period dramas,Unromantic period dramas
+movie,musicals,sad,cheerful,0,Musicals,Sad musicals,Musicals that are not sad,Non-sad musicals,Cheerful musicals
+movie,crime movies,funny,serious,0,Crime movies,Funny crime movies,Crime movies that are not funny,Non-funny crime movies,Serious crime movies
+movie,sports movies,predictable,surprising,0,Sports movies,Predictable sports movies,Sports movies that are not predictable,Non-predictable sports movies,Surprising sports movies
+movie,romance movies,cheesy,subtle,0,Romance movies,Cheesy romance movies,Romance movies that are not cheesy,Non-cheesy romance movies,Subtle romance movies
+movie,fantasy movies,violent,peaceful,0,Fantasy movies,Violent fantasy movies,Fantasy movies that are not violent,Non-violent fantasy movies,Peaceful fantasy movies
+movie,dramas,slow,fast-paced,0,Dramas,Slow dramas,Dramas that are not slow,Non-slow dramas,Fast-paced dramas
+movie,sci-fi movies,complex,simple,0,Sci-fi movies,Complex sci-fi movies,Sci-fi movies that are not complex,Non-complex sci-fi movies,Simple sci-fi movies
+movie,documentaries,political,apolitical,0,Documentaries,Political documentaries,Documentaries that are not political,Non-political documentaries,Apolitical documentaries
+movie,family movies,sentimental,restrained,0,Family movies,Sentimental family movies,Family movies that are not sentimental,Non-sentimental family movies,Restrained family movies
+movie,animated films,long,short,0,Animated films,Long animated films,Animated films that are not long,Non-long animated films,Short animated films
+movie,road movies,lonely,warm,0,Road movies,Lonely road movies,Road movies that are not lonely,Non-lonely road movies,Warm road movies
+movie,comedies,romantic,unromantic,0,Comedies,Romantic comedies,Comedies that are not romantic,Non-romantic comedies,Unromantic comedies
+movie,movies,nostalgic,modern,0,Movies,Nostalgic movies,Movies that are not nostalgic,Non-nostalgic movies,Modern movies
+movie,musicals,old-fashioned,modern,0,Musicals,Old-fashioned musicals,Musicals that are not old-fashioned,Non-old-fashioned musicals,Modern musicals
+movie,crime movies,slow,fast-paced,0,Crime movies,Slow crime movies,Crime movies that are not slow,Non-slow crime movies,Fast-paced crime movies
+movie,dramas,religious,secular,0,Dramas,Religious dramas,Dramas that are not religious,Non-religious dramas,Secular dramas
+movie,romance movies,sad,happy,0,Romance movies,Sad romance movies,Romance movies that are not sad,Non-sad romance movies,Happy romance movies
+movie,fantasy movies,dark,bright,0,Fantasy movies,Dark fantasy movies,Fantasy movies that are not dark,Non-dark fantasy movies,Bright fantasy movies
+movie,sports movies,emotional,detached,0,Sports movies,Emotional sports movies,Sports movies that are not emotional,Non-emotional sports movies,Detached sports movies
+movie,period dramas,violent,peaceful,0,Period dramas,Violent period dramas,Period dramas that are not violent,Non-violent period dramas,Peaceful period dramas
+movie,documentaries,depressing,uplifting,0,Documentaries,Depressing documentaries,Documentaries that are not depressing,Non-depressing documentaries,Uplifting documentaries
+movie,comedies,long,short,0,Comedies,Long comedies,Comedies that are not long,Non-long comedies,Short comedies
+movie,animated films,sad,happy,0,Animated films,Sad animated films,Animated films that are not sad,Non-sad animated films,Happy animated films
+movie,sci-fi movies,funny,serious,0,Sci-fi movies,Funny sci-fi movies,Sci-fi movies that are not funny,Non-funny sci-fi movies,Serious sci-fi movies
+movie,movies,explicit,clean,0,Movies,Explicit movies,Movies that are not explicit,Non-explicit movies,Clean movies
+music,songs,sad,happy,0,Songs,Sad songs,Songs that are not sad,Non-sad songs,Happy songs
+music,rock songs,slow,fast,0,Rock songs,Slow rock songs,Rock songs that are not slow,Non-slow rock songs,Fast rock songs
+music,jazz,loud,quiet,0,Jazz,Loud jazz,Jazz that are not loud,Non-loud jazz,Quiet jazz
+music,piano pieces,dark,bright,0,Piano pieces,Dark piano pieces,Piano pieces that are not dark,Non-dark piano pieces,Bright piano pieces
+music,hip-hop tracks,romantic,unromantic,0,Hip-hop tracks,Romantic hip-hop tracks,Hip-hop tracks that are not romantic,Non-romantic hip-hop tracks,Unromantic hip-hop tracks
+music,folk songs,upbeat,mellow,0,Folk songs,Upbeat folk songs,Folk songs that are not upbeat,Non-upbeat folk songs,Mellow folk songs
+music,pop songs,melancholic,cheerful,0,Pop songs,Melancholic pop songs,Pop songs that are not melancholic,Non-melancholic pop songs,Cheerful pop songs
+music,electronic music,calm,intense,0,Electronic music,Calm electronic music,Electronic music that are not calm,Non-calm electronic music,Intense electronic music
+music,R&B songs,angry,calm,0,R&B songs,Angry R&B songs,R&B songs that are not angry,Non-angry R&B songs,Calm R&B songs
+music,indie songs,loud,quiet,0,Indie songs,Loud indie songs,Indie songs that are not loud,Non-loud indie songs,Quiet indie songs
+music,classical music,dramatic,subdued,0,Classical music,Dramatic classical music,Classical music that are not dramatic,Non-dramatic classical music,Subdued classical music
+music,country songs,sad,cheerful,0,Country songs,Sad country songs,Country songs that are not sad,Non-sad country songs,Cheerful country songs
+music,dance tracks,melancholic,cheerful,0,Dance tracks,Melancholic dance tracks,Dance tracks that are not melancholic,Non-melancholic dance tracks,Cheerful dance tracks
+music,acoustic songs,upbeat,mellow,0,Acoustic songs,Upbeat acoustic songs,Acoustic songs that are not upbeat,Non-upbeat acoustic songs,Mellow acoustic songs
+music,songs,long,short,0,Songs,Long songs,Songs that are not long,Non-long songs,Short songs
+music,rock songs,romantic,unromantic,0,Rock songs,Romantic rock songs,Rock songs that are not romantic,Non-romantic rock songs,Unromantic rock songs
+music,jazz,fast,slow,0,Jazz,Fast jazz,Jazz that are not fast,Non-fast jazz,Slow jazz
+music,piano pieces,sad,happy,0,Piano pieces,Sad piano pieces,Piano pieces that are not sad,Non-sad piano pieces,Happy piano pieces
+music,hip-hop tracks,calm,intense,0,Hip-hop tracks,Calm hip-hop tracks,Hip-hop tracks that are not calm,Non-calm hip-hop tracks,Intense hip-hop tracks
+music,folk songs,dark,bright,0,Folk songs,Dark folk songs,Folk songs that are not dark,Non-dark folk songs,Bright folk songs
+music,pop songs,explicit,clean,0,Pop songs,Explicit pop songs,Pop songs that are not explicit,Non-explicit pop songs,Clean pop songs
+music,electronic music,nostalgic,futuristic,0,Electronic music,Nostalgic electronic music,Electronic music that are not nostalgic,Non-nostalgic electronic music,Futuristic electronic music
+music,R&B songs,upbeat,mellow,0,R&B songs,Upbeat R&B songs,R&B songs that are not upbeat,Non-upbeat R&B songs,Mellow R&B songs
+music,indie songs,sentimental,restrained,0,Indie songs,Sentimental indie songs,Indie songs that are not sentimental,Non-sentimental indie songs,Restrained indie songs
+music,classical music,cheerful,somber,0,Classical music,Cheerful classical music,Classical music that are not cheerful,Non-cheerful classical music,Somber classical music
+music,country songs,political,apolitical,0,Country songs,Political country songs,Country songs that are not political,Non-political country songs,Apolitical country songs
+music,dance tracks,slow,fast,0,Dance tracks,Slow dance tracks,Dance tracks that are not slow,Non-slow dance tracks,Fast dance tracks
+music,acoustic songs,dark,bright,0,Acoustic songs,Dark acoustic songs,Acoustic songs that are not dark,Non-dark acoustic songs,Bright acoustic songs
+music,songs,religious,secular,0,Songs,Religious songs,Songs that are not religious,Non-religious songs,Secular songs
+music,jazz,sad,happy,0,Jazz,Sad jazz,Jazz that are not sad,Non-sad jazz,Happy jazz
+music,rock songs,cheesy,subtle,0,Rock songs,Cheesy rock songs,Rock songs that are not cheesy,Non-cheesy rock songs,Subtle rock songs
+music,pop songs,complex,simple,0,Pop songs,Complex pop songs,Pop songs that are not complex,Non-complex pop songs,Simple pop songs
+music,hip-hop tracks,sad,happy,0,Hip-hop tracks,Sad hip-hop tracks,Hip-hop tracks that are not sad,Non-sad hip-hop tracks,Happy hip-hop tracks
+book,novels,sad,happy,0,Novels,Sad novels,Novels that are not sad,Non-sad novels,Happy novels
+book,short stories,dark,lighthearted,0,Short stories,Dark short stories,Short stories that are not dark,Non-dark short stories,Lighthearted short stories
+book,essays,difficult,easy,0,Essays,Difficult essays,Essays that are not difficult,Non-difficult essays,Easy essays
+book,poetry collections,romantic,unromantic,0,Poetry collections,Romantic poetry collections,Poetry collections that are not romantic,Non-romantic poetry collections,Unromantic poetry collections
+book,fantasy novels,scary,comforting,0,Fantasy novels,Scary fantasy novels,Fantasy novels that are not scary,Non-scary fantasy novels,Comforting fantasy novels
+book,mystery novels,violent,gentle,0,Mystery novels,Violent mystery novels,Mystery novels that are not violent,Non-violent mystery novels,Gentle mystery novels
+book,history books,boring,engaging,0,History books,Boring history books,History books that are not boring,Non-boring history books,Engaging history books
+book,science books,difficult,easy,0,Science books,Difficult science books,Science books that are not difficult,Non-difficult science books,Easy science books
+book,memoirs,depressing,uplifting,0,Memoirs,Depressing memoirs,Memoirs that are not depressing,Non-depressing memoirs,Uplifting memoirs
+book,self-help books,religious,secular,0,Self-help books,Religious self-help books,Self-help books that are not religious,Non-religious self-help books,Secular self-help books
+book,children's books,sad,happy,0,Children's books,Sad children's books,Children's books that are not sad,Non-sad children's books,Happy children's books
+book,graphic novels,violent,gentle,0,Graphic novels,Violent graphic novels,Graphic novels that are not violent,Non-violent graphic novels,Gentle graphic novels
+book,travel books,lonely,warm,0,Travel books,Lonely travel books,Travel books that are not lonely,Non-lonely travel books,Warm travel books
+book,biographies,long,short,0,Biographies,Long biographies,Biographies that are not long,Non-long biographies,Short biographies
+book,novels,slow,fast-paced,0,Novels,Slow novels,Novels that are not slow,Non-slow novels,Fast-paced novels
+book,short stories,funny,serious,0,Short stories,Funny short stories,Short stories that are not funny,Non-funny short stories,Serious short stories
+book,essays,political,apolitical,0,Essays,Political essays,Essays that are not political,Non-political essays,Apolitical essays
+book,poetry collections,dark,bright,0,Poetry collections,Dark poetry collections,Poetry collections that are not dark,Non-dark poetry collections,Bright poetry collections
+book,fantasy novels,long,short,0,Fantasy novels,Long fantasy novels,Fantasy novels that are not long,Non-long fantasy novels,Short fantasy novels
+book,mystery novels,funny,serious,0,Mystery novels,Funny mystery novels,Mystery novels that are not funny,Non-funny mystery novels,Serious mystery novels
+book,history books,heavy,light,0,History books,Heavy history books,History books that are not heavy,Non-heavy history books,Light history books
+book,science books,political,apolitical,0,Science books,Political science books,Science books that are not political,Non-political science books,Apolitical science books
+book,memoirs,funny,serious,0,Memoirs,Funny memoirs,Memoirs that are not funny,Non-funny memoirs,Serious memoirs
+book,self-help books,preachy,subtle,0,Self-help books,Preachy self-help books,Self-help books that are not preachy,Non-preachy self-help books,Subtle self-help books
+book,children's books,scary,comforting,0,Children's books,Scary children's books,Children's books that are not scary,Non-scary children's books,Comforting children's books
+book,graphic novels,romantic,unromantic,0,Graphic novels,Romantic graphic novels,Graphic novels that are not romantic,Non-romantic graphic novels,Unromantic graphic novels
+book,travel books,funny,serious,0,Travel books,Funny travel books,Travel books that are not funny,Non-funny travel books,Serious travel books
+book,biographies,depressing,uplifting,0,Biographies,Depressing biographies,Biographies that are not depressing,Non-depressing biographies,Uplifting biographies
+book,novels,explicit,clean,0,Novels,Explicit novels,Novels that are not explicit,Non-explicit novels,Clean novels
+book,short stories,sentimental,restrained,0,Short stories,Sentimental short stories,Short stories that are not sentimental,Non-sentimental short stories,Restrained short stories
+book,fantasy novels,romantic,unromantic,0,Fantasy novels,Romantic fantasy novels,Fantasy novels that are not romantic,Non-romantic fantasy novels,Unromantic fantasy novels
+book,essays,cheerful,somber,0,Essays,Cheerful essays,Essays that are not cheerful,Non-cheerful essays,Somber essays
+book,novels,predictable,surprising,0,Novels,Predictable novels,Novels that are not predictable,Non-predictable novels,Surprising novels
+movie,action movies,violent,peaceful,1,Action movies,Violent action movies,Action movies that are not violent,Non-violent action movies,Peaceful action movies
+movie,horror movies,scary,comforting,1,Horror movies,Scary horror movies,Horror movies that are not scary,Non-scary horror movies,Comforting horror movies
+movie,war movies,violent,peaceful,1,War movies,Violent war movies,War movies that are not violent,Non-violent war movies,Peaceful war movies
+movie,thrillers,suspenseful,relaxed,1,Thrillers,Suspenseful thrillers,Thrillers that are not suspenseful,Non-suspenseful thrillers,Relaxed thrillers
+movie,comedies,funny,serious,1,Comedies,Funny comedies,Comedies that are not funny,Non-funny comedies,Serious comedies
+movie,tragedies,sad,happy,1,Tragedies,Sad tragedies,Tragedies that are not sad,Non-sad tragedies,Happy tragedies
+movie,romance movies,romantic,unromantic,1,Romance movies,Romantic romance movies,Romance movies that are not romantic,Non-romantic romance movies,Unromantic romance movies
+music,ballads,sad,happy,1,Ballads,Sad ballads,Ballads that are not sad,Non-sad ballads,Happy ballads
+music,metal songs,loud,quiet,1,Metal songs,Loud metal songs,Metal songs that are not loud,Non-loud metal songs,Quiet metal songs
+music,lullabies,calm,intense,1,Lullabies,Calm lullabies,Lullabies that are not calm,Non-calm lullabies,Intense lullabies
+music,punk songs,angry,calm,1,Punk songs,Angry punk songs,Punk songs that are not angry,Non-angry punk songs,Calm punk songs
+music,love songs,romantic,unromantic,1,Love songs,Romantic love songs,Love songs that are not romantic,Non-romantic love songs,Unromantic love songs
+book,romance novels,romantic,unromantic,1,Romance novels,Romantic romance novels,Romance novels that are not romantic,Non-romantic romance novels,Unromantic romance novels
+book,philosophy books,difficult,easy,1,Philosophy books,Difficult philosophy books,Philosophy books that are not difficult,Non-difficult philosophy books,Easy philosophy books
+book,true crime books,dark,bright,1,True crime books,Dark true crime books,True crime books that are not dark,Non-dark true crime books,Bright true crime books
+book,horror novels,scary,comforting,1,Horror novels,Scary horror novels,Horror novels that are not scary,Non-scary horror novels,Comforting horror novels
+book,tragedies,sad,happy,1,Tragedies,Sad tragedies,Tragedies that are not sad,Non-sad tragedies,Happy tragedies

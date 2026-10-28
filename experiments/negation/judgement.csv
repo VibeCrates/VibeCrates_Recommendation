@@ -1,0 +1,37 @@
+domain,query,mac_opus,mac_mark,astrago_gemma,astrago_mark,top10_overlap
+movie,무섭지 않은 공포 영화,No scary horror movies.,△,Scary movies that aren't frightening.,△,2
+movie,슬프지 않은 영화,Not sad.,△,Movies that aren't sad.,O,0
+movie,너무 길지 않은 영화,Not too long.,△,Not too long movies,O,0
+movie,잔인하지 않은 스릴러,Not a cruel thriller.,O,Non-violent thrillers,O,0
+movie,뻔하지 않은 로맨스 영화,"No, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no",X,Uncliche romantic movies,O,0
+movie,해피엔딩이 아닌 영화,Not a happy ending.,△,Movies that don't have happy endings,O,1
+movie,폭력적이지 않은 액션 영화,Not violent action movies.,O,Non-violent action movies,O,2
+movie,지루하지 않은 다큐멘터리,Boring documentaries,X,Non-boring documentaries,O,3
+movie,야하지 않은 로맨스 영화,It's a dirty romance movie.,X,Romantic movies I haven't seen.,X,1
+movie,어린이용이 아닌 애니메이션,"Not for children, but animation",O,Animation not intended for children,O,4
+movie,우울하지 않은 전쟁 영화,A non-depressive war movie.,O,Non-depressing war movies,O,2
+movie,반전 없는 잔잔한 영화,"A calm, unreverseed movie.",X,"Quiet, predictable movies.",O,0
+music,시끄럽지 않은 록 음악,No loud rock music.,△,Quiet rock music,O,0
+music,슬프지 않은 발라드,"You're not sad, Valad.",X,Sad ballads,X,0
+music,가사 없는 잔잔한 음악,Quiet music without lyrics,O,"Calm, instrumental music without lyrics.",O,1
+music,우울하지 않은 비 오는 날 노래,It's not depressing. It's raining.,△,Songs for when it’s not sad on a rainy day.,△,0
+music,신나지 않은 차분한 노래,It's not exciting. It's calm.,△,"Calm, unexciting songs",O,0
+music,너무 빠르지 않은 댄스곡,Not too fast.,△,I’m looking for fast dance songs.,X,0
+music,사랑 노래가 아닌 노래,It's not a love song. It's a song.,△,Songs that aren't love songs,O,2
+music,욕 없는 힙합,Hip-hop without swearing.,O,Rap music without explicit lyrics.,O,1
+music,졸리지 않은 공부할 때 음악,Music when you're studying.,X,Music to listen to while studying without getting tired.,O,3
+music,오글거리지 않은 사랑 노래,A love song that didn't go out.,X,Love songs that aren't overly sentimental.,O,3
+music,어둡지 않은 일렉트로닉 음악,Undark Electric Music,X,Upbeat electronic music,O,1
+music,슬픈데 우울하지 않은 노래,"It's sad, but it's not depressing.",△,Songs that are sad but not depressing.,O,0
+book,어렵지 않은 철학 책,It's a philosophy book.,X,Easy philosophy books,O,4
+book,두껍지 않은 소설,Not a thick novel.,O,Thin novels,O,1
+book,무겁지 않은 역사 책,A Book of History Not Heavy,O,Light historical books,O,1
+book,뻔하지 않은 자기계발서,A self-respecting self-helper.,X,A self-improvement book that isn't cliché.,O,1
+book,잔인하지 않은 추리 소설,It's not cruel. It's not cruel.,△,Non-violent mystery novels,O,0
+book,연애 이야기가 아닌 소설,It's not a romance. It's a novel.,△,A novel that’s not about romance.,O,3
+book,우울하지 않은 성장 소설,Not the gloom of growing up.,X,A coming-of-age novel that isn't depressing.,O,2
+book,결말이 슬프지 않은 소설,It's not a sad ending.,△,Novels with happy endings,O,0
+book,지루하지 않은 고전 문학,Not Boring Classic Literature,O,Non-boring classic literature,O,6
+book,교훈적이지 않은 동화,Undirected fairy tales.,X,Unwise fables,X,1
+book,수학 공식 없는 과학 책,Science Without Mathematics,O,Science books without formulas.,O,2
+book,무섭지 않은 판타지 소설,Not a scary fantasy novel.,O,Fantasy novels that aren't scary.,O,0
