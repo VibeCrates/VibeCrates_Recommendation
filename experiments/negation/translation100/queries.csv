@@ -1,0 +1,101 @@
+id,domain,form,query,meaning
+1,movie,~지 않은,잔인하지 않은 액션 영화,action movies that are not gory
+2,movie,~지 않은,뻔하지 않은 로맨스 영화,romance movies that are not predictable
+3,movie,~지 않은,지루하지 않은 다큐멘터리,documentaries that are not boring
+4,movie,~지 않은,유치하지 않은 애니메이션,animations that are not childish
+5,movie,~지 않은,어둡지 않은 SF 영화,sci-fi movies that are not dark
+6,movie,~지 않은,우울하지 않은 성장 영화,coming-of-age movies that are not depressing
+7,movie,~지 않은,복잡하지 않은 스릴러,thrillers that are not complicated
+8,movie,~지 않은,선정적이지 않은 드라마,dramas that are not sexually explicit
+9,movie,~지 않은,무겁지 않은 전쟁 영화,war movies that are not heavy
+10,movie,~지 않은,시끄럽지 않은 코미디,comedies that are not loud
+11,music,~지 않은,시끄럽지 않은 메탈,metal that is not loud
+12,music,~지 않은,우울하지 않은 인디 음악,indie music that is not gloomy
+13,music,~지 않은,느리지 않은 발라드,ballads that are not slow
+14,music,~지 않은,뻔하지 않은 케이팝,K-pop that is not cliched
+15,music,~지 않은,자극적이지 않은 힙합,hip-hop that is not provocative
+16,music,~지 않은,무겁지 않은 클래식,classical music that is not heavy
+17,music,~지 않은,촌스럽지 않은 트로트,trot that is not tacky
+18,music,~지 않은,신나지 않은 크리스마스 노래,Christmas songs that are not upbeat
+19,music,~지 않은,단조롭지 않은 로파이,lo-fi that is not monotonous
+20,music,~지 않은,과하지 않은 일렉트로닉 음악,electronic music that is not over the top
+21,book,~지 않은,어렵지 않은 철학책,philosophy books that are not difficult
+22,book,~지 않은,길지 않은 추리 소설,mystery novels that are not long
+23,book,~지 않은,무섭지 않은 공포 소설,horror novels that are not scary
+24,book,~지 않은,지루하지 않은 역사책,history books that are not boring
+25,book,~지 않은,슬프지 않은 연애 소설,romance novels that are not sad
+26,book,~지 않은,딱딱하지 않은 경제 책,economics books that are not dry
+27,book,~지 않은,잔인하지 않은 범죄 소설,crime novels that are not violent
+28,book,~지 않은,유치하지 않은 판타지 소설,fantasy novels that are not childish
+29,book,~지 않은,뻔하지 않은 자기계발서,self-help books that are not cliched
+30,book,~지 않은,우울하지 않은 시집,poetry collections that are not depressing
+31,movie,너무 ~지 않은,너무 길지 않은 판타지 영화,fantasy movies that are not too long
+32,movie,너무 ~지 않은,너무 슬프지 않은 가족 영화,family movies that are not too sad
+33,movie,너무 ~지 않은,너무 잔인하지 않은 좀비 영화,zombie movies that are not too gory
+34,music,너무 ~지 않은,너무 빠르지 않은 운동 음악,workout music that is not too fast
+35,music,너무 ~지 않은,너무 시끄럽지 않은 록 음악,rock music that is not too loud
+36,music,너무 ~지 않은,너무 잔잔하지 않은 재즈,jazz that is not too mellow
+37,book,너무 ~지 않은,너무 두껍지 않은 고전 소설,classic novels that are not too thick
+38,book,너무 ~지 않은,너무 어렵지 않은 과학책,science books that are not too difficult
+39,book,너무 ~지 않은,너무 어둡지 않은 SF 소설,sci-fi novels that are not too dark
+40,book,너무 ~지 않은,너무 가볍지 않은 에세이,essays that are not too light
+41,movie,안 ~,안 무서운 귀신 영화,ghost movies that are not scary
+42,movie,안 ~,안 슬픈 동물 영화,animal movies that are not sad
+43,movie,안 ~,안 지루한 예술 영화,art films that are not boring
+44,movie,안 ~,안 뻔한 하이틴 영화,teen movies that are not predictable
+45,music,안 ~,안 시끄러운 밴드 음악,band music that is not loud
+46,music,안 ~,안 슬픈 이별 노래,breakup songs that are not sad
+47,music,안 ~,안 유명한 재즈 앨범,jazz albums that are not famous
+48,book,안 ~,안 어려운 수학책,math books that are not difficult
+49,book,안 ~,안 무서운 추리 소설,mystery novels that are not scary
+50,book,안 ~,안 지루한 고전,classics that are not boring
+51,movie,~ 없는,반전 없는 스릴러,thrillers without a twist
+52,movie,~ 없는,피 나오는 장면 없는 범죄 영화,crime movies without bloody scenes
+53,movie,~ 없는,로맨스 없는 액션 영화,action movies without romance
+54,movie,~ 없는,노출 없는 로맨스 영화,romance movies without nudity
+55,movie,~ 없는,악역 없는 애니메이션,animations without a villain
+56,music,~ 없는,가사 없는 피아노 곡,piano pieces without lyrics
+57,music,~ 없는,보컬 없는 록 음악,rock music without vocals
+58,music,~ 없는,욕 없는 힙합,hip-hop without profanity
+59,music,~ 없는,전자음 없는 어쿠스틱 음악,acoustic music without electronic sounds
+60,music,~ 없는,드럼 없는 잔잔한 음악,calm music without drums
+61,book,~ 없는,그림 없는 동화,fairy tales without illustrations
+62,book,~ 없는,연애 없는 판타지 소설,fantasy novels without romance
+63,book,~ 없는,어려운 용어 없는 과학책,science books without jargon
+64,book,~ 없는,폭력 없는 청소년 소설,young adult novels without violence
+65,book,~ 없는,로맨스 없는 미스터리 소설,mystery novels without romance
+66,movie,~ 아닌,할리우드 영화가 아닌 액션 영화,action movies that are not Hollywood films
+67,movie,~ 아닌,실화가 아닌 전쟁 영화,war movies not based on a true story
+68,movie,~ 아닌,애니메이션이 아닌 디즈니 영화,Disney movies that are not animated
+69,movie,~ 아닌,속편이 아닌 공포 영화,horror movies that are not sequels
+70,music,~ 아닌,영어 노래가 아닌 팝 음악,pop music that is not in English
+71,music,~ 아닌,리메이크가 아닌 옛날 노래,old songs that are not remakes
+72,music,~ 아닌,아이돌이 아닌 케이팝,K-pop that is not by idols
+73,book,~ 아닌,번역서가 아닌 소설,novels that are not translations
+74,book,~ 아닌,시리즈가 아닌 판타지 소설,fantasy novels that are not part of a series
+75,book,~ 아닌,베스트셀러가 아닌 에세이,essays that are not bestsellers
+76,movie,말고·빼고,마블 말고 히어로 영화,superhero movies other than Marvel
+77,movie,말고·빼고,공포 말고 스릴러 영화,thriller movies but not horror
+78,movie,말고·빼고,한국 영화 빼고 범죄 영화,crime movies excluding Korean films
+79,music,말고·빼고,발라드 말고 이별 노래,breakup songs that are not ballads
+80,music,말고·빼고,아이유 말고 비슷한 가수 노래,songs by singers similar to IU but not IU
+81,music,말고·빼고,트로트 빼고 옛날 노래,old songs excluding trot
+82,book,말고·빼고,하루키 말고 일본 소설,Japanese novels other than Murakami
+83,book,말고·빼고,해리포터 말고 마법 소설,magic novels other than Harry Potter
+84,book,말고·빼고,소설 말고 여행 책,travel books that are not novels
+85,book,말고·빼고,자기계발서 빼고 동기부여 책,motivational books excluding self-help books
+86,movie,없이·않고,슬픈 장면 없이 따뜻한 영화,heartwarming movies without sad scenes
+87,music,없이·않고,가사 없이 들을 수 있는 공부 음악,study music you can listen to without lyrics
+88,book,없이·않고,결말 걱정 없이 읽을 수 있는 소설,novels you can read without worrying about the ending
+89,movie,없이·않고,생각하지 않고 볼 수 있는 영화,movies you can watch without thinking
+90,music,없이·않고,질리지 않고 반복해서 듣는 노래,songs you can replay without getting tired of them
+91,movie,~지 않는,주인공이 죽지 않는 전쟁 영화,war movies where the protagonist does not die
+92,movie,~지 않는,개가 죽지 않는 영화,movies where the dog does not die
+93,movie,~지 않는,범인이 잡히지 않는 범죄 영화,crime movies where the culprit is not caught
+94,movie,~지 않는,끝나지 않는 여름 같은 영화,movies that feel like a summer that never ends
+95,music,~지 않는,질리지 않는 여름 노래,summer songs that never get old
+96,music,~지 않는,잠이 오지 않는 밤에 듣는 노래,songs for nights when I can't sleep
+97,book,~지 않는,범인이 끝까지 밝혀지지 않는 추리 소설,mystery novels where the culprit is never revealed
+98,book,~지 않는,주인공이 성장하지 않는 소설,novels where the protagonist does not grow
+99,book,~지 않는,사건이 일어나지 않는 잔잔한 소설,quiet novels where nothing happens
+100,book,~지 않는,사람이 죽지 않는 추리 소설,mystery novels where nobody dies

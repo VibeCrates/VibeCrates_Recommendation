@@ -1,0 +1,101 @@
+id,domain,form,query,meaning,gemma,gemma_mark,opus,opus_mark
+1,movie,~지 않은,잔인하지 않은 액션 영화,action movies that are not gory,Non-violent action movies,O,Not a brutal action film.,O
+2,movie,~지 않은,뻔하지 않은 로맨스 영화,romance movies that are not predictable,Uncliche romantic movies,O,"No, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no, no",X
+3,movie,~지 않은,지루하지 않은 다큐멘터리,documentaries that are not boring,Non-boring documentaries,O,Boring documentaries,X
+4,movie,~지 않은,유치하지 않은 애니메이션,animations that are not childish,Non-childish animation,O,Unfashionable Animations,X
+5,movie,~지 않은,어둡지 않은 SF 영화,sci-fi movies that are not dark,Sci-fi movies that aren't dark.,O,Undark SF movies.,△
+6,movie,~지 않은,우울하지 않은 성장 영화,coming-of-age movies that are not depressing,Happy coming-of-age movies,O,A growing movie that doesn't get depressed.,△
+7,movie,~지 않은,복잡하지 않은 스릴러,thrillers that are not complicated,A thriller that isn't complicated.,O,Uncomplicated Thriller,O
+8,movie,~지 않은,선정적이지 않은 드라마,dramas that are not sexually explicit,Non-explicit dramas,O,Unspecified Drama,X
+9,movie,~지 않은,무겁지 않은 전쟁 영화,war movies that are not heavy,Lighthearted war movies,O,Not a heavy war movie.,O
+10,movie,~지 않은,시끄럽지 않은 코미디,comedies that are not loud,Quiet comedies,O,No loud comedy,△
+11,music,~지 않은,시끄럽지 않은 메탈,metal that is not loud,Quiet metal music,O,No loud metal.,△
+12,music,~지 않은,우울하지 않은 인디 음악,indie music that is not gloomy,Indie music that isn't depressing,O,Undepressed Indy Music,△
+13,music,~지 않은,느리지 않은 발라드,ballads that are not slow,Slow ballads,X,"Not too slow, Valad.",X
+14,music,~지 않은,뻔하지 않은 케이팝,K-pop that is not cliched,Unconventional K-pop,O,Unspoken Kpop.,X
+15,music,~지 않은,자극적이지 않은 힙합,hip-hop that is not provocative,Non-offensive hip-hop,O,Unstimulating hip-hop,△
+16,music,~지 않은,무겁지 않은 클래식,classical music that is not heavy,Light classical music,O,No heavy classical,△
+17,music,~지 않은,촌스럽지 않은 트로트,trot that is not tacky,Non-cheesy trot music,O,Unconventional Trots,X
+18,music,~지 않은,신나지 않은 크리스마스 노래,Christmas songs that are not upbeat,Not-so-exciting Christmas songs,O,Not an exciting Christmas song.,O
+19,music,~지 않은,단조롭지 않은 로파이,lo-fi that is not monotonous,"Not overly polished, lo-fi",X,Undiminished Lofai,X
+20,music,~지 않은,과하지 않은 일렉트로닉 음악,electronic music that is not over the top,Subtle electronic music,O,Not too much Electric music.,△
+21,book,~지 않은,어렵지 않은 철학책,philosophy books that are not difficult,Easy philosophy books,O,It's a philosophy book.,X
+22,book,~지 않은,길지 않은 추리 소설,mystery novels that are not long,A short mystery novel,O,It's not a long line of reasoning.,X
+23,book,~지 않은,무섭지 않은 공포 소설,horror novels that are not scary,Horror novels that aren't scary.,O,"No fear, no fear.",X
+24,book,~지 않은,지루하지 않은 역사책,history books that are not boring,An interesting history book that won't be boring.,O,A Boring History Book,X
+25,book,~지 않은,슬프지 않은 연애 소설,romance novels that are not sad,A love story that isn't sad.,O,You're not sad. You're not sad.,X
+26,book,~지 않은,딱딱하지 않은 경제 책,economics books that are not dry,Non-stuffy economic books,O,Unhard economic books.,△
+27,book,~지 않은,잔인하지 않은 범죄 소설,crime novels that are not violent,Non-violent crime novels,O,It's not cruel. It's a crime novel.,△
+28,book,~지 않은,유치하지 않은 판타지 소설,fantasy novels that are not childish,Non-childish fantasy novels,O,Unfashionable fantasy fiction.,X
+29,book,~지 않은,뻔하지 않은 자기계발서,self-help books that are not cliched,A self-improvement book that isn't cliché.,O,A self-respecting self-helper.,X
+30,book,~지 않은,우울하지 않은 시집,poetry collections that are not depressing,A collection of poems that aren't depressing.,O,An Undepressed Marriage,X
+31,movie,너무 ~지 않은,너무 길지 않은 판타지 영화,fantasy movies that are not too long,A not-too-long fantasy movie,O,Not too long a fantasy movie.,O
+32,movie,너무 ~지 않은,너무 슬프지 않은 가족 영화,family movies that are not too sad,A family movie that isn't too sad.,O,"Family movie, not too sad.",O
+33,movie,너무 ~지 않은,너무 잔인하지 않은 좀비 영화,zombie movies that are not too gory,A not-too-gruesome zombie movie,O,It's not too cruel. It's a zombie movie.,△
+34,music,너무 ~지 않은,너무 빠르지 않은 운동 음악,workout music that is not too fast,Fast-paced workout music,X,Not too fast.,X
+35,music,너무 ~지 않은,너무 시끄럽지 않은 록 음악,rock music that is not too loud,Quiet rock music,O,Rock music that wasn't too loud.,O
+36,music,너무 ~지 않은,너무 잔잔하지 않은 재즈,jazz that is not too mellow,Not too calm jazz,O,"Not too calm, jazz.",△
+37,book,너무 ~지 않은,너무 두껍지 않은 고전 소설,classic novels that are not too thick,Not too thick classic novels,O,Not too thick a classic novel.,O
+38,book,너무 ~지 않은,너무 어렵지 않은 과학책,science books that are not too difficult,Not too difficult science books,O,Science Book Not Too Hard,O
+39,book,너무 ~지 않은,너무 어둡지 않은 SF 소설,sci-fi novels that are not too dark,Science fiction novels that aren't too dark.,O,"SF fiction, not too dark.",O
+40,book,너무 ~지 않은,너무 가볍지 않은 에세이,essays that are not too light,Essays that aren't too light.,O,No Lighter essay,△
+41,movie,안 ~,안 무서운 귀신 영화,ghost movies that are not scary,Scary ghost movies,X,It's a ghost movie. It's not scary.,△
+42,movie,안 ~,안 슬픈 동물 영화,animal movies that are not sad,Movies about animals that aren't sad.,O,It's not sad. It's not sad.,X
+43,movie,안 ~,안 지루한 예술 영화,art films that are not boring,Not boring art films,O,It's not boring. It's not boring.,X
+44,movie,안 ~,안 뻔한 하이틴 영화,teen movies that are not predictable,Unassuming high school movie,X,The unspoken Hightin movie.,X
+45,music,안 ~,안 시끄러운 밴드 음악,band music that is not loud,Quiet band music,O,No loud band music.,△
+46,music,안 ~,안 슬픈 이별 노래,breakup songs that are not sad,Songs about bittersweet goodbyes,X,An Unhappily Starring Song,X
+47,music,안 ~,안 유명한 재즈 앨범,jazz albums that are not famous,Unwell-known jazz albums,△,Not-known jazz albums.,△
+48,book,안 ~,안 어려운 수학책,math books that are not difficult,Simple math books,O,A hard math book.,X
+49,book,안 ~,안 무서운 추리 소설,mystery novels that are not scary,Non-scary mystery novels,O,It's not scary. It's not scary.,X
+50,book,안 ~,안 지루한 고전,classics that are not boring,Not boring classics,O,It's a boring classic.,X
+51,movie,~ 없는,반전 없는 스릴러,thrillers without a twist,Thriller without twists,O,Unreversed Thriller,X
+52,movie,~ 없는,피 나오는 장면 없는 범죄 영화,crime movies without bloody scenes,Crime movies without scenes of blood or gore.,O,A crime movie without blood.,O
+53,movie,~ 없는,로맨스 없는 액션 영화,action movies without romance,Action movies without romance,O,Action movies without romance.,O
+54,movie,~ 없는,노출 없는 로맨스 영화,romance movies without nudity,Subtle romance movies,△,Romantic films without exposure.,△
+55,movie,~ 없는,악역 없는 애니메이션,animations without a villain,Anime without villains,O,Animators Without Pain,X
+56,music,~ 없는,가사 없는 피아노 곡,piano pieces without lyrics,Piano pieces without lyrics,O,Free piano music,X
+57,music,~ 없는,보컬 없는 록 음악,rock music without vocals,Rock music without vocals,O,No vocal rock music,△
+58,music,~ 없는,욕 없는 힙합,hip-hop without profanity,Rap music without explicit lyrics.,O,Hip-hop without swearing.,O
+59,music,~ 없는,전자음 없는 어쿠스틱 음악,acoustic music without electronic sounds,Acoustic music without electronic sounds.,O,Acoustic music without electronic notes,O
+60,music,~ 없는,드럼 없는 잔잔한 음악,calm music without drums,"Calm, instrumental music without drums.",△,Quiet music without drums.,O
+61,book,~ 없는,그림 없는 동화,fairy tales without illustrations,Pictureless fairy tales,O,A Fair Without Painting,X
+62,book,~ 없는,연애 없는 판타지 소설,fantasy novels without romance,Fantasy novels about unrequited love.,X,"No love, no fantasy fiction.",X
+63,book,~ 없는,어려운 용어 없는 과학책,science books without jargon,Science books without complicated terms.,O,Science Book Without Difficult Words,O
+64,book,~ 없는,폭력 없는 청소년 소설,young adult novels without violence,Young adult novels without violence,O,Youth Without Violence,X
+65,book,~ 없는,로맨스 없는 미스터리 소설,mystery novels without romance,Mystery novels without romance,O,A mystery novel without romance.,O
+66,movie,~ 아닌,할리우드 영화가 아닌 액션 영화,action movies that are not Hollywood films,Action movies that aren't Hollywood films.,O,"It's not a Hollywood movie, it's an action movie.",△
+67,movie,~ 아닌,실화가 아닌 전쟁 영화,war movies not based on a true story,A war movie that feels unbelievable.,X,It's not a real story. It's a war movie.,△
+68,movie,~ 아닌,애니메이션이 아닌 디즈니 영화,Disney movies that are not animated,Disney movies that aren't animated.,O,"Disney movies, not animations.",O
+69,movie,~ 아닌,속편이 아닌 공포 영화,horror movies that are not sequels,Horror movies that aren't sequels,O,It's not an insider. It's a horror movie.,X
+70,music,~ 아닌,영어 노래가 아닌 팝 음악,pop music that is not in English,Pop music that isn't in English.,O,"It's not English, it's pop music.",△
+71,music,~ 아닌,리메이크가 아닌 옛날 노래,old songs that are not remakes,Old songs that aren't remakes,O,"It's not a remake, it's an old song.",△
+72,music,~ 아닌,아이돌이 아닌 케이팝,K-pop that is not by idols,Pop music from non-idol groups,△,"Kpop, not Idol.",△
+73,book,~ 아닌,번역서가 아닌 소설,novels that are not translations,Novels that aren't translated.,O,"No translation, no novel.",X
+74,book,~ 아닌,시리즈가 아닌 판타지 소설,fantasy novels that are not part of a series,Fantasy novels that aren't series.,O,"Not a series, but a fantasy novel.",△
+75,book,~ 아닌,베스트셀러가 아닌 에세이,essays that are not bestsellers,Best-selling essays that aren't bestsellers.,X,"Esei, not the best seller.",X
+76,movie,말고·빼고,마블 말고 히어로 영화,superhero movies other than Marvel,"Superhero movies, not Marvel.",O,Not Marvel. Hero.,△
+77,movie,말고·빼고,공포 말고 스릴러 영화,thriller movies but not horror,"Thriller movies, not horror.",O,"No fear, no thriller movies.",X
+78,movie,말고·빼고,한국 영화 빼고 범죄 영화,crime movies excluding Korean films,"Korean movies, excluding crime films.",X,Except for the Korean movie.,X
+79,music,말고·빼고,발라드 말고 이별 노래,breakup songs that are not ballads,"Instead of ballads, I’m looking for breakup songs.",O,Don't play ball. Don't sing goodbye.,X
+80,music,말고·빼고,아이유 말고 비슷한 가수 노래,songs by singers similar to IU but not IU,Similar singers to IU,△,Not a reason. A similar singer's song.,X
+81,music,말고·빼고,트로트 빼고 옛날 노래,old songs excluding trot,"Songs from the past, excluding trot music.",O,"Except the trott, old song.",△
+82,book,말고·빼고,하루키 말고 일본 소설,Japanese novels other than Murakami,"Novels by Haruki Murakami, but Japanese novels.",X,"Japanese novel, not a day.",X
+83,book,말고·빼고,해리포터 말고 마법 소설,magic novels other than Harry Potter,Fantasy novels like Harry Potter,X,It's not Harry Potter. It's a magic novel.,△
+84,book,말고·빼고,소설 말고 여행 책,travel books that are not novels,"Instead of novels, I’m looking for travel books.",O,It's not a novel. It's a travel book.,△
+85,book,말고·빼고,자기계발서 빼고 동기부여 책,motivational books excluding self-help books,"Books that motivate me, excluding self-improvement guides.",O,"Except for self-help books, motivational books.",O
+86,movie,없이·않고,슬픈 장면 없이 따뜻한 영화,heartwarming movies without sad scenes,Warm movies without sad scenes.,O,Warm movies without sad scenes.,O
+87,music,없이·않고,가사 없이 들을 수 있는 공부 음악,study music you can listen to without lyrics,Instrumental music for studying without lyrics.,O,Study music you can listen to without having to say anything.,X
+88,book,없이·않고,결말 걱정 없이 읽을 수 있는 소설,novels you can read without worrying about the ending,Novels you can read without worrying about the ending.,O,A novel you can read without worrying about the ending.,O
+89,movie,없이·않고,생각하지 않고 볼 수 있는 영화,movies you can watch without thinking,Movies I can watch without thinking about them.,O,A movie you can watch without thinking about it.,O
+90,music,없이·않고,질리지 않고 반복해서 듣는 노래,songs you can replay without getting tired of them,Songs I can listen to over and over without getting tired of them.,O,It's a song that never gets tired of hearing it over and over again.,△
+91,movie,~지 않는,주인공이 죽지 않는 전쟁 영화,war movies where the protagonist does not die,A war movie where the protagonist doesn't die.,O,A war movie where the main character doesn't die.,O
+92,movie,~지 않는,개가 죽지 않는 영화,movies where the dog does not die,A movie where a dog doesn't die.,O,A movie where dogs don't die.,O
+93,movie,~지 않는,범인이 잡히지 않는 범죄 영화,crime movies where the culprit is not caught,A crime movie where the culprit never gets caught.,O,A crime film that he's not caught.,△
+94,movie,~지 않는,끝나지 않는 여름 같은 영화,movies that feel like a summer that never ends,A movie that feels like an endless summer.,O,It's like a never-ending summer movie.,O
+95,music,~지 않는,질리지 않는 여름 노래,summer songs that never get old,Songs that never get old for summer,O,"♪ Hey, hey Hey, hey ♪",X
+96,music,~지 않는,잠이 오지 않는 밤에 듣는 노래,songs for nights when I can't sleep,Songs to listen to when you can’t sleep.,O,It's a song you hear at night when you can't sleep.,O
+97,book,~지 않는,범인이 끝까지 밝혀지지 않는 추리 소설,mystery novels where the culprit is never revealed,A mystery novel where the culprit isn't fully revealed.,△,The unsub's a mystery novel that doesn't show up until the end.,X
+98,book,~지 않는,주인공이 성장하지 않는 소설,novels where the protagonist does not grow,A novel about a character who doesn't grow or change.,O,A novel where the characters don't grow up.,O
+99,book,~지 않는,사건이 일어나지 않는 잔잔한 소설,quiet novels where nothing happens,A quiet novel where nothing much happens.,O,A calm novel that doesn't happen.,X
+100,book,~지 않는,사람이 죽지 않는 추리 소설,mystery novels where nobody dies,A mystery novel where no one dies.,O,A man who doesn't die. A man who doesn't die.,X
