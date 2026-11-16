@@ -110,7 +110,7 @@ CLIP 본체(이미지·텍스트)는 고정이고, mpnet은 LoRA 어댑터만 �
 
 ## 5. API
 
-FastAPI 서버입니다. 실행 후 `http://<서버>:8000/docs`에서 전체 엔드포인트를 확인할 수 있습니다. 요청·응답 형식, 전달 번들 형식, Qdrant 적재 방법은 [`docs/api_for_backend.md`](docs/api_for_backend.md)에 있습니다.
+FastAPI 서버입니다. 전체 엔드포인트 목록: `http://<서버>:8000/docs`. 요청·응답 형식, 전달 번들 형식, Qdrant 적재 방법은 [`docs/api_for_backend.md`](docs/api_for_backend.md)에 있습니다.
 
 | 메서드 · 경로 | 용도 |
 |---|---|
