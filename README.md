@@ -22,9 +22,10 @@ User accounts, saved boards and vector search belong to the backend repository; 
 5. [API](#5-api)
 6. [Running locally](#6-running-locally)
 7. [Training and evaluation](#7-training-and-evaluation)
-8. [Known limitations](#8-known-limitations)
-9. [Repository layout](#9-repository-layout)
-10. [Documentation](#10-documentation)
+8. [Development history](#8-development-history)
+9. [Known limitations](#9-known-limitations)
+10. [Repository layout](#10-repository-layout)
+11. [Documentation](#11-documentation)
 
 ---
 
@@ -254,7 +255,31 @@ Experiment outputs are in `experiments/`; experiment reports are in `docs/`.
 
 ---
 
-## 8. Known limitations
+## 8. Development history
+
+| Period (2026) | Stage | Work |
+|---|---|---|
+| 05-06 | Model design | Dual-encoder structure (TextBlock, ImageBlock, QueryBlock, ContentBlock) and two-stage training losses |
+| 05-20 – 05-22 | Data exploration | Survey of the movie, music and book source CSVs, IMDb ID cleanup, image URL validation |
+| 05-20 – 05-31 | Data collection | Book descriptions (Google Books), music descriptions (Last.fm), music covers (MusicBrainz), image download pipeline, book data switched to Kindle 2023 |
+| 05-29 | Implementation | Preprocessing, evaluation, inference, query-based API |
+| 05-31 – 06-15 | Training data generation | Training queries per item with Qwen2.5-VL-7B; query language switched from Korean to English |
+| 06-16 – 06-18 | Training | Training dataset assembly, precomputed CLIP image embeddings, first training run, early stopping, checkpoints, index build |
+| 06-18 | Evaluation | Recommendation quality evaluation for Korean and English queries |
+| 07-06 – 07-16 | Data processing | Canonical CSVs, TMDB movie metadata merge, music text diagnosis, mood description synthesis trial |
+| 08-03 – 08-07 | Data processing | Book data rebuilt from three sources, mood descriptions for all three domains synthesized with vLLM on a GPU server, training queries regenerated, pre-training QA |
+| 08-13 – 08-18 | Model improvement, training | Stage 2 loss replaced with InfoNCE, one-query sampling, CLIP freezing fix, title/field-name dropout experiments |
+| 08-14 – 08-31 | Serving | Backend integration, query-vector endpoints, item vector delivery bundle, Korean query translation, extra music covers (Deezer) |
+| 09-01 – 09-09 | Data processing, evaluation | Duplicate item removal, pairwise LLM judging, per-domain cap rule |
+| 09-11 – 09-23 | Evaluation, training | Human label sheets, domain-balanced batch and field-name unification experiments, popular-item extraction, items without covers dropped from the bundle |
+| 10-08 – 10-15 | Evaluation, serving | Judge validation, energy-axis measurement, training query vector bundle, Korean translation dictionary, domain detection |
+| 10-23 – 10-31 | Serving, analysis | Move to the university GPU server (AstraGo), Gemma 3 4B sentence translation, retraining (newbase), model issue list, negation measurement |
+
+Detailed records are in `reports/` (May–August) and `docs/` (July–October).
+
+---
+
+## 9. Known limitations
 
 - **Negation:** "fantasy novels that are not scary" maps close to "scary fantasy novels". This comes from the frozen CLIP text encoder.
 - **Metaphorical sentences:** for poetic queries, the translation's meaning sometimes drifts from the original.
@@ -263,7 +288,7 @@ Causes and current status are in [`docs/model_issues.md`](docs/model_issues.md).
 
 ---
 
-## 9. Repository layout
+## 10. Repository layout
 
 ```
 VibeCrates_Recommendation/
@@ -288,7 +313,7 @@ VibeCrates_Recommendation/
 
 ---
 
-## 10. Documentation
+## 11. Documentation
 
 Most documents are in Korean.
 
