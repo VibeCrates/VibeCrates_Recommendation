@@ -4,7 +4,12 @@
 
 VibeCrates is a recommendation service where you describe a mood in plain words, such as "a song to listen to alone on a rainy night" or "a quiet, lonely film", and it finds movies, music and books that match that feeling. The results are shown as a "board", a collage of their covers.
 
-This repository is the **AI recommendation server**. It does three things. It runs an API that turns a user's search text into a 768-dimensional vector. It trains the model that places about 190,000 works in the same vector space, and delivers those vectors to the backend. And it holds the experiments that check whether the model actually finds the right works. User accounts, saved boards and the vector search itself live in the backend repository, and the UI lives in the frontend repository.
+This repository is the **AI recommendation server**. It does three things.
+- Inference: runs the API server that turns a user's search text into a 768-dimensional vector.
+- Training: trains the model that places about 190,000 works in the same vector space, and delivers the results to the backend.
+- Evaluation: manages the experiments that check whether the model actually finds the right works.
+
+User accounts, saved boards and the vector search itself live in the backend repository, and the UI lives in the frontend repository.
 
 ---
 
@@ -17,7 +22,7 @@ This repository is the **AI recommendation server**. It does three things. It ru
 5. [API](#5-api)
 6. [Setup and running](#6-setup-and-running)
 7. [Training and evaluation](#7-training-and-evaluation)
-8. [Current state and known limitations](#8-current-state-and-known-limitations)
+8. [Known limitations](#8-known-limitations)
 9. [Repository layout](#9-repository-layout)
 10. [Documentation](#10-documentation)
 
@@ -25,7 +30,7 @@ This repository is the **AI recommendation server**. It does three things. It ru
 
 ## 1. What this server does in the service
 
-The backend runs the search; this server **only turns search text into a vector**. This was decided on 2026-08-24. The backend already operates a vector database (Qdrant), so loading the item vectors there and letting it search keeps the overall system simpler.
+The search runs in the backend's vector database (Qdrant); this server **turns search text into a vector**.
 
 ```
 [search text] → frontend → backend ──POST /api/v1/search/vector──▶ AI recommendation server
@@ -38,7 +43,7 @@ The backend runs the search; this server **only turns search text into a vector*
                          matching works → board collage
 ```
 
-Item vectors are computed in this repository ahead of time and handed to the backend as a **delivery bundle** (CSV). One rule matters above all: **query vectors and item vectors must come from the same checkpoint.** If they come from different models, search still succeeds without any error and only the results are wrong, which makes the problem hard to notice. For that reason every API response and every bundle row carries a `model_version`, and the backend checks that the two match when it loads the vectors.
+Item vectors are computed in this repository ahead of time and handed to the backend as a **delivery bundle** (CSV). **Query vectors and item vectors must come from the same checkpoint.** If they do not, search still succeeds without any error and only the results are wrong. The `model_version` carried by every API response and every bundle row is how you check that the two match.
 
 ---
 
@@ -52,9 +57,9 @@ The starting point is a set of **canonical CSVs** (`data/canonical/`) that bring
 | Music | 39,682 | Spotify audio-feature dataset | Original URLs + Deezer re-fetch (92.4%) |
 | Books | 110,594 | Kindle + Goodreads (Zenodo) + BX blurbs, merged | 97.0% |
 
-The raw text differed in kind from domain to domain. Movies and books had third-person plot descriptions, but about 60% of the music text field was first-person song lyrics. Trained on that, a model learns to tell domains apart by *the type of writing* rather than by mood. So for every item we **synthesized a mood description in a single shared format (`description_synth`) with an LLM**, based on the original information (plot, blurb, audio features, and so on). Music audio features such as energy and valence were turned into natural-language phrases like "calm" or "intense" and included in the description.
+The item text the model reads is not the original plot or blurb but a **mood description (`description_synth`)** that an LLM synthesized from the original information (plot, blurb, audio features, and so on). All three domains use the same format. Music audio features such as energy and valence are turned into natural-language phrases like "calm" or "intense" and included in the description.
 
-Training also needs **three training queries per item**: short search phrases a person might type to find that work. Qwen2.5-VL wrote them from each item's cover and description. `scripts/prepare_dataset.py` pairs these queries with the items to produce `data/train_dataset.csv`.
+Training also needs **three training queries per item**: short search phrases a person might type to find that work, written by Qwen2.5-VL from the item's cover and description. `scripts/prepare_dataset.py` pairs these queries with the items to produce `data/train_dataset.csv`.
 
 Raw data, images, training data and model files are not committed because of their size (see `.gitignore`). The repository contains the canonical CSVs and the scripts that build them.
 
@@ -63,6 +68,10 @@ Raw data, images, training data and model files are not committed because of the
 ## 3. Model
 
 The model is a **dual encoder**. Items and search text are encoded by separate encoders into the same 768-dimensional space, and the nearest items are found by cosine similarity. Item vectors only need to be computed once, so a live search encodes just the query, which takes tens of milliseconds even on a CPU.
+
+<img width="769" height="248" alt="Inference model" src="https://github.com/user-attachments/assets/216883ea-b2ca-497f-9069-e9757c5cda3d" />
+
+- Inference model: turns the user's search text (query) into a vector.
 
 ```
 Item side                                                  Query side
@@ -74,28 +83,28 @@ cover image ─ CLIP ViT-L/14 vision + MLP ─ z_image ────────�
 
 Training has two stages (`src/training/trainer.py`).
 
+<img width="1200" height="664" alt="Training stages" src="https://github.com/user-attachments/assets/a6f8f180-1b27-4555-9d75-53f204bf75ca" />
+
 - **Stage 1 (contrastive):** trains the MLP heads on all three sides plus the mpnet LoRA adapter. An InfoNCE loss pulls the three vectors from the same item together and pushes apart those from different items. It is applied to three pairs (description–query, description–image, image–query) and summed.
 - **Stage 2:** freezes everything else and trains only the `ContentBlock`, again with InfoNCE, so that the final item vector `z_content` (description and image combined) matches the query vector `z_query`. `z_content` is the vector actually used for search.
 
-The pretrained encoder bodies stay frozen. CLIP is left untouched on both the image and the query side, and mpnet only gets a small LoRA adapter. In August a naming-rule bug made all of CLIP (262M parameters) trainable, and training on 190,000 items wiped out CLIP's pretrained knowledge. Fixing that was the single largest quality improvement so far.
+The pretrained encoder bodies are not trained. CLIP is frozen on both the image and the query side, and mpnet only gets a LoRA adapter.
 
-**The serving checkpoint** is `best_stage2_qlora_off`, trained on 2026-08-14, and the API's `model_version` is `trained_model.pt@1786697109`. A retrain on the October-cleaned data (newbase) showed no difference in a pairwise comparison (win rate 49.2%, p=0.73), so it was not swapped in.
+The serving checkpoint is `best_stage2_qlora_off`, with `model_version` `trained_model.pt@1786697109`.
 
 ---
 
 ## 4. Korean queries
 
-The model was trained only in English, and its query encoder, CLIP, uses an English tokenizer that breaks Korean text into byte fragments. When we compared 40 Korean–English query pairs with the same meaning, the cosine similarity of their query vectors was 0.058, which means essentially unrelated, and not a single pair shared any of its top-10 results.
+The model was trained only in English and the CLIP tokenizer is English-only, so the server **translates Korean queries into English before encoding them** (`src/api/translation.py`). The backend simply sends Korean as is. Translation is attempted in this order.
 
-So the server **translates Korean queries into English before encoding them** (`src/api/translation.py`). The backend simply sends Korean as is. Translation is attempted in three steps.
-
-1. **Translation dictionary:** queries that can be split entirely into genre, mood and situation words, such as "시집" (poetry collection) or "로파이 비 오는 날" (lo-fi rainy day), are translated by joining entries from a reviewed dictionary (`src/api/ko_en_dict.json`, 520 entries). Most real queries look like this, and a general-purpose translator often gets them wrong (e.g. "시집" → *Indulgent*, "이별" → *DIVORCE*).
-2. **Gemma 3 4B:** sentence-style queries that the dictionary cannot cover are translated by Gemma 3 4B served with vLLM. Human ratings clearly favored it over the older translator (4.42–4.52 vs 3.64 out of 5). It is used only on servers where `LLM_TRANSLATE_URL` is set.
+1. **Translation dictionary:** queries that can be split entirely into genre, mood and situation words, such as "시집" (poetry collection) or "로파이 비 오는 날", are translated by joining entries from a reviewed dictionary (`src/api/ko_en_dict.json`, 520 entries), e.g. 로파이 비 오는 날 → *lo-fi rainy day*. If even one word is missing from the dictionary, the query moves to the next step.
+2. **Gemma 3 4B:** sentence-style queries are translated by Gemma 3 4B served with vLLM. It is used only on servers where `LLM_TRANSLATE_URL` is set.
 3. **opus-mt-ko-en:** if Gemma is not configured or does not answer in time, Helsinki-NLP's opus-mt translates the query.
 
-A failed translation never fails the request; the original text is encoded as is. Quality drops, but that is better than letting one translator stop search entirely.
+If every translation step fails, the request does not fail; the original text is encoded as is.
 
-Alongside translation, the server also reads **which domain the query names** (`src/api/domain_intent.py`). If the query contains a noun for a kind of work, such as "movie", "song" or "novel", the response's `domain` is `movie`, `music` or `book`, and the backend searches only that domain. Genres (jazz, horror) span several domains, so they are not used as cues. Restricting the search wrongly would hide results the user wanted, so when in doubt the value is `all`.
+Alongside translation, the server also reads **which domain the query names** (`src/api/domain_intent.py`). If the query contains a noun for a kind of work, such as "movie", "song" or "novel", the response's `domain` is `movie`, `music` or `book`, and the backend searches only that domain. Genres (jazz, horror) are not used as cues, and when no such noun appears or several domains are wanted together, the value is `all`. The full rules are in [`docs/api_for_backend.md`](docs/api_for_backend.md).
 
 ---
 
@@ -127,9 +136,10 @@ The server is built with FastAPI. Once it is running, every endpoint can be trie
   "vector": [0.0023, 0.0258, ...] }
 ```
 
-Vectors are L2-normalized, so the dot product equals cosine similarity. `translated_text` is filled only when a translation happened; `null` means the text was encoded as sent. When results look wrong, this field tells you whether the problem is the translation or the search.
+Vectors are L2-normalized, so the dot product equals cosine similarity. `translated_text` is filled only when a translation happened; `null` means the text was encoded as sent.
 
-Two things to watch out for. The server accepts **HTTP/1.1 only**; requests sent over HTTP/2 lose their body and keep failing with 422. And CLIP reads at most 77 tokens, so anything longer is cut off at the end.
+- The server accepts **HTTP/1.1 only**. Requests sent over HTTP/2 lose their body and fail with 422.
+- CLIP reads at most 77 tokens, so anything longer is cut off at the end.
 
 ---
 
@@ -159,7 +169,7 @@ Running the server needs two things that are not in the repository: the trained 
 PORT=9000 ./scripts/serve.sh  # different port
 ```
 
-`serve.sh` uses the uvicorn inside `venv` and prints this machine's LAN and Tailscale addresses. It does this because starting the app with another Python on the PATH (Anaconda, for example) can silently fail to load the model when packages are missing. Startup takes about 13 seconds, and connections are refused during that time.
+`serve.sh` starts the server with the uvicorn inside `venv` and prints this machine's LAN and Tailscale addresses. Startup takes about 13 seconds, and connections are refused during that time.
 
 Main environment variables:
 
@@ -174,7 +184,7 @@ Main environment variables:
 
 ### Docker
 
-The `Dockerfile` does not bake the model into the image; the model is mounted as a volume at run time. Model and indexes together are about 2.8GB, and baking them in would mean rebuilding the image after every retrain. Inference runs fine on a CPU, so the image installs the CPU build of torch.
+The image contains only the code; the model and indexes are mounted as volumes at run time (`MODEL_PATH`, `INDEX_DIR`). It is built for inference, so it uses the CPU build of torch.
 
 ### Tests
 
@@ -184,7 +194,7 @@ pytest tests/        # API, data, domain detection, translation (69 tests)
 
 ### Current deployment
 
-The production server runs on a university GPU server (AstraGo, A100), with the API server on port 8000 and the Gemma translation server (vLLM) on port 8001. The backend has called this server since 2026-10-25. Training runs on a separate RTX 5090 server. Addresses and access procedures are kept in internal team documents, not in this public repository.
+The production server runs on a university GPU server (AstraGo, A100), with the API server on port 8000 and the Gemma translation server (vLLM) on port 8001. Training runs on a separate RTX 5090 server. Addresses are in internal team documents.
 
 ---
 
@@ -212,28 +222,25 @@ python scripts/train.py \
     --index-dir indexes
 ```
 
-`--sample-one-query` picks one of each item's three training queries at random on every step. Earlier, the average of the three query vectors was used as the training target, which meant the model never learned the real case where a single query comes in. Other experimental flags such as `--query-lora`, `--title-dropout` and `--domain-balanced-batches` are described in `python scripts/train.py --help`.
+`--sample-one-query` picks one of each item's three training queries at random on every step (the setting used by the serving model). Other experimental flags such as `--query-lora`, `--title-dropout` and `--domain-balanced-batches` are described in `python scripts/train.py --help`.
 
 ### Evaluation
 
-Recommendation has no single right answer, so the evaluation method itself has changed several times. These are the current principles.
+Two models (a checkpoint plus its index each) are run on the same evaluation queries and compared.
 
-- **Decide by pairwise comparison, not absolute scores.** At first an LLM judge graded each result as right, partial or wrong. Those grades turned out to depend heavily on whether the query and the item description shared words. For results with no shared words, humans marked 41% as right while the judge marked only 2.7%. Since September 2026 the judge is shown two models' results side by side and picks the better one (`scripts/judge_pairwise.py`), and decisions are made from the win rate and its p-value.
-- **Humans evaluate experiments that are sensitive to wording.** The judge could not reliably reject results that share words with the query but are wrong. Such experiments are evaluated with human label sheets (`build_label_sheet.py`, `score_label_sheet.py`).
-- **Recheck premises on the current model.** New experiments are not started from weaknesses that were measured on an older model.
+- **Pairwise judging:** `scripts/judge_pairwise.py` shows an LLM judge (Qwen2.5-VL-7B by default) the two models' results side by side and asks which is better. It asks twice with the order swapped and reports the win rate and p-value.
+- **Human labels:** comparisons the judge cannot settle are turned into a label sheet with `scripts/build_label_sheet.py`, labeled by people, and tallied with `scripts/score_label_sheet.py`.
 
-Experiment outputs live in `experiments/`, and the reasoning behind decisions lives in `docs/`.
+Experiment outputs are in `experiments/`, and experiment reports are in `docs/`.
 
 ---
 
-## 8. Current state and known limitations
+## 8. Known limitations
 
-The status and evidence for every known issue are in [`docs/model_issues.md`](docs/model_issues.md). The ones that affect the service are summarized here.
+- **Negation is barely reflected.** "Fantasy novels that are not scary" is turned into a vector close to "scary fantasy novels". This is a limitation of the frozen CLIP text encoder.
+- **Metaphorical sentences translate less reliably.** The more poetic the query, the further its translation can drift from the original meaning.
 
-- **Negation is barely reflected.** "Fantasy novels that are not scary" is read much like "scary fantasy novels". The cause is the frozen CLIP text encoder, and retraining with negation data alone is unlikely to fix it. It is on hold because real search logs (about 40,000 unique queries) contain essentially no negated searches.
-- **Metaphorical sentences translate unreliably.** The more poetic the query, the further its translation drifts from the original meaning. The real fix is a multilingual encoder, which needs retraining.
-- **Recent retrains have not shown a measurable effect.** Four retrains in a row came out as "no difference" in pairwise comparison. We cannot yet tell whether the models are truly the same or whether the evaluation, with only 40 queries per language, is too coarse to see the difference.
-- **There is no real user data yet.** Choosing the next improvement needs user feedback, so requirements for behavior logs (impressions, likes, board edits) have been handed to the backend.
+The cause and current status of each issue are in [`docs/model_issues.md`](docs/model_issues.md).
 
 ---
 
@@ -258,7 +265,7 @@ VibeCrates_Recommendation/
 └── requirements-serve.txt   # API server dependencies only
 ```
 
-`models/`, `indexes/`, `dist/` and `for_result_report/` are not committed because of size or because they are not meant to be public.
+`models/`, `indexes/`, `dist/` and `for_result_report/` are not committed.
 
 ---
 
