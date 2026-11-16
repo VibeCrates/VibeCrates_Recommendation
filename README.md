@@ -46,7 +46,7 @@ search text
 
 Item vectors are precomputed in this repository and delivered to the backend as a bundle (CSV). Query vectors and item vectors must come from the same checkpoint; the `model_version` in API responses and bundle rows identifies it.
 
-The production server runs on a university GPU server (AstraGo, A100) with the API server (8000) and the Gemma translation server (vLLM, 8001). Training runs on a separate RTX 5090 server.
+The production server runs on a university GPU server (A100) with the API server (8000) and the Gemma translation server (vLLM, 8001). Training runs on a separate RTX 5090 server.
 
 ---
 
@@ -273,7 +273,7 @@ Experiment outputs are in `experiments/`; experiment reports are in `docs/`.
 | 09-01 – 09-09 | Data processing, evaluation | Duplicate item removal, pairwise LLM judging, per-domain cap rule |
 | 09-11 – 09-23 | Evaluation, training | Human label sheets, domain-balanced batch and field-name unification experiments, popular-item extraction, items without covers dropped from the bundle |
 | 10-08 – 10-15 | Evaluation, serving | Judge validation, energy-axis measurement, training query vector bundle, Korean translation dictionary, domain detection |
-| 10-23 – 10-31 | Serving, analysis | Move to the university GPU server (AstraGo), Gemma 3 4B sentence translation, retraining (newbase), model issue list, negation measurement |
+| 10-23 – 10-31 | Serving, analysis | Move to the university GPU server, Gemma 3 4B sentence translation, retraining (newbase), model issue list, negation measurement |
 
 Detailed records are in `reports/` (May–August) and `docs/` (July–October).
 
