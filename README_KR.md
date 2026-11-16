@@ -61,17 +61,18 @@ VibeCrates는 분위기를 텍스트로 입력받아("비 오는 밤에 혼자",
 
 ### 데이터 출처
 
-| 도메인 | 출처 | 사용한 내용 | 라이선스 |
-|---|---|---|---|
-| 영화 | [Movie Genre from its Poster](https://www.kaggle.com/datasets/neha1703/movie-genre-from-its-poster) (Kaggle, neha1703) | 작품 목록, IMDb ID, 장르 | Kaggle 페이지 참조 |
-| 영화 | [TMDB API](https://www.themoviedb.org/) | 줄거리 등 메타데이터, 포스터 | TMDB 이용 약관 |
-| 음악 | Spotify 트랙 오디오 피처·가사 데이터셋 (Kaggle) | 곡 목록, 오디오 피처, 가사, 장르 | — |
-| 음악 | [Last.fm API](https://www.last.fm/api) | 곡 설명 | Last.fm API 이용 약관 |
-| 음악 | [Deezer API](https://developers.deezer.com/), [MusicBrainz](https://musicbrainz.org/) + [Cover Art Archive](https://coverartarchive.org/) | 앨범 표지 | 각 서비스 약관 |
-| 책 | [Amazon Kindle Books Dataset 2023 (130K Books)](https://www.kaggle.com/datasets/asaniczka/amazon-kindle-books-dataset-2023-130k-books) (Kaggle, asaniczka) | 작품 목록, 카테고리, 표지 URL | ODC-By |
-| 책 | [Best Books Ever Dataset](https://zenodo.org/records/4265096) (Casanova Lozano & Costa Planells, Zenodo, DOI 10.5281/zenodo.4265096) | 작품 목록, 블러브, 장르, 표지 URL | CC BY-NC 4.0 |
-| 책 | [57,000+ Books with Metadata and Blurbs](https://www.kaggle.com/datasets/jdobrow/57000-books-with-metadata-and-blurbs) (Kaggle, jdobrow) | 작품 목록, 블러브 | 명시 없음 |
-| 책 | [Open Library API](https://openlibrary.org/developers/api) | 표지, 카테고리, 평점 | Open Library 이용 약관 |
+<table>
+  <tr><th>도메인</th><th>출처</th><th>사용한 내용</th><th>라이선스</th></tr>
+  <tr><td rowspan="2">영화</td><td><a href="https://www.kaggle.com/datasets/neha1703/movie-genre-from-its-poster">Movie Genre from its Poster</a> (Kaggle, neha1703)</td><td>작품 목록, IMDb ID, 장르</td><td>Kaggle 페이지 참조</td></tr>
+  <tr><td><a href="https://www.themoviedb.org/">TMDB API</a></td><td>줄거리 등 메타데이터, 포스터</td><td>TMDB 이용 약관</td></tr>
+  <tr><td rowspan="3">음악</td><td>Spotify 트랙 오디오 피처·가사 데이터셋 (Kaggle)</td><td>곡 목록, 오디오 피처, 가사, 장르</td><td>—</td></tr>
+  <tr><td><a href="https://www.last.fm/api">Last.fm API</a></td><td>곡 설명</td><td>Last.fm API 이용 약관</td></tr>
+  <tr><td><a href="https://developers.deezer.com/">Deezer API</a>, <a href="https://musicbrainz.org/">MusicBrainz</a> + <a href="https://coverartarchive.org/">Cover Art Archive</a></td><td>앨범 표지</td><td>각 서비스 약관</td></tr>
+  <tr><td rowspan="4">책</td><td><a href="https://www.kaggle.com/datasets/asaniczka/amazon-kindle-books-dataset-2023-130k-books">Amazon Kindle Books Dataset 2023 (130K Books)</a> (Kaggle, asaniczka)</td><td>작품 목록, 카테고리, 표지 URL</td><td>ODC-By</td></tr>
+  <tr><td><a href="https://zenodo.org/records/4265096">Best Books Ever Dataset</a> (Casanova Lozano & Costa Planells, Zenodo, DOI 10.5281/zenodo.4265096)</td><td>작품 목록, 블러브, 장르, 표지 URL</td><td>CC BY-NC 4.0</td></tr>
+  <tr><td><a href="https://www.kaggle.com/datasets/jdobrow/57000-books-with-metadata-and-blurbs">57,000+ Books with Metadata and Blurbs</a> (Kaggle, jdobrow)</td><td>작품 목록, 블러브</td><td>명시 없음</td></tr>
+  <tr><td><a href="https://openlibrary.org/developers/api">Open Library API</a></td><td>표지, 카테고리, 평점</td><td>Open Library 이용 약관</td></tr>
+</table>
 
 책 데이터는 세 데이터셋에서 블러브가 있는 행을 합치고 중복을 제거해 만들었습니다(우선순위 Kindle > Goodreads > BX, `scripts/merge_book_sources.py`).
 

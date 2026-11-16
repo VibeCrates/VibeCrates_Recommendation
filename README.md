@@ -61,17 +61,18 @@ The item data for the three domains is built by combining the public datasets an
 
 ### Data sources
 
-| Domain | Source | Used for | License |
-|---|---|---|---|
-| Movies | [Movie Genre from its Poster](https://www.kaggle.com/datasets/neha1703/movie-genre-from-its-poster) (Kaggle, neha1703) | Item list, IMDb IDs, genres | See Kaggle page |
-| Movies | [TMDB API](https://www.themoviedb.org/) | Plot and other metadata, posters | TMDB terms of use |
-| Music | Spotify track audio-feature and lyrics dataset (Kaggle) | Track list, audio features, lyrics, genres | — |
-| Music | [Last.fm API](https://www.last.fm/api) | Track descriptions | Last.fm API terms |
-| Music | [Deezer API](https://developers.deezer.com/), [MusicBrainz](https://musicbrainz.org/) + [Cover Art Archive](https://coverartarchive.org/) | Album covers | Each service's terms |
-| Books | [Amazon Kindle Books Dataset 2023 (130K Books)](https://www.kaggle.com/datasets/asaniczka/amazon-kindle-books-dataset-2023-130k-books) (Kaggle, asaniczka) | Item list, categories, cover URLs | ODC-By |
-| Books | [Best Books Ever Dataset](https://zenodo.org/records/4265096) (Casanova Lozano & Costa Planells, Zenodo, DOI 10.5281/zenodo.4265096) | Item list, blurbs, genres, cover URLs | CC BY-NC 4.0 |
-| Books | [57,000+ Books with Metadata and Blurbs](https://www.kaggle.com/datasets/jdobrow/57000-books-with-metadata-and-blurbs) (Kaggle, jdobrow) | Item list, blurbs | Not stated |
-| Books | [Open Library API](https://openlibrary.org/developers/api) | Covers, categories, ratings | Open Library terms |
+<table>
+  <tr><th>Domain</th><th>Source</th><th>Used for</th><th>License</th></tr>
+  <tr><td rowspan="2">Movies</td><td><a href="https://www.kaggle.com/datasets/neha1703/movie-genre-from-its-poster">Movie Genre from its Poster</a> (Kaggle, neha1703)</td><td>Item list, IMDb IDs, genres</td><td>See Kaggle page</td></tr>
+  <tr><td><a href="https://www.themoviedb.org/">TMDB API</a></td><td>Plot and other metadata, posters</td><td>TMDB terms of use</td></tr>
+  <tr><td rowspan="3">Music</td><td>Spotify track audio-feature and lyrics dataset (Kaggle)</td><td>Track list, audio features, lyrics, genres</td><td>—</td></tr>
+  <tr><td><a href="https://www.last.fm/api">Last.fm API</a></td><td>Track descriptions</td><td>Last.fm API terms</td></tr>
+  <tr><td><a href="https://developers.deezer.com/">Deezer API</a>, <a href="https://musicbrainz.org/">MusicBrainz</a> + <a href="https://coverartarchive.org/">Cover Art Archive</a></td><td>Album covers</td><td>Each service's terms</td></tr>
+  <tr><td rowspan="4">Books</td><td><a href="https://www.kaggle.com/datasets/asaniczka/amazon-kindle-books-dataset-2023-130k-books">Amazon Kindle Books Dataset 2023 (130K Books)</a> (Kaggle, asaniczka)</td><td>Item list, categories, cover URLs</td><td>ODC-By</td></tr>
+  <tr><td><a href="https://zenodo.org/records/4265096">Best Books Ever Dataset</a> (Casanova Lozano & Costa Planells, Zenodo, DOI 10.5281/zenodo.4265096)</td><td>Item list, blurbs, genres, cover URLs</td><td>CC BY-NC 4.0</td></tr>
+  <tr><td><a href="https://www.kaggle.com/datasets/jdobrow/57000-books-with-metadata-and-blurbs">57,000+ Books with Metadata and Blurbs</a> (Kaggle, jdobrow)</td><td>Item list, blurbs</td><td>Not stated</td></tr>
+  <tr><td><a href="https://openlibrary.org/developers/api">Open Library API</a></td><td>Covers, categories, ratings</td><td>Open Library terms</td></tr>
+</table>
 
 Book data merges the rows with blurbs from the three datasets and removes duplicates (priority Kindle > Goodreads > BX, `scripts/merge_book_sources.py`).
 
