@@ -46,7 +46,7 @@ search text
 
 Item vectors are precomputed in this repository and delivered to the backend as a bundle (CSV). Query vectors and item vectors must come from the same checkpoint; the `model_version` in API responses and bundle rows identifies it.
 
-The production server runs on a university GPU server (A100) with the API server (8000) and the Gemma translation server (vLLM, 8001). Training runs on a separate RTX 5090 server.
+The production server runs on a university GPU server (A100) with the API server (8000) and the Gemma translation server (vLLM, 8001).
 
 ---
 
@@ -77,7 +77,7 @@ The item data for the three domains is built by combining the public datasets an
 
 Book data merges the rows with blurbs from the three datasets and removes duplicates (priority Kindle > Goodreads > BX, `scripts/merge_book_sources.py`).
 
-This product uses the TMDB API but is not endorsed or certified by TMDB.
+Notice required by the TMDB terms of use: This product uses the TMDB API but is not endorsed or certified by TMDB.
 
 The item text fed to the model is a mood description (`description_synth`) synthesized by an LLM from the original information (plot, blurb, audio features, etc.). All three domains use the same format. Music audio features (energy, valence, etc.) appear in the description as phrases such as "calm" or "intense".
 
@@ -91,9 +91,9 @@ Raw data, images, training data and model files are not in the repository (`.git
 
 A dual encoder. Items and search text go through separate encoders into the same 768-dimensional space, and the nearest items are found by cosine similarity. Item vectors are stored in advance. At search time only the query is encoded, in tens of milliseconds on a CPU.
 
-<img width="769" height="248" alt="Inference model" src="https://github.com/user-attachments/assets/216883ea-b2ca-497f-9069-e9757c5cda3d" />
+### Overall model structure
+<img width="1200" height="664" alt="Training stages" src="https://github.com/user-attachments/assets/a6f8f180-1b27-4555-9d75-53f204bf75ca" />
 
-- Inference model: turns the user's search text (query) into a vector.
 
 ```
 Item side
@@ -109,14 +109,18 @@ score = cos(z_content, z_query)
 
 Training has two stages (`src/training/trainer.py`).
 
-<img width="1200" height="664" alt="Training stages" src="https://github.com/user-attachments/assets/a6f8f180-1b27-4555-9d75-53f204bf75ca" />
 
 - **Stage 1 (contrastive):** trains the description, image and query MLP heads and the SBERT encoder's LoRA adapter. The loss is the sum of InfoNCE over three pairs (description–query, description–image, image–query).
 - **Stage 2:** trains only the `ContentBlock`, with InfoNCE between the item vector `z_content` and the query vector `z_query`. `z_content` is the vector used for search.
-
-The CLIP encoders (image and text) are frozen; the SBERT encoder trains only its LoRA adapter.
+- The CLIP encoders (image and text) are frozen; the SBERT encoder trains only its LoRA adapter.
 
 Serving checkpoint: `best_stage2_qlora_off` (`model_version`: `trained_model.pt@1786697109`)
+
+### Inference (query encoding) model
+
+<img width="769" height="248" alt="Inference model" src="https://github.com/user-attachments/assets/216883ea-b2ca-497f-9069-e9757c5cda3d" />
+
+- Inference model: turns the user's search text (query) into a vector.
 
 ---
 
@@ -164,7 +168,6 @@ A FastAPI server. All endpoints are listed at `http://<server>:8000/docs` once i
 
 Vectors are L2-normalized, so the dot product equals cosine similarity. `translated_text` is set only when a translation happened, and is `null` otherwise.
 
-- HTTP/1.1 only. HTTP/2 requests lose their body and return 422.
 - CLIP's input limit is 77 tokens; anything beyond is truncated.
 
 ---
@@ -275,14 +278,12 @@ Experiment outputs are in `experiments/`; experiment reports are in `docs/`.
 | 10-08 – 10-15 | Evaluation, serving | Judge validation, energy-axis measurement, training query vector bundle, Korean translation dictionary, domain detection |
 | 10-23 – 10-31 | Serving, analysis | Move to the university GPU server, Gemma 3 4B sentence translation, retraining (newbase), model issue list, negation measurement |
 
-Detailed records are in `reports/` (May–August) and `docs/` (July–October).
-
 ---
 
 ## 9. Known limitations
 
 - **Negation:** "fantasy novels that are not scary" maps close to "scary fantasy novels". This comes from the frozen CLIP text encoder.
-- **Metaphorical sentences:** for poetic queries, the translation's meaning sometimes drifts from the original.
+- **Metaphorical sentences:** for metaphorical queries, the meaning of the translation sometimes differs from the meaning of the original.
 
 Causes and current status are in [`docs/model_issues.md`](docs/model_issues.md).
 
@@ -308,8 +309,6 @@ VibeCrates_Recommendation/
 ├── requirements.txt         # Full dependencies, including training and experiments
 └── requirements-serve.txt   # API server dependencies only
 ```
-
-`models/`, `indexes/`, `dist/` and `for_result_report/` are not included in the repository.
 
 ---
 
