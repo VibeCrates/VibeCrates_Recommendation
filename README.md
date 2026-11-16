@@ -76,21 +76,25 @@ A dual encoder. Items and search text go through separate encoders into the same
 - Inference model: turns the user's search text (query) into a vector.
 
 ```
-Item side                                                  Query side
-mood description ─ all-mpnet-base-v2 (LoRA) + MLP ─ z_text ─┐
-                                                            ├─ ContentBlock ─ z_content (768, L2-normalized)
-cover image ─ CLIP ViT-L/14 vision + MLP ─ z_image ─────────┘                    ↕ cosine similarity
-                                 search text ─ CLIP ViT-L/14 text (frozen) + MLP ─ z_query (768)
+Item side
+  mood description → SBERT encoder (all-mpnet-base-v2, LoRA) + MLP → z_text
+  cover image      → CLIP ViT-L/14 image encoder (frozen) + MLP    → z_image
+  z_text + z_image → ContentBlock → z_content (768, L2-normalized)
+
+Query side
+  search text → CLIP ViT-L/14 text encoder (frozen) + MLP → z_query (768)
+
+score = cos(z_content, z_query)
 ```
 
 Training has two stages (`src/training/trainer.py`).
 
 <img width="1200" height="664" alt="Training stages" src="https://github.com/user-attachments/assets/a6f8f180-1b27-4555-9d75-53f204bf75ca" />
 
-- **Stage 1 (contrastive):** trains the description, image and query MLP heads and the mpnet LoRA adapter. The loss is the sum of InfoNCE over three pairs (description–query, description–image, image–query).
+- **Stage 1 (contrastive):** trains the description, image and query MLP heads and the SBERT encoder's LoRA adapter. The loss is the sum of InfoNCE over three pairs (description–query, description–image, image–query).
 - **Stage 2:** trains only the `ContentBlock`, with InfoNCE between the item vector `z_content` and the query vector `z_query`. `z_content` is the vector used for search.
 
-The CLIP bodies (image and text) are frozen; mpnet trains only its LoRA adapter.
+The CLIP encoders (image and text) are frozen; the SBERT encoder trains only its LoRA adapter.
 
 Serving checkpoint: `best_stage2_qlora_off` (`model_version`: `trained_model.pt@1786697109`)
 

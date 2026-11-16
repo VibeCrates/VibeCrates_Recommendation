@@ -76,21 +76,25 @@ VibeCrates는 분위기를 텍스트로 입력받아("비 오는 밤에 혼자",
 - 추론 모델 그림 : 사용자 검색어(쿼리)를 벡터로 전환합니다.
 
 ```
-작품 쪽                                              검색어 쪽
-분위기 설명 ─ all-mpnet-base-v2(LoRA) + MLP ─ z_text ─┐
-                                                ├─ ContentBlock ─ z_content (768, L2 정규화)
-표지 이미지 ─ CLIP ViT-L/14 비전 + MLP ─ z_image ┘                       ↕ 코사인 유사도
-                                     검색어 ─ CLIP ViT-L/14 텍스트(고정) + MLP ─ z_query (768)
+작품 쪽
+  분위기 설명 → SBERT 인코더(all-mpnet-base-v2, LoRA) + MLP → z_text
+  표지 이미지 → CLIP ViT-L/14 이미지 인코더(고정) + MLP → z_image
+  z_text + z_image → ContentBlock → z_content (768, L2 정규화)
+
+검색어 쪽
+  검색어 → CLIP ViT-L/14 텍스트 인코더(고정) + MLP → z_query (768)
+
+점수 = cos(z_content, z_query)
 ```
 
 학습은 두 단계입니다(`src/training/trainer.py`).
 
 <img width="1200" height="664" alt="스크린샷 2026-11-16 오후 2 27 24" src="https://github.com/user-attachments/assets/a6f8f180-1b27-4555-9d75-53f204bf75ca" />
 
-- **1단계(대조 학습):** 설명·이미지·검색어의 MLP 헤드와 mpnet LoRA 어댑터를 학습합니다. 손실은 세 쌍(설명–검색어, 설명–이미지, 이미지–검색어)의 InfoNCE 합입니다.
+- **1단계(대조 학습):** 설명·이미지·검색어의 MLP 헤드와 SBERT 인코더의 LoRA 어댑터를 학습합니다. 손실은 세 쌍(설명–검색어, 설명–이미지, 이미지–검색어)의 InfoNCE 합입니다.
 - **2단계:** `ContentBlock`만 학습합니다. 작품 벡터 `z_content`와 검색어 벡터 `z_query` 사이의 InfoNCE를 씁니다. 검색에 쓰는 벡터는 `z_content`입니다.
 
-CLIP 본체(이미지·텍스트)는 고정이고, mpnet은 LoRA 어댑터만 학습합니다.
+CLIP 인코더(이미지·텍스트)는 고정이고, SBERT 인코더는 LoRA 어댑터만 학습합니다.
 
 서비스 체크포인트: `best_stage2_qlora_off` (`model_version`: `trained_model.pt@1786697109`)
 
