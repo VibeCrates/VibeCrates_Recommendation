@@ -33,14 +33,14 @@ User accounts, saved boards and vector search belong to the backend repository; 
 This server converts search text into a vector. The search itself runs in the backend's vector database (Qdrant).
 
 ```
-[search text] → frontend → backend ──POST /api/v1/search/vector──▶ AI recommendation server
-                                                                     │ ① translate to English if Korean
-                                                                     │ ② encode into a 768-d vector
-                           backend vector DB  ◀────── query vector ──┘
-                  (≈180k item vectors, one collection per domain)
-                                │ cosine-similarity search
-                                ▼
-                         matching works → board collage
+search text
+  → frontend → backend
+  → AI recommendation server (POST /api/v1/search/vector)
+      ① translate to English if Korean
+      ② encode into a 768-d query vector
+  → backend vector DB (≈180k item vectors, one collection per domain)
+      cosine-similarity search with the query vector
+  → matching works → board collage
 ```
 
 Item vectors are precomputed in this repository and delivered to the backend as a bundle (CSV). Query vectors and item vectors must come from the same checkpoint; the `model_version` in API responses and bundle rows identifies it.
