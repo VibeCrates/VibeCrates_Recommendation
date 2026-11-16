@@ -90,9 +90,9 @@ This product uses the TMDB API but is not endorsed or certified by TMDB.
 
 듀얼 인코더입니다. 작품과 검색어를 각각의 인코더로 같은 768차원 공간에 놓고, 코사인 유사도로 가까운 작품을 찾습니다. 작품 벡터는 미리 저장해 둡니다. 실제 검색 시에는 검색어 하나만 인코딩하며, CPU에서 수십 ms 안에 끝납니다.
 
-<img width="769" height="248" alt="스크린샷 2026-11-16 오후 2 27 52" src="https://github.com/user-attachments/assets/216883ea-b2ca-497f-9069-e9757c5cda3d" />
+### 모델 전체 구조
+<img width="1200" height="664" alt="스크린샷 2026-11-16 오후 2 27 24" src="https://github.com/user-attachments/assets/a6f8f180-1b27-4555-9d75-53f204bf75ca" />
 
-- 추론 모델 그림 : 사용자 검색어(쿼리)를 벡터로 전환합니다.
 
 ```
 작품 쪽
@@ -108,14 +108,18 @@ This product uses the TMDB API but is not endorsed or certified by TMDB.
 
 학습은 두 단계입니다(`src/training/trainer.py`).
 
-<img width="1200" height="664" alt="스크린샷 2026-11-16 오후 2 27 24" src="https://github.com/user-attachments/assets/a6f8f180-1b27-4555-9d75-53f204bf75ca" />
 
 - **1단계(대조 학습):** 설명·이미지·검색어의 MLP 헤드와 SBERT 인코더의 LoRA 어댑터를 학습합니다. 손실은 세 쌍(설명–검색어, 설명–이미지, 이미지–검색어)의 InfoNCE 합입니다.
 - **2단계:** `ContentBlock`만 학습합니다. 작품 벡터 `z_content`와 검색어 벡터 `z_query` 사이의 InfoNCE를 씁니다. 검색에 쓰는 벡터는 `z_content`입니다.
-
-CLIP 인코더(이미지·텍스트)는 고정이고, SBERT 인코더는 LoRA 어댑터만 학습합니다.
+- CLIP 인코더(이미지·텍스트)는 고정이고, SBERT 인코더는 LoRA 어댑터만 학습합니다.
 
 서비스 체크포인트: `best_stage2_qlora_off` (`model_version`: `trained_model.pt@1786697109`)
+
+### 추론(쿼리 인코딩) 모델
+
+<img width="769" height="248" alt="스크린샷 2026-11-16 오후 2 27 52" src="https://github.com/user-attachments/assets/216883ea-b2ca-497f-9069-e9757c5cda3d" />
+
+- 추론 모델 그림 : 사용자 검색어(쿼리)를 벡터로 전환합니다.
 
 ---
 
