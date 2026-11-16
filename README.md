@@ -2,7 +2,7 @@
 
 **English** · [한국어](README_KR.md)
 
-VibeCrates takes a mood written as a sentence ("a song to listen to alone on a rainy night", "a quiet, lonely film") and recommends matching movies, music and books. Results are shown as a "board", a collage of their covers.
+VibeCrates takes a mood as text ("alone on a rainy night", "a calm countryside scene", etc.) and recommends matching movies, music and books. Results are shown as a "board", a collage of their covers.
 
 This repository is the AI recommendation server.
 - Inference: API server that turns search text into a 768-dimensional vector
@@ -20,7 +20,7 @@ User accounts, saved boards and vector search belong to the backend repository; 
 3. [Model](#3-model)
 4. [Korean queries](#4-korean-queries)
 5. [API](#5-api)
-6. [Setup and running](#6-setup-and-running)
+6. [Running locally](#6-running-locally)
 7. [Training and evaluation](#7-training-and-evaluation)
 8. [Known limitations](#8-known-limitations)
 9. [Repository layout](#9-repository-layout)
@@ -44,6 +44,8 @@ This server converts search text into a vector. The search itself runs in the ba
 ```
 
 Item vectors are precomputed in this repository and delivered to the backend as a bundle (CSV). Query vectors and item vectors must come from the same checkpoint; the `model_version` in API responses and bundle rows identifies it.
+
+The production server runs on a university GPU server (AstraGo, A100) with the API server (8000) and the Gemma translation server (vLLM, 8001). Training runs on a separate RTX 5090 server.
 
 ---
 
@@ -143,7 +145,7 @@ Vectors are L2-normalized, so the dot product equals cosine similarity. `transla
 
 ---
 
-## 6. Setup and running
+## 6. Running locally
 
 ### Environment
 
@@ -184,19 +186,11 @@ PORT=9000 ./scripts/serve.sh  # different port
 | `LLM_TRANSLATE_URL` | (unset) | Gemma translation server (OpenAI-compatible, e.g. `http://127.0.0.1:8001/v1`). If unset: dictionary → opus-mt |
 | `LLM_TRANSLATE_TIMEOUT` | `1.0` | Gemma timeout (seconds) |
 
-### Docker
-
-The image contains only the code; model and indexes are mounted as volumes (`MODEL_PATH`, `INDEX_DIR`). torch is the CPU build.
-
 ### Tests
 
 ```bash
 pytest tests/        # API, data, domain detection, translation (69 tests)
 ```
-
-### Deployment
-
-The production server runs on a university GPU server (AstraGo, A100) with the API server (8000) and the Gemma translation server (vLLM, 8001). Training runs on a separate RTX 5090 server. Addresses are in internal team documents.
 
 ---
 
