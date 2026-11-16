@@ -51,13 +51,31 @@ VibeCrates는 분위기를 텍스트로 입력받아("비 오는 밤에 혼자",
 
 ## 2. 데이터
 
-세 도메인의 원본 데이터를 같은 형식으로 정리한 canonical CSV(`data/canonical/`)를 가공해서 사용합니다.
+아래 공개 데이터셋과 API를 조합해 세 도메인의 작품 데이터를 만들었습니다. 조합한 결과를 같은 형식으로 정리한 canonical CSV(`data/canonical/`)를 가공해서 사용합니다.
 
-| 도메인 | 작품 수 | 원본 | 표지 이미지 |
-|---|---:|---|---|
-| 영화 | 39,515 | MovieGenre 데이터셋 + TMDB 메타데이터 | TMDB 포스터 (보유율 99.3%) |
-| 음악 | 39,682 | Spotify 오디오 피처 데이터셋 | 원본 URL + Deezer (92.4%) |
-| 책 | 110,594 | Kindle + Goodreads(Zenodo) + BX 블러브 | 97.0% |
+| 도메인 | 작품 수 | 표지 이미지 보유율 |
+|---|---:|---:|
+| 영화 | 39,515 | 99.3% |
+| 음악 | 39,682 | 92.4% |
+| 책 | 110,594 | 97.0% |
+
+### 데이터 출처
+
+| 도메인 | 출처 | 사용한 내용 | 라이선스 |
+|---|---|---|---|
+| 영화 | [Movie Genre from its Poster](https://www.kaggle.com/datasets/neha1703/movie-genre-from-its-poster) (Kaggle, neha1703) | 작품 목록, IMDb ID, 장르 | Kaggle 페이지 참조 |
+| 영화 | [TMDB API](https://www.themoviedb.org/) | 줄거리 등 메타데이터, 포스터 | TMDB 이용 약관 |
+| 음악 | Spotify 트랙 오디오 피처·가사 데이터셋 (Kaggle) | 곡 목록, 오디오 피처, 가사, 장르 | — |
+| 음악 | [Last.fm API](https://www.last.fm/api) | 곡 설명 | Last.fm API 이용 약관 |
+| 음악 | [Deezer API](https://developers.deezer.com/), [MusicBrainz](https://musicbrainz.org/) + [Cover Art Archive](https://coverartarchive.org/) | 앨범 표지 | 각 서비스 약관 |
+| 책 | [Amazon Kindle Books Dataset 2023 (130K Books)](https://www.kaggle.com/datasets/asaniczka/amazon-kindle-books-dataset-2023-130k-books) (Kaggle, asaniczka) | 작품 목록, 카테고리, 표지 URL | ODC-By |
+| 책 | [Best Books Ever Dataset](https://zenodo.org/records/4265096) (Casanova Lozano & Costa Planells, Zenodo, DOI 10.5281/zenodo.4265096) | 작품 목록, 블러브, 장르, 표지 URL | CC BY-NC 4.0 |
+| 책 | [57,000+ Books with Metadata and Blurbs](https://www.kaggle.com/datasets/jdobrow/57000-books-with-metadata-and-blurbs) (Kaggle, jdobrow) | 작품 목록, 블러브 | 명시 없음 |
+| 책 | [Open Library API](https://openlibrary.org/developers/api) | 표지, 카테고리, 평점 | Open Library 이용 약관 |
+
+책 데이터는 세 데이터셋에서 블러브가 있는 행을 합치고 중복을 제거해 만들었습니다(우선순위 Kindle > Goodreads > BX, `scripts/merge_book_sources.py`).
+
+This product uses the TMDB API but is not endorsed or certified by TMDB.
 
 모델에 들어가는 작품 텍스트는 LLM이 원본 정보(줄거리, 블러브, 오디오 피처 등)로 합성한 분위기 설명(`description_synth`)입니다. 세 도메인이 같은 형식을 씁니다. 음악의 오디오 피처(energy, valence 등)는 "차분한", "강렬한" 같은 표현으로 바뀌어 설명에 들어갑니다.
 

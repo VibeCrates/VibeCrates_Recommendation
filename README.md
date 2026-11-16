@@ -51,13 +51,31 @@ The production server runs on a university GPU server (AstraGo, A100) with the A
 
 ## 2. Data
 
-The pipeline processes canonical CSVs (`data/canonical/`), which hold the raw data of the three domains in one format.
+The item data for the three domains is built by combining the public datasets and APIs below. The combined result is kept as canonical CSVs (`data/canonical/`) in one format, and the pipeline processes those.
 
-| Domain | Items | Sources | Cover images |
-|---|---:|---|---|
-| Movies | 39,515 | MovieGenre dataset + TMDB metadata | TMDB posters (99.3% coverage) |
-| Music | 39,682 | Spotify audio-feature dataset | Original URLs + Deezer (92.4%) |
-| Books | 110,594 | Kindle + Goodreads (Zenodo) + BX blurbs | 97.0% |
+| Domain | Items | Cover image coverage |
+|---|---:|---:|
+| Movies | 39,515 | 99.3% |
+| Music | 39,682 | 92.4% |
+| Books | 110,594 | 97.0% |
+
+### Data sources
+
+| Domain | Source | Used for | License |
+|---|---|---|---|
+| Movies | [Movie Genre from its Poster](https://www.kaggle.com/datasets/neha1703/movie-genre-from-its-poster) (Kaggle, neha1703) | Item list, IMDb IDs, genres | See Kaggle page |
+| Movies | [TMDB API](https://www.themoviedb.org/) | Plot and other metadata, posters | TMDB terms of use |
+| Music | Spotify track audio-feature and lyrics dataset (Kaggle) | Track list, audio features, lyrics, genres | — |
+| Music | [Last.fm API](https://www.last.fm/api) | Track descriptions | Last.fm API terms |
+| Music | [Deezer API](https://developers.deezer.com/), [MusicBrainz](https://musicbrainz.org/) + [Cover Art Archive](https://coverartarchive.org/) | Album covers | Each service's terms |
+| Books | [Amazon Kindle Books Dataset 2023 (130K Books)](https://www.kaggle.com/datasets/asaniczka/amazon-kindle-books-dataset-2023-130k-books) (Kaggle, asaniczka) | Item list, categories, cover URLs | ODC-By |
+| Books | [Best Books Ever Dataset](https://zenodo.org/records/4265096) (Casanova Lozano & Costa Planells, Zenodo, DOI 10.5281/zenodo.4265096) | Item list, blurbs, genres, cover URLs | CC BY-NC 4.0 |
+| Books | [57,000+ Books with Metadata and Blurbs](https://www.kaggle.com/datasets/jdobrow/57000-books-with-metadata-and-blurbs) (Kaggle, jdobrow) | Item list, blurbs | Not stated |
+| Books | [Open Library API](https://openlibrary.org/developers/api) | Covers, categories, ratings | Open Library terms |
+
+Book data merges the rows with blurbs from the three datasets and removes duplicates (priority Kindle > Goodreads > BX, `scripts/merge_book_sources.py`).
+
+This product uses the TMDB API but is not endorsed or certified by TMDB.
 
 The item text fed to the model is a mood description (`description_synth`) synthesized by an LLM from the original information (plot, blurb, audio features, etc.). All three domains use the same format. Music audio features (energy, valence, etc.) appear in the description as phrases such as "calm" or "intense".
 
