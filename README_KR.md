@@ -76,7 +76,7 @@ VibeCrates는 분위기를 텍스트로 입력받아("비 오는 밤에 혼자",
 
 책 데이터는 세 데이터셋에서 블러브가 있는 행을 합치고 중복을 제거해 만들었습니다(우선순위 Kindle > Goodreads > BX, `scripts/merge_book_sources.py`).
 
-This product uses the TMDB API but is not endorsed or certified by TMDB.
+TMDB 이용 약관에 따른 고지: This product uses the TMDB API but is not endorsed or certified by TMDB.
 
 모델에 들어가는 작품 텍스트는 LLM이 원본 정보(줄거리, 블러브, 오디오 피처 등)로 합성한 분위기 설명(`description_synth`)입니다. 세 도메인이 같은 형식을 씁니다. 음악의 오디오 피처(energy, valence 등)는 "차분한", "강렬한" 같은 표현으로 바뀌어 설명에 들어갑니다.
 
