@@ -51,7 +51,7 @@ VibeCrates는 분위기를 텍스트로 입력받아("비 오는 밤에 혼자",
 
 ## 2. 데이터
 
-출발점은 세 도메인을 같은 형식으로 맞춘 canonical CSV(`data/canonical/`)입니다.
+세 도메인의 원본 데이터를 같은 형식으로 정리한 canonical CSV(`data/canonical/`)를 가공해서 사용합니다.
 
 | 도메인 | 작품 수 | 원본 | 표지 이미지 |
 |---|---:|---|---|
@@ -120,7 +120,7 @@ FastAPI 서버입니다. 전체 엔드포인트 목록: `http://<서버>:8000/do
 
 | 메서드 · 경로 | 용도 |
 |---|---|
-| `POST /api/v1/search/vector` | 검색어 한 건 → 768차원 벡터 (정본) |
+| `POST /api/v1/search/vector` | 검색어 한 건 → 768차원 벡터 (백엔드 사용 경로) |
 | `GET /api/v1/search/vector?keyword=…` | 위와 동일, GET |
 | `POST /api/v1/embeddings` | 여러 검색어 → 벡터 (정리 예정) |
 | `POST /api/v1/recommend` | 서버 내부 검색 결과. 백엔드 검색 결과 대조용 |
@@ -255,7 +255,7 @@ VibeCrates_Recommendation/
 │   └── data/                # 데이터셋, 로더, 전처리
 ├── scripts/                 # 데이터 수집·합성, 학습, 인덱스·번들 생성, 평가, 서버 실행
 │   └── vibe_crate/          # 메인·보드 화면 디자인 시안 (정적 HTML)
-├── data/canonical/          # 도메인별 정본 CSV (원본·이미지·학습 데이터는 gitignore)
+├── data/canonical/          # 도메인별 canonical CSV (원본·이미지·학습 데이터는 gitignore)
 ├── experiments/             # 실험 결과와 사람 라벨 시트
 ├── docs/                    # 설계 문서, API 안내, 작업 기록, 세션 보고
 ├── reports/                 # 초기(1~20회차) 세션 보고

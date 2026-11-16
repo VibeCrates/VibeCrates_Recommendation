@@ -51,7 +51,7 @@ The production server runs on a university GPU server (AstraGo, A100) with the A
 
 ## 2. Data
 
-The starting point is a set of canonical CSVs (`data/canonical/`) that share one format across the three domains.
+The pipeline processes canonical CSVs (`data/canonical/`), which hold the raw data of the three domains in one format.
 
 | Domain | Items | Sources | Cover images |
 |---|---:|---|---|
@@ -120,7 +120,7 @@ A FastAPI server. All endpoints are listed at `http://<server>:8000/docs` once i
 
 | Method · path | Purpose |
 |---|---|
-| `POST /api/v1/search/vector` | One query → 768-d vector (canonical) |
+| `POST /api/v1/search/vector` | One query → 768-d vector (used by the backend) |
 | `GET /api/v1/search/vector?keyword=…` | Same, via GET |
 | `POST /api/v1/embeddings` | Several queries → vectors (to be retired) |
 | `POST /api/v1/recommend` | Server-side search results, for cross-checking the backend's search |
