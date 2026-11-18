@@ -136,7 +136,7 @@ TMDB 이용 약관에 따른 고지: This product uses the TMDB API but is not e
 
 <img width="769" height="248" alt="스크린샷 2026-11-16 오후 2 27 52" src="https://github.com/user-attachments/assets/216883ea-b2ca-497f-9069-e9757c5cda3d" />
 
-- 추론 모델 그림 : 사용자 검색어(쿼리)를 벡터로 전환합니다.
+- 추론 모델 그림 : 추론시에는 전체 구조에서 학습된 Query Block만을 사용하여 사용자 검색어(쿼리)를 벡터로 전환합니다.
 
 ---
 
