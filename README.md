@@ -136,7 +136,7 @@ Serving checkpoint: `best_stage2_qlora_off` (`model_version`: `trained_model.pt@
 
 <img width="769" height="248" alt="Inference model" src="https://github.com/user-attachments/assets/216883ea-b2ca-497f-9069-e9757c5cda3d" />
 
-- Inference model: turns the user's search text (query) into a vector.
+- Inference model: at inference time, only the Query Block trained in the overall structure is used to turn the user's search text (query) into a vector.
 
 ---
 
