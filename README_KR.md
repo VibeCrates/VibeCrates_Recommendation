@@ -92,7 +92,7 @@ TMDB 이용 약관에 따른 고지: This product uses the TMDB API but is not e
 듀얼 인코더입니다. 작품과 검색어를 각각의 인코더로 같은 768차원 공간에 놓고, 코사인 유사도로 가까운 작품을 찾습니다. 작품 벡터는 미리 저장해 둡니다. 실제 검색 시에는 검색어 하나만 인코딩하며, CPU에서 수십 ms 안에 끝납니다.
 
 ### 모델 전체 구조
-<img width="1200" height="664" alt="스크린샷 2026-11-16 오후 2 27 24" src="https://github.com/user-attachments/assets/a6f8f180-1b27-4555-9d75-53f204bf75ca" />
+<img width="1200" height="664" alt="스크린샷 2026-11-16 오후 2 27 24" src="assets/model_overview_frozen_clip.png" />
 
 
 ```

@@ -92,7 +92,7 @@ Raw data, images, training data and model files are not in the repository (`.git
 A dual encoder. Items and search text go through separate encoders into the same 768-dimensional space, and the nearest items are found by cosine similarity. Item vectors are stored in advance. At search time only the query is encoded, in tens of milliseconds on a CPU.
 
 ### Overall model structure
-<img width="1200" height="664" alt="Training stages" src="https://github.com/user-attachments/assets/a6f8f180-1b27-4555-9d75-53f204bf75ca" />
+<img width="1200" height="664" alt="Training stages" src="assets/model_overview_frozen_clip.png" />
 
 
 ```
